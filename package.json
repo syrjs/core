@@ -1,0 +1,20 @@
+{
+  "name": "mousejs",
+  "version": "1.0.0",
+  "description": "native javascript widgets for mousenative bridges. expermentation for an agnostic implimentation of abstract view engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.paypal.com:nativexo/mousejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "jsdoc": "^3.4.3",
+    "mocha": "^3.4.2"
+  }
+}
