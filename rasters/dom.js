@@ -15,6 +15,9 @@ function parseStyle (style) {
   let ret = []
   for (let prop in style) {
     let value = style[prop]
+    if (prop.indexOf('height') > -1 || prop.indexOf('width') > -1 || prop.indexOf('left') > -1 || prop.indexOf('top') > -1) {
+      value = value + 'px'
+    }
     ret.push(prop + ':' + value)
   }
   return ret.join(';')

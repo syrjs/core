@@ -2,27 +2,36 @@
 
 native javascript widgets for mousenative bridges. expermentation for an agnostic implimentation of abstract view engine
 
-
 # goal
 
-coupled with mousenative bridges for various platforms. the aim is to provide a minimally viable product that can produce
-simple views with lower overhead the next competitor react-native.
-
-an agnostic implimentation that uses a constructor chain to generate a AST that can be sent to rasters for various platforms.
-
-rasters provide style, position, and ownership orchastration for each platform they support.
-
+* minimally viable to the goal of native checkout
+* render agnostic, web, native with one code base (mobile first)
 
 ### mvp roadmap
 
-    * cli raster
-    * web raster
-    * native raster (ios, android)
-
-
+* web raster
+* native raster (ios, android)
 
 # DOCs
 
 These will serve as minimal docs for api for now. Trying to JSDOC the source as well to generate source docs. 
 
+### AST
 
+`MouseJS` uses constructed javascript objects to hold representation of the application UI. When requested, `MouseJS` will generate an AST from the root level view, and provides this to a `Raster`. `MouseJS` currently has these rasters; `dom`, `ast`, `ios` (external repo).
+
+The AST Interface is shown below. Any raster could be created to support this AST. Checkout `mousenative-ios` for an IOS implimentation of a `Raster`.
+
+```json
+{
+  "type" : "",
+  "children" : [],
+  "style" : {
+    height: 0,
+    width: 0,
+    top: 0,
+    left: 0,
+    backgroundColor: "#000000" // expanded formatted hex only support atm (mvp)
+  }
+}
+```

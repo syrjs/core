@@ -6,19 +6,14 @@ RasterManager.setRaster(require('../rasters/dom.js'))
 
 let basecomponent = new BaseComponent({
   style: {
-    left: 0,
-    height: 20,
-    width: 150
-  },
-  components: [
-    new BaseComponent({type: 'Text', content: 'Hello World'}),
-    new BaseComponent({type: 'Button', content: 'Yes'})
-  ]
+    left: 50,
+    top: 50,
+    height: 250,
+    width: 250,
+    background: '#6699ff',
+    display: 'block',
+    position: 'absolute'
+  }
 })
 
 console.log(basecomponent.render())
-
-// set the raster for the raster manager
-RasterManager.setRaster(require('../rasters/ast.js'))
-
-console.log('ast: ', basecomponent.render())
