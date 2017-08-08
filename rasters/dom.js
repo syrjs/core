@@ -56,6 +56,10 @@ function parseAST(ast) {
   return ret;
 }
 class DOMRaster {
+  constructor() {
+    this.type = 'dom';
+  }
+
   render(component) {
     console.log(component);
     // render a view

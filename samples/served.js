@@ -1,2 +1,13 @@
-const Mouse = require('../index.js');
-new Mouse(<div>Hey World</div>).renderInto(document.body);
+import { Component, RasterManager } from '../index';
+
+class myView extends Component {
+  render() {
+    return (
+      <div>
+        Currently Rendering With {RasterManager.currentRasterType()}
+      </div>
+    );
+  }
+}
+
+RasterManager.render(myView);

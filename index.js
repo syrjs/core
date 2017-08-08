@@ -1,27 +1,8 @@
-const RasterManager = require('./rastermanager.js');
+import { RasterManager } from './rastermanager';
 const DOMRaster = require('./rasters/dom');
-
-RasterManager.setRaster();
+RasterManager.setRaster(DOMRaster);
 
 /** Class representing a base mouse component. */
-class Mouse {
-  /**
-   * Create a component.
-   * @param {object} def - The definition of the mouse component.
-   */
-  constructor(def) {
-    this._ast = def;
-  }
+class Component {}
 
-  renderInto(target) {
-    let html = this.render();
-    target.innerHTML = html;
-  }
-
-  render() {
-    console.log(this._ast);
-    return DOMRaster.render(this._ast);
-  }
-}
-
-module.exports = Mouse;
+export { Component, RasterManager };

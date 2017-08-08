@@ -34,7 +34,7 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['babel-preset-es2015'],
-          plugins: ['babel-plugin-transform-jsx'],
+          plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
         },
       },
     ],
