@@ -1,18 +1,17 @@
-var webpack = require('webpack')
-var path = require('path')
+var webpack = require('webpack');
+var path = require('path');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-
-    // for now we set one entry for the main package.json entry
+  // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/served.js']
+    app: ['./samples/served.js'],
   },
 
   output: {
     path: path.resolve('./build'),
-    filename: 'assets/[name].min.js'
+    filename: 'assets/[name].min.js',
   },
 
   // resolve files
@@ -20,24 +19,25 @@ module.exports = {
   // command dir is the project path
   resolve: {
     extensions: ['.js', '.css'],
-    modules: ['./node_modules']
+    modules: ['./node_modules'],
   },
   devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json-loader',
       },
       {
         test: /.js?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['babel-preset-es2015']
-        }
-      }
-    ]
+          presets: ['babel-preset-es2015'],
+          plugins: ['babel-plugin-transform-jsx'],
+        },
+      },
+    ],
   },
 
   plugins: [
@@ -47,7 +47,7 @@ module.exports = {
       title: 'Test Fixture',
       mobile: true,
       template: require('html-webpack-template'),
-      links: []
-    })
-  ]
-}
+      links: [],
+    }),
+  ],
+};

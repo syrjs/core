@@ -1,8 +1,8 @@
-let BaseComponent = require('../index.js')
-let RasterManager = require('../rastermanager.js')
+let BaseComponent = require('../index.js');
+let RasterManager = require('../rastermanager.js');
 
 // set the raster for the raster manager
-RasterManager.setRaster(require('../rasters/dom.js'))
+RasterManager.setRaster(require('../rasters/dom.js'));
 
 let basecomponent = new BaseComponent({
   style: {
@@ -12,8 +12,8 @@ let basecomponent = new BaseComponent({
     width: 250,
     background: '#6699ff',
     display: 'block',
-    position: 'absolute'
-  }
-})
+    position: 'absolute',
+  },
+});
 
-console.log(basecomponent.render())
+console.log(basecomponent.render());
