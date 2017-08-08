@@ -1,5 +1,5 @@
-import { RasterManager } from './rastermanager';
-const DOMRaster = require('./rasters/dom');
+import { RasterManager } from './lib/rastermanager';
+const DOMRaster = require('./lib/rasters/dom');
 RasterManager.setRaster(DOMRaster);
 
 /** Class representing a base mouse component. */

@@ -1,7 +1,7 @@
 {
-  "name": "mousejs",
-  "version": "1.0.0",
-  "description": "native javascript widgets for mousenative bridges. expermentation for an agnostic implimentation of abstract view engine",
+  "name": "syr",
+  "version": "1.0.1",
+  "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -10,11 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.paypal.com:nativexo/mousejs.git"
+    "url": "git@github.com:dmikey/syr.git"
   },
   "author": "",
   "license": "ISC",
-  "private": true,
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",

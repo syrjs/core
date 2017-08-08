@@ -1,4 +1,4 @@
-import { Component, RasterManager } from '../index';
+import { Component, RasterManager as React } from '../index';
 
 class myView extends Component {
   render() {
@@ -10,4 +10,4 @@ class myView extends Component {
   }
 }
 
-RasterManager.render(myView);
+React.render(myView);
