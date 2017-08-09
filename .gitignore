@@ -5,3 +5,4 @@ package-lock.json
 build/
 .DS_Store
 ios/SyrNativeSample/SyrNativeSample.xcodeproj/xcuserdata
+.nyc_output/
