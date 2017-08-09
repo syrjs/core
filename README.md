@@ -34,7 +34,7 @@ import { Component, Render } from 'syr';
 class MyComponent extends Component {
     render() {
       return (
-        <div>Hello World</div>
+        <div foo="bar">Hello World</div>
       )
     }
 }

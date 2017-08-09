@@ -1,4 +1,4 @@
-import { Component, React } from '../index';
+import { Component, Render } from '../index';
 
 class MyComponent extends Component {
     render() {
@@ -8,4 +8,4 @@ class MyComponent extends Component {
     }
 }
 
-React.render(MyComponent);
+Render(MyComponent);

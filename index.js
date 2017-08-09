@@ -1,17 +1,8 @@
-import { RasterManager as React } from './lib/rastermanager';
+import { RasterManager } from './lib/rastermanager';
+import { Component } from './lib/component';
 const DOMRaster = require('./lib/rasters/dom');
-React.setRaster(DOMRaster);
 
-/** Class representing a base mouse component. */
-class Component {
-  constructor(props) {
-    //this.props = this.render().attributes || {};
-  }
+RasterManager.setRaster(DOMRaster);
+const Render = RasterManager.render;
 
-  render() {}
-}
-
-// compatibility with react
-React.Component = Component;
-
-export { Component, React };
+export { Component, Render };
