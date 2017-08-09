@@ -1,8 +1,8 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr">
   <br>
   syr
   <br>
+  <img src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr">
 </h1>
 <p align="center" style="font-size: 1.2rem;">minimally obtrusive reactisque view engine, aimed at native developers</p>
 
