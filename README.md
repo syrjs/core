@@ -30,9 +30,20 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 ### contributing
 
 * fork repo
-* run dev sandbox with `npm run serve`
 * add tests
 * open PR!
+
+### working on web raster
+
+* run dev sandbox with `npm run serve`
+* open browser and hit `http://localhost:8080/`
+
+### working on ios raster
+
+* run dev sandbox with `npm run serve`
+* open `ios/SyrNativeSample.xcodeproj`
+* run ios project which points to `http://127.0.0.1:8080`
+* use Safari Developer tools to connect to remote debugger
 
 ### docs
 
