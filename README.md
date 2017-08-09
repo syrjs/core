@@ -1,5 +1,7 @@
 # syr
 
+![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)
+
 This set of libraries and utilities aims to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
 
 We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
