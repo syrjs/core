@@ -1,5 +1,5 @@
 ![syr](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png)
-# syr
+# syr : the norwegian boar goddess
 
 [![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/syr@1.0.4/dist/syr.min.js?compression=gzip)](https://unpkg.com/syr@1.0.4/dist/syr.min.js)
