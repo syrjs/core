@@ -40,7 +40,7 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 Install Syr CLI
 
 ```bash
-npm install syr -g
+npm install syr-cli -g
 ```
 
 Then use syr to create and run a project.
