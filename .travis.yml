@@ -20,7 +20,7 @@ install:
 
 script:
   - npm run test
-  - BROWSER=true COVERAGE=false FLAKEY=false PERFORMANCE=false npm run test:karma
+  - BROWSER=true COVERAGE=false FLAKEY=false PERFORMANCE=false npm run test
 
 # Necessary to compile native modules for io.js v3 or Node.js v4
 env:
