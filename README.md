@@ -1,3 +1,4 @@
+![209261](https://user-images.githubusercontent.com/328000/29106270-071a5b08-7c89-11e7-8928-2a9f4bf85050.png)
 # syr
 
 ![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)
