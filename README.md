@@ -75,7 +75,7 @@ class MyComponent extends Component {
   render() {
   	// pass ast directly to render
     return {
-			elementName: 'div',
+      elementName: 'div',
       children: ['Hello World']
     };
   }
