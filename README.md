@@ -1,9 +1,16 @@
-![209261](https://user-images.githubusercontent.com/328000/29106270-071a5b08-7c89-11e7-8928-2a9f4bf85050.png)
-# syr
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr">
+    <br>
+  syr
+  <br>
+</h1>
+<p align="center" style="font-size: 1.2rem;">minimally obtrusive reactisque view engine, aimed at native developers</p>
+
 
 [![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/syr@1.0.4/dist/syr.min.js?compression=gzip)](https://unpkg.com/syr@1.0.4/dist/syr.min.js)
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
+
 
 This set of libraries and utilities aimed to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
 
@@ -26,26 +33,82 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 * web raster
 * ios native raster
 
+### getting started developing using Syr
 
-### contributing
+### easy way
 
-* fork repo
-* add tests
-* open PR!
+Install Syr CLI
 
-### working on web raster
+```bash
+npm install syr -g
+```
+
+Then use syr to create and run a project.
+
+```bash
+syr init MyProject
+```
+
+This will create a directory called `MyProject`. This Directory will contain the javascript, and native code starter.
+
+
+To bring up and serve a development bundle run
+
+```bash
+syr watch
+```
+
+To create an ejectable bundle from your project
+
+```bash
+syr eject
+```
+
+This will produce a app.bundle.js file that you can use to distribute,.
+
+
+### long way
+
+Install Syr
+
+```bash
+npm install syr --save-dev
+```
+
+Add JSX support
+
+```
+npm install babel-plugin-transform-jsx --save-dev
+```
+
+Add this pluigin along with the ES2015 preset to babel.
+
+```json
+{
+  "presets": ["babel-preset-es2015"],
+  "plugins": [["babel-plugin-transform-jsx", { "useVariables": true }]]
+}
+```
+
+### working with web raster
 
 * run dev sandbox with `npm run serve`
 * open browser and hit `http://localhost:8080/`
 
-### working on ios raster
+### working with ios raster
 
 * run dev sandbox with `npm run serve`
 * open `ios/SyrNativeSample.xcodeproj`
 * run ios project which points to `http://127.0.0.1:8080`
 * use Safari Developer tools to connect to remote debugger
 
-### docs
+### contributing to syr
+
+* fork repo
+* add tests
+* open PR!
+
+### more ...
 
 Syr like, Preact, aims to have a somewhat compatible React API.
 
