@@ -6,10 +6,10 @@
   "scripts": {
     "test": "nyc mocha --compilers js:babel-core/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build": "npm run pretty & webpack",
+    "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\"",
     "serve": "webpack-dev-server --config dev.config.js --content-base build/",
-    "prepublish": "npm test & npm run build"
+    "prepublish": "npm test; npm run build"
   },
   "repository": {
     "type": "git",
