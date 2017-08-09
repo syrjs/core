@@ -73,7 +73,7 @@ mport { Component, Render } from 'syr';
 
 class MyComponent extends Component {
   render() {
-  	// pass ast directly to render
+    // pass ast directly to render
     return {
       elementName: 'div',
       children: ['Hello World']

@@ -7,9 +7,17 @@ let style = {
   backgroundColor: '#00ff00',
 };
 
+let otherstyle = {
+  color: '#333333',
+  backgroundColor: '#ffffff',
+}
 class MyComponent extends Component {
   render() {
-    return <div style={style}>Hello World</div>;
+    return <div style={style}>Hello World
+        <div style={otherstyle}>
+          Something Else
+        </div>
+    </div>;
   }
 }
 
