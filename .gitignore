@@ -4,10 +4,11 @@ dist/
 package-lock.json
 build/
 .DS_Store
-ios/SyrNativeSample/SyrNativeSample.xcodeproj/xcuserdata
-ios/SyrNativeSample/SyrNativeSample.xcodeproj/project.xcworkspace/xcuserdata
+ios/SyrNativeSample/SyrNativeSample.xcodeproj/xcuserdata/
+ios/SyrNativeSample/SyrNativeSample.xcodeproj/project.xcworkspace/xcuserdata/
 
-ios/SyrNative/SyrNative.xcodeproj/project.xcworkspace/xcuserdata
+ios/SyrNative/SyrNative.xcodeproj/project.xcworkspace/xcuserdata/
 ios/SyrNative/SyrNative.xcodeproj/xcuserdata/
+
 
 .nyc_output/
