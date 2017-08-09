@@ -1,13 +1,14 @@
 {
   "name": "syr",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
     "build": "npm run pretty & webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\"",
-    "serve": "webpack-dev-server --config dev.config.js --content-base build/"
+    "serve": "webpack-dev-server --config dev.config.js --content-base build/",
+    "prepublish": "npm test & npm run build"
   },
   "repository": {
     "type": "git",
