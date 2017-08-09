@@ -1,18 +1,16 @@
-var webpack = require('webpack');
-var path = require('path');
-
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./index.js'],
+    syr: ['./index.js'],
   },
 
   output: {
     path: path.resolve('./dist'),
-    filename: 'assets/[name].min.js',
+    filename: '[name].min.js',
     library: 'syr',
     libraryTarget: 'var',
   },
@@ -43,15 +41,5 @@ module.exports = {
     ],
   },
 
-  plugins: [
-    new UglifyJSPlugin(),
-    new HtmlWebpackPlugin({
-      inject: false,
-      appMountId: 'app',
-      title: 'Test Fixture',
-      mobile: true,
-      template: require('html-webpack-template'),
-      links: [],
-    }),
-  ],
+  plugins: [new UglifyJSPlugin()],
 };
