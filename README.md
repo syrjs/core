@@ -4,11 +4,13 @@
   syr
   <br>
 </h1>
-<p align="center" style="font-size: 1.2rem;">minimal reactisque view engine, aimed at native developers</p>
+<p align="center" style="font-size: 1.2rem;">minimally obtrusive reactisque view engine, aimed at native developers</p>
 
+<p align="center" style="font-size: 1.2rem;">
 [![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/syr@1.0.4/dist/syr.min.js?compression=gzip)](https://unpkg.com/syr@1.0.4/dist/syr.min.js)
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
+</p>
 
 This set of libraries and utilities aimed to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
 
