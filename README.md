@@ -5,7 +5,7 @@
 [![gzip size](http://img.badgesize.io/https://unpkg.com/syr/dist/syr.min.js?compression=gzip)](https://unpkg.com/syr/dist/syr.min.js)
 
 
-This set of libraries and utilities aims to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
+This set of libraries and utilities aimed to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
 
 We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
 
