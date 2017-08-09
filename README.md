@@ -1,9 +1,9 @@
 ![209261](https://user-images.githubusercontent.com/328000/29106270-071a5b08-7c89-11e7-8928-2a9f4bf85050.png)
 # syr
 
-![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)
+[![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 [![gzip size](http://img.badgesize.io/https://unpkg.com/syr@1.0.4/dist/syr.min.js?compression=gzip)](https://unpkg.com/syr@1.0.4/dist/syr.min.js)
-
+[![MIT License][license-badge]][LICENSE]
 
 This set of libraries and utilities aimed to help Native SDK developers, create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint, and reduced complexity.
 
