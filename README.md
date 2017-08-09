@@ -29,7 +29,7 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 Syr like, Preact, aims to have a somewhat compatible React API.
 
 
-Render a Syr Component
+Render a Syr Component. Passing the component to Render, without a target will draw the component to `document.body` when rendering in the web. If rendering natively, it will render to the `root` view.
 
 ```javascript
 import { Component, Render } from 'syr';

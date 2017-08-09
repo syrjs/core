@@ -1,12 +1,13 @@
 {
   "name": "syr",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "build": "npm run pretty & webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\"",
-    "serve": "webpack-dev-server --content-base build/"
+    "serve": "webpack-dev-server --config dev.config.js --content-base build/"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "json-loader": "^0.5.4",
     "mocha": "^3.4.2",
     "prettier": "^1.5.3",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.4.5"
   },
