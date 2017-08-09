@@ -26,6 +26,14 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 * web raster
 * ios native raster
 
+
+### contributing
+
+* fork repo
+* run dev sandbox with `npm run serve`
+* add tests
+* open PR!
+
 ### docs
 
 Syr like, Preact, aims to have a somewhat compatible React API.
