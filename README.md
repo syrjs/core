@@ -26,26 +26,48 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 * web raster
 * ios native raster
 
+### getting started developing using Syr
 
-### contributing
+Install Syr
 
-* fork repo
-* add tests
-* open PR!
+```bash
+npm install syr --save-dev
+```
 
-### working on web raster
+Add JSX support
+
+```
+npm install babel-plugin-transform-jsx --save-dev
+```
+
+Add this pluigin along with the ES2015 preset to babel.
+
+```json
+{
+  "presets": ["babel-preset-es2015"],
+  "plugins": [["babel-plugin-transform-jsx", { "useVariables": true }]]
+}
+```
+
+### working with web raster
 
 * run dev sandbox with `npm run serve`
 * open browser and hit `http://localhost:8080/`
 
-### working on ios raster
+### working with ios raster
 
 * run dev sandbox with `npm run serve`
 * open `ios/SyrNativeSample.xcodeproj`
 * run ios project which points to `http://127.0.0.1:8080`
 * use Safari Developer tools to connect to remote debugger
 
-### docs
+### contributing to syr
+
+* fork repo
+* add tests
+* open PR!
+
+### more ...
 
 Syr like, Preact, aims to have a somewhat compatible React API.
 
