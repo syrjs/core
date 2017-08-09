@@ -1,8 +1,8 @@
 //
 //  ViewController.h
-//  SyrNativeSample
+//  MouseNativeSample
 //
-//  Created by Anderson,Derek on 8/9/17.
+//  Created by Anderson,Derek on 7/6/17.
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
 

@@ -13,7 +13,25 @@
 		D2984E991F3B02E800189F3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2984E971F3B02E800189F3C /* Main.storyboard */; };
 		D2984E9B1F3B02E800189F3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2984E9A1F3B02E800189F3C /* Assets.xcassets */; };
 		D2984E9E1F3B02E800189F3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2984E9C1F3B02E800189F3C /* LaunchScreen.storyboard */; };
+		D2984EAD1F3B032300189F3C /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2984EAA1F3B030200189F3C /* SyrNative.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D2984EA91F3B030200189F3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2D7E0301F0F672D0039C3A9;
+			remoteInfo = SyrNative;
+		};
+		D2984EAE1F3B032700189F3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2D7E02F1F0F672D0039C3A9;
+			remoteInfo = SyrNative;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D2984E8B1F3B02E800189F3C /* SyrNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyrNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +44,7 @@
 		D2984E9A1F3B02E800189F3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2984E9D1F3B02E800189F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2984E9F1F3B02E800189F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyrNative.xcodeproj; path = ../SyrNative/SyrNative.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2984EAD1F3B032300189F3C /* SyrNative.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +64,7 @@
 			children = (
 				D2984E8D1F3B02E800189F3C /* SyrNativeSample */,
 				D2984E8C1F3B02E800189F3C /* Products */,
+				D2984EAC1F3B031100189F3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +100,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D2984EA61F3B030200189F3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2984EAA1F3B030200189F3C /* SyrNative.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2984EAC1F3B031100189F3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +130,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D2984EAF1F3B032700189F3C /* PBXTargetDependency */,
 			);
 			name = SyrNativeSample;
 			productName = SyrNativeSample;
@@ -125,12 +163,28 @@
 			mainGroup = D2984E821F3B02E800189F3C;
 			productRefGroup = D2984E8C1F3B02E800189F3C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D2984EA61F3B030200189F3C /* Products */;
+					ProjectRef = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D2984E8A1F3B02E800189F3C /* SyrNativeSample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D2984EAA1F3B030200189F3C /* SyrNative.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SyrNative.framework;
+			remoteRef = D2984EA91F3B030200189F3C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2984E891F3B02E800189F3C /* Resources */ = {
@@ -157,6 +211,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2984EAF1F3B032700189F3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SyrNative;
+			targetProxy = D2984EAE1F3B032700189F3C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2984E971F3B02E800189F3C /* Main.storyboard */ = {
@@ -311,6 +373,7 @@
 				D2984EA41F3B02E800189F3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

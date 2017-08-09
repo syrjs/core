@@ -1,5 +1,7 @@
 node_modules/
+dist/
 .vscode/
 package-lock.json
 build/
 .DS_Store
+ios/SyrNativeSample/SyrNativeSample.xcodeproj/xcuserdata
