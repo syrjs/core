@@ -58,9 +58,27 @@ import { Component, Render } from 'syr';
 class MyComponent extends Component {
     render() {
       return (
-        <div foo="bar">Hello World</div>
+        <div>Hello World</div>
       )
     }
+}
+
+Render(MyComponent);
+```
+
+The same example can be written without JSX support
+
+```javascript
+mport { Component, Render } from 'syr';
+
+class MyComponent extends Component {
+  render() {
+  	// pass ast directly to render
+    return {
+			elementName: 'div',
+      children: ['Hello World']
+    };
+  }
 }
 
 Render(MyComponent);
