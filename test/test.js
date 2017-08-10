@@ -1,8 +1,6 @@
 import { Component, Render, RasterManager } from '../index';
 const assert = require('assert');
 
-global.document = { body: {} };
-
 describe('Component', function() {
   describe('Base Component', function() {
     it('should render', function() {
