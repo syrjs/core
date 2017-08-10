@@ -18,7 +18,7 @@ Package Syr with your Native SDK without worry, drive dynamic experiences with i
 
 Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
 
-Native Libraries, are crafted that to be sandboxed. Ready to deploy to any environment.
+Native Libraries, are crafted to be sandboxed. Ready to deploy to any environment.
 
 ### dev docs
 
