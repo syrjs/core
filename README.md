@@ -50,7 +50,7 @@ npm install syr-cli -g
 Then use syr to create and run a project.
 
 ```bash
-syr init MyProject
+syr --init MyProject
 ```
 
 This will create a directory called `MyProject`. This Directory will contain the javascript, and native code starter.
@@ -59,16 +59,16 @@ This will create a directory called `MyProject`. This Directory will contain the
 To bring up and serve a development bundle run
 
 ```bash
-syr watch
+syr --watch
 ```
 
 To create an ejectable bundle from your project
 
 ```bash
-syr eject
+syr --eject
 ```
 
-This will produce a app.bundle.js file that you can use to distribute,.
+This will produce a app.bundle.js file that you can use to distribute.
 
 
 ### long way
