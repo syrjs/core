@@ -14,17 +14,13 @@
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 
 
-This set of libraries and utilities aimed to help Native SDK developers create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of a React Native like eco system, with a much smaller footprint and reduced complexity.
+This set of libraries and utilities aimed to help Native SDK developers create dynamic UX for distribution. The goal of this library is to provide Native SDK developers the benefits of a React Native like eco system with a smaller footprint and reduced complexity.
 
-We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
+Package Syr with your Native SDK without worry, drive dynamic experiences with it.
 
-Syr uses a React like API with a custom JS API bridge, that allows an SDK developer to bundle an updatable experience through Apple's iTunes terms. 
+Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
 
-A carefully crafted SDK can be enhanced or tested without needing to deploy multiple binaries.
-
-The ultimate goal was not to recreate React, nor chase something like Preact. Through the magic of Babel and Webpack, we've adopted a similar set of technologies that allow us ease and familiar use, while meeting the goal of pushing AST over the JavaScript Bridges in each native environment (including the web).
-
-The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
+Native Libraries, are crafted that to be sandboxed. Ready to deploy to any environment.
 
 ### dev docs
 
@@ -74,6 +70,13 @@ syr --eject
 
 This will produce a app.bundle.js file that you can use to distribute.
 
+Eject Native Library
+
+```bash
+syr --ejectNative 
+```
+
+Generates a new iOS/MyAppLibrary `collision free` version of native libraries ready to stick into any project.
 
 ### long way
 
