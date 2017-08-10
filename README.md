@@ -26,7 +26,11 @@ The ultimate goal was not to recreate React, nor chase something like Preact. Th
 
 The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
 
-# goal
+### dev docs
+
+https://dmikey.github.io/syr/index.html
+
+### goal
 
 * minally viable react compatible API
 * reduce surface area of projects like React-Native
