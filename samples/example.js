@@ -28,6 +28,9 @@ class MyView extends Component {
     return (
       <div>
         <MyComponent foo="Halllo World" />
+        <button onclick={()=>{
+            console.log('yeaaaaaa')
+          }} style={{backgroundColor:'#000000', color:'#ffffff'}}>Press Me</button>
       </div>
     );
   }
