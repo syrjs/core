@@ -14,7 +14,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 
 
-This set of libraries and utilities aimed to help Native SDK developers create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.
+This set of libraries and utilities aimed to help Native SDK developers create dynamic UX for distribution. The goal of this library is provide Native SDK developers with the benefits of a React Native like eco system, with a much smaller footprint and reduced complexity.
 
 We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
 
