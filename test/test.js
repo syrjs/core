@@ -1,9 +1,11 @@
-let assert = require('assert');
-import { Component, Render } from '../index';
+import { Component, Render, RasterManager } from '../index';
+const assert = require('assert');
 
-describe('Raster CLI', function() {
+global.document = { body: {} };
+
+describe('Component', function() {
   describe('Base Component', function() {
-    it('should render its base content', function() {
+    it('should render', function() {
       class MyComponent extends Component {
         render() {
           return <div>Hello World</div>;
@@ -16,6 +18,28 @@ describe('Raster CLI', function() {
         attributes: {},
         children: ['Hello World'],
       });
+    });
+  });
+});
+
+describe('Raster', function() {
+  describe('Raster Core', function() {
+    it('Return the Current Raster', function() {
+      assert.equal(RasterManager.getRaster().type, 'dom');
+    });
+  });
+  describe('Raster Render', function() {
+    it('should render', function() {
+      class MyComponent extends Component {
+        render() {
+          return <div>Hello World</div>;
+        }
+      }
+
+      document.body.innerHTML = '';
+      Render(MyComponent);
+
+      assert.equal(document.body.innerHTML, '<div style="">Hello World</div>');
     });
   });
 });

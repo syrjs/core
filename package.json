@@ -7,7 +7,7 @@
     "test": "nyc mocha --compilers js:babel-core/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
-    "pretty": "prettier --single-quote --trailing-comma es5 --write \"**/*.js\"",
+    "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
     "serve": "webpack-dev-server --config dev.config.js --content-base build/",
     "prepublish": "npm test; npm run build"
   },
@@ -21,7 +21,7 @@
     }
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
@@ -30,7 +30,6 @@
     "coveralls": "^2.13.1",
     "html-webpack-plugin": "^2.29.0",
     "html-webpack-template": "^6.0.1",
-    "jsdoc": "^3.4.3",
     "json-loader": "^0.5.4",
     "mocha": "^3.4.2",
     "mocha-coveralls-reporter": "0.0.5",

@@ -5,4 +5,4 @@ const DOMRaster = require('./lib/rasters/dom');
 RasterManager.setRaster(DOMRaster);
 const Render = RasterManager.render;
 
-export { Component, Render };
+export { Component, Render, RasterManager};
