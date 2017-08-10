@@ -213,3 +213,15 @@ Returns as object that serializes like below.
    ]
 }
 ````
+
+### lifecycle events
+
+| Lifecycle method            | When it gets called                              |
+|-----------------------------|--------------------------------------------------|
+| `componentWillMount`        | before the component gets mounted to the DOM     |
+| `componentDidMount`         | after the component gets mounted to the DOM      |
+| `componentWillUnmount`      | prior to removal from the DOM                    |
+| `componentWillReceiveProps` | before new props get accepted                    |
+| `shouldComponentUpdate`     | before `render()`. Return `false` to skip render |
+| `componentWillUpdate`       | before `render()`                                |
+| `componentDidUpdate`        | after `render()`                                 |
