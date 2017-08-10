@@ -10,15 +10,27 @@ let style = {
 let otherstyle = {
   color: '#333333',
   backgroundColor: '#ffffff',
-}
+};
+
 class MyComponent extends Component {
   render() {
-    return <div style={style}>Hello World
-        <div style={otherstyle}>
-          Something Else
-        </div>
-    </div>;
+    return (
+      <div style={style}>
+        Hello World {this.props.foo}
+        <div style={otherstyle}>Something Else</div>
+      </div>
+    );
   }
 }
 
-Render(MyComponent);
+class MyView extends Component {
+  render() {
+    return (
+      <div>
+        <MyComponent foo="Halllo World" />
+      </div>
+    );
+  }
+}
+
+Render(MyView);
