@@ -23,15 +23,31 @@ class MyComponent extends Component {
   }
 }
 
+class Animated {
+  render() {
+    return (
+      <div>{this.props.children}</div>
+    )
+  }
+}
+
 class MyView extends Component {
   render() {
     return (
       <div>
         <MyComponent foo="Halllo World" />
-          <button
-            onclick={this.changeButtonText}
-            style={{ backgroundColor: '#000000', color: '#ffffff' }}
-          >
+        <Animated style={{ opacity: 1}}>
+          <MyComponent foo="Halllo World" />
+          <div style={{ backgroundColor: 'pink', color: 'grey' }}>
+          <div> First Event21212 </div>
+          <div>Another event!!</div>
+        </div>
+        <MyComponent foo="Halllo World" />
+        </Animated>
+        <button
+          onclick={this.changeButtonText}
+          style={{ backgroundColor: '#000000', color: '#ffffff' }}
+        >
           Press Me
         </button>
       </div>
@@ -39,7 +55,7 @@ class MyView extends Component {
   }
 
   changeButtonText(e) {
-    e.target.innerText = "New World";
+    e.target.innerText = 'New World';
   }
 }
 
