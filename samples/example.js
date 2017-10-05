@@ -29,6 +29,7 @@ class MyView extends Component {
       <div>
         <MyComponent foo="Halllo World" />
           <button
+            count={0}
             onclick={this.changeButtonText}
             style={{ backgroundColor: '#000000', color: '#ffffff' }}
           >
@@ -39,7 +40,7 @@ class MyView extends Component {
   }
 
   changeButtonText(e) {
-    e.target.innerText = "New World";
+    console.log('alert')
   }
 }
 

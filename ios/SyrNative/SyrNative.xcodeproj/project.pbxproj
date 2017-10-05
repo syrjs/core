@@ -7,23 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24A90611F86C2BF003DAD64 /* SyrBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = D24A905F1F86C2BF003DAD64 /* SyrBridge.h */; };
+		D24A90621F86C2BF003DAD64 /* SyrBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = D24A90601F86C2BF003DAD64 /* SyrBridge.m */; };
+		D24A90651F86C841003DAD64 /* SyrRootView.h in Headers */ = {isa = PBXBuildFile; fileRef = D24A90631F86C841003DAD64 /* SyrRootView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D24A90661F86C841003DAD64 /* SyrRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D24A90641F86C841003DAD64 /* SyrRootView.m */; };
 		D2D7E0351F0F672D0039C3A9 /* SyrNative.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D7E0331F0F672D0039C3A9 /* SyrNative.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2D7E06A1F0F69050039C3A9 /* SyrCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D7E0681F0F69050039C3A9 /* SyrCore.h */; };
 		D2D7E06B1F0F69050039C3A9 /* SyrCore.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D7E0691F0F69050039C3A9 /* SyrCore.m */; };
-		D2D7E06D1F0F69DF0039C3A9 /* SyrPublic.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D7E06C1F0F69BB0039C3A9 /* SyrPublic.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2D7E06F1F0F69F80039C3A9 /* SyrPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D7E06E1F0F69F80039C3A9 /* SyrPublic.m */; };
 		D2D7E07E1F11E7DD0039C3A9 /* SyrRaster.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D7E07C1F11E7DD0039C3A9 /* SyrRaster.h */; };
 		D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D7E07D1F11E7DD0039C3A9 /* SyrRaster.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D24A905F1F86C2BF003DAD64 /* SyrBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrBridge.h; sourceTree = "<group>"; };
+		D24A90601F86C2BF003DAD64 /* SyrBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrBridge.m; sourceTree = "<group>"; };
+		D24A90631F86C841003DAD64 /* SyrRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrRootView.h; sourceTree = "<group>"; };
+		D24A90641F86C841003DAD64 /* SyrRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrRootView.m; sourceTree = "<group>"; };
 		D2D7E0301F0F672D0039C3A9 /* SyrNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SyrNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D7E0331F0F672D0039C3A9 /* SyrNative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SyrNative.h; path = ../SyrNative/SyrNative.h; sourceTree = "<group>"; };
 		D2D7E0341F0F672D0039C3A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2D7E0681F0F69050039C3A9 /* SyrCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrCore.h; sourceTree = "<group>"; };
 		D2D7E0691F0F69050039C3A9 /* SyrCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrCore.m; sourceTree = "<group>"; };
-		D2D7E06C1F0F69BB0039C3A9 /* SyrPublic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrPublic.h; sourceTree = "<group>"; };
-		D2D7E06E1F0F69F80039C3A9 /* SyrPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrPublic.m; sourceTree = "<group>"; };
 		D2D7E07C1F11E7DD0039C3A9 /* SyrRaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrRaster.h; sourceTree = "<group>"; };
 		D2D7E07D1F11E7DD0039C3A9 /* SyrRaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrRaster.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,14 +62,16 @@
 		D2D7E0321F0F672D0039C3A9 /* SyrNative */ = {
 			isa = PBXGroup;
 			children = (
-				D2D7E0331F0F672D0039C3A9 /* SyrNative.h */,
 				D2D7E0341F0F672D0039C3A9 /* Info.plist */,
+				D2D7E0331F0F672D0039C3A9 /* SyrNative.h */,
 				D2D7E0681F0F69050039C3A9 /* SyrCore.h */,
 				D2D7E0691F0F69050039C3A9 /* SyrCore.m */,
-				D2D7E06C1F0F69BB0039C3A9 /* SyrPublic.h */,
-				D2D7E06E1F0F69F80039C3A9 /* SyrPublic.m */,
 				D2D7E07C1F11E7DD0039C3A9 /* SyrRaster.h */,
 				D2D7E07D1F11E7DD0039C3A9 /* SyrRaster.m */,
+				D24A905F1F86C2BF003DAD64 /* SyrBridge.h */,
+				D24A90601F86C2BF003DAD64 /* SyrBridge.m */,
+				D24A90631F86C841003DAD64 /* SyrRootView.h */,
+				D24A90641F86C841003DAD64 /* SyrRootView.m */,
 			);
 			path = SyrNative;
 			sourceTree = "<group>";
@@ -78,8 +84,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D7E0351F0F672D0039C3A9 /* SyrNative.h in Headers */,
+				D24A90651F86C841003DAD64 /* SyrRootView.h in Headers */,
 				D2D7E07E1F11E7DD0039C3A9 /* SyrRaster.h in Headers */,
-				D2D7E06D1F0F69DF0039C3A9 /* SyrPublic.h in Headers */,
+				D24A90611F86C2BF003DAD64 /* SyrBridge.h in Headers */,
 				D2D7E06A1F0F69050039C3A9 /* SyrCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,7 +159,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2D7E06F1F0F69F80039C3A9 /* SyrPublic.m in Sources */,
+				D24A90661F86C841003DAD64 /* SyrRootView.m in Sources */,
+				D24A90621F86C2BF003DAD64 /* SyrBridge.m in Sources */,
 				D2D7E06B1F0F69050039C3A9 /* SyrCore.m in Sources */,
 				D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */,
 			);
