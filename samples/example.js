@@ -1,10 +1,12 @@
-import { Component, Render } from '../index';
+import { Component, Render, View, Animated } from '../index';
 
 let style = {
-  height: 100,
-  width: 100,
+  top: 50,
+  left: 50,
+  height: 200,
+  width: 200,
   color: '#ffffff',
-  backgroundColor: '#00ff00',
+  backgroundColor: '#00fff0',
 };
 
 let otherstyle = {
@@ -15,33 +17,17 @@ let otherstyle = {
 class MyComponent extends Component {
   render() {
     return (
-      <div style={style}>
-        Hello World {this.props.foo}
-        <div style={otherstyle}>Something Else</div>
-      </div>
+      <View style={style}>
+        Hi
+      </View>
     );
+  }
+  componentDidMount() {
+    console.log('component mounted');
+    setTimeout(()=>{
+        console.log('render again', MyComponent);
+    }, 1000);
   }
 }
 
-class MyView extends Component {
-  render() {
-    return (
-      <div>
-        <MyComponent foo="Halllo World" />
-          <button
-            count={0}
-            onclick={this.changeButtonText}
-            style={{ backgroundColor: '#000000', color: '#ffffff' }}
-          >
-          Press Me
-        </button>
-      </div>
-    );
-  }
-
-  changeButtonText(e) {
-    console.log('alert')
-  }
-}
-
-Render(MyView);
+Render(MyComponent);

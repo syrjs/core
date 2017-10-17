@@ -29,7 +29,7 @@ typedef void (^StyleCaseBlock)();
 - (void)runApp:(NSString*)withBundlePath rootView:(SyrRootView*)rootView {
   
   NSLog(@"Starting Syr Native Application");
-  return [_bridge loadBundle:withBundlePath];
+  return [_bridge loadBundle:withBundlePath withRootView:rootView];
 }
 
 

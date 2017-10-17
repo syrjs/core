@@ -19,6 +19,7 @@
   [super viewDidLoad];
   
   SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@""];
+  [self.view addSubview:rootView];
 }
 
 
