@@ -69,6 +69,9 @@
   } else if([messageType containsString:@"gui"]) {
     [_raster parseAST:syrMessage withRootView:_rootView];
     NSLog(@"Render Message Recieved, Handed to Raster");
+  } else if([messageType containsString:@"animation"]) {
+    [_raster setupAnimation:syrMessage];
+    NSLog(@"Render Message Recieved, Handed to Raster");
   }
 }
 
@@ -80,7 +83,8 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
 }
 
 - (void) rasterRenderedComponent: (NSString*) withComponentId {
-  [_bridgedBrowser evaluateJavaScript:@"var foo = 1; foo + 1;" completionHandler:^(id result, NSError *error) {
+  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit({'guid':'%@', 'type':'componentDidMount'})", withComponentId];
+  [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
     if (error == nil)
     {
       if (result != nil)

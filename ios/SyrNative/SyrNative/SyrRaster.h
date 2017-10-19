@@ -23,6 +23,6 @@ alpha:   1.]
 + (id) sharedInstance;
 -(void) parseAST: (NSDictionary*) astString withRootView:(SyrRootView*) rootView;
 -(void) registerComponent: (NSObject*) component withName: (NSString*) name;
-
+-(void) setupAnimation: (NSDictionary*) animationDict;
 
 @end
