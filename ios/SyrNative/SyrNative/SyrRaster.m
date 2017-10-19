@@ -112,7 +112,7 @@
       if([child isKindOfClass:[NSString class]]) {
         UITextView *textView = [[UITextView alloc] init];
         textView.text = child;
-        textView.frame = view.frame;
+        textView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
         textView.backgroundColor = [UIColor clearColor];
         [view addSubview:textView];
       }
@@ -141,6 +141,20 @@
         textView.frame = view.frame;
         textView.backgroundColor = [UIColor clearColor];
         [view addSubview:textView];
+      } else {
+        NSLog(@"jey");
+        NSString* elementName = [child objectForKey:@"elementName"];
+        if([elementName containsString:@"View"]) {
+          UIView* subview = [_components objectForKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+          NSDictionary* parent = [child objectForKey:@"parent"];
+          if(subview == nil) {
+            subview = [[UIView alloc] init];
+          }
+          NSDictionary* attributes = [child objectForKey:@"attributes"];
+          NSDictionary* style = [attributes objectForKey:@"style"];
+          subview = [self styleView:subview withStyle:style];
+          [view addSubview:subview];
+        }
       }
     }
     
