@@ -1,4 +1,4 @@
-import { Component, Render, View, Animated } from '../index';
+import { Component, Render, View, Animated, Button } from '../index';
 
 let style = {
   top: 0,
@@ -41,24 +41,22 @@ class MyComponent extends Component {
   render() {
     return (
       <Animated.View style={style}>
-        <View style={otherStyle}>Sup</View>
+        <Button>Click Me</Button>
         <View style={otherOtherStyle}>Sup</View>
-        {this.state.message}
       </Animated.View>
     );
   }
   componentDidMount() {
       Animated.timing(this, {
         toValue: { x: 0, y: 250 },
-        duration: 1000,
+        duration: 500,
       }).start();
-
       setTimeout(() => {
         Animated.timing(this, {
           toValue: { x: 0, y: 700 },
-          duration: 1000,
+          duration: 2300,
         }).start();
-      }, 2000);
+      }, 1000);
   }
 }
 

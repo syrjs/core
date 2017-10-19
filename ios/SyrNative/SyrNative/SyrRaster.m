@@ -67,9 +67,11 @@
       NSNumber* y = [animation objectForKey:@"y"];
       NSNumber* x2 = [animation objectForKey:@"x2"];
       NSNumber* y2 = [animation objectForKey:@"y2"];
+      double duration = [[animation objectForKey:@"duration"] integerValue];
+      duration = duration / 1000; // we get it as ms from the js
       
       view.frame  = CGRectMake([x floatValue], [y floatValue], view.frame.size.width, view.frame.size.height);
-      [UIView animateWithDuration:.5 delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         view.frame  = CGRectMake([x2 floatValue], [y2 floatValue], view.frame.size.width, view.frame.size.height);
       } completion:^(BOOL finished) {
         
@@ -138,11 +140,10 @@
       if([child isKindOfClass:[NSString class]]) {
         UITextView *textView = [[UITextView alloc] init];
         textView.text = child;
-        textView.frame = view.frame;
+        textView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
         textView.backgroundColor = [UIColor clearColor];
         [view addSubview:textView];
       } else {
-        NSLog(@"jey");
         NSString* elementName = [child objectForKey:@"elementName"];
         if([elementName containsString:@"View"]) {
           UIView* subview = [_components objectForKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
@@ -153,8 +154,28 @@
           NSDictionary* attributes = [child objectForKey:@"attributes"];
           NSDictionary* style = [attributes objectForKey:@"style"];
           subview = [self styleView:subview withStyle:style];
+          
+          for(id subchild in [child objectForKey:@"children"]) {
+            if([subchild isKindOfClass:[NSString class]]) {
+              UITextView *textView = [[UITextView alloc] init];
+              textView.text = subchild;
+              textView.frame = CGRectMake(0, 0, subview.frame.size.width, subview.frame.size.height);
+              textView.backgroundColor = [UIColor clearColor];
+              [subview addSubview:textView];
+            }
+          }
+          
           [view addSubview:subview];
         }
+        
+        if([elementName containsString:@"Button"]) {
+          UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+          [button setTitle:@"Press Me" forState:UIControlStateNormal];
+          button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+          [button sizeToFit];
+          [view addSubview:button];
+        }
+    
       }
     }
     
