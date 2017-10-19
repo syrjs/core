@@ -11,12 +11,12 @@ let style = {
 class MyComponent extends Component {
   constructor() {
     super();
-    this.state =  {
-      message : "hello"
-    }
+    this.state = {
+      message: 'hello',
+    };
     this.animation = new Animated.ValueXY({
       x: -375,
-      y: 0
+      y: 0,
     });
   }
   render() {
@@ -28,14 +28,14 @@ class MyComponent extends Component {
   }
   componentDidMount() {
     Animated.timing(this, {
-      toValue: {x: 0, y: 0},
-      duration: 1000
+      toValue: { x: 0, y: 0 },
+      duration: 1000,
     }).start();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       Animated.timing(this, {
-        toValue: {x: -375, y: 0},
-        duration: 1000
+        toValue: { x: -375, y: 0 },
+        duration: 1000,
       }).start();
     }, 2000);
   }
