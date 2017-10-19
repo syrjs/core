@@ -42,21 +42,34 @@ class MyComponent extends Component {
     return (
       <Animated.View style={style}>
         <Button>Click Me</Button>
-        <View style={otherOtherStyle}>Sup</View>
+        <View style={otherOtherStyle}>{this.state.message}</View>
       </Animated.View>
     );
   }
   componentDidMount() {
+      // animate in after mounting
       Animated.timing(this, {
         toValue: { x: 0, y: 250 },
         duration: 500,
-      }).start();
-      setTimeout(() => {
-        Animated.timing(this, {
-          toValue: { x: 0, y: 700 },
-          duration: 2300,
-        }).start();
-      }, 1000);
+      }).start(()=>{
+
+      setTimeout(()=>{
+          // set style before altering state
+          style.backgroundColor = "#ff000f";
+          // setting state forces a re-render
+          this.setState({
+            message: 'Hi How Are You Doing?'
+          });
+
+          // animate away
+          setTimeout(()=>{
+            Animated.timing(this, {
+              toValue: { x: 0, y: 700 },
+              duration: 500,
+            }).start();
+          }, 1000)
+        });
+      });
   }
 }
 

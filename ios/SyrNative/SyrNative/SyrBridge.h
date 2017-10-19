@@ -13,4 +13,5 @@
 @interface SyrBridge : NSObject <WKScriptMessageHandler>
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView;
 - (void) rasterRenderedComponent: (NSString*) withComponentId;
+- (void) sendEvent: (NSDictionary*) message;
 @end

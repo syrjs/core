@@ -82,22 +82,29 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
  	[_rootView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
 
-- (void) rasterRenderedComponent: (NSString*) withComponentId {
-  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit({'guid':'%@', 'type':'componentDidMount'})", withComponentId];
+- (void) sendEvent: (NSDictionary*) message {
+  NSData *messageData = [NSJSONSerialization dataWithJSONObject:message
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:nil];
+  NSString *messageString = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+  
+  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit(%@)", messageString];
   [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
     if (error == nil)
     {
-      if (result != nil)
-      {
-        NSInteger integerResult = [result integerValue]; // 2
-        NSLog(@"result: %ld", (long)integerResult);
-      }
+      
     }
     else
     {
       NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
     }
   }];
+}
+
+- (void) rasterRenderedComponent: (NSString*) withComponentId {
+  NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentDidMount"};
+  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit({'guid':'%@', 'type':'componentDidMount'})", withComponentId];
+  [self sendEvent:event];
 }
 
 @end

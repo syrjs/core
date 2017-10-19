@@ -74,8 +74,8 @@
       [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         view.frame  = CGRectMake([x2 floatValue], [y2 floatValue], view.frame.size.width, view.frame.size.height);
       } completion:^(BOOL finished) {
-        
-        
+        NSDictionary* event = @{@"guid":animatedTargetGuid, @"type":@"animationComplete", @"animation": animation};
+        [_bridge sendEvent:event];
       }];
     }
   }
@@ -117,6 +117,39 @@
         textView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
         textView.backgroundColor = [UIColor clearColor];
         [view addSubview:textView];
+      } else {
+        NSString* elementName = [child objectForKey:@"elementName"];
+        if([elementName containsString:@"View"]) {
+          UIView* subview = [_components objectForKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+          NSDictionary* parent = [child objectForKey:@"parent"];
+          if(subview == nil) {
+            subview = [[UIView alloc] init];
+          }
+          NSDictionary* attributes = [child objectForKey:@"attributes"];
+          NSDictionary* style = [attributes objectForKey:@"style"];
+          subview = [self styleView:subview withStyle:style];
+          
+          for(id subchild in [child objectForKey:@"children"]) {
+            if([subchild isKindOfClass:[NSString class]]) {
+              UITextView *textView = [[UITextView alloc] init];
+              textView.text = subchild;
+              textView.frame = CGRectMake(0, 0, subview.frame.size.width, subview.frame.size.height);
+              textView.backgroundColor = [UIColor clearColor];
+              [subview addSubview:textView];
+            }
+          }
+          
+          [view addSubview:subview];
+        }
+        
+        if([elementName containsString:@"Button"]) {
+          UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+          [button setTitle:@"Press Me" forState:UIControlStateNormal];
+          button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+          [button sizeToFit];
+          [view addSubview:button];
+        }
+        
       }
     }
   }
