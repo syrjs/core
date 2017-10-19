@@ -46,6 +46,12 @@ class MyComponent extends Component {
       </Animated.View>
     );
   }
+  componentWillUpdate() {
+    console.log('component will update');
+  }
+  componentDidUpdate() {
+    console.log('component did update');
+  }
   componentDidMount() {
       // animate in after mounting
       Animated.timing(this, {

@@ -109,6 +109,9 @@
     NSDictionary* style = [attributes objectForKey:@"style"];
     view = [self styleView:view withStyle:style];
     
+    NSDictionary* event = @{@"guid":[[astDict valueForKey:@"instance"] valueForKey:@"guid"], @"type":@"componentWillUpdate"};
+    [_bridge sendEvent:event];
+    
     NSDictionary* children = [astDict objectForKey:@"children"];
     for(id child in children) {
       if([child isKindOfClass:[NSString class]]) {
@@ -153,6 +156,8 @@
       }
     }
   }
+  NSDictionary* event = @{@"guid":[[astDict valueForKey:@"instance"] valueForKey:@"guid"], @"type":@"componentDidUpdate"};
+  [_bridge sendEvent:event];
 }
 
 -(void) build: (NSDictionary*) astDict {

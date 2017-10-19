@@ -103,7 +103,6 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
 
 - (void) rasterRenderedComponent: (NSString*) withComponentId {
   NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentDidMount"};
-  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit({'guid':'%@', 'type':'componentDidMount'})", withComponentId];
   [self sendEvent:event];
 }
 
