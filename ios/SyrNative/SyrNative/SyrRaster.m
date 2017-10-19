@@ -71,7 +71,7 @@
       duration = duration / 1000; // we get it as ms from the js
       
       view.frame  = CGRectMake([x floatValue], [y floatValue], view.frame.size.width, view.frame.size.height);
-      [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         view.frame  = CGRectMake([x2 floatValue], [y2 floatValue], view.frame.size.width, view.frame.size.height);
       } completion:^(BOOL finished) {
         NSDictionary* event = @{@"guid":animatedTargetGuid, @"type":@"animationComplete", @"animation": animation};
@@ -150,6 +150,11 @@
           [button setTitle:@"Press Me" forState:UIControlStateNormal];
           button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
           [button sizeToFit];
+          
+          // Add an action in current code file (i.e. target)
+          [button addTarget:_bridge action:@selector(buttonPressed:)
+           forControlEvents:UIControlEventTouchUpInside];
+          
           [view addSubview:button];
         }
         
@@ -211,6 +216,13 @@
           [button setTitle:@"Press Me" forState:UIControlStateNormal];
           button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
           [button sizeToFit];
+          NSNumber* tag = [[child valueForKey:@"instance"] valueForKey:@"tag"];
+          
+          button.tag = [tag integerValue];
+          // Add an action in current code file (i.e. target)
+          [button addTarget:_bridge action:@selector(buttonPressed:)
+           forControlEvents:UIControlEventTouchUpInside];
+          
           [view addSubview:button];
         }
     

@@ -38,6 +38,12 @@
   return self;
 }
 
+- (void)buttonPressed:(UIButton *)button  {
+  NSNumber* tagNumber = [NSNumber numberWithInt:button.tag];
+  NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
+  [self sendEvent:event];
+}
+
 - (id) initWithRootView: (SyrRootView*) rootView {
   self = [super init];
   if (self)

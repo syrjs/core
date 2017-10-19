@@ -41,41 +41,24 @@ class MyComponent extends Component {
   render() {
     return (
       <Animated.View style={style}>
-        <Button>Click Me</Button>
+        <Button onPress={this.onPressClickMe}>Click Me</Button>
         <View style={otherOtherStyle}>{this.state.message}</View>
       </Animated.View>
     );
   }
-  componentWillUpdate() {
-    console.log('component will update');
-  }
-  componentDidUpdate() {
-    console.log('component did update');
+  onPressClickMe() {
+      // animate in after mounting
+      Animated.timing(this.parent, {
+        toValue: { x: 0, y: 700 },
+        duration: 500,
+      }).start();
   }
   componentDidMount() {
       // animate in after mounting
       Animated.timing(this, {
         toValue: { x: 0, y: 250 },
         duration: 500,
-      }).start(()=>{
-
-      setTimeout(()=>{
-          // set style before altering state
-          style.backgroundColor = "#ff000f";
-          // setting state forces a re-render
-          this.setState({
-            message: 'Hi How Are You Doing?'
-          });
-
-          // animate away
-          setTimeout(()=>{
-            Animated.timing(this, {
-              toValue: { x: 0, y: 700 },
-              duration: 500,
-            }).start();
-          }, 1000)
-        });
-      });
+      }).start();
   }
 }
 
