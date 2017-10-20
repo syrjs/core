@@ -165,6 +165,8 @@
   [_bridge sendEvent:event];
 }
 
+
+// this is all UGLY, todo is cleaning this up asap, if if if if loop loop loop.
 -(void) build: (NSDictionary*) astDict {
   NSString* elementName = [astDict objectForKey:@"elementName"];
   if([elementName containsString:@"View"]) {
@@ -225,7 +227,16 @@
           
           [view addSubview:button];
         }
-    
+        
+        if([elementName containsString:@"Image"]) {
+          // WOW UGLIES
+          NSString* source = [[[[child objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
+          NSDictionary* style = [[[child objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+          UIImage* image = [UIImage imageNamed:source];
+          UIImageView* imageHolder = [[UIImageView alloc] initWithImage:image];
+          imageHolder.frame = [self styleFrame:style];
+          [view addSubview:imageHolder];
+        }
       }
     }
     

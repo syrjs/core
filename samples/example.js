@@ -1,31 +1,6 @@
 import { Component, Render, View, Animated, Button } from '../index';
-
-let style = {
-  top: 0,
-  left: 0,
-  height: 450,
-  width: 375,
-  color: '#000000',
-  backgroundColor: '#ff00ff',
-};
-
-let otherStyle = {
-  top: 60,
-  left: 0,
-  height: 150,
-  width: 375,
-  color: '#000000',
-  backgroundColor: '#fff000',
-};
-
-let otherOtherStyle = {
-  top: 100,
-  left: 0,
-  height: 150,
-  width: 375,
-  color: '#000000',
-  backgroundColor: '#fffff0',
-};
+import { styles } from './styles';
+console.log('styles>>>', styles);
 
 class MyComponent extends Component {
   constructor() {
@@ -40,9 +15,10 @@ class MyComponent extends Component {
   }
   render() {
     return (
-      <Animated.View style={style}>
+      <Animated.View style={styles.mainView}>
         <Button onPress={this.onPressClickMe}>Click Me</Button>
-        <View style={otherOtherStyle}>{this.state.message}</View>
+        <View style={styles.secondaryView}>{this.state.message}</View>
+        <Image style={styles.image} source={{uri:'testImage'}}/>
       </Animated.View>
     );
   }
