@@ -20,6 +20,12 @@ let styles = {
     left: 0,
     height: 150,
     width: 375
+  },
+  text: {
+    top: 0,
+    left: 0,
+    height: 40,
+    width: 200
   }
 };
 

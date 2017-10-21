@@ -85,7 +85,7 @@
 didStartProvisionalNavigation:(WKNavigation *)navigation {
   NSLog(@"Loading Bundle");
   // bundle reloaded, remove all subviews from root view
- 	[_rootView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+  [_rootView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 - (void) sendEvent: (NSDictionary*) message {

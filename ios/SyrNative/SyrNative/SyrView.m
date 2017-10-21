@@ -7,20 +7,13 @@
 //
 
 #import "SyrView.h"
-#import "SyrRaster.h"
-
-#import <UIKit/UIKit.h>
 
 @implementation SyrView
 
-- (id) init
-{
-  self = [super init];
-  if (self!=nil) {
-    [[SyrRaster sharedInstance] registerComponent:self withName:@"View"];
-  }
-  return self;
++(NSObject*) render: (NSDictionary*) component {
+  UIView* view = [[UIView alloc] init];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  return [SyrView styleView:view withStyle:style];
 }
-
 
 @end

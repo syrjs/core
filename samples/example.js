@@ -1,6 +1,5 @@
-import { Component, Render, View, Animated, Button } from '../index';
+import { Component, Render, View, Animated, Button, TextView } from '../index';
 import { styles } from './styles';
-console.log('styles>>>', styles);
 
 class MyComponent extends Component {
   constructor() {
@@ -15,11 +14,11 @@ class MyComponent extends Component {
   }
   render() {
     return (
-      <Animated.View style={styles.mainView}>
-        <Button onPress={this.onPressClickMe}>Click Me</Button>
-        <View style={styles.secondaryView}>{this.state.message}</View>
+      <View style={styles.mainView}>
+        <Button onPress={this.onPressClickMe}></Button>
+        <View style={styles.secondaryView}></View>
         <Image style={styles.image} source={{uri:'testImage'}}/>
-      </Animated.View>
+      </View>
     );
   }
   onPressClickMe() {

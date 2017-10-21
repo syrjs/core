@@ -7,6 +7,11 @@
 //
 
 #import "SyrRaster.h"
+#import "SyrAnimator.h"
+#import "SyrText.h"
+#import "SyrView.h"
+#import "SyrImage.h"
+#import "SyrButton.h"
 
 #import <UIKit/UIKit.h>
 
@@ -29,7 +34,6 @@
   return instance;
 }
 
-
 - (id) init
 {
   self = [super init];
@@ -38,47 +42,6 @@
     _animations = [[NSMutableDictionary alloc] init];
   }
   return self;
-}
-
--(void) setupAnimation: (NSDictionary*) astDict {
-  NSLog(@"%@", [astDict valueForKey:@"ast"]);
-  NSError *jsonError;
-  NSData *objectData = [[astDict valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
-  NSDictionary *componentDict = [NSJSONSerialization JSONObjectWithData:objectData
-                                                          options:NSJSONReadingMutableContainers
-                                                            error:&jsonError];
-  
-  NSString* elementName = [componentDict objectForKey:@"elementName"];
-  NSString* animatedTargetGuid = [componentDict objectForKey:@"guid"];
-  
-  if(elementName == nil) {
-    NSArray* children = [componentDict objectForKey:@"children"];
-    NSDictionary* child = [children objectAtIndex:0];
-    elementName = [child valueForKey:@"type"];
-    animatedTargetGuid = [child valueForKey:@"guid"];
-  }
-  
-  if([elementName containsString:@"View"]) {
-    UIView* view = [_components objectForKey:animatedTargetGuid];
-    NSLog(@"animate");
-    NSDictionary* animation = [componentDict objectForKey:@"animation"];
-    if(animation != nil) {
-      NSNumber* x = [animation objectForKey:@"x"];
-      NSNumber* y = [animation objectForKey:@"y"];
-      NSNumber* x2 = [animation objectForKey:@"x2"];
-      NSNumber* y2 = [animation objectForKey:@"y2"];
-      double duration = [[animation objectForKey:@"duration"] integerValue];
-      duration = duration / 1000; // we get it as ms from the js
-      
-      view.frame  = CGRectMake([x floatValue], [y floatValue], view.frame.size.width, view.frame.size.height);
-      [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        view.frame  = CGRectMake([x2 floatValue], [y2 floatValue], view.frame.size.width, view.frame.size.height);
-      } completion:^(BOOL finished) {
-        NSDictionary* event = @{@"guid":animatedTargetGuid, @"type":@"animationComplete", @"animation": animation};
-        [_bridge sendEvent:event];
-      }];
-    }
-  }
 }
 
 -(void) parseAST: (NSDictionary*) astString withRootView: (SyrRootView*) rootView {
@@ -97,175 +60,99 @@
 }
 
 -(void) update: (NSDictionary*) astDict {
-  NSString* elementName = [astDict objectForKey:@"elementName"];
-  if([elementName containsString:@"View"]) {
-    UIView* view = [_components objectForKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-    if(view == nil) {
-      view = [[UIView alloc] init];
-    } else {
-      [view.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    }
-    NSDictionary* attributes = [astDict objectForKey:@"attributes"];
-    NSDictionary* style = [attributes objectForKey:@"style"];
-    view = [self styleView:view withStyle:style];
-    
-    NSDictionary* event = @{@"guid":[[astDict valueForKey:@"instance"] valueForKey:@"guid"], @"type":@"componentWillUpdate"};
-    [_bridge sendEvent:event];
-    
-    NSDictionary* children = [astDict objectForKey:@"children"];
-    for(id child in children) {
-      if([child isKindOfClass:[NSString class]]) {
-        UITextView *textView = [[UITextView alloc] init];
-        textView.text = child;
-        textView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-        textView.backgroundColor = [UIColor clearColor];
-        [view addSubview:textView];
-      } else {
-        NSString* elementName = [child objectForKey:@"elementName"];
-        if([elementName containsString:@"View"]) {
-          UIView* subview = [_components objectForKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-          NSDictionary* parent = [child objectForKey:@"parent"];
-          if(subview == nil) {
-            subview = [[UIView alloc] init];
-          }
-          NSDictionary* attributes = [child objectForKey:@"attributes"];
-          NSDictionary* style = [attributes objectForKey:@"style"];
-          subview = [self styleView:subview withStyle:style];
-          
-          for(id subchild in [child objectForKey:@"children"]) {
-            if([subchild isKindOfClass:[NSString class]]) {
-              UITextView *textView = [[UITextView alloc] init];
-              textView.text = subchild;
-              textView.frame = CGRectMake(0, 0, subview.frame.size.width, subview.frame.size.height);
-              textView.backgroundColor = [UIColor clearColor];
-              [subview addSubview:textView];
-            }
-          }
-          
-          [view addSubview:subview];
-        }
-        
-        if([elementName containsString:@"Button"]) {
-          UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-          [button setTitle:@"Press Me" forState:UIControlStateNormal];
-          button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-          [button sizeToFit];
-          
-          // Add an action in current code file (i.e. target)
-          [button addTarget:_bridge action:@selector(buttonPressed:)
-           forControlEvents:UIControlEventTouchUpInside];
-          
-          [view addSubview:button];
-        }
-        
-      }
-    }
-  }
-  NSDictionary* event = @{@"guid":[[astDict valueForKey:@"instance"] valueForKey:@"guid"], @"type":@"componentDidUpdate"};
-  [_bridge sendEvent:event];
+  NSLog(@"update");
 }
 
-
-// this is all UGLY, todo is cleaning this up asap, if if if if loop loop loop.
 -(void) build: (NSDictionary*) astDict {
-  NSString* elementName = [astDict objectForKey:@"elementName"];
-  if([elementName containsString:@"View"]) {
-    UIView* view = [_components objectForKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-    NSDictionary* parent = [[astDict objectForKey:@"instance"] objectForKey:@"parent"];
-    if(view == nil) {
-      view = [[UIView alloc] init];
-    }
-    NSDictionary* attributes = [astDict objectForKey:@"attributes"];
-    NSDictionary* style = [attributes objectForKey:@"style"];
-    view = [self styleView:view withStyle:style];
-    [_rootView addSubview:view];
-    
-    NSDictionary* children = [astDict objectForKey:@"children"];
+  NSObject* component = [self createComponent:astDict];
+  [self buildChildren:astDict withViewParent:component];
+	[_rootView addSubview:component];
+  [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+  [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+}
+
+-(void) buildChildren:(NSDictionary*) component withViewParent: (UIView*) view  {
+  if([component isKindOfClass:[NSDictionary class]]) {
+    NSArray* children = [component objectForKey:@"children"];
     for(id child in children) {
-      if([child isKindOfClass:[NSString class]]) {
-        UITextView *textView = [[UITextView alloc] init];
-        textView.text = child;
-        textView.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-        textView.backgroundColor = [UIColor clearColor];
-        [view addSubview:textView];
-      } else {
-        NSString* elementName = [child objectForKey:@"elementName"];
-        if([elementName containsString:@"View"]) {
-          UIView* subview = [_components objectForKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-          NSDictionary* parent = [child objectForKey:@"parent"];
-          if(subview == nil) {
-            subview = [[UIView alloc] init];
-          }
-          NSDictionary* attributes = [child objectForKey:@"attributes"];
-          NSDictionary* style = [attributes objectForKey:@"style"];
-          subview = [self styleView:subview withStyle:style];
-          
-          for(id subchild in [child objectForKey:@"children"]) {
-            if([subchild isKindOfClass:[NSString class]]) {
-              UITextView *textView = [[UITextView alloc] init];
-              textView.text = subchild;
-              textView.frame = CGRectMake(0, 0, subview.frame.size.width, subview.frame.size.height);
-              textView.backgroundColor = [UIColor clearColor];
-              [subview addSubview:textView];
-            }
-          }
-          
-          [view addSubview:subview];
+      NSArray* subchildren = [child objectForKey:@"children"];
+      if(subchildren != [NSNull null]) {
+        if(subchildren.count > 0){
+          [self buildChildren:subchildren withViewParent:child];
         }
-        
-        if([elementName containsString:@"Button"]) {
-          UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-          [button setTitle:@"Press Me" forState:UIControlStateNormal];
-          button.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
-          [button sizeToFit];
-          NSNumber* tag = [[child valueForKey:@"instance"] valueForKey:@"tag"];
-          
-          button.tag = [tag integerValue];
-          // Add an action in current code file (i.e. target)
-          [button addTarget:_bridge action:@selector(buttonPressed:)
-           forControlEvents:UIControlEventTouchUpInside];
-          
-          [view addSubview:button];
-        }
-        
-        if([elementName containsString:@"Image"]) {
-          // WOW UGLIES
-          NSString* source = [[[[child objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
-          NSDictionary* style = [[[child objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-          UIImage* image = [UIImage imageNamed:source];
-          UIImageView* imageHolder = [[UIImageView alloc] initWithImage:image];
-          imageHolder.frame = [self styleFrame:style];
-          [view addSubview:imageHolder];
+      }
+      UIView* subview = (UIView*)[self createComponent:child];
+      [view addSubview:subview];
+    }
+  }
+
+}
+
+-(NSObject*) createComponent: (NSDictionary*) component {
+  // infer the class name from the element tag the raster is sending us
+  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+  
+  // get instance of the class
+  NSObject* class = NSClassFromString(className);
+  
+  // populate return
+  NSObject* __unsafe_unretained returnComponent;
+  
+  // get render method
+  SEL selector = NSSelectorFromString(@"render:");
+  if ([class respondsToSelector:selector]) {
+    
+    // invoke render method, pass component
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+    [inv setSelector:selector];
+    [inv setTarget:class];
+
+    [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+    [inv invoke];
+    
+    // set reference to returnComponent borrow
+    [inv getReturnValue:&returnComponent];
+  }
+  
+  
+  // return the component that was created
+  return returnComponent;
+}
+
+
+-(void) setupAnimation: (NSDictionary*) astDict {
+  NSLog(@"%@", [astDict valueForKey:@"ast"]);
+  NSError *jsonError;
+  NSData *objectData = [[astDict valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *componentDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                options:NSJSONReadingMutableContainers
+                                                                  error:&jsonError];
+  
+  
+  NSString* animatedTargetGuid = [componentDict objectForKey:@"guid"];
+  NSObject* animatedTarget = [_components objectForKey:animatedTargetGuid];
+  
+  // if our holder of animated (likely parent component)
+  // is not in our list of component instances, do a quick check
+  // on children
+  if(animatedTarget == nil) {
+    NSArray* children = [componentDict objectForKey:@"children"];
+    if([children count] > 0){
+      for(id child in children) {
+        NSString* childGuid = [child objectForKey:@"guid"];
+        animatedTarget = [_components objectForKey:childGuid];
+        if(animatedTarget != nil) {
+          animatedTargetGuid = childGuid;
+          break;
         }
       }
     }
-    
-    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-    [_components setObject:view forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+  }
+  
+  if(animatedTargetGuid != nil) {
+    // need a better way to get the animation dict from this event
+    [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"]];
   }
 }
-
--(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style {
-  view.frame = [self styleFrame:style];
-  NSString* backgroundColor = [style valueForKey:@"backgroundColor"];
-  view.backgroundColor = [self colorFromHash:backgroundColor];
-  return view;
-}
-
-- (CGRect)styleFrame:(NSDictionary*)styleDictionary {
-  NSNumber* frameHeight = [styleDictionary objectForKey:@"height"];
-  NSNumber* frameWidth = [styleDictionary objectForKey:@"width"];
-  NSNumber* framex = [styleDictionary objectForKey:@"left"];
-  NSNumber* framey = [styleDictionary objectForKey:@"top"];
-  return CGRectMake([framex doubleValue], [framey doubleValue], [frameWidth doubleValue], [frameHeight doubleValue]);
-}
-
-- (UIColor*)colorFromHash:(NSString*) color {
-  color = [color stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
-  unsigned colorInt = 0;
-  [[NSScanner scannerWithString:color] scanHexInt:&colorInt];
-  return UIColorFromRGB(colorInt);
-}
-
 
 @end
