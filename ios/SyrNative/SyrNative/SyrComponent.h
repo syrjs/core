@@ -6,6 +6,7 @@
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
 
+#import "SyrBridge.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -19,5 +20,5 @@ alpha:   1.]
 +(NSObject*) render: (NSDictionary*) component;
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style;
 +(UIColor*)colorFromHash:(NSString*) color;
-+ (CGRect)styleFrame:(NSDictionary*)styleDictionary;
++(CGRect)styleFrame:(NSDictionary*)styleDictionary;
 @end

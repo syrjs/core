@@ -32,7 +32,7 @@ class MyComponent extends Component {
       // animate in after mounting
       Animated.timing(this, {
         toValue: { x: 0, y: 250 },
-        duration: 500,
+        duration: 2000,
       }).start();
   }
 }

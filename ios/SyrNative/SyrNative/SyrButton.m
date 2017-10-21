@@ -7,7 +7,7 @@
 //
 
 #import "SyrButton.h"
-#import "SyrBridge.h"
+#import "SyrEventHandler.h"
 
 @implementation SyrButton
 
@@ -17,6 +17,7 @@
   button.frame = CGRectMake(0, 0, 250, 50);
   [button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
+  [button addTarget:[SyrEventHandler sharedInstance] action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
   button.tag = [tag integerValue];
   // Add an action in current code file (i.e. target)
   return button;

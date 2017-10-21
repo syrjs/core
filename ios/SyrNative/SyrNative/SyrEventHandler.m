@@ -10,4 +10,20 @@
 
 @implementation SyrEventHandler
 
++ (id) sharedInstance {
+  static SyrEventHandler *instance = nil;
+  @synchronized(self) {
+    if (instance == nil) {
+      instance = [[self alloc] init];
+    }
+  }
+  return instance;
+}
+
+- (void) btnSelected:(id)sender {
+  NSNumber* tagNumber = [NSNumber numberWithInt:[sender tag]];
+  NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
+  [_bridge sendEvent:event];
+}
+
 @end

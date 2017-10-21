@@ -13,6 +13,7 @@
 +(NSObject*) render: (NSDictionary*) component {
   UIView* view = [[UIView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  view.frame = [SyrView styleFrame:style];
   return [SyrView styleView:view withStyle:style];
 }
 

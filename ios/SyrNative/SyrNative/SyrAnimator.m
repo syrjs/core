@@ -18,7 +18,8 @@
         NSNumber* y2 = [animation objectForKey:@"y2"];
         double duration = [[animation objectForKey:@"duration"] integerValue];
         duration = duration / 1000; // we get it as ms from the js
-        CGRect frame = CGRectMake([x floatValue], [y floatValue], 300, 300);
+        NSNumber* currentFrame = [component valueForKeyPath:@"frame"];
+        CGRect frame = CGRectMake([x floatValue], [y floatValue], [currentFrame CGRectValue].size.width, [currentFrame CGRectValue].size.height);
         // get render method
         SEL selector = NSSelectorFromString(@"setValue:forKey:");
         if ([component respondsToSelector:selector]) {
@@ -26,7 +27,8 @@
           [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
 
           [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], 300, 300);
+            //todo add animate for size
+            CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], [currentFrame CGRectValue].size.width, [currentFrame CGRectValue].size.height);
             [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
           } completion:^(BOOL finished) {
             NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};

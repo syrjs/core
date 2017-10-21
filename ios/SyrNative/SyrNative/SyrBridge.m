@@ -9,6 +9,7 @@
 #import "SyrBridge.h"
 #import "SyrEventHandler.h"
 #import "SyrRaster.h"
+#import "SyrEventHandler.h"
 
 @interface SyrBridge()
 @property SyrEventHandler* eventHandler;
@@ -31,7 +32,8 @@
     configuration.userContentController = controller;
     _bridgedBrowser = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) configuration:configuration];
     _bridgedBrowser.navigationDelegate = self;
-    _eventHandler = [[SyrEventHandler alloc] init];
+    _eventHandler = [SyrEventHandler sharedInstance];
+    _eventHandler.bridge = self;
     _raster = [SyrRaster sharedInstance];
     _raster.bridge = self;
   }

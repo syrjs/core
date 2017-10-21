@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SyrBridge.h"
 
 @interface SyrEventHandler : NSObject
-
+@property SyrBridge* bridge;
++ (id) sharedInstance;
+- (void)btnSelected:(id)sender;
 @end

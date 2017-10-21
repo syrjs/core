@@ -19,5 +19,4 @@
   return imageHolder;
 }
 
-
 @end

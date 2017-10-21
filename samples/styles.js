@@ -1,11 +1,12 @@
 let styles = {
   mainView: {
-    top: 0,
+    top: 700,
     left: 0,
     height: 450,
     width: 375,
     color: '#000000',
-    backgroundColor: '#ff00ff',
+    backgroundColor: '#0ff00f',
+    position: 'absolute'
   },
   secondaryView: {
     top: 60,
@@ -14,19 +15,21 @@ let styles = {
     width: 375,
     color: '#000000',
     backgroundColor: '#fff000',
+    position: 'absolute'
   },
   image: {
-    top: 100,
+    top: 70,
     left: 0,
-    height: 150,
-    width: 375
+    height: 200,
+    width: 375,
+    position: 'absolute'
   },
   text: {
     top: 0,
     left: 0,
     height: 40,
-    width: 200
-  }
+    width: 200,
+  },
 };
 
 export { styles };

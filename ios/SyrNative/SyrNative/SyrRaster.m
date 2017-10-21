@@ -13,6 +13,7 @@
 #import "SyrImage.h"
 #import "SyrButton.h"
 #import "SyrAnimatedView.h"
+#import "SyrEventHandler.h"
 
 #import <UIKit/UIKit.h>
 
