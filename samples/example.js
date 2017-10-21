@@ -14,11 +14,11 @@ class MyComponent extends Component {
   }
   render() {
     return (
-      <View style={styles.mainView}>
+      <Animated.View style={styles.mainView}>
         <Button onPress={this.onPressClickMe}></Button>
         <View style={styles.secondaryView}></View>
         <Image style={styles.image} source={{uri:'testImage'}}/>
-      </View>
+      </Animated.View>
     );
   }
   onPressClickMe() {

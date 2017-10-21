@@ -9,7 +9,7 @@
 #import "SyrAnimator.h"
 
 @implementation SyrAnimator
-+(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animation {
++(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId{
   		NSLog(@"animate");
       if(animation != nil) {
         NSNumber* x = [animation objectForKey:@"x"];
@@ -29,8 +29,8 @@
             CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], 300, 300);
             [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
           } completion:^(BOOL finished) {
-            //NSDictionary* event = @{@"guid":animatedTargetGuid, @"type":@"animationComplete", @"animation": animation};
-            //[_bridge sendEvent:event];
+            NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
+            [bridge sendEvent:event];
           }];
           
         }

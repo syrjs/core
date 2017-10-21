@@ -12,6 +12,7 @@
 #import "SyrView.h"
 #import "SyrImage.h"
 #import "SyrButton.h"
+#import "SyrAnimatedView.h"
 
 #import <UIKit/UIKit.h>
 
@@ -81,8 +82,7 @@
           [self buildChildren:subchildren withViewParent:child];
         }
       }
-      UIView* subview = (UIView*)[self createComponent:child];
-      [view addSubview:subview];
+      [view addSubview:[self createComponent:child]];
     }
   }
 
@@ -151,7 +151,7 @@
   
   if(animatedTargetGuid != nil) {
     // need a better way to get the animation dict from this event
-    [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"]];
+    [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"] withBridge:_bridge withTargetId:animatedTargetGuid];
   }
 }
 

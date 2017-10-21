@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SyrBridge.h"
 
 @interface SyrAnimator : NSObject
-+(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animationDict;
++(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animationDict withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId;
 @end
