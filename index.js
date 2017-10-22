@@ -5,6 +5,7 @@ import { Animated } from './lib/animated';
 import { Events } from './lib/events';
 import { Button } from './lib/button';
 import { Text } from './lib/text';
+import { Image } from './lib/image';
 
 const DOMRaster = require('./lib/rasters/dom');
 const WKRaster = require('./lib/rasters/wkwebview');
@@ -21,8 +22,10 @@ export {
   Component,
   Render,
   RasterManager,
-  View, Animated,
+  View,
+  Animated,
   Events,
   Button,
-  Text
+  Text,
+  Image
 };

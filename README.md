@@ -218,8 +218,8 @@ Every library likely has need for 2D animations.
 
 Creating a Slide In Animation and Slide out After Button Click
 
-```
-import { Component, Render, View, Animated, Button, TextView } from 'syr';
+```javascript
+import { Component, Render, View, Animated, Button, Text } from 'syr';
 
 import { styles } from './styles';
 
@@ -235,6 +235,7 @@ class MyComponent extends Component {
     });
   }
   render() {
+    // add the transform to the styles
     styles.mainView.transform = [this.animation];
     return (
       <Animated.View style={styles.mainView}>

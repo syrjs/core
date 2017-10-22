@@ -1,4 +1,4 @@
-import { Component, Render, View, Animated, Button, TextView } from '../index';
+import { Component, Render, View, Animated, Button, TextView, Image } from '../index';
 import { styles } from './styles';
 
 class MyComponent extends Component {
