@@ -13,9 +13,11 @@
 
 +(NSObject*) render: (NSDictionary*) component {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
   [button setTitle:@"Press Me" forState:UIControlStateNormal];
-  button.frame = CGRectMake(0, 0, 250, 50);
-  [button sizeToFit];
+  button.frame = [SyrButton styleFrame:style];
+
+  //[button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
   [button addTarget:[SyrEventHandler sharedInstance] action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
   button.tag = [tag integerValue];

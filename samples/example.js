@@ -13,24 +13,27 @@ class MyComponent extends Component {
     });
   }
   render() {
+    styles.mainView.transform = [this.animation];
     return (
       <Animated.View style={styles.mainView}>
-        <Button onPress={this.onPressClickMe}></Button>
-        <View style={styles.secondaryView}></View>
+        <Button style={styles.button} onPress={this.onPressClickMe.bind(this)}></Button>
+        <View style={styles.secondaryView}>
+          <Text>Something</Text>
+        </View>
         <Image style={styles.image} source={{uri:'testImage'}}/>
       </Animated.View>
     );
   }
   onPressClickMe() {
       // animate in after mounting
-      Animated.timing(this.parent, {
+      Animated.timing(this.animation, {
         toValue: { x: 0, y: 700 },
         duration: 500,
       }).start();
   }
   componentDidMount() {
       // animate in after mounting
-      Animated.timing(this, {
+      Animated.timing(this.animation, {
         toValue: { x: 0, y: 250 },
         duration: 2000,
       }).start();

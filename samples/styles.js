@@ -17,6 +17,13 @@ let styles = {
     backgroundColor: '#fff000',
     position: 'absolute'
   },
+  button: {
+    top: 0,
+    left: 0,
+    height: 40,
+    width: 300,
+    backgroundColor: '#00ff0f',
+  },
   image: {
     top: 70,
     left: 0,
