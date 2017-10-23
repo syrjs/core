@@ -14,6 +14,7 @@
   UIView* view = [[UIView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
   view.frame = [SyrAnimatedView styleFrame:style];
+  
   return [SyrAnimatedView styleView:view withStyle:style];
 }
 

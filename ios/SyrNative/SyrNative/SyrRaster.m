@@ -77,16 +77,17 @@
   if([component isKindOfClass:[NSDictionary class]]) {
     NSArray* children = [component objectForKey:@"children"];
     for(id child in children) {
+      NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
+      
       if(subchildren != [NSNull null]) {
         if(subchildren.count > 0){
-          [self buildChildren:subchildren withViewParent:child];
+          [self buildChildren:child withViewParent:nsComponent];
         }
       }
       
-      NSObject* component = [self createComponent:child];
-       [_components setObject:component forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-      [view addSubview:component];
+      [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+      [view addSubview:nsComponent];
     }
   }
 

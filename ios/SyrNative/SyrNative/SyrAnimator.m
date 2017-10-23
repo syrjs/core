@@ -8,8 +8,29 @@
 
 #import "SyrAnimator.h"
 
+
+@interface SyrAnimatorDelegate : NSObject
+@property SyrBridge* bridge;
+@property	NSString* targetId;
+@property	NSDictionary* animation;
+@end
+@implementation SyrAnimatorDelegate
+
+- (void)animationDidStop:(CAAnimation *)anim
+                finished:(BOOL)finished {
+  if(finished){
+    NSLog(@"animation complete");
+    NSDictionary* event = @{@"guid":_targetId, @"type":@"animationComplete", @"animation": _animation};
+    [_bridge sendEvent:event];
+  }
+}
+
+@end
+
 @implementation SyrAnimator
 +(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId{
+  		NSLog(@"animate");
+
       if(animation != nil) {
         NSString* animationType = [SyrAnimator determineAnimationType:animation];
         if([animationType  isEqual: @"animateComponentXY"]) {
@@ -39,6 +60,7 @@
 }
 
 +(void) animateInterpolate:(NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId {
+  NSLog(@"interpolate");
   [CATransaction begin];
   NSNumber* from = [animation objectForKey:@"value"];
   NSNumber* to = [animation objectForKey:@"toValue"];
@@ -53,11 +75,17 @@
   coreAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([from longValue])];
   coreAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([to longValue])];
   
-  [CATransaction setCompletionBlock:^{
-    NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
-    [bridge sendEvent:event];
-  }];
+  SyrAnimatorDelegate* delegate = [[SyrAnimatorDelegate alloc] init];
+  delegate.bridge = bridge;
+  delegate.targetId = targetId;
+  delegate.animation = animation;
+  coreAnimation.delegate = delegate;
   
+//  [CATransaction setCompletionBlock:^{
+//    NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
+//    [bridge sendEvent:event];
+//  }];
+//  
   [[component valueForKey:@"layer"] addAnimation:coreAnimation forKey:@"rotation"];
   [CATransaction commit];
 }
