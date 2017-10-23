@@ -62,7 +62,7 @@
 }
 
 -(void) update: (NSDictionary*) astDict {
-  NSLog(@"update");
+  //NSLog(@"update");
 }
 
 -(void) build: (NSDictionary*) astDict {
@@ -83,7 +83,10 @@
           [self buildChildren:subchildren withViewParent:child];
         }
       }
-      [view addSubview:[self createComponent:child]];
+      
+      NSObject* component = [self createComponent:child];
+       [_components setObject:component forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+      [view addSubview:component];
     }
   }
 
@@ -122,7 +125,6 @@
 
 
 -(void) setupAnimation: (NSDictionary*) astDict {
-  NSLog(@"%@", [astDict valueForKey:@"ast"]);
   NSError *jsonError;
   NSData *objectData = [[astDict valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *componentDict = [NSJSONSerialization JSONObjectWithData:objectData

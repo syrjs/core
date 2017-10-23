@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "SyrBridge.h"
 
+#define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
+
 @interface SyrAnimator : NSObject
 +(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animationDict withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId;
 @end

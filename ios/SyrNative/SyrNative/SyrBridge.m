@@ -60,7 +60,6 @@
   [_rootView addSubview:_bridgedBrowser];
 }
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView{
-  NSLog(@"Loading Bundle");
   // pointing at the dev server for now
   NSURL *nsurl=[NSURL URLWithString:@"http://127.0.0.1:8080/?sds"];
   NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
@@ -73,13 +72,11 @@
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
   if([messageType containsString:@"event"]) {
-    NSLog(@"Event Message Recieved, Handed to Event Handler");
+    
   } else if([messageType containsString:@"gui"]) {
     [_raster parseAST:syrMessage withRootView:_rootView];
-    NSLog(@"Render Message Recieved, Handed to Raster");
   } else if([messageType containsString:@"animation"]) {
     [_raster setupAnimation:syrMessage];
-    NSLog(@"Render Message Recieved, Handed to Raster");
   }
 }
 

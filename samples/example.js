@@ -11,14 +11,15 @@ class MyComponent extends Component {
     // 2d slide animation
     this.slideAnimation = new Animated.ValueXY({
       x: 0,
-      y: 700,
+      y: 0,
     });
 
     // interpolation animation
     this.spinAnimation = new Animated.Value(0);
   }
   render() {
-    styles.mainView.transform = [this.slideAnimation, this.spinAnimation];
+    styles.mainView.transform =[this.slideAnimation];
+    styles.image.transform = [this.spinAnimation];
     return (
       <Animated.View style={styles.mainView}>
         <Button style={styles.button} onPress={this.onPressClickMe.bind(this)}></Button>
@@ -36,21 +37,36 @@ class MyComponent extends Component {
         duration: 1000,
       }).start();
   }
-  componentDidMount() {
-    console.log(this.spinAnimation);
-      // this.setState({
-      //   message: 'hello how are you'
-      // });
-      //animate in after mounting
-      // Animated.timing(this.slideAnimation, {
-      //   toValue: { x: 0, y: 250 },
-      //   duration: 1000,
-      // }).start();
+  spin() {
+    Animated.timing(this.spinAnimation, {
+      toValue: 360,
+      duration: 2000
+    }).start(()=>{
+      this.spin();
+    });
+  }
+  slideUp() {
 
-      Animated.timing(this.spinAnimation, {
-        toValue: 1,
-        duration: 1000
-      }).start();
+    this.slideAnimation.setValue({x:0, y:600});
+    Animated.timing(this.slideAnimation, {
+      toValue: { x: 0, y: 0 },
+      duration: 1000,
+    }).start(()=>{
+      this.slideDown()
+    });
+  }
+  slideDown() {
+    this.slideAnimation.setValue({x:0, y:0});
+    Animated.timing(this.slideAnimation, {
+      toValue: { x: 0, y: 600 },
+      duration: 1000,
+    }).start(()=>{
+      this.slideUp();
+    });
+  }
+  componentDidMount() {
+      this.spin();
+      this.slideUp();
   }
 }
 

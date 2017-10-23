@@ -10,8 +10,6 @@
 
 @implementation SyrAnimator
 +(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId{
-  		NSLog(@"animate");
-
       if(animation != nil) {
         NSString* animationType = [SyrAnimator determineAnimationType:animation];
         if([animationType  isEqual: @"animateComponentXY"]) {
@@ -41,22 +39,27 @@
 }
 
 +(void) animateInterpolate:(NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId {
-  NSLog(@"interpolate");
+  [CATransaction begin];
   NSNumber* from = [animation objectForKey:@"value"];
   NSNumber* to = [animation objectForKey:@"toValue"];
   double duration = [[animation objectForKey:@"duration"] integerValue];
   duration = duration / 1000; // we get it as ms from the js
-  SEL selector = NSSelectorFromString(@"setValue:forKey:");
-  if ([component respondsToSelector:selector]) {
-   
-    [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-       CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI);
-       [component performSelector: selector withObject:[NSValue valueWithCGAffineTransform:transform] withObject:@"transform"];
-    } completion:^(BOOL finished) {
-      NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
-      [bridge sendEvent:event];
-    }];
-  }
+
+  CABasicAnimation *coreAnimation = [CABasicAnimation   animationWithKeyPath:@"transform.rotation.z"];
+  coreAnimation.duration = duration;
+  coreAnimation.additive = YES;
+  coreAnimation.removedOnCompletion = YES;
+  coreAnimation.fillMode = kCAFillModeForwards;
+  coreAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([from longValue])];
+  coreAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([to longValue])];
+  
+  [CATransaction setCompletionBlock:^{
+    NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
+    [bridge sendEvent:event];
+  }];
+  
+  [[component valueForKey:@"layer"] addAnimation:coreAnimation forKey:@"rotation"];
+  [CATransaction commit];
 }
 
 +(void) animateComponentXY:(NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId {
