@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2C0356C1F9E65BB009BE5E0 /* SyrNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2EC21C31F4D257300DFA7C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C21F4D257300DFA7C9 /* main.m */; };
 		D2EC21C61F4D257300DFA7C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */; };
 		D2EC21C91F4D257300DFA7C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C81F4D257300DFA7C9 /* ViewController.m */; };
 		D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */; };
 		D2EC21CE1F4D257300DFA7C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */; };
 		D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */; };
-		D2EC21DF1F4D259500DFA7C9 /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; };
+		D2EC21DF1F4D259500DFA7C9 /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D2C0356D1F9E65BB009BE5E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2D7E02F1F0F672D0039C3A9;
+			remoteInfo = SyrNative;
+		};
 		D2EC21DC1F4D257D00DFA7C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
@@ -25,6 +33,29 @@
 			remoteInfo = SyrNative;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D2C0356A1F9E6577009BE5E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C0356F1F9E65BB009BE5E0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2C0356C1F9E65BB009BE5E0 /* SyrNative.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D2EC21BE1F4D257300DFA7C9 /* SyrNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyrNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,10 +150,13 @@
 				D2EC21BA1F4D257300DFA7C9 /* Sources */,
 				D2EC21BB1F4D257300DFA7C9 /* Frameworks */,
 				D2EC21BC1F4D257300DFA7C9 /* Resources */,
+				D2C0356A1F9E6577009BE5E0 /* CopyFiles */,
+				D2C0356F1F9E65BB009BE5E0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D2C0356E1F9E65BB009BE5E0 /* PBXTargetDependency */,
 			);
 			name = SyrNativeSample;
 			productName = SyrNativeSample;
@@ -204,6 +238,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2C0356E1F9E65BB009BE5E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SyrNative;
+			targetProxy = D2C0356D1F9E65BB009BE5E0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */ = {
