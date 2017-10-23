@@ -7,13 +7,18 @@ class MyComponent extends Component {
     this.state = {
       message: 'This is a Slide Up',
     };
-    this.animation = new Animated.ValueXY({
+
+    // 2d slide animation
+    this.slideAnimation = new Animated.ValueXY({
       x: 0,
       y: 700,
     });
+
+    // interpolation animation
+    this.spinAnimation = new Animated.Value(0);
   }
   render() {
-    styles.mainView.transform = [this.animation];
+    styles.mainView.transform = [this.slideAnimation, this.spinAnimation];
     return (
       <Animated.View style={styles.mainView}>
         <Button style={styles.button} onPress={this.onPressClickMe.bind(this)}></Button>
@@ -26,16 +31,25 @@ class MyComponent extends Component {
   }
   onPressClickMe() {
       // animate in after mounting
-      Animated.timing(this.animation, {
+      Animated.timing(this.slideAnimation, {
         toValue: { x: 0, y: 700 },
-        duration: 500,
+        duration: 1000,
       }).start();
   }
   componentDidMount() {
-      // animate in after mounting
-      Animated.timing(this.animation, {
-        toValue: { x: 0, y: 250 },
-        duration: 2000,
+    console.log(this.spinAnimation);
+      // this.setState({
+      //   message: 'hello how are you'
+      // });
+      //animate in after mounting
+      // Animated.timing(this.slideAnimation, {
+      //   toValue: { x: 0, y: 250 },
+      //   duration: 1000,
+      // }).start();
+
+      Animated.timing(this.spinAnimation, {
+        toValue: 1,
+        duration: 1000
       }).start();
   }
 }

@@ -1,6 +1,6 @@
 let styles = {
   mainView: {
-    top: 700,
+    top: 0,
     left: 0,
     height: 450,
     width: 375,

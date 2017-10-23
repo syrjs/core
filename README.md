@@ -8,10 +8,6 @@
 </h1>
 <p align="center" style="font-size: 1.2rem;">minimally obtrusive reactisque view engine, aimed at native developers</p>
 
-
-[![build status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
-[![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
-
 Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.
 
 We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
