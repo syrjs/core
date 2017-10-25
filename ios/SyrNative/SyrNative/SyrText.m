@@ -10,6 +10,13 @@
 
 @implementation SyrText
 
+SYR_EXPORT_MODULE();
+
+SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
+{
+  NSLog(@"some stuff");
+}
+
 +(NSObject*) render: (NSDictionary*) component {
   UITextView *textView = [[UITextView alloc] init];
   textView.backgroundColor = [UIColor clearColor];

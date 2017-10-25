@@ -24,6 +24,7 @@
 {
   self = [super init];
   if (self!=nil) {
+    _bridgedBrowser = [[NSMutableDictionary alloc] init];
     // setup a 0,0,0,0 wkwebview to use the jsbridge
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *controller = [[WKUserContentController alloc] init];
@@ -60,6 +61,9 @@
   [_rootView addSubview:_bridgedBrowser];
 }
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView{
+  
+  NSLog(@"%@", _raster.nativemodules);
+  
   // pointing at the dev server for now
   NSURL *nsurl=[NSURL URLWithString:@"http://127.0.0.1:8080/?sds"];
   NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];

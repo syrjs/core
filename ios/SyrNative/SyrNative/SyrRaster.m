@@ -5,7 +5,7 @@
 //  Created by Anderson,Derek on 7/8/17.
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
-
+#import <objc/runtime.h>
 #import "SyrRaster.h"
 #import "SyrAnimator.h"
 #import "SyrEventHandler.h"
@@ -37,6 +37,7 @@
   if (self!=nil) {
     _components = [[NSMutableDictionary alloc] init];
     _animations = [[NSMutableDictionary alloc] init];
+    _nativemodules = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
@@ -152,6 +153,21 @@
     // need a better way to get the animation dict from this event
     [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"] withBridge:_bridge withTargetId:animatedTargetGuid];
   }
+}
+
+-(void) registerComponent: (NSString*) className {
+  NSLog(@"I'm registering this component: %@", className);
+  NSMutableArray* nsMethods = [[NSMutableArray alloc] init];
+  int unsigned numMethods;
+  Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
+  for (int i = 0; i < numMethods; i++) {
+    NSString* selector = NSStringFromSelector(method_getName(methods[i]));
+    if([selector containsString:@"__syr_export"]) {
+      [nsMethods addObject:selector];
+    }
+  }
+  free(methods);
+  [_nativemodules setObject:nsMethods forKey:className];
 }
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
 
-#import "SyrBridge.h"
+#import "SyrRaster.h"
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -19,9 +19,11 @@ alpha:   1.]
 #define SYR_CONCAT2(A, B) A ## B
 #define SYR_CONCAT(A, B) SYR_CONCAT2(A, B)
 
-#define SYR_EXPORT_MODULE(js_name) \
-+ (void)load { NSLog(@"hi from header"); }
+// tell syr to register a native class
+#define SYR_EXPORT_MODULE() \
++ (void)load { [[SyrRaster sharedInstance] registerComponent:NSStringFromClass([self class])]; }
 
+// tell syr how to find native class methods to send to JavaScript
 #define SYR_EXPORT_METHOD(method) \
 + (void)SYR_CONCAT(__syr_export__, method)
 

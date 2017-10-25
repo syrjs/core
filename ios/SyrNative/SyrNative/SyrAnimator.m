@@ -19,7 +19,6 @@
 - (void)animationDidStop:(CAAnimation *)anim
                 finished:(BOOL)finished {
   if(finished){
-    NSLog(@"animation complete");
     NSDictionary* event = @{@"guid":_targetId, @"type":@"animationComplete", @"animation": _animation};
     [_bridge sendEvent:event];
   }
@@ -29,8 +28,6 @@
 
 @implementation SyrAnimator
 +(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId{
-  		NSLog(@"animate");
-
       if(animation != nil) {
         NSString* animationType = [SyrAnimator determineAnimationType:animation];
         if([animationType  isEqual: @"animateComponentXY"]) {
@@ -60,7 +57,6 @@
 }
 
 +(void) animateInterpolate:(NSObject*) component withAnimation: (NSDictionary*) animation withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId {
-  NSLog(@"interpolate");
   [CATransaction begin];
   NSNumber* from = [animation objectForKey:@"value"];
   NSNumber* to = [animation objectForKey:@"toValue"];
@@ -80,12 +76,7 @@
   delegate.targetId = targetId;
   delegate.animation = animation;
   coreAnimation.delegate = delegate;
-  
-//  [CATransaction setCompletionBlock:^{
-//    NSDictionary* event = @{@"guid":targetId, @"type":@"animationComplete", @"animation": animation};
-//    [bridge sendEvent:event];
-//  }];
-//  
+
   [[component valueForKey:@"layer"] addAnimation:coreAnimation forKey:@"rotation"];
   [CATransaction commit];
 }
