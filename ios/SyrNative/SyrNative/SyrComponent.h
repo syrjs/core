@@ -16,6 +16,15 @@ green:   ((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
 blue:    ((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:   1.]
 
+#define SYR_CONCAT2(A, B) A ## B
+#define SYR_CONCAT(A, B) SYR_CONCAT2(A, B)
+
+#define SYR_EXPORT_MODULE(js_name) \
++ (void)load { NSLog(@"hi from header"); }
+
+#define SYR_EXPORT_METHOD(method) \
++ (void)SYR_CONCAT(__syr_export__, method)
+
 @interface SyrComponent : NSObject
 +(NSObject*) render: (NSDictionary*) component;
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style;
