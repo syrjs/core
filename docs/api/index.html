@@ -117,6 +117,8 @@
         
             <li class="second-level"><a href="#components">Components</a></li>
             
+                <li class="third-level"><a href="#a-component">A Component</a></li>
+            
                 <li class="third-level"><a href="#view">View</a></li>
             
                 <li class="third-level"><a href="#textview">TextView</a></li>
@@ -169,11 +171,90 @@
 
 <h1 id="syrsdk-api">SyrSDK API</h1>
 <h2 id="components">Components</h2>
+<h3 id="a-component">A Component</h3>
+<p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup would like like this.</p>
+<pre><code class="javascript">import { Component } from 'syr';
+
+class MyComponent extends Component {
+  constructor() {
+  }
+  render() {
+  }
+}
+
+</code></pre>
+
 <h3 id="view">View</h3>
+<p>A <code>View</code> component is the basic component that renders to a surface (the <code>RootView</code>). This component can be rendered to a <code>SyrRootView</code>.</p>
+<pre><code class="javascript">import { View } from 'syr';
+
+render(){
+  return &lt;View&gt;&lt;/View&gt;
+}
+</code></pre>
+
+<p>It can also own components, that will render to the surface as a child. Such as another <code>View</code>.</p>
+<pre><code class="javascript">import { View } from 'syr';
+
+render(){
+  return &lt;View&gt;
+      &lt;View&gt;&lt;/View&gt;
+  &lt;/View&gt;
+}
+</code></pre>
+
+<p>Because a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.</p>
+<pre><code class="javascript">import { View } from 'syr';
+
+render(){
+  return &lt;View style={{
+    height: 100,
+    width: 100,
+    left: 50,
+    top: 50
+  }}&gt;&lt;/View&gt;
+}
+</code></pre>
+
 <h3 id="textview">TextView</h3>
+<p>A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a <code>value</code> property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a <code>TextView</code></p>
+<pre><code class="javascript">import { TextView } from 'syr';
+
+render(){
+  return &lt;TextView&gt;&lt;/TextView&gt;
+}
+</code></pre>
+
 <h3 id="animatedview">Animated.View</h3>
+<p>An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stubb exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.</p>
+<pre><code class="javascript">import { Animated } from 'syr';
+
+render(){
+  return &lt;Animated.View&gt;&lt;/Animated.View&gt;
+}
+</code></pre>
+
 <h3 id="image">Image</h3>
+<p>A component for displaying an Image. It is self terminated as it can not hold any children.</p>
+<pre><code class="javascript">import { Image } from 'syr';
+
+render(){
+  return &lt;Image source={{uri:&quot;file_name&quot;}} style={{ height:150, width:300 }}/&gt;
+}
+</code></pre>
+
 <h3 id="button">Button</h3>
+<p>A clickable component. Returns an onPress event.</p>
+<pre><code class="javascript">import { Image } from 'syr';
+
+render(){
+  return &lt;Button onPress={this.onPress} style={{ height:150, width:300 }}&gt;Press Me&lt;/Button&gt;
+}
+onPress(){
+  // the button was pressed!
+}
+</code></pre>
+
 <h2 id="styling-a-component">Styling a component</h2>
 <h3 id="styling-your-component-from-javascript">Styling your component from JavaScript</h3>
 <h3 id="styling-your-component-from-native">Styling your component from Native</h3>

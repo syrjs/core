@@ -2,16 +2,109 @@
 
 ## Components
 
+### A Component
+
+SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup would like like this.
+
+```javascript
+import { Component } from 'syr';
+
+class MyComponent extends Component {
+  constructor() {
+  }
+  render() {
+  }
+}
+
+```
 ### View
+
+A `View` component is the basic component that renders to a surface (the `RootView`). This component can be rendered to a `SyrRootView`.
+
+```javascript
+import { View } from 'syr';
+
+render(){
+  return <View></View>
+}
+```
+
+It can also own components, that will render to the surface as a child. Such as another `View`.
+
+```javascript
+import { View } from 'syr';
+
+render(){
+  return <View>
+      <View></View>
+  </View>
+}
+```
+
+Because a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.
+
+```javascript
+import { View } from 'syr';
+
+render(){
+  return <View style={{
+    height: 100,
+    width: 100,
+    left: 50,
+    top: 50
+  }}></View>
+}
+```
 
 ### TextView
 
+A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a `value` property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a `TextView`
+
+```javascript
+import { TextView } from 'syr';
+
+render(){
+  return <TextView></TextView>
+}
+```
+
 ### Animated.View
+
+An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stubb exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
+
+```javascript
+import { Animated } from 'syr';
+
+render(){
+  return <Animated.View></Animated.View>
+}
+```
 
 ### Image
 
+A component for displaying an Image. It is self terminated as it can not hold any children.
+
+```javascript
+import { Image } from 'syr';
+
+render(){
+  return <Image source={{uri:"file_name"}} style={{ height:150, width:300 }}/>
+}
+```
 ### Button
 
+A clickable component. Returns an onPress event.
+
+```javascript
+import { Image } from 'syr';
+
+render(){
+  return <Button onPress={this.onPress} style={{ height:150, width:300 }}>Press Me</Button>
+}
+onPress(){
+  // the button was pressed!
+}
+```
 
 ## Styling a component
 
