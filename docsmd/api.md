@@ -1,5 +1,7 @@
 # SyrSDK API
 
+This API guide is morphing over time. Please checkback often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.
+
 ## Components
 
 ### A Component
