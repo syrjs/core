@@ -6,7 +6,7 @@ This API guide is morphing over time. Please checkback often, and feel free to u
 
 ### A Component
 
-SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup would like like this.
+SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.
 
 ```javascript
 import { Component } from 'syr';
@@ -336,7 +336,7 @@ Syr Native Modules are always used in the `Class` invokation method. What this m
 
 `MyNativeModule.h`
 ```objc
-#import "MyNativeModule.h"
+#import "SyrComponent.h"
 
 @interface MyNativeModule : SyrComponent
 @end

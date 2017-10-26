@@ -183,7 +183,7 @@
 <p>This API guide is morphing over time. Please checkback often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.</p>
 <h2 id="components">Components</h2>
 <h3 id="a-component">A Component</h3>
-<p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup would like like this.</p>
+<p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.</p>
 <pre><code class="javascript">import { Component } from 'syr';
 
 class MyComponent extends Component {
@@ -456,7 +456,7 @@ Render(MyComponent);
 <p>Syr Native Modules are always used in the <code>Class</code> invokation method. What this means is that if you want to store instanced information (some value) on your class <code>Natively</code> you need to use the <code>sharedDelegate</code> pattern.</p>
 <h3 id="building-your-first-class">Building your first class</h3>
 <p><code>MyNativeModule.h</code></p>
-<pre><code class="objc">#import &quot;MyNativeModule.h&quot;
+<pre><code class="objc">#import &quot;SyrComponent.h&quot;
 
 @interface MyNativeModule : SyrComponent
 @end
