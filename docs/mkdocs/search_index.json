@@ -1,0 +1,134 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Syr\n\n\nPreamble and Ramble\n\n\nSimply put, Syr is a light weight, reduced implimentation of the React-Native pattern. Currently running on iOS only, Android and Web coming.\n\n\nThe target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. And you want to be able to update those experiences without needing ot require the SDK be reintegrated for simple changes, like business logic, and look and feel.", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#syr", 
+            "text": "", 
+            "title": "Syr"
+        }, 
+        {
+            "location": "/#preamble-and-ramble", 
+            "text": "Simply put, Syr is a light weight, reduced implimentation of the React-Native pattern. Currently running on iOS only, Android and Web coming.  The target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. And you want to be able to update those experiences without needing ot require the SDK be reintegrated for simple changes, like business logic, and look and feel.", 
+            "title": "Preamble and Ramble"
+        }, 
+        {
+            "location": "/api/", 
+            "text": "SyrSDK API\n\n\nComponents\n\n\nView\n\n\nTextView\n\n\nAnimated.View\n\n\nImage\n\n\nButton\n\n\nStyling a component\n\n\nStyling your component from JavaScript\n\n\nStyling your component from Native\n\n\nRendering\n\n\nSyr components are built on the React Class pattern using ESNext. Using this pattern you can extend components and provide a render function that will present the inner set of components.\n\n\nimport { Component } from 'syr';\n\nclass MyComponent extends Component {\n  render() {\n    return \nView\n/View\n\n  }\n}\n\nexport { MyComponent };\n\n\n\n\n\nLifeCycle\n\n\nSyr supports Life Cycle events to help control the flow of the program. To take advantage of these add the following to javascript classes.\n\n\nMethod stubs\n\n\nimport { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    // runs when object is created in javascript\n  }\n  render() {\n    // when what this class should return as it's rendering tree\n  }\n  componentDidMount() {\n    // this fires when component has been added to the rendering surface\n  }\n  componentWillUnmount() {\n    // fires when component is removed from rendering surface\n  }\n  componentWillUpdate() {\n    // fires before component will update, you can return false\n    // to prevent an update\n  }\n  componentDidUpdate() {\n    // component updated, runs after the component state was changed\n  }\n}\n\n\n\n\n\nEvents\n\n\nNotifying JavaScript from Native\n\n\nIf you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass \nSyrComponent.h\n.\n\n\nself sendEventWithName:@\nFooParty\n body:@{@\nname\n: eventName}];\n\n\n\n\nSubscribing to Events from JavaScript\n\n\nJavaScript can subscribe to the events that are being passed down from the native layer.\n\n\nimport { NativeEventEmitter } from 'syr';\n\n\nconst subscription = NativeEventEmitter.addListener(\n  'FooParty',\n  (event) =\n console.log(event.name)\n);\n\n// unsubscribe when needed\nsubscription.remove();\n\n\n\n\nAnimations\n\n\nSyr has support for animations. With Syr animations you can run animations transitions in parallel, or sequence. Animations allow for the shift in x,y position and size. If you need a more complex animation you can use \nAnimated.Value\n to bind a transform to the component.\n\n\nSlide\n\n\nimport { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // slide animation\n    this.slideAnimation = new Animated.XYValue({\n      x: 0\n      y: 0\n    });\n  }\n  render() {\n    return (\n      \nAnimated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        transform: [this.slideAnimation]\n      }}\n\n      \n/Animated.View\n\n    );\n  }\n  componentDidMount() {\n    Animated.timing(this.slideAnimation, {\n      toValue: {\n        x:100,\n        y:100\n      },\n      duration: 5000\n    }).start()\n  }\n}\n\nRender(MyComponent);\n\n\n\n\nRotation\n\n\nimport { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // interpolation animation\n    this.spinAnimation = new Animated.Value(0);\n  }\n  render() {\n    return (\n      \nAnimated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        top: 50,\n        left: 50,\n        transform: [this.spinAnimation]\n      }}\n\n      \n/Animated.View\n\n    );\n  }\n  spin() {\n    //spin the object 360 degress. and repeat after 5 seconds\n    Animated.timing(this.spinAnimation, {\n      toValue: 360,\n      duration: 5000\n    }).start(()=\n{\n      this.spin();\n    });\n  }\n  componentDidMount() {\n    this.spin();\n  }\n}\n\nRender(MyComponent);\n\n\n\n\nCreating Native Modules\n\n\nSyr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderables (Views, Text, Buttons), and having methods callable from JavaScript.\n\n\nSyr Native Modules are always used in the \nClass\n invokation method. What this means is that if you want to store instanced information (some value) on your class \nNatively\n you need to use the \nsharedDelegate\n pattern.\n\n\nBuilding your first class\n\n\nMyNativeModule.h\n\n\n#import \nMyNativeModule.h\n\n\n@interface MyNativeModule : SyrComponent\n@end\n\n\n\n\nMyNativeModule.m\n\n\n#import \nMyNativeModule.h\n\n\n@implementation MyNativeModule\n\n// send this class to the JS bridge\nSYR_EXPORT_MODULE();\n\n// this is an objective C method that will get it's invokation from JS\nSYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)\n{\n  // do something with Name and Location strings\n}\n\n// if you want to use this module in the JSX tree\n// there are helper methods on the component to help with\n// styling and more\n+(NSObject*) render: (NSDictionary*) component {\n  UIView *view = [[UIView alloc] init];\n  return view;\n}\n\n@end\n\n\n\n\n\nAccessing the native modules from javascript.\n\n\n\nimport { NativeModules } from 'syr';\n\nlet MyNativeModule = NativeModules.MyNativeModule;\n\nMyNativeModule.addEvent('building an app', 'at my desk');", 
+            "title": "Api"
+        }, 
+        {
+            "location": "/api/#syrsdk-api", 
+            "text": "", 
+            "title": "SyrSDK API"
+        }, 
+        {
+            "location": "/api/#components", 
+            "text": "", 
+            "title": "Components"
+        }, 
+        {
+            "location": "/api/#view", 
+            "text": "", 
+            "title": "View"
+        }, 
+        {
+            "location": "/api/#textview", 
+            "text": "", 
+            "title": "TextView"
+        }, 
+        {
+            "location": "/api/#animatedview", 
+            "text": "", 
+            "title": "Animated.View"
+        }, 
+        {
+            "location": "/api/#image", 
+            "text": "", 
+            "title": "Image"
+        }, 
+        {
+            "location": "/api/#button", 
+            "text": "", 
+            "title": "Button"
+        }, 
+        {
+            "location": "/api/#styling-a-component", 
+            "text": "", 
+            "title": "Styling a component"
+        }, 
+        {
+            "location": "/api/#styling-your-component-from-javascript", 
+            "text": "", 
+            "title": "Styling your component from JavaScript"
+        }, 
+        {
+            "location": "/api/#styling-your-component-from-native", 
+            "text": "", 
+            "title": "Styling your component from Native"
+        }, 
+        {
+            "location": "/api/#rendering", 
+            "text": "Syr components are built on the React Class pattern using ESNext. Using this pattern you can extend components and provide a render function that will present the inner set of components.  import { Component } from 'syr';\n\nclass MyComponent extends Component {\n  render() {\n    return  View /View \n  }\n}\n\nexport { MyComponent };", 
+            "title": "Rendering"
+        }, 
+        {
+            "location": "/api/#lifecycle", 
+            "text": "Syr supports Life Cycle events to help control the flow of the program. To take advantage of these add the following to javascript classes.", 
+            "title": "LifeCycle"
+        }, 
+        {
+            "location": "/api/#method-stubs", 
+            "text": "import { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    // runs when object is created in javascript\n  }\n  render() {\n    // when what this class should return as it's rendering tree\n  }\n  componentDidMount() {\n    // this fires when component has been added to the rendering surface\n  }\n  componentWillUnmount() {\n    // fires when component is removed from rendering surface\n  }\n  componentWillUpdate() {\n    // fires before component will update, you can return false\n    // to prevent an update\n  }\n  componentDidUpdate() {\n    // component updated, runs after the component state was changed\n  }\n}", 
+            "title": "Method stubs"
+        }, 
+        {
+            "location": "/api/#events", 
+            "text": "", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/api/#notifying-javascript-from-native", 
+            "text": "If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass  SyrComponent.h .  self sendEventWithName:@ FooParty  body:@{@ name : eventName}];", 
+            "title": "Notifying JavaScript from Native"
+        }, 
+        {
+            "location": "/api/#subscribing-to-events-from-javascript", 
+            "text": "JavaScript can subscribe to the events that are being passed down from the native layer.  import { NativeEventEmitter } from 'syr';\n\n\nconst subscription = NativeEventEmitter.addListener(\n  'FooParty',\n  (event) =  console.log(event.name)\n);\n\n// unsubscribe when needed\nsubscription.remove();", 
+            "title": "Subscribing to Events from JavaScript"
+        }, 
+        {
+            "location": "/api/#animations", 
+            "text": "Syr has support for animations. With Syr animations you can run animations transitions in parallel, or sequence. Animations allow for the shift in x,y position and size. If you need a more complex animation you can use  Animated.Value  to bind a transform to the component.", 
+            "title": "Animations"
+        }, 
+        {
+            "location": "/api/#slide", 
+            "text": "import { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // slide animation\n    this.slideAnimation = new Animated.XYValue({\n      x: 0\n      y: 0\n    });\n  }\n  render() {\n    return (\n       Animated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        transform: [this.slideAnimation]\n      }} \n       /Animated.View \n    );\n  }\n  componentDidMount() {\n    Animated.timing(this.slideAnimation, {\n      toValue: {\n        x:100,\n        y:100\n      },\n      duration: 5000\n    }).start()\n  }\n}\n\nRender(MyComponent);", 
+            "title": "Slide"
+        }, 
+        {
+            "location": "/api/#rotation", 
+            "text": "import { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // interpolation animation\n    this.spinAnimation = new Animated.Value(0);\n  }\n  render() {\n    return (\n       Animated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        top: 50,\n        left: 50,\n        transform: [this.spinAnimation]\n      }} \n       /Animated.View \n    );\n  }\n  spin() {\n    //spin the object 360 degress. and repeat after 5 seconds\n    Animated.timing(this.spinAnimation, {\n      toValue: 360,\n      duration: 5000\n    }).start(()= {\n      this.spin();\n    });\n  }\n  componentDidMount() {\n    this.spin();\n  }\n}\n\nRender(MyComponent);", 
+            "title": "Rotation"
+        }, 
+        {
+            "location": "/api/#creating-native-modules", 
+            "text": "Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderables (Views, Text, Buttons), and having methods callable from JavaScript.  Syr Native Modules are always used in the  Class  invokation method. What this means is that if you want to store instanced information (some value) on your class  Natively  you need to use the  sharedDelegate  pattern.", 
+            "title": "Creating Native Modules"
+        }, 
+        {
+            "location": "/api/#building-your-first-class", 
+            "text": "MyNativeModule.h  #import  MyNativeModule.h \n\n@interface MyNativeModule : SyrComponent\n@end  MyNativeModule.m  #import  MyNativeModule.h \n\n@implementation MyNativeModule\n\n// send this class to the JS bridge\nSYR_EXPORT_MODULE();\n\n// this is an objective C method that will get it's invokation from JS\nSYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)\n{\n  // do something with Name and Location strings\n}\n\n// if you want to use this module in the JSX tree\n// there are helper methods on the component to help with\n// styling and more\n+(NSObject*) render: (NSDictionary*) component {\n  UIView *view = [[UIView alloc] init];\n  return view;\n}\n\n@end  Accessing the native modules from javascript.  \nimport { NativeModules } from 'syr';\n\nlet MyNativeModule = NativeModules.MyNativeModule;\n\nMyNativeModule.addEvent('building an app', 'at my desk');", 
+            "title": "Building your first class"
+        }, 
+        {
+            "location": "/getting_started/", 
+            "text": "", 
+            "title": "Getting started"
+        }
+    ]
+}

@@ -1,2 +1,4 @@
 site_name: SyrSDK
 theme: cinder
+site_dir: docs
+docs_dir: docsmd
