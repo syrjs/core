@@ -12,9 +12,9 @@
 
 SYR_EXPORT_MODULE();
 
-SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
+SYR_EXPORT_METHOD(addMoarEvents: (NSString*) foo)
 {
-  NSLog(@"some stuff");
+  NSLog(@"some stuff, %@", foo);
 }
 
 +(NSObject*) render: (NSDictionary*) component {

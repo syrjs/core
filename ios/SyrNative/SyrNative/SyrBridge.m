@@ -16,6 +16,7 @@
 @property SyrRaster* raster;
 @property WKWebView* bridgedBrowser;
 @property SyrRootView* rootView;
+@property NSMutableDictionary* instances;
 @end
 
 @implementation SyrBridge
@@ -69,7 +70,16 @@
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
   NSURL* syrBridgeUrl = [NSURL fileURLWithPath:syrBridgePath];
-  [_bridgedBrowser loadFileURL:syrBridgeUrl allowingReadAccessToURL:syrBridgeUrl];
+  NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
+  
+
+  NSMutableArray *queryItems = [NSMutableArray array];
+  for (NSString *key in _raster.nativemodules) {
+    [queryItems addObject:[NSURLQueryItem queryItemWithName:key value:_raster.nativemodules[key]]];
+  }
+  components.queryItems = queryItems;
+  
+  [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController
@@ -77,6 +87,41 @@
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
   if([messageType containsString:@"event"]) {
+    //
+  } else if([messageType containsString:@"cmd"]) {
+		// get the class
+    NSString* className = [syrMessage valueForKey:@"class"];
+    Class class = NSClassFromString(className);
+    
+    // create an instance of the object
+    if(class != nil){
+      [_instances setObject:class forKey:className];
+    }
+ 
+    //get render method
+    NSString* selectorString = [syrMessage valueForKey:@"selector"];
+    SEL methodSelector = NSSelectorFromString(selectorString);
+    if ([class respondsToSelector:methodSelector]) {
+    
+      NSMethodSignature *methodSignature = [NSClassFromString(className) methodSignatureForSelector:methodSelector];
+      //invoke render method, pass component
+      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSignature];
+    
+      [inv setSelector:methodSelector];
+      [inv setTarget:class];
+      
+      NSData *argsData = [[syrMessage valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
+      NSError *error;
+      //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+      id argsObject = [NSJSONSerialization JSONObjectWithData:argsData options:0 error:&error];
+      int argsIndex = 2; // start at 2
+      for(id arg in argsObject) {
+        NSObject* argObj = [argsObject objectForKey:arg];
+        [inv setArgument:&(argObj) atIndex:argsIndex];
+        argsIndex = argsIndex + 1;
+      }
+      [inv invoke];
+    }
     
   } else if([messageType containsString:@"gui"]) {
     [_raster parseAST:syrMessage withRootView:_rootView];

@@ -89,6 +89,10 @@
 
 }
 
+/**
+ creates a component based on the JSX element name.
+ todo: make this more react-nativeique
+ */
 -(NSObject*) createComponent: (NSDictionary*) component {
   // infer the class name from the element tag the raster is sending us
   NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
@@ -120,7 +124,9 @@
   return returnComponent;
 }
 
-
+/**
+ prepares an animation to be run
+ */
 -(void) setupAnimation: (NSDictionary*) astDict {
   NSError *jsonError;
   NSData *objectData = [[astDict valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
@@ -155,19 +161,21 @@
   }
 }
 
+/**
+ Prepares class methods for bridge support.
+ loops through all the methods that contain a prefix, and then prepares
+ an array to send to the js app
+ */
 -(void) registerComponent: (NSString*) className {
-  NSLog(@"I'm registering this component: %@", className);
-  NSMutableArray* nsMethods = [[NSMutableArray alloc] init];
   int unsigned numMethods;
   Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
   for (int i = 0; i < numMethods; i++) {
     NSString* selector = NSStringFromSelector(method_getName(methods[i]));
     if([selector containsString:@"__syr_export"]) {
-      [nsMethods addObject:selector];
+      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", className, selector]];
     }
   }
   free(methods);
-  [_nativemodules setObject:nsMethods forKey:className];
 }
 
 @end
