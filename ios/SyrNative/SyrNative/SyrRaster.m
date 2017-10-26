@@ -42,6 +42,9 @@
   return self;
 }
 
+/**
+ Parse as AST tree, being given a root view to render that tree to
+ */
 -(void) parseAST: (NSDictionary*) astString withRootView: (SyrRootView*) rootView {
 
   NSError *jsonError;
@@ -49,18 +52,24 @@
   NSDictionary *astDict = [NSJSONSerialization JSONObjectWithData:objectData
                                                        options:NSJSONReadingMutableContainers
                                                          error:&jsonError];
+  
+  // javascript is letting us know we have an update
+  // to ui, so lets update it
   if([astDict objectForKey:@"update"]) {
     [self update: astDict];
   } else {
+    // otherwise lets build it
     _rootView = rootView;
     [self build: astDict];
   }
 }
 
 -(void) update: (NSDictionary*) astDict {
+ 	// todo - reimpliment state update with animations in mind
   //NSLog(@"update");
 }
 
+// build the component tree
 -(void) build: (NSDictionary*) astDict {
   NSObject* component = [self createComponent:astDict];
   [self buildChildren:astDict withViewParent:component];
@@ -69,6 +78,7 @@
   [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
 }
 
+// build children in the tree
 -(void) buildChildren:(NSDictionary*) component withViewParent: (UIView*) view  {
   if([component isKindOfClass:[NSDictionary class]]) {
     NSArray* children = [component objectForKey:@"children"];

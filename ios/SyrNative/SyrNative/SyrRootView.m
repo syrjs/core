@@ -23,6 +23,9 @@
   return self;
 }
 
+/**
+ this view holds the Syr rendering
+ */
 - (id) initWithBundlePath: (NSString*) bundlePath {
   self = [super init];
   if (self)

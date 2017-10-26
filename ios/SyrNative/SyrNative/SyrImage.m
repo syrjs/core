@@ -10,14 +10,6 @@
 
 @implementation SyrImage
 
-SYR_EXPORT_MODULE();
-
-SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
-{
-  NSLog(@"some stuff");
-}
-
-
 +(NSObject*) render: (NSDictionary*) component {
   NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];

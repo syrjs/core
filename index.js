@@ -7,6 +7,7 @@ import { Button } from './lib/button';
 import { Text } from './lib/text';
 import { Image } from './lib/image';
 import { NativeModules } from './lib/nativemodules';
+import { Dimensions } from './lib/dimensions';
 
 const DOMRaster = require('./lib/rasters/dom');
 const WKRaster = require('./lib/rasters/wkwebview');
@@ -29,5 +30,6 @@ export {
   Button,
   Text,
   Image,
-  NativeModules
+  NativeModules,
+  Dimensions
 };

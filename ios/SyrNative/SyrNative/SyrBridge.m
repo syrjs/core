@@ -61,9 +61,18 @@
   // create a root view
   [_rootView addSubview:_bridgedBrowser];
 }
+
+/**
+ load the javascript bundle.
+ we use an html fixture to aid in loading
+ 
+ we pass as query the native modules available
+ and envrionment info
+ */
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView{
   
-  NSLog(@"%@", _raster.nativemodules);
+  // load a bundle with the root view we were handed
+  // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
   NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
   NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
@@ -72,57 +81,34 @@
   NSURL* syrBridgeUrl = [NSURL fileURLWithPath:syrBridgePath];
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
   
-
+  // pass native module names and selectors to the javascript side
   NSMutableArray *queryItems = [NSMutableArray array];
   for (NSString *key in _raster.nativemodules) {
     [queryItems addObject:[NSURLQueryItem queryItemWithName:key value:_raster.nativemodules[key]]];
   }
+  
+  // setup some environment stuff for the interpreter
+  NSNumber* width = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.width];
+  NSNumber* height = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.height];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
+  
   components.queryItems = queryItems;
   
   [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
 
+/**
+	the bridge sending a message for us to act on
+ */
 - (void)userContentController:(WKUserContentController *)userContentController
       didReceiveScriptMessage:(WKScriptMessage *)message {
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
   if([messageType containsString:@"event"]) {
-    //
+    // todo : eventing from JS to the native layer
   } else if([messageType containsString:@"cmd"]) {
-		// get the class
-    NSString* className = [syrMessage valueForKey:@"class"];
-    Class class = NSClassFromString(className);
-    
-    // create an instance of the object
-    if(class != nil){
-      [_instances setObject:class forKey:className];
-    }
- 
-    //get render method
-    NSString* selectorString = [syrMessage valueForKey:@"selector"];
-    SEL methodSelector = NSSelectorFromString(selectorString);
-    if ([class respondsToSelector:methodSelector]) {
-    
-      NSMethodSignature *methodSignature = [NSClassFromString(className) methodSignatureForSelector:methodSelector];
-      //invoke render method, pass component
-      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSignature];
-    
-      [inv setSelector:methodSelector];
-      [inv setTarget:class];
-      
-      NSData *argsData = [[syrMessage valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
-      NSError *error;
-      //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
-      id argsObject = [NSJSONSerialization JSONObjectWithData:argsData options:0 error:&error];
-      int argsIndex = 2; // start at 2
-      for(id arg in argsObject) {
-        NSObject* argObj = [argsObject objectForKey:arg];
-        [inv setArgument:&(argObj) atIndex:argsIndex];
-        argsIndex = argsIndex + 1;
-      }
-      [inv invoke];
-    }
-    
+    [self invokeMethodWithMessage:syrMessage];
   } else if([messageType containsString:@"gui"]) {
     [_raster parseAST:syrMessage withRootView:_rootView];
   } else if([messageType containsString:@"animation"]) {
@@ -130,6 +116,50 @@
   }
 }
 
+/**
+ Invoke a class method from the signature we are given.
+ assume the data types, and use NSObject to pass them through
+ */
+- (void)invokeMethodWithMessage: (NSDictionary*) syrMessage {
+  // get the class
+  NSString* className = [syrMessage valueForKey:@"class"];
+  Class class = NSClassFromString(className);
+  
+  // create an instance of the object
+  if(class != nil){
+    [_instances setObject:class forKey:className];
+  }
+  
+  //get render method
+  NSString* selectorString = [syrMessage valueForKey:@"selector"];
+  SEL methodSelector = NSSelectorFromString(selectorString);
+  if ([class respondsToSelector:methodSelector]) {
+    
+    NSMethodSignature *methodSignature = [NSClassFromString(className) methodSignatureForSelector:methodSelector];
+    //invoke render method, pass component
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSignature];
+    
+    [inv setSelector:methodSelector];
+    [inv setTarget:class];
+    
+    NSData *argsData = [[syrMessage valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+    id argsObject = [NSJSONSerialization JSONObjectWithData:argsData options:0 error:&error];
+    int argsIndex = 2; // start at 2
+    for(id arg in argsObject) {
+      NSObject* argObj = [argsObject objectForKey:arg];
+      [inv setArgument:&(argObj) atIndex:argsIndex];
+      argsIndex = argsIndex + 1;
+    }
+    [inv invoke];
+  }
+}
+
+/**
+ if the page is refreshed, we need to thrash the render
+ todo - ensure this isn't leaking
+ */
 - (void)webView:(WKWebView *)webView
 didStartProvisionalNavigation:(WKNavigation *)navigation {
   NSLog(@"Loading Bundle");
@@ -137,6 +167,10 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
   [_rootView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
+/**
+ send an event to through the bridge to the javascript side.
+ todo - handle errors
+ */
 - (void) sendEvent: (NSDictionary*) message {
   NSData *messageData = [NSJSONSerialization dataWithJSONObject:message
                                                      options:NSJSONWritingPrettyPrinted
@@ -156,6 +190,9 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
   }];
 }
 
+/**
+ delegate method for the raster to invoke when it has added the UI component to a parent
+ */
 - (void) rasterRenderedComponent: (NSString*) withComponentId {
   NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentDidMount"};
   [self sendEvent:event];

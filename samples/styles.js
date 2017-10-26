@@ -1,9 +1,11 @@
+import { Dimensions } from '../index.js';
+console.log(Dimensions);
 let styles = {
   mainView: {
     top: 0,
     left: 0,
-    height: 670,
-    width: 375,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
     color: '#000000',
     backgroundColor: '#404040',
     position: 'absolute'

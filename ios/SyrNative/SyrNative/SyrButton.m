@@ -11,15 +11,6 @@
 
 @implementation SyrButton
 
-
-SYR_EXPORT_MODULE();
-
-SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
-{
-  NSLog(@"some stuff");
-}
-
-
 +(NSObject*) render: (NSDictionary*) component {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];

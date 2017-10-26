@@ -26,6 +26,9 @@ typedef void (^StyleCaseBlock)();
 	return self;
 }
 
+/**
+ run a syr app
+ */
 - (void)runApp:(NSString*)withBundlePath rootView:(SyrRootView*)rootView {
   
   NSLog(@"Starting Syr Native Application");
