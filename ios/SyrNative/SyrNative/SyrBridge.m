@@ -63,12 +63,13 @@
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView{
   
   NSLog(@"%@", _raster.nativemodules);
-  
-  // pointing at the dev server for now
-  NSURL *nsurl=[NSURL URLWithString:@"http://127.0.0.1:8080/?sds"];
-  NSURLRequest *nsrequest=[NSURLRequest requestWithURL:nsurl];
-  _rootView = rootView;
-  [_bridgedBrowser loadRequest:nsrequest];
+   _rootView = rootView;
+  NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
+  NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
+  NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
+  NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
+  NSURL* syrBridgeUrl = [NSURL fileURLWithPath:syrBridgePath];
+  [_bridgedBrowser loadFileURL:syrBridgeUrl allowingReadAccessToURL:syrBridgeUrl];
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController

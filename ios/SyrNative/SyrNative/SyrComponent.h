@@ -30,6 +30,6 @@ alpha:   1.]
 @interface SyrComponent : NSObject
 +(NSObject*) render: (NSDictionary*) component;
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style;
-+(UIColor*)colorFromHash:(NSString*) color;
-+(CGRect)styleFrame:(NSDictionary*)styleDictionary;
++(UIColor*) colorFromHash:(NSString*) color;
++(CGRect) styleFrame:(NSDictionary*)styleDictionary;
 @end
