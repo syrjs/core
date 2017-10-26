@@ -147,8 +147,28 @@
         }, 
         {
             "location": "/debugging/", 
-            "text": "", 
+            "text": "Debugging Syr Applications\n\n\nIn addition to using native platform debugging tools, like XCode, and Apple Insturments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.\n\n\nOpening Safari Developer tools while a Syr App is running.\n\n\n\n\nDebug Pause with Breakpoints and Console.\n\n\n\n\nTimelines, Memory Usage, Object Allocation", 
             "title": "Debugging"
+        }, 
+        {
+            "location": "/debugging/#debugging-syr-applications", 
+            "text": "In addition to using native platform debugging tools, like XCode, and Apple Insturments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.", 
+            "title": "Debugging Syr Applications"
+        }, 
+        {
+            "location": "/debugging/#opening-safari-developer-tools-while-a-syr-app-is-running", 
+            "text": "", 
+            "title": "Opening Safari Developer tools while a Syr App is running."
+        }, 
+        {
+            "location": "/debugging/#debug-pause-with-breakpoints-and-console", 
+            "text": "", 
+            "title": "Debug Pause with Breakpoints and Console."
+        }, 
+        {
+            "location": "/debugging/#timelines-memory-usage-object-allocation", 
+            "text": "", 
+            "title": "Timelines, Memory Usage, Object Allocation"
         }, 
         {
             "location": "/getting_started/", 
