@@ -225,7 +225,7 @@ class MyComponent extends Component {
 If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass `SyrComponent.h`.
 
 ```objc
-self sendEventWithName:@"FooParty" body:@{@"name": eventName}];
+[self sendEventWithName:@"FooParty" body:@{@"name": eventName}];
 ```
 
 ### Subscribing to Events from JavaScript

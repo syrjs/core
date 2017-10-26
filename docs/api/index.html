@@ -71,7 +71,7 @@
                 
                 
                     <li >
-                        <a href="../Syr 0.0.1/">Syr 0.0.1</a>
+                        <a href="../Syr_0.0.1/">Syr 0.0.1</a>
                     </li>
                 
                 
@@ -104,7 +104,7 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../Syr 0.0.1/">
+                        <a rel="next" href="../Syr_0.0.1/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -371,7 +371,7 @@ class MyComponent extends Component {
 <h2 id="events">Events</h2>
 <h3 id="notifying-javascript-from-native">Notifying JavaScript from Native</h3>
 <p>If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass <code>SyrComponent.h</code>.</p>
-<pre><code class="objc">self sendEventWithName:@&quot;FooParty&quot; body:@{@&quot;name&quot;: eventName}];
+<pre><code class="objc">[self sendEventWithName:@&quot;FooParty&quot; body:@{@&quot;name&quot;: eventName}];
 </code></pre>
 
 <h3 id="subscribing-to-events-from-javascript">Subscribing to Events from JavaScript</h3>
