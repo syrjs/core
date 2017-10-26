@@ -11,6 +11,14 @@
 
     
     <url>
+     <loc>/Syr 0.0.1/</loc>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/api/</loc>
      <lastmod>2017-10-26</lastmod>
      <changefreq>daily</changefreq>

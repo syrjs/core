@@ -1,4 +1,4 @@
-# ![](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png) Syr
+# ![](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png) Syr <sup style="font-size:14px">Dynamic UI Engine for Shared Systems (SDKs)</sup>
 ### Preamble and Ramble
 
 Simply put, Syr is a light weight, reduced implimentation of the React-Native pattern. Currently running on iOS only, Android and Web coming.
