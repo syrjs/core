@@ -109,25 +109,81 @@ onPress(){
 ```
 
 ## Styling a component
+<sup style="color:red;">watch out! this is under heavy development!</sup>
 
-### Styling your component from JavaScript
+Styling a component is much like basic `React-Native`. Create a JavaScript literal that describes the layout properties that you would like to affect.
 
-### Styling your component from Native
+```javascript
+let style = {
+  height: 50,
+  width: 100
+}
+```
+
+You then bind the style to the rendering node.
+
+```javascript
+render() {
+  return <View style={style}></View>
+}
+```
+
+### height
+
+Set the height of a frame.
+
+```javascript
+let style = {
+  height: 50
+}
+```
+
+### width
+
+Set the width of a frame.
+
+```javascript
+let style = {
+  width: 100
+}
+```
+
+### left
+
+Set the origin left for a frame.
+
+```javascript
+let style = {
+  left: 50
+}
+```
+
+### top
+
+Set the origin top of a frame.
+
+```javascript
+let style = {
+  top: 50
+}
+```
 
 ## Rendering
 
-Syr components are built on the React Class pattern using ESNext. Using this pattern you can extend components and provide a render function that will present the inner set of components.
+SyrSDK uses the concept of a `raster`. It tries to detect the environment it's in, based on the availability of the `SyrNative` bridge. Rendering to the `RootView` suface is as easy as creating the component, and handing it to the raster.
+
+We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's `constructor`, and then the `lifeCycle` events.
 
 ```javascript
-import { Component } from 'syr';
+import { Component, Render } from 'syr';
 
-class MyComponent extends Component {
+class MyApp extends Component {
   render() {
     return <View></View>
   }
 }
 
-export { MyComponent };
+Render(MyComponent);
 
 ```
 
@@ -315,7 +371,6 @@ SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 Accessing the native modules from javascript.
 
 ```javascript
-
 import { NativeModules } from 'syr';
 
 let MyNativeModule = NativeModules.MyNativeModule;

@@ -77,6 +77,12 @@
                 
                 
                     <li >
+                        <a href="../debugging/">Debugging</a>
+                    </li>
+                
+                
+                
+                    <li >
                         <a href="../getting_started/">Getting started</a>
                     </li>
                 
@@ -97,7 +103,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../getting_started/">
+                        <a rel="prev" href="../debugging/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -132,9 +138,13 @@
         
             <li class="second-level"><a href="#styling-a-component">Styling a component</a></li>
             
-                <li class="third-level"><a href="#styling-your-component-from-javascript">Styling your component from JavaScript</a></li>
+                <li class="third-level"><a href="#height">height</a></li>
             
-                <li class="third-level"><a href="#styling-your-component-from-native">Styling your component from Native</a></li>
+                <li class="third-level"><a href="#width">width</a></li>
+            
+                <li class="third-level"><a href="#left">left</a></li>
+            
+                <li class="third-level"><a href="#top">top</a></li>
             
         
             <li class="second-level"><a href="#rendering">Rendering</a></li>
@@ -170,6 +180,7 @@
         <div class="col-md-9" role="main">
 
 <h1 id="syrsdk-api">SyrSDK API</h1>
+<p>This API guide is morphing over time. Please checkback often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.</p>
 <h2 id="components">Components</h2>
 <h3 id="a-component">A Component</h3>
 <p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup would like like this.</p>
@@ -256,19 +267,60 @@ onPress(){
 </code></pre>
 
 <h2 id="styling-a-component">Styling a component</h2>
-<h3 id="styling-your-component-from-javascript">Styling your component from JavaScript</h3>
-<h3 id="styling-your-component-from-native">Styling your component from Native</h3>
-<h2 id="rendering">Rendering</h2>
-<p>Syr components are built on the React Class pattern using ESNext. Using this pattern you can extend components and provide a render function that will present the inner set of components.</p>
-<pre><code class="javascript">import { Component } from 'syr';
+<p><sup style="color:red;">watch out! this is under heavy development!</sup></p>
+<p>Styling a component is much like basic <code>React-Native</code>. Create a JavaScript literal that describes the layout properties that you would like to affect.</p>
+<pre><code class="javascript">let style = {
+  height: 50,
+  width: 100
+}
+</code></pre>
 
-class MyComponent extends Component {
+<p>You then bind the style to the rendering node.</p>
+<pre><code class="javascript">render() {
+  return &lt;View style={style}&gt;&lt;/View&gt;
+}
+</code></pre>
+
+<h3 id="height">height</h3>
+<p>Set the height of a frame.</p>
+<pre><code class="javascript">let style = {
+  height: 50
+}
+</code></pre>
+
+<h3 id="width">width</h3>
+<p>Set the width of a frame.</p>
+<pre><code class="javascript">let style = {
+  width: 100
+}
+</code></pre>
+
+<h3 id="left">left</h3>
+<p>Set the origin left for a frame.</p>
+<pre><code class="javascript">let style = {
+  left: 50
+}
+</code></pre>
+
+<h3 id="top">top</h3>
+<p>Set the origin top of a frame.</p>
+<pre><code class="javascript">let style = {
+  top: 50
+}
+</code></pre>
+
+<h2 id="rendering">Rendering</h2>
+<p>SyrSDK uses the concept of a <code>raster</code>. It tries to detect the environment it's in, based on the availability of the <code>SyrNative</code> bridge. Rendering to the <code>RootView</code> suface is as easy as creating the component, and handing it to the raster.</p>
+<p>We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's <code>constructor</code>, and then the <code>lifeCycle</code> events.</p>
+<pre><code class="javascript">import { Component, Render } from 'syr';
+
+class MyApp extends Component {
   render() {
     return &lt;View&gt;&lt;/View&gt;
   }
 }
 
-export { MyComponent };
+Render(MyComponent);
 
 </code></pre>
 
@@ -437,8 +489,7 @@ SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 </code></pre>
 
 <p>Accessing the native modules from javascript.</p>
-<pre><code class="javascript">
-import { NativeModules } from 'syr';
+<pre><code class="javascript">import { NativeModules } from 'syr';
 
 let MyNativeModule = NativeModules.MyNativeModule;
 

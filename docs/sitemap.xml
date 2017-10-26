@@ -19,6 +19,14 @@
 
     
     <url>
+     <loc>/debugging/</loc>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/getting_started/</loc>
      <lastmod>2017-10-26</lastmod>
      <changefreq>daily</changefreq>
