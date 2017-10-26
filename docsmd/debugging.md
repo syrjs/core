@@ -1,6 +1,6 @@
 # Debugging Syr Applications
 
-In addition to using native platform debugging tools, like XCode, and Apple Insturments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.
+In addition to using native platform debugging tools, like XCode, and Apple Instruments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.
 
 ## Opening Safari Developer tools while a Syr App is running.
 

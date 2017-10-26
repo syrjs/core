@@ -149,14 +149,14 @@
 
 <h1 id="syr-dynamic-ui-engine-for-shared-systems-sdks"><img alt="" src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" /> Syr <sup style="font-size:14px">Dynamic UI Engine for Shared Systems (SDKs)</sup></h1>
 <h3 id="preamble-and-ramble">Preamble and Ramble</h3>
-<p>Simply put, Syr is a light weight, reduced implimentation of the React-Native pattern. Currently running on iOS only, Android and Web coming.</p>
-<p>The target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. That developer wants to be able to update those experiences without needing ot require the SDK be reintegrated for simple changes, like business logic, and look and feel.</p>
+<p>Simply put, Syr is a light weight, reduced implementation of the React-Native pattern. Currently running on iOS only, Android and Web coming.</p>
+<p>The target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. That developer wants to be able to update those experiences without needing to require the SDK be reintegrated for simple changes, like business logic, and look and feel.</p>
 <p>Using SyrSDK, apps are written in JavaScript. They are built using familiar tools like <code>webpack</code> and Syr uses a superset of the familiar <code>React-Native</code> Api.</p>
-<p>Distrbute Business Logic and UI updates over the wire with the built in bundle manager inside Syr.</p>
+<p>Distribute Business Logic and UI updates over the wire with the built in bundle manager inside Syr.</p>
 <h3 id="why-another-web-to-native-framework-js-bridge-thing">Why Another Web to Native Framework JS Bridge Thing?</h3>
 <p>The story is as old as the hills. We couldn't find that one tool that fit right into our workflow. So we struck out - and made it. We couldn't find another dynamic JavaScript Engine that offered us any of the advantages we required, over React-Native. So we stuck with React-Native for a long time.</p>
 <p>Eventually, we decided we needed to strike out on our own, as React-Native started to fork from our ideals. React-Native required large amounts of overhead to integrate into existing projects - we're trying to ship SDKs, this just isn't working well.</p>
-<p>We didn't want to write our SDK natively, and then distribute it to React-Native users. We wanted to write our SDK in React-Native and ship it without the React-Native dependecy. Sound Familiar?</p>
+<p>We didn't want to write our SDK natively, and then distribute it to React-Native users. We wanted to write our SDK in React-Native and ship it without the React-Native dependency. Sound Familiar?</p>
 <p>We tried to internalize the code base, but then quickly realized that if we wanted to keep up with changes to iOS(Android), then we had to accept that ReactNative's changes were indeed needed. Which meant internalizing every release going forward.</p>
 <p>It quickly became too much, and we took a breath. Surveyed the land, and decided that we needed to accomplish some goals.</p>
 <ul>
@@ -167,10 +167,10 @@
 <p>Portability. We've quickly learned that the surface area of React-Native was far too wide for us to approach gracefully. The addition of C libraries like Boost, really put the hurt on us since we didn't actually want to live inside a React Eco system. We want to be inside 3rd party; Swift and ObjectiveC and Java apps.</p>
 </li>
 <li>
-<p>Look, Smell and Feel like React. React is a hot API right now. It feels familiar to those who use it, and because of it's popularity it's a pattern that is easy to get aquanted with. We knew we needed to maintain a certin compatibility with it's predicatble interface.</p>
+<p>Look, Smell and Feel like React. React is a hot API right now. It feels familiar to those who use it, and because of it's popularity it's a pattern that is easy to get aquatinted with. We knew we needed to maintain a certain compatibility with it's predictable interface.</p>
 </li>
 </ul>
-<p>These we're the goals in mind for <code>SyrSDK</code>. Thanks to the openess of the internet, we've been able to borrow details on implimentation from places like <code>ReactNative</code> so we suspect you'll find it's in working order.</p>
+<p>These we're the goals in mind for <code>SyrSDK</code>. Thanks to the openness of the internet, we've been able to borrow details on implementation from places like <code>ReactNative</code> so we suspect you'll find it's in working order.</p>
 <p>Come help contribute! PULL REQUESTS WANTED!</p></div>
         
     </div>
@@ -226,5 +226,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-10-26 23:38:21
+Build Date UTC : 2017-10-26 23:56:28
 -->

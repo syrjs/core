@@ -1,6 +1,6 @@
 # SyrSDK API
 
-This API guide is morphing over time. Please checkback often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.
+This API guide is morphing over time. Please check back often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.
 
 ## Components
 
@@ -72,7 +72,7 @@ render(){
 
 ### Animated.View
 
-An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stubb exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
+An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
 
 ```javascript
 import { Animated } from 'syr';
@@ -170,7 +170,7 @@ let style = {
 
 ## Rendering
 
-SyrSDK uses the concept of a `raster`. It tries to detect the environment it's in, based on the availability of the `SyrNative` bridge. Rendering to the `RootView` suface is as easy as creating the component, and handing it to the raster.
+SyrSDK uses the concept of a `raster`. It tries to detect the environment it's in, based on the availability of the `SyrNative` bridge. Rendering to the `RootView` surface is as easy as creating the component, and handing it to the raster.
 
 We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's `constructor`, and then the `lifeCycle` events.
 
@@ -328,9 +328,9 @@ Render(MyComponent);
 
 ## Creating Native Modules
 
-Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderables (Views, Text, Buttons), and having methods callable from JavaScript.
+Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.
 
-Syr Native Modules are always used in the `Class` invokation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate` pattern.
+Syr Native Modules are always used in the `Class` invocation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate` pattern.
 
 ### Building your first class
 

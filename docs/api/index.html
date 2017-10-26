@@ -195,7 +195,7 @@
         <div class="col-md-9" role="main">
 
 <h1 id="syrsdk-api">SyrSDK API</h1>
-<p>This API guide is morphing over time. Please checkback often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.</p>
+<p>This API guide is morphing over time. Please check back often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.</p>
 <h2 id="components">Components</h2>
 <h3 id="a-component">A Component</h3>
 <p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.</p>
@@ -252,7 +252,7 @@ render(){
 </code></pre>
 
 <h3 id="animatedview">Animated.View</h3>
-<p>An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stubb exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.</p>
+<p>An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.</p>
 <pre><code class="javascript">import { Animated } from 'syr';
 
 render(){
@@ -325,7 +325,7 @@ onPress(){
 </code></pre>
 
 <h2 id="rendering">Rendering</h2>
-<p>SyrSDK uses the concept of a <code>raster</code>. It tries to detect the environment it's in, based on the availability of the <code>SyrNative</code> bridge. Rendering to the <code>RootView</code> suface is as easy as creating the component, and handing it to the raster.</p>
+<p>SyrSDK uses the concept of a <code>raster</code>. It tries to detect the environment it's in, based on the availability of the <code>SyrNative</code> bridge. Rendering to the <code>RootView</code> surface is as easy as creating the component, and handing it to the raster.</p>
 <p>We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's <code>constructor</code>, and then the <code>lifeCycle</code> events.</p>
 <pre><code class="javascript">import { Component, Render } from 'syr';
 
@@ -467,8 +467,8 @@ Render(MyComponent);
 </code></pre>
 
 <h2 id="creating-native-modules">Creating Native Modules</h2>
-<p>Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderables (Views, Text, Buttons), and having methods callable from JavaScript.</p>
-<p>Syr Native Modules are always used in the <code>Class</code> invokation method. What this means is that if you want to store instanced information (some value) on your class <code>Natively</code> you need to use the <code>sharedDelegate</code> pattern.</p>
+<p>Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.</p>
+<p>Syr Native Modules are always used in the <code>Class</code> invocation method. What this means is that if you want to store instanced information (some value) on your class <code>Natively</code> you need to use the <code>sharedDelegate</code> pattern.</p>
 <h3 id="building-your-first-class">Building your first class</h3>
 <p><code>MyNativeModule.h</code></p>
 <pre><code class="objc">#import &quot;SyrComponent.h&quot;
