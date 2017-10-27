@@ -10,7 +10,11 @@
 
 @implementation SyrComponent
 
-+(UIColor*)colorFromHash:(NSString*) color {
++(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body {
+  
+}
+
++(UIColor*) colorFromHash:(NSString*) color {
   color = [color stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
   unsigned colorInt = 0;
   [[NSScanner scannerWithString:color] scanHexInt:&colorInt];
@@ -55,7 +59,7 @@
   return view;
 }
 
-+(CGRect)styleFrame:(NSDictionary*)styleDictionary {
++(CGRect) styleFrame:(NSDictionary*)styleDictionary {
   NSNumber* frameHeight = [styleDictionary objectForKey:@"height"];
   NSNumber* frameWidth = [styleDictionary objectForKey:@"width"];
   NSNumber* framex = [styleDictionary objectForKey:@"left"];

@@ -98,7 +98,7 @@ render(){
 A clickable component. Returns an onPress event.
 
 ```javascript
-import { Image } from 'syr';
+import { Button } from 'syr';
 
 render(){
   return <Button onPress={this.onPress} style={{ height:150, width:300 }}>Press Me</Button>
