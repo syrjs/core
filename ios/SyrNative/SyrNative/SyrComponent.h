@@ -32,4 +32,5 @@ alpha:   1.]
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style;
 +(UIColor*) colorFromHash:(NSString*) color;
 +(CGRect) styleFrame:(NSDictionary*)styleDictionary;
++(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body;
 @end

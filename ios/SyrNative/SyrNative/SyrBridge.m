@@ -105,9 +105,7 @@
       didReceiveScriptMessage:(WKScriptMessage *)message {
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
-  if([messageType containsString:@"event"]) {
-    // todo : eventing from JS to the native layer
-  } else if([messageType containsString:@"cmd"]) {
+  if([messageType containsString:@"cmd"]) {
     [self invokeMethodWithMessage:syrMessage];
   } else if([messageType containsString:@"gui"]) {
     [_raster parseAST:syrMessage withRootView:_rootView];

@@ -2,13 +2,12 @@ import { RasterManager } from './lib/rastermanager';
 import { Component } from './lib/component';
 import { View } from './lib/view';
 import { Animated } from './lib/animated';
-import { Events } from './lib/events';
+import { Events , EventEmitter } from './lib/events';
 import { Button } from './lib/button';
 import { Text } from './lib/text';
 import { Image } from './lib/image';
 import { NativeModules } from './lib/nativemodules';
 import { Dimensions } from './lib/dimensions';
-
 const DOMRaster = require('./lib/rasters/dom');
 const WKRaster = require('./lib/rasters/wkwebview');
 
@@ -31,5 +30,6 @@ export {
   Text,
   Image,
   NativeModules,
-  Dimensions
+  Dimensions,
+  EventEmitter
 };

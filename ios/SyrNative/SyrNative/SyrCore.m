@@ -15,8 +15,6 @@
 
 @implementation SyrCore
 
-typedef void (^StyleCaseBlock)();
-
 - (id) init
 {
 	self = [super init];

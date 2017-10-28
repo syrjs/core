@@ -11,7 +11,7 @@
 @implementation SyrComponent
 
 +(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body {
-  
+  [[[SyrRaster sharedInstance] bridge] sendEvent:@{@"type":@"event", @"name": name, @"body": body}];
 }
 
 +(UIColor*) colorFromHash:(NSString*) color {

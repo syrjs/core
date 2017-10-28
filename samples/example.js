@@ -1,4 +1,4 @@
-import { Component, Render, View, Animated, Button, TextView, Image } from '../index';
+import { Component, Render, View, Animated, Button, TextView, Image, EventEmitter } from '../index';
 import { styles } from './styles';
 
 class MyComponent extends Component {
@@ -28,6 +28,9 @@ class MyComponent extends Component {
   }
   componentDidMount() {
     this.spin();
+    EventEmitter.addListener('EventReminder', (message)=>{
+      console.log('this event happened', message);
+    })
   }
 }
 

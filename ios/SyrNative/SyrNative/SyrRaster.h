@@ -18,7 +18,6 @@ blue:    ((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
 alpha:   1.]
 
 @interface SyrRaster : NSObject
-
 @property SyrBridge* bridge;
 + (id) sharedInstance;
 -(void) parseAST: (NSDictionary*) astString withRootView:(SyrRootView*) rootView;
