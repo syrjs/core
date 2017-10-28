@@ -170,22 +170,25 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
  todo - handle errors
  */
 - (void) sendEvent: (NSDictionary*) message {
-  NSData *messageData = [NSJSONSerialization dataWithJSONObject:message
-                                                     options:NSJSONWritingPrettyPrinted
-                                                       error:nil];
-  NSString *messageString = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
-  
-  NSString* js = [NSString stringWithFormat:@"SyrEvents.emit(%@)", messageString];
-  [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
-    if (error == nil)
-    {
-      
-    }
-    else
-    {
-      NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
-    }
-  }];
+  // send events on an async queue
+  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+  dispatch_async(queue, ^{
+    NSData *messageData = [NSJSONSerialization dataWithJSONObject:message
+                                                          options:NSJSONWritingPrettyPrinted
+                                                            error:nil];
+    NSString *messageString = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
+    NSString* js = [NSString stringWithFormat:@"SyrEvents.emit(%@)", messageString];
+    [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+      if (error == nil)
+      {
+        // do something with JS returns here
+      }
+      else
+      {
+        NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
+      }
+    }];
+  });
 }
 
 /**

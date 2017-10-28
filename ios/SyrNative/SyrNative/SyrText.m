@@ -17,15 +17,27 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
 }
 
 +(NSObject*) render: (NSDictionary*) component {
-  UITextView *textView = [[UITextView alloc] init];
-  textView.backgroundColor = [UIColor clearColor];
-  textView.frame = CGRectMake(0, 0, 300, 40);
-  for(id subchild in [component objectForKey:@"children"]) {
-    if([subchild isKindOfClass:[NSString class]]) {
-      textView.text = subchild;
-    }
+  UILabel *text = [[UILabel alloc] init];
+  text.backgroundColor = [UIColor clearColor];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  text.frame = [SyrText styleFrame:style];
+  text.text = [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
+  
+  NSString* textColor = [style valueForKey:@"color"];
+  if(textColor != nil) {
+    text.textColor = [SyrText colorFromHash:textColor];
   }
-  return textView;
+  
+  NSString* fontName = [style valueForKey:@"fontFamily"];
+  NSNumber* fontSize = [style valueForKey:@"fontSize"];
+
+  if(fontName != nil && fontSize != nil) {
+    [text  setFont:[UIFont fontWithName:fontName size:[fontSize doubleValue]]];
+  } else if (fontSize != nil) {
+    [text  setFont:[UIFont systemFontOfSize:[fontSize doubleValue]]];
+  }
+  
+  return [SyrText styleView:text withStyle:style];
 }
 
 @end

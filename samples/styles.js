@@ -1,5 +1,4 @@
 import { Dimensions } from '../index.js';
-console.log(Dimensions);
 let styles = {
   mainView: {
     top: 0,
@@ -13,14 +12,22 @@ let styles = {
   secondaryView: {
     height: 125,
     width: 125,
-    top:50,
-    left: 50,
-    color: '#000000',
+    top: (Dimensions.get('window').height/2) - 62.5,
+    left: (Dimensions.get('window').width/2) - 62.5,
     borderTopColor: '#ffffff',
     backgroundColor: '#BEBEBE',
     position: 'absolute',
     borderWidth: 6,
     borderRadius: 62.5
+  },
+  text: {
+    height: 50,
+    width: 270,
+    left:(Dimensions.get('window').width/2) - 135,
+    top: (Dimensions.get('window').height/2) + 65,
+    color: '#ffffff',
+    position: 'absolute',
+    fontSize: 24
   },
   button: {
     top: 0,
@@ -38,8 +45,8 @@ let styles = {
   spinner: {
     height: 120,
     width: 120,
-    top:52.5,
-    left: 52.5,
+    top: (Dimensions.get('window').height/2) - 60,
+    left: (Dimensions.get('window').width/2) - 60,
     backgroundColor: '#404040',
     position: 'absolute',
     borderRadius: 62.5

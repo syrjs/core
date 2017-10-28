@@ -1,4 +1,4 @@
-import { Component, Render, View, Animated, Button, TextView, Image, EventEmitter } from '../index';
+import { Component, Render, View, Animated, Button, Text, Image, EventEmitter } from '../index';
 import { styles } from './styles';
 
 class MyComponent extends Component {
@@ -15,6 +15,7 @@ class MyComponent extends Component {
         <View style={styles.spinner}>
           <Image style={styles.image} source={{uri:"icon_lock_white"}}></Image>
         </View>
+        <Text style={styles.text}>Securely logging you in.</Text>
       </Animated.View>
     );
   }
@@ -28,9 +29,6 @@ class MyComponent extends Component {
   }
   componentDidMount() {
     this.spin();
-    EventEmitter.addListener('EventReminder', (message)=>{
-      console.log('this event happened', message);
-    })
   }
 }
 

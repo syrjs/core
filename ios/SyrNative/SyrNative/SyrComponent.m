@@ -24,7 +24,11 @@
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style {
   //view.frame = [self styleFrame:style];
   NSString* backgroundColor = [style valueForKey:@"backgroundColor"];
-  view.backgroundColor = [self colorFromHash:backgroundColor];
+  if (backgroundColor == nil) {
+    view.backgroundColor = [UIColor clearColor];
+  } else {
+    view.backgroundColor = [self colorFromHash:backgroundColor];
+  }
   
   NSNumber* borderRadius = [style valueForKey:@"borderRadius"];
   if (borderRadius) {
