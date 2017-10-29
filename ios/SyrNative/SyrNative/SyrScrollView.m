@@ -1,20 +1,22 @@
 //
-//  SyrView.m
+//  SyrScrollView.m
 //  SyrNative
 //
-//  Created by Anderson,Derek on 10/16/17.
+//  Created by Anderson,Derek on 10/28/17.
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
 
-#import "SyrView.h"
+#import "SyrScrollView.h"
 
-@implementation SyrView
+@implementation SyrScrollView
+
 
 +(NSObject*) render: (NSDictionary*) component {
-  UIView* view = [[UIView alloc] init];
+	UIScrollView *scrollView = [[UIScrollView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  view.frame = [self styleFrame:style];
-  return [self styleView:view withStyle:style];
+  scrollView.frame = [self styleFrame:style];
+  return scrollView;
 }
+
 
 @end

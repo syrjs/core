@@ -1,4 +1,4 @@
-import { Component, Render, View, Animated, Button, Text, Image, EventEmitter } from '../index';
+import { Component, Render, View, Animated, Button, Text, Image, EventEmitter, ScrollView } from '../index';
 import { styles } from './styles';
 
 class MyComponent extends Component {
@@ -10,13 +10,13 @@ class MyComponent extends Component {
   render() {
     styles.secondaryView.transform = [this.spinAnimation];
     return (
-      <Animated.View style={styles.mainView}>
-        <Animated.View style={styles.secondaryView}></Animated.View>
-        <View style={styles.spinner}>
-          <Image style={styles.image} source={{uri:"icon_lock_white"}}></Image>
-        </View>
-        <Text style={styles.text}>Securely logging you in.</Text>
-      </Animated.View>
+        <Animated.View style={styles.mainView}>
+            <Animated.View style={styles.secondaryView}></Animated.View>
+            <View style={styles.spinner}>
+              <Image style={styles.image} source={{uri:"icon_lock_white"}}></Image>
+            </View>
+            <Text style={styles.text}>Securely logging you in.</Text>
+        </Animated.View>
     );
   }
   spin() {

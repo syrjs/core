@@ -8,6 +8,8 @@ import { Text } from './lib/text';
 import { Image } from './lib/image';
 import { NativeModules } from './lib/nativemodules';
 import { Dimensions } from './lib/dimensions';
+import { ScrollView } from './lib/scrollview';
+
 const DOMRaster = require('./lib/rasters/dom');
 const WKRaster = require('./lib/rasters/wkwebview');
 
@@ -31,5 +33,6 @@ export {
   Image,
   NativeModules,
   Dimensions,
-  EventEmitter
+  EventEmitter,
+  ScrollView
 };

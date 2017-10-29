@@ -15,7 +15,7 @@
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
   UIImage* image = [UIImage imageNamed:source];
   UIImageView* imageHolder = [[UIImageView alloc] initWithImage:image];
-  imageHolder.frame = [SyrImage styleFrame:style];
+  imageHolder.frame = [self styleFrame:style];
   return imageHolder;
 }
 

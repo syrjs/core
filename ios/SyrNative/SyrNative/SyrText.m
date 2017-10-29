@@ -20,12 +20,12 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
   UILabel *text = [[UILabel alloc] init];
   text.backgroundColor = [UIColor clearColor];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  text.frame = [SyrText styleFrame:style];
+  text.frame = [self styleFrame:style];
   text.text = [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
   
   NSString* textColor = [style valueForKey:@"color"];
   if(textColor != nil) {
-    text.textColor = [SyrText colorFromHash:textColor];
+    text.textColor = [self colorFromHash:textColor];
   }
   
   NSString* fontName = [style valueForKey:@"fontFamily"];
@@ -37,7 +37,7 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
     [text  setFont:[UIFont systemFontOfSize:[fontSize doubleValue]]];
   }
   
-  return [SyrText styleView:text withStyle:style];
+  return [self styleView:text withStyle:style];
 }
 
 @end

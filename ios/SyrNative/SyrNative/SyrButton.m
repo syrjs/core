@@ -15,7 +15,7 @@
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
   [button setTitle:@"Press Me" forState:UIControlStateNormal];
-  button.frame = [SyrButton styleFrame:style];
+  button.frame = [self styleFrame:style];
 
   //[button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
