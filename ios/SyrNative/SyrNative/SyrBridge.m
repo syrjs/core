@@ -103,13 +103,23 @@
  */
 - (void)userContentController:(WKUserContentController *)userContentController
       didReceiveScriptMessage:(WKScriptMessage *)message {
+  
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
   if([messageType containsString:@"cmd"]) {
+    
+    // keep messaging on the async queue
     [self invokeMethodWithMessage:syrMessage];
   } else if([messageType containsString:@"gui"]) {
-    [_raster parseAST:syrMessage withRootView:_rootView];
+    
+    //updating the UI needs to be done on the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+       [_raster parseAST:syrMessage withRootView:_rootView];
+    });
+   
   } else if([messageType containsString:@"animation"]) {
+    
+    // animations define the thread they are on
     [_raster setupAnimation:syrMessage];
   }
 }
@@ -178,16 +188,20 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
                                                             error:nil];
     NSString *messageString = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
     NSString* js = [NSString stringWithFormat:@"SyrEvents.emit(%@)", messageString];
-    [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
-      if (error == nil)
-      {
-        // do something with JS returns here
-      }
-      else
-      {
-        NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
-      }
-    }];
+    
+    // dispatching on the bridge to wkwebview needs to be done on the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+        if (error == nil)
+        {
+          // do something with JS returns here
+        }
+        else
+        {
+          NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
+        }
+      }];
+    });
   });
 }
 
