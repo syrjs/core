@@ -1,62 +1,45 @@
-import { Component, Render } from '../index';
-
-let style = {
-  height: 100,
-  width: 100,
-  color: '#ffffff',
-  backgroundColor: '#00ff00',
-};
-
-let otherstyle = {
-  color: '#333333',
-  backgroundColor: '#ffffff',
-};
+import {
+  Component,
+  Render,
+  View,
+  Animated,
+  Button,
+  Text,
+  Image,
+  EventEmitter,
+  ScrollView,
+} from '../index';
+import { styles } from './styles';
 
 class MyComponent extends Component {
+  constructor() {
+    super();
+    // interpolation animation
+    this.spinAnimation = new Animated.Value(0);
+  }
   render() {
+    styles.secondaryView.transform = [this.spinAnimation];
     return (
-      <div style={style}>
-        Hello World {this.props.foo}
-        <div style={otherstyle}>Something Else</div>
-      </div>
+      <Animated.View style={styles.mainView}>
+        <Animated.View style={styles.secondaryView} />
+        <View style={styles.spinner}>
+          <Image style={styles.image} source={{ uri: 'icon_lock_white' }} />
+        </View>
+        <Text style={styles.text}>Securely logging you in.</Text>
+      </Animated.View>
     );
   }
-}
-
-class Animated {
-  render() {
-    return (
-      <div>{this.props.children}</div>
-    )
+  spin() {
+    Animated.timing(this.spinAnimation, {
+      toValue: 360,
+      duration: 5000,
+    }).start(() => {
+      this.spin();
+    });
+  }
+  componentDidMount() {
+    this.spin();
   }
 }
 
-class MyView extends Component {
-  render() {
-    return (
-      <div>
-        <MyComponent foo="Halllo World" />
-        <Animated style={{ opacity: 1}}>
-          <MyComponent foo="Halllo World" />
-          <div style={{ backgroundColor: 'pink', color: 'grey' }}>
-          <div> First Event21212 </div>
-          <div>Another event!!</div>
-        </div>
-        <MyComponent foo="Halllo World" />
-        </Animated>
-        <button
-          onclick={this.changeButtonText}
-          style={{ backgroundColor: '#000000', color: '#ffffff' }}
-        >
-          Press Me
-        </button>
-      </div>
-    );
-  }
-
-  changeButtonText(e) {
-    e.target.innerText = 'New World';
-  }
-}
-
-Render(MyView);
+Render(MyComponent);

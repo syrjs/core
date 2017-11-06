@@ -4,7 +4,39 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-08-09</lastmod>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/Syr_0.0.1/</loc>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/api/</loc>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/debugging/</loc>
+     <lastmod>2017-10-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/getting_started/</loc>
+     <lastmod>2017-10-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

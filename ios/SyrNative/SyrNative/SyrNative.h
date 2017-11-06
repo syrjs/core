@@ -14,4 +14,4 @@ FOUNDATION_EXPORT double SyrVersionNumber;
 //! Project version string for MouseNative.
 FOUNDATION_EXPORT const unsigned char SyrVersionString[];
 
-#import <SyrNative/SyrPublic.h>
+#import <SyrNative/SyrRootView.h>

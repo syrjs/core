@@ -7,111 +7,135 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D2984E901F3B02E800189F3C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2984E8F1F3B02E800189F3C /* main.m */; };
-		D2984E931F3B02E800189F3C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2984E921F3B02E800189F3C /* AppDelegate.m */; };
-		D2984E961F3B02E800189F3C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2984E951F3B02E800189F3C /* ViewController.m */; };
-		D2984E991F3B02E800189F3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2984E971F3B02E800189F3C /* Main.storyboard */; };
-		D2984E9B1F3B02E800189F3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2984E9A1F3B02E800189F3C /* Assets.xcassets */; };
-		D2984E9E1F3B02E800189F3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2984E9C1F3B02E800189F3C /* LaunchScreen.storyboard */; };
-		D2984EAD1F3B032300189F3C /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2984EAA1F3B030200189F3C /* SyrNative.framework */; };
+		D2C0356C1F9E65BB009BE5E0 /* SyrNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2EC21C31F4D257300DFA7C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C21F4D257300DFA7C9 /* main.m */; };
+		D2EC21C61F4D257300DFA7C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */; };
+		D2EC21C91F4D257300DFA7C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C81F4D257300DFA7C9 /* ViewController.m */; };
+		D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */; };
+		D2EC21CE1F4D257300DFA7C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */; };
+		D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */; };
+		D2EC21DF1F4D259500DFA7C9 /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D2984EA91F3B030200189F3C /* PBXContainerItemProxy */ = {
+		D2C0356D1F9E65BB009BE5E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2D7E0301F0F672D0039C3A9;
-			remoteInfo = SyrNative;
-		};
-		D2984EAE1F3B032700189F3C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
+			containerPortal = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2D7E02F1F0F672D0039C3A9;
 			remoteInfo = SyrNative;
 		};
+		D2EC21DC1F4D257D00DFA7C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2D7E0301F0F672D0039C3A9;
+			remoteInfo = SyrNative;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D2C0356A1F9E6577009BE5E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C0356F1F9E65BB009BE5E0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2C0356C1F9E65BB009BE5E0 /* SyrNative.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		D2984E8B1F3B02E800189F3C /* SyrNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyrNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2984E8F1F3B02E800189F3C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D2984E911F3B02E800189F3C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D2984E921F3B02E800189F3C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D2984E941F3B02E800189F3C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D2984E951F3B02E800189F3C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D2984E981F3B02E800189F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D2984E9A1F3B02E800189F3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D2984E9D1F3B02E800189F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D2984E9F1F3B02E800189F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyrNative.xcodeproj; path = ../SyrNative/SyrNative.xcodeproj; sourceTree = "<group>"; };
+		D2EC21BE1F4D257300DFA7C9 /* SyrNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyrNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EC21C21F4D257300DFA7C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D2EC21C41F4D257300DFA7C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D2EC21C71F4D257300DFA7C9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D2EC21C81F4D257300DFA7C9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D2EC21CB1F4D257300DFA7C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D2EC21D01F4D257300DFA7C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D2EC21D21F4D257300DFA7C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyrNative.xcodeproj; path = ../SyrNative/SyrNative.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2984E881F3B02E800189F3C /* Frameworks */ = {
+		D2EC21BB1F4D257300DFA7C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2984EAD1F3B032300189F3C /* SyrNative.framework in Frameworks */,
+				D2EC21DF1F4D259500DFA7C9 /* SyrNative.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D2984E821F3B02E800189F3C = {
+		D2EC21B51F4D257300DFA7C9 = {
 			isa = PBXGroup;
 			children = (
-				D2984E8D1F3B02E800189F3C /* SyrNativeSample */,
-				D2984E8C1F3B02E800189F3C /* Products */,
-				D2984EAC1F3B031100189F3C /* Frameworks */,
+				D2EC21C01F4D257300DFA7C9 /* SyrNativeSample */,
+				D2EC21BF1F4D257300DFA7C9 /* Products */,
+				D2EC21DE1F4D258100DFA7C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		D2984E8C1F3B02E800189F3C /* Products */ = {
+		D2EC21BF1F4D257300DFA7C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2984E8B1F3B02E800189F3C /* SyrNativeSample.app */,
+				D2EC21BE1F4D257300DFA7C9 /* SyrNativeSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2984E8D1F3B02E800189F3C /* SyrNativeSample */ = {
+		D2EC21C01F4D257300DFA7C9 /* SyrNativeSample */ = {
 			isa = PBXGroup;
 			children = (
-				D2984E911F3B02E800189F3C /* AppDelegate.h */,
-				D2984E921F3B02E800189F3C /* AppDelegate.m */,
-				D2984E941F3B02E800189F3C /* ViewController.h */,
-				D2984E951F3B02E800189F3C /* ViewController.m */,
-				D2984E971F3B02E800189F3C /* Main.storyboard */,
-				D2984E9A1F3B02E800189F3C /* Assets.xcassets */,
-				D2984E9C1F3B02E800189F3C /* LaunchScreen.storyboard */,
-				D2984E9F1F3B02E800189F3C /* Info.plist */,
-				D2984E8E1F3B02E800189F3C /* Supporting Files */,
+				D2EC21C41F4D257300DFA7C9 /* AppDelegate.h */,
+				D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */,
+				D2EC21C71F4D257300DFA7C9 /* ViewController.h */,
+				D2EC21C81F4D257300DFA7C9 /* ViewController.m */,
+				D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */,
+				D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */,
+				D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */,
+				D2EC21D21F4D257300DFA7C9 /* Info.plist */,
+				D2EC21C11F4D257300DFA7C9 /* Supporting Files */,
 			);
 			path = SyrNativeSample;
 			sourceTree = "<group>";
 		};
-		D2984E8E1F3B02E800189F3C /* Supporting Files */ = {
+		D2EC21C11F4D257300DFA7C9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D2984E8F1F3B02E800189F3C /* main.m */,
+				D2EC21C21F4D257300DFA7C9 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D2984EA61F3B030200189F3C /* Products */ = {
+		D2EC21D91F4D257C00DFA7C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2984EAA1F3B030200189F3C /* SyrNative.framework */,
+				D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2984EAC1F3B031100189F3C /* Frameworks */ = {
+		D2EC21DE1F4D258100DFA7C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */,
+				D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,40 +143,43 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2984E8A1F3B02E800189F3C /* SyrNativeSample */ = {
+		D2EC21BD1F4D257300DFA7C9 /* SyrNativeSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2984EA21F3B02E800189F3C /* Build configuration list for PBXNativeTarget "SyrNativeSample" */;
+			buildConfigurationList = D2EC21D51F4D257300DFA7C9 /* Build configuration list for PBXNativeTarget "SyrNativeSample" */;
 			buildPhases = (
-				D2984E871F3B02E800189F3C /* Sources */,
-				D2984E881F3B02E800189F3C /* Frameworks */,
-				D2984E891F3B02E800189F3C /* Resources */,
+				D2EC21BA1F4D257300DFA7C9 /* Sources */,
+				D2EC21BB1F4D257300DFA7C9 /* Frameworks */,
+				D2EC21BC1F4D257300DFA7C9 /* Resources */,
+				D2C0356A1F9E6577009BE5E0 /* CopyFiles */,
+				D2C0356F1F9E65BB009BE5E0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D2984EAF1F3B032700189F3C /* PBXTargetDependency */,
+				D2C0356E1F9E65BB009BE5E0 /* PBXTargetDependency */,
 			);
 			name = SyrNativeSample;
 			productName = SyrNativeSample;
-			productReference = D2984E8B1F3B02E800189F3C /* SyrNativeSample.app */;
+			productReference = D2EC21BE1F4D257300DFA7C9 /* SyrNativeSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D2984E831F3B02E800189F3C /* Project object */ = {
+		D2EC21B61F4D257300DFA7C9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Anderson,Derek";
+				ORGANIZATIONNAME = PayPal;
 				TargetAttributes = {
-					D2984E8A1F3B02E800189F3C = {
+					D2EC21BD1F4D257300DFA7C9 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 2GTL2L66E7;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = D2984E861F3B02E800189F3C /* Build configuration list for PBXProject "SyrNativeSample" */;
+			buildConfigurationList = D2EC21B91F4D257300DFA7C9 /* Build configuration list for PBXProject "SyrNativeSample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -160,79 +187,79 @@
 				en,
 				Base,
 			);
-			mainGroup = D2984E821F3B02E800189F3C;
-			productRefGroup = D2984E8C1F3B02E800189F3C /* Products */;
+			mainGroup = D2EC21B51F4D257300DFA7C9;
+			productRefGroup = D2EC21BF1F4D257300DFA7C9 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D2984EA61F3B030200189F3C /* Products */;
-					ProjectRef = D2984EA51F3B030200189F3C /* SyrNative.xcodeproj */;
+					ProductGroup = D2EC21D91F4D257C00DFA7C9 /* Products */;
+					ProjectRef = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				D2984E8A1F3B02E800189F3C /* SyrNativeSample */,
+				D2EC21BD1F4D257300DFA7C9 /* SyrNativeSample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D2984EAA1F3B030200189F3C /* SyrNative.framework */ = {
+		D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SyrNative.framework;
-			remoteRef = D2984EA91F3B030200189F3C /* PBXContainerItemProxy */;
+			remoteRef = D2EC21DC1F4D257D00DFA7C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D2984E891F3B02E800189F3C /* Resources */ = {
+		D2EC21BC1F4D257300DFA7C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2984E9E1F3B02E800189F3C /* LaunchScreen.storyboard in Resources */,
-				D2984E9B1F3B02E800189F3C /* Assets.xcassets in Resources */,
-				D2984E991F3B02E800189F3C /* Main.storyboard in Resources */,
+				D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */,
+				D2EC21CE1F4D257300DFA7C9 /* Assets.xcassets in Resources */,
+				D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2984E871F3B02E800189F3C /* Sources */ = {
+		D2EC21BA1F4D257300DFA7C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2984E961F3B02E800189F3C /* ViewController.m in Sources */,
-				D2984E931F3B02E800189F3C /* AppDelegate.m in Sources */,
-				D2984E901F3B02E800189F3C /* main.m in Sources */,
+				D2EC21C91F4D257300DFA7C9 /* ViewController.m in Sources */,
+				D2EC21C61F4D257300DFA7C9 /* AppDelegate.m in Sources */,
+				D2EC21C31F4D257300DFA7C9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D2984EAF1F3B032700189F3C /* PBXTargetDependency */ = {
+		D2C0356E1F9E65BB009BE5E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SyrNative;
-			targetProxy = D2984EAE1F3B032700189F3C /* PBXContainerItemProxy */;
+			targetProxy = D2C0356D1F9E65BB009BE5E0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D2984E971F3B02E800189F3C /* Main.storyboard */ = {
+		D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D2984E981F3B02E800189F3C /* Base */,
+				D2EC21CB1F4D257300DFA7C9 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		D2984E9C1F3B02E800189F3C /* LaunchScreen.storyboard */ = {
+		D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D2984E9D1F3B02E800189F3C /* Base */,
+				D2EC21D01F4D257300DFA7C9 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -240,7 +267,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D2984EA01F3B02E800189F3C /* Debug */ = {
+		D2EC21D31F4D257300DFA7C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -289,7 +316,7 @@
 			};
 			name = Debug;
 		};
-		D2984EA11F3B02E800189F3C /* Release */ = {
+		D2EC21D41F4D257300DFA7C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -332,24 +359,28 @@
 			};
 			name = Release;
 		};
-		D2984EA31F3B02E800189F3C /* Debug */ = {
+		D2EC21D61F4D257300DFA7C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2GTL2L66E7;
 				INFOPLIST_FILE = SyrNativeSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Syr.SyrNativeSample;
+				PRODUCT_BUNDLE_IDENTIFIER = PayPal.SyrNativeSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		D2984EA41F3B02E800189F3C /* Release */ = {
+		D2EC21D71F4D257300DFA7C9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2GTL2L66E7;
 				INFOPLIST_FILE = SyrNativeSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Syr.SyrNativeSample;
+				PRODUCT_BUNDLE_IDENTIFIER = PayPal.SyrNativeSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -357,25 +388,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2984E861F3B02E800189F3C /* Build configuration list for PBXProject "SyrNativeSample" */ = {
+		D2EC21B91F4D257300DFA7C9 /* Build configuration list for PBXProject "SyrNativeSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2984EA01F3B02E800189F3C /* Debug */,
-				D2984EA11F3B02E800189F3C /* Release */,
+				D2EC21D31F4D257300DFA7C9 /* Debug */,
+				D2EC21D41F4D257300DFA7C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2984EA21F3B02E800189F3C /* Build configuration list for PBXNativeTarget "SyrNativeSample" */ = {
+		D2EC21D51F4D257300DFA7C9 /* Build configuration list for PBXNativeTarget "SyrNativeSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2984EA31F3B02E800189F3C /* Debug */,
-				D2984EA41F3B02E800189F3C /* Release */,
+				D2EC21D61F4D257300DFA7C9 /* Debug */,
+				D2EC21D71F4D257300DFA7C9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D2984E831F3B02E800189F3C /* Project object */;
+	rootObject = D2EC21B61F4D257300DFA7C9 /* Project object */;
 }

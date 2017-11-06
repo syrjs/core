@@ -1,9 +1,9 @@
 //
 //  ViewController.m
-//  MouseNativeSample
+//  SyrNativeSample
 //
-//  Created by Anderson,Derek on 7/6/17.
-//  Copyright © 2017 Anderson,Derek. All rights reserved.
+//  Created by Anderson,Derek on 8/22/17.
+//  Copyright © 2017 PayPal. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -16,18 +16,18 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-	[super viewDidLoad];
-	SyrPublic* syrpublic = [[SyrPublic alloc] init];
-	[syrpublic runApp:self];
-
-	// Do any additional setup after loading the view, typically from a nib.
+  [super viewDidLoad];
+  
+  SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@""];
+  rootView.frame = self.view.frame;
+  [self.view addSubview:rootView];
+  
 }
 
 
 - (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
-
 
 @end

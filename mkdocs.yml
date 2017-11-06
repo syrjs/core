@@ -1,0 +1,6 @@
+site_name: SyrSDK
+repo_url: "https://github.com/dmikey/syr"
+copyright: "Syr is licensed under the <a href='https://github.com/dmikey/syr/blob/master/LICENSE'>MIT license"
+theme: cinder
+site_dir: docs
+docs_dir: docsmd

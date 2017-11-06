@@ -2,13 +2,213 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Syr", 
+            "text": "Syr \nDynamic UI Engine for Shared Systems (SDKs)\n\n\nPreamble and Ramble\n\n\nSimply put, Syr is a light weight, reduced implementation of the React-Native pattern. Currently running on iOS only, Android and Web coming.\n\n\nThe target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. That developer wants to be able to update those experiences without needing to require the SDK be reintegrated for simple changes, like business logic, and look and feel.\n\n\nUsing SyrSDK, apps are written in JavaScript. They are built using familiar tools like \nwebpack\n and Syr uses a superset of the familiar \nReact-Native\n Api.\n\n\nDistribute Business Logic and UI updates over the wire with the built in bundle manager inside Syr.\n\n\nWhy Another Web to Native Framework JS Bridge Thing?\n\n\nThe story is as old as the hills. We couldn't find that one tool that fit right into our workflow. So we struck out - and made it. We couldn't find another dynamic JavaScript Engine that offered us any of the advantages we required, over React-Native. So we stuck with React-Native for a long time.\n\n\nEventually, we decided we needed to strike out on our own, as React-Native started to fork from our ideals. React-Native required large amounts of overhead to integrate into existing projects - we're trying to ship SDKs, this just isn't working well.\n\n\nWe didn't want to write our SDK natively, and then distribute it to React-Native users. We wanted to write our SDK in React-Native and ship it without the React-Native dependency. Sound Familiar?\n\n\nWe tried to internalize the code base, but then quickly realized that if we wanted to keep up with changes to iOS(Android), then we had to accept that ReactNative's changes were indeed needed. Which meant internalizing every release going forward.\n\n\nIt quickly became too much, and we took a breath. Surveyed the land, and decided that we needed to accomplish some goals.\n\n\n\n\n\n\nSize. We're shipping SDKs, not Packed Apps. Our End Users are not looking at adding 5 megabytes simply for a payments experience they can throw in the native web browser.\n\n\n\n\n\n\nPortability. We've quickly learned that the surface area of React-Native was far too wide for us to approach gracefully. The addition of C libraries like Boost, really put the hurt on us since we didn't actually want to live inside a React Eco system. We want to be inside 3rd party; Swift and ObjectiveC and Java apps.\n\n\n\n\n\n\nLook, Smell and Feel like React. React is a hot API right now. It feels familiar to those who use it, and because of it's popularity it's a pattern that is easy to get aquatinted with. We knew we needed to maintain a certain compatibility with it's predictable interface.\n\n\n\n\n\n\nThese we're the goals in mind for \nSyrSDK\n. Thanks to the openness of the internet, we've been able to borrow details on implementation from places like \nReactNative\n so we suspect you'll find it's in working order.\n\n\nCome help contribute! PULL REQUESTS WANTED!", 
             "title": "Home"
         }, 
         {
-            "location": "/#syr", 
+            "location": "/#syr-dynamic-ui-engine-for-shared-systems-sdks", 
             "text": "", 
-            "title": "Syr"
+            "title": "Syr Dynamic UI Engine for Shared Systems (SDKs)"
+        }, 
+        {
+            "location": "/#preamble-and-ramble", 
+            "text": "Simply put, Syr is a light weight, reduced implementation of the React-Native pattern. Currently running on iOS only, Android and Web coming.  The target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. That developer wants to be able to update those experiences without needing to require the SDK be reintegrated for simple changes, like business logic, and look and feel.  Using SyrSDK, apps are written in JavaScript. They are built using familiar tools like  webpack  and Syr uses a superset of the familiar  React-Native  Api.  Distribute Business Logic and UI updates over the wire with the built in bundle manager inside Syr.", 
+            "title": "Preamble and Ramble"
+        }, 
+        {
+            "location": "/#why-another-web-to-native-framework-js-bridge-thing", 
+            "text": "The story is as old as the hills. We couldn't find that one tool that fit right into our workflow. So we struck out - and made it. We couldn't find another dynamic JavaScript Engine that offered us any of the advantages we required, over React-Native. So we stuck with React-Native for a long time.  Eventually, we decided we needed to strike out on our own, as React-Native started to fork from our ideals. React-Native required large amounts of overhead to integrate into existing projects - we're trying to ship SDKs, this just isn't working well.  We didn't want to write our SDK natively, and then distribute it to React-Native users. We wanted to write our SDK in React-Native and ship it without the React-Native dependency. Sound Familiar?  We tried to internalize the code base, but then quickly realized that if we wanted to keep up with changes to iOS(Android), then we had to accept that ReactNative's changes were indeed needed. Which meant internalizing every release going forward.  It quickly became too much, and we took a breath. Surveyed the land, and decided that we needed to accomplish some goals.    Size. We're shipping SDKs, not Packed Apps. Our End Users are not looking at adding 5 megabytes simply for a payments experience they can throw in the native web browser.    Portability. We've quickly learned that the surface area of React-Native was far too wide for us to approach gracefully. The addition of C libraries like Boost, really put the hurt on us since we didn't actually want to live inside a React Eco system. We want to be inside 3rd party; Swift and ObjectiveC and Java apps.    Look, Smell and Feel like React. React is a hot API right now. It feels familiar to those who use it, and because of it's popularity it's a pattern that is easy to get aquatinted with. We knew we needed to maintain a certain compatibility with it's predictable interface.    These we're the goals in mind for  SyrSDK . Thanks to the openness of the internet, we've been able to borrow details on implementation from places like  ReactNative  so we suspect you'll find it's in working order.  Come help contribute! PULL REQUESTS WANTED!", 
+            "title": "Why Another Web to Native Framework JS Bridge Thing?"
+        }, 
+        {
+            "location": "/Syr_0.0.1/", 
+            "text": "Milestone release : 0.0.1\n\n\nChange log will start to feature notes going forward.", 
+            "title": "Syr 0.0.1"
+        }, 
+        {
+            "location": "/Syr_0.0.1/#milestone-release-001", 
+            "text": "Change log will start to feature notes going forward.", 
+            "title": "Milestone release : 0.0.1"
+        }, 
+        {
+            "location": "/api/", 
+            "text": "SyrSDK API\n\n\nThis API guide is morphing over time. Please check back often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.\n\n\nComponents\n\n\nA Component\n\n\nSyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.\n\n\nimport { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n  }\n  render() {\n  }\n}\n\n\n\n\n\nView\n\n\nA \nView\n component is the basic component that renders to a surface (the \nRootView\n). This component can be rendered to a \nSyrRootView\n.\n\n\nimport { View } from 'syr';\n\nrender(){\n  return \nView\n/View\n\n}\n\n\n\n\nIt can also own components, that will render to the surface as a child. Such as another \nView\n.\n\n\nimport { View } from 'syr';\n\nrender(){\n  return \nView\n\n      \nView\n/View\n\n  \n/View\n\n}\n\n\n\n\nBecause a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.\n\n\nimport { View } from 'syr';\n\nrender(){\n  return \nView style={{\n    height: 100,\n    width: 100,\n    left: 50,\n    top: 50\n  }}\n/View\n\n}\n\n\n\n\nTextView\n\n\nA text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a \nvalue\n property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a \nTextView\n\n\nimport { TextView } from 'syr';\n\nrender(){\n  return \nTextView\n/TextView\n\n}\n\n\n\n\nAnimated.View\n\n\nAn animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.\n\n\nimport { Animated } from 'syr';\n\nrender(){\n  return \nAnimated.View\n/Animated.View\n\n}\n\n\n\n\nImage\n\n\nA component for displaying an Image. It is self terminated as it can not hold any children.\n\n\nimport { Image } from 'syr';\n\nrender(){\n  return \nImage source={{uri:\nfile_name\n}} style={{ height:150, width:300 }}/\n\n}\n\n\n\n\nButton\n\n\nA clickable component. Returns an onPress event.\n\n\nimport { Button } from 'syr';\n\nrender(){\n  return \nButton onPress={this.onPress} style={{ height:150, width:300 }}\nPress Me\n/Button\n\n}\nonPress(){\n  // the button was pressed!\n}\n\n\n\n\nStyling a component\n\n\nwatch out! this is under heavy development!\n\n\nStyling a component is much like basic \nReact-Native\n. Create a JavaScript literal that describes the layout properties that you would like to affect.\n\n\nlet style = {\n  height: 50,\n  width: 100\n}\n\n\n\n\nYou then bind the style to the rendering node.\n\n\nrender() {\n  return \nView style={style}\n/View\n\n}\n\n\n\n\nheight\n\n\nSet the height of a frame.\n\n\nlet style = {\n  height: 50\n}\n\n\n\n\nwidth\n\n\nSet the width of a frame.\n\n\nlet style = {\n  width: 100\n}\n\n\n\n\nleft\n\n\nSet the origin left for a frame.\n\n\nlet style = {\n  left: 50\n}\n\n\n\n\ntop\n\n\nSet the origin top of a frame.\n\n\nlet style = {\n  top: 50\n}\n\n\n\n\nRendering\n\n\nSyrSDK uses the concept of a \nraster\n. It tries to detect the environment it's in, based on the availability of the \nSyrNative\n bridge. Rendering to the \nRootView\n surface is as easy as creating the component, and handing it to the raster.\n\n\nWe recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's \nconstructor\n, and then the \nlifeCycle\n events.\n\n\nimport { Component, Render } from 'syr';\n\nclass MyApp extends Component {\n  render() {\n    return \nView\n/View\n\n  }\n}\n\nRender(MyComponent);\n\n\n\n\n\nLifeCycle\n\n\nSyr supports Life Cycle events to help control the flow of the program. To take advantage of these add the following to javascript classes.\n\n\nMethod stubs\n\n\nimport { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    // runs when object is created in javascript\n  }\n  render() {\n    // when what this class should return as it's rendering tree\n  }\n  componentDidMount() {\n    // this fires when component has been added to the rendering surface\n  }\n  componentWillUnmount() {\n    // fires when component is removed from rendering surface\n  }\n  componentWillUpdate() {\n    // fires before component will update, you can return false\n    // to prevent an update\n  }\n  componentDidUpdate() {\n    // component updated, runs after the component state was changed\n  }\n}\n\n\n\n\n\nEvents\n\n\nNotifying JavaScript from Native\n\n\nIf you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass \nSyrComponent.h\n.\n\n\n[self sendEventWithName:@\nFooParty\n body:@{@\nname\n: eventName}];\n\n\n\n\nSubscribing to Events from JavaScript\n\n\nJavaScript can subscribe to the events that are being passed down from the native layer.\n\n\nimport { NativeEventEmitter } from 'syr';\n\n\nconst subscription = NativeEventEmitter.addListener(\n  'FooParty',\n  (event) =\n console.log(event.name)\n);\n\n// unsubscribe when needed\nsubscription.remove();\n\n\n\n\nAnimations\n\n\nSyr has support for animations. With Syr animations you can run animations transitions in parallel, or sequence. Animations allow for the shift in x,y position and size. If you need a more complex animation you can use \nAnimated.Value\n to bind a transform to the component.\n\n\nSlide\n\n\nimport { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // slide animation\n    this.slideAnimation = new Animated.XYValue({\n      x: 0\n      y: 0\n    });\n  }\n  render() {\n    return (\n      \nAnimated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        transform: [this.slideAnimation]\n      }}\n\n      \n/Animated.View\n\n    );\n  }\n  componentDidMount() {\n    Animated.timing(this.slideAnimation, {\n      toValue: {\n        x:100,\n        y:100\n      },\n      duration: 5000\n    }).start()\n  }\n}\n\nRender(MyComponent);\n\n\n\n\nRotation\n\n\nimport { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // interpolation animation\n    this.spinAnimation = new Animated.Value(0);\n  }\n  render() {\n    return (\n      \nAnimated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        top: 50,\n        left: 50,\n        transform: [this.spinAnimation]\n      }}\n\n      \n/Animated.View\n\n    );\n  }\n  spin() {\n    //spin the object 360 degress. and repeat after 5 seconds\n    Animated.timing(this.spinAnimation, {\n      toValue: 360,\n      duration: 5000\n    }).start(()=\n{\n      this.spin();\n    });\n  }\n  componentDidMount() {\n    this.spin();\n  }\n}\n\nRender(MyComponent);\n\n\n\n\nCreating Native Modules\n\n\nSyr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.\n\n\nSyr Native Modules are always used in the \nClass\n invocation method. What this means is that if you want to store instanced information (some value) on your class \nNatively\n you need to use the \nsharedDelegate\n pattern.\n\n\nBuilding your first class\n\n\nMyNativeModule.h\n\n\n#import \nSyrComponent.h\n\n\n@interface MyNativeModule : SyrComponent\n@end\n\n\n\n\nMyNativeModule.m\n\n\n#import \nMyNativeModule.h\n\n\n@implementation MyNativeModule\n\n// send this class to the JS bridge\nSYR_EXPORT_MODULE();\n\n// this is an objective C method that will get it's invokation from JS\nSYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)\n{\n  // do something with Name and Location strings\n}\n\n// if you want to use this module in the JSX tree\n// there are helper methods on the component to help with\n// styling and more\n+(NSObject*) render: (NSDictionary*) component {\n  UIView *view = [[UIView alloc] init];\n  return view;\n}\n\n@end\n\n\n\n\n\nAccessing the native modules from javascript.\n\n\nimport { NativeModules } from 'syr';\n\nlet MyNativeModule = NativeModules.MyNativeModule;\n\nMyNativeModule.addEvent('building an app', 'at my desk');", 
+            "title": "Api"
+        }, 
+        {
+            "location": "/api/#syrsdk-api", 
+            "text": "This API guide is morphing over time. Please check back often, and feel free to update from the Syr repo and send a PR if you notice something that isn't right.", 
+            "title": "SyrSDK API"
+        }, 
+        {
+            "location": "/api/#components", 
+            "text": "", 
+            "title": "Components"
+        }, 
+        {
+            "location": "/api/#a-component", 
+            "text": "SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.  import { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n  }\n  render() {\n  }\n}", 
+            "title": "A Component"
+        }, 
+        {
+            "location": "/api/#view", 
+            "text": "A  View  component is the basic component that renders to a surface (the  RootView ). This component can be rendered to a  SyrRootView .  import { View } from 'syr';\n\nrender(){\n  return  View /View \n}  It can also own components, that will render to the surface as a child. Such as another  View .  import { View } from 'syr';\n\nrender(){\n  return  View \n       View /View \n   /View \n}  Because a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.  import { View } from 'syr';\n\nrender(){\n  return  View style={{\n    height: 100,\n    width: 100,\n    left: 50,\n    top: 50\n  }} /View \n}", 
+            "title": "View"
+        }, 
+        {
+            "location": "/api/#textview", 
+            "text": "A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a  value  property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a  TextView  import { TextView } from 'syr';\n\nrender(){\n  return  TextView /TextView \n}", 
+            "title": "TextView"
+        }, 
+        {
+            "location": "/api/#animatedview", 
+            "text": "An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.  import { Animated } from 'syr';\n\nrender(){\n  return  Animated.View /Animated.View \n}", 
+            "title": "Animated.View"
+        }, 
+        {
+            "location": "/api/#image", 
+            "text": "A component for displaying an Image. It is self terminated as it can not hold any children.  import { Image } from 'syr';\n\nrender(){\n  return  Image source={{uri: file_name }} style={{ height:150, width:300 }}/ \n}", 
+            "title": "Image"
+        }, 
+        {
+            "location": "/api/#button", 
+            "text": "A clickable component. Returns an onPress event.  import { Button } from 'syr';\n\nrender(){\n  return  Button onPress={this.onPress} style={{ height:150, width:300 }} Press Me /Button \n}\nonPress(){\n  // the button was pressed!\n}", 
+            "title": "Button"
+        }, 
+        {
+            "location": "/api/#styling-a-component", 
+            "text": "watch out! this is under heavy development!  Styling a component is much like basic  React-Native . Create a JavaScript literal that describes the layout properties that you would like to affect.  let style = {\n  height: 50,\n  width: 100\n}  You then bind the style to the rendering node.  render() {\n  return  View style={style} /View \n}", 
+            "title": "Styling a component"
+        }, 
+        {
+            "location": "/api/#height", 
+            "text": "Set the height of a frame.  let style = {\n  height: 50\n}", 
+            "title": "height"
+        }, 
+        {
+            "location": "/api/#width", 
+            "text": "Set the width of a frame.  let style = {\n  width: 100\n}", 
+            "title": "width"
+        }, 
+        {
+            "location": "/api/#left", 
+            "text": "Set the origin left for a frame.  let style = {\n  left: 50\n}", 
+            "title": "left"
+        }, 
+        {
+            "location": "/api/#top", 
+            "text": "Set the origin top of a frame.  let style = {\n  top: 50\n}", 
+            "title": "top"
+        }, 
+        {
+            "location": "/api/#rendering", 
+            "text": "SyrSDK uses the concept of a  raster . It tries to detect the environment it's in, based on the availability of the  SyrNative  bridge. Rendering to the  RootView  surface is as easy as creating the component, and handing it to the raster.  We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's  constructor , and then the  lifeCycle  events.  import { Component, Render } from 'syr';\n\nclass MyApp extends Component {\n  render() {\n    return  View /View \n  }\n}\n\nRender(MyComponent);", 
+            "title": "Rendering"
+        }, 
+        {
+            "location": "/api/#lifecycle", 
+            "text": "Syr supports Life Cycle events to help control the flow of the program. To take advantage of these add the following to javascript classes.", 
+            "title": "LifeCycle"
+        }, 
+        {
+            "location": "/api/#method-stubs", 
+            "text": "import { Component } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    // runs when object is created in javascript\n  }\n  render() {\n    // when what this class should return as it's rendering tree\n  }\n  componentDidMount() {\n    // this fires when component has been added to the rendering surface\n  }\n  componentWillUnmount() {\n    // fires when component is removed from rendering surface\n  }\n  componentWillUpdate() {\n    // fires before component will update, you can return false\n    // to prevent an update\n  }\n  componentDidUpdate() {\n    // component updated, runs after the component state was changed\n  }\n}", 
+            "title": "Method stubs"
+        }, 
+        {
+            "location": "/api/#events", 
+            "text": "", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/api/#notifying-javascript-from-native", 
+            "text": "If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass  SyrComponent.h .  [self sendEventWithName:@ FooParty  body:@{@ name : eventName}];", 
+            "title": "Notifying JavaScript from Native"
+        }, 
+        {
+            "location": "/api/#subscribing-to-events-from-javascript", 
+            "text": "JavaScript can subscribe to the events that are being passed down from the native layer.  import { NativeEventEmitter } from 'syr';\n\n\nconst subscription = NativeEventEmitter.addListener(\n  'FooParty',\n  (event) =  console.log(event.name)\n);\n\n// unsubscribe when needed\nsubscription.remove();", 
+            "title": "Subscribing to Events from JavaScript"
+        }, 
+        {
+            "location": "/api/#animations", 
+            "text": "Syr has support for animations. With Syr animations you can run animations transitions in parallel, or sequence. Animations allow for the shift in x,y position and size. If you need a more complex animation you can use  Animated.Value  to bind a transform to the component.", 
+            "title": "Animations"
+        }, 
+        {
+            "location": "/api/#slide", 
+            "text": "import { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // slide animation\n    this.slideAnimation = new Animated.XYValue({\n      x: 0\n      y: 0\n    });\n  }\n  render() {\n    return (\n       Animated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        transform: [this.slideAnimation]\n      }} \n       /Animated.View \n    );\n  }\n  componentDidMount() {\n    Animated.timing(this.slideAnimation, {\n      toValue: {\n        x:100,\n        y:100\n      },\n      duration: 5000\n    }).start()\n  }\n}\n\nRender(MyComponent);", 
+            "title": "Slide"
+        }, 
+        {
+            "location": "/api/#rotation", 
+            "text": "import { Component, Render, Animated } from 'syr';\n\nclass MyComponent extends Component {\n  constructor() {\n    super();\n    // interpolation animation\n    this.spinAnimation = new Animated.Value(0);\n  }\n  render() {\n    return (\n       Animated.View style={{\n        height: 100,\n        width: 100,\n        backgroundColor: '#ffffff',\n        top: 50,\n        left: 50,\n        transform: [this.spinAnimation]\n      }} \n       /Animated.View \n    );\n  }\n  spin() {\n    //spin the object 360 degress. and repeat after 5 seconds\n    Animated.timing(this.spinAnimation, {\n      toValue: 360,\n      duration: 5000\n    }).start(()= {\n      this.spin();\n    });\n  }\n  componentDidMount() {\n    this.spin();\n  }\n}\n\nRender(MyComponent);", 
+            "title": "Rotation"
+        }, 
+        {
+            "location": "/api/#creating-native-modules", 
+            "text": "Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.  Syr Native Modules are always used in the  Class  invocation method. What this means is that if you want to store instanced information (some value) on your class  Natively  you need to use the  sharedDelegate  pattern.", 
+            "title": "Creating Native Modules"
+        }, 
+        {
+            "location": "/api/#building-your-first-class", 
+            "text": "MyNativeModule.h  #import  SyrComponent.h \n\n@interface MyNativeModule : SyrComponent\n@end  MyNativeModule.m  #import  MyNativeModule.h \n\n@implementation MyNativeModule\n\n// send this class to the JS bridge\nSYR_EXPORT_MODULE();\n\n// this is an objective C method that will get it's invokation from JS\nSYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)\n{\n  // do something with Name and Location strings\n}\n\n// if you want to use this module in the JSX tree\n// there are helper methods on the component to help with\n// styling and more\n+(NSObject*) render: (NSDictionary*) component {\n  UIView *view = [[UIView alloc] init];\n  return view;\n}\n\n@end  Accessing the native modules from javascript.  import { NativeModules } from 'syr';\n\nlet MyNativeModule = NativeModules.MyNativeModule;\n\nMyNativeModule.addEvent('building an app', 'at my desk');", 
+            "title": "Building your first class"
+        }, 
+        {
+            "location": "/debugging/", 
+            "text": "Debugging Syr Applications\n\n\nIn addition to using native platform debugging tools, like XCode, and Apple Instruments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.\n\n\nOpening Safari Developer tools while a Syr App is running.\n\n\n\n\nDebug Pause with Breakpoints and Console.\n\n\n\n\nTimelines, Memory Usage, Object Allocation", 
+            "title": "Debugging"
+        }, 
+        {
+            "location": "/debugging/#debugging-syr-applications", 
+            "text": "In addition to using native platform debugging tools, like XCode, and Apple Instruments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.", 
+            "title": "Debugging Syr Applications"
+        }, 
+        {
+            "location": "/debugging/#opening-safari-developer-tools-while-a-syr-app-is-running", 
+            "text": "", 
+            "title": "Opening Safari Developer tools while a Syr App is running."
+        }, 
+        {
+            "location": "/debugging/#debug-pause-with-breakpoints-and-console", 
+            "text": "", 
+            "title": "Debug Pause with Breakpoints and Console."
+        }, 
+        {
+            "location": "/debugging/#timelines-memory-usage-object-allocation", 
+            "text": "", 
+            "title": "Timelines, Memory Usage, Object Allocation"
+        }, 
+        {
+            "location": "/getting_started/", 
+            "text": "Getting Started Building\n\n\nSetting up a Syr JavaScript Project\n\n\nThe base of a Syr project, is the JavaScript module that you intend to run inside the native environment. Using this JavaScript project, you will be able to setup an iOS or Android application, and it will be able to load the JavaScript.\n\n\nYou can use \nwebpack\n to both build and serve the bundle for development. This allows things like Hot Reloading, so you don't need to refresh your app while you build.\n\n\nSetting up an iOS Application\n\n\nFast Track, with a new App.\n\n\nIf you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab \nSyrCLI\n. This tool will create a new \nSyrNative\n project for you. And provide the skeleton to get started tinkering right away.\n\n\nAn Existing Application\n\n\nWe've made sure to put labor into making the SDK as portable as possible. While the version of Syr is still early, we have decided to directly stick to Native versioning tools. What this means for iOS is that we ship a \n.framework\n file with ObjectiveC binaries. (source is always available here on github)\n\n\nThis \n.framework\n will let you quickly and rapidly get started no matter what existing project setup you have. A \n.framework\n file is allowed to have multiple versions of a binary embedded, we hope this helps with easy of upgrades through a more portable versioning structure within the same distribution.\n\n\nDownload PATH_TO_FRAMEWORK_HERE\n\n\nInclude with your XCode project.\n\n\nStart a new Syr JavaScript project.", 
+            "title": "Getting started"
+        }, 
+        {
+            "location": "/getting_started/#getting-started-building", 
+            "text": "", 
+            "title": "Getting Started Building"
+        }, 
+        {
+            "location": "/getting_started/#setting-up-a-syr-javascript-project", 
+            "text": "The base of a Syr project, is the JavaScript module that you intend to run inside the native environment. Using this JavaScript project, you will be able to setup an iOS or Android application, and it will be able to load the JavaScript.  You can use  webpack  to both build and serve the bundle for development. This allows things like Hot Reloading, so you don't need to refresh your app while you build.", 
+            "title": "Setting up a Syr JavaScript Project"
+        }, 
+        {
+            "location": "/getting_started/#setting-up-an-ios-application", 
+            "text": "", 
+            "title": "Setting up an iOS Application"
+        }, 
+        {
+            "location": "/getting_started/#fast-track-with-a-new-app", 
+            "text": "If you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab  SyrCLI . This tool will create a new  SyrNative  project for you. And provide the skeleton to get started tinkering right away.", 
+            "title": "Fast Track, with a new App."
+        }, 
+        {
+            "location": "/getting_started/#an-existing-application", 
+            "text": "We've made sure to put labor into making the SDK as portable as possible. While the version of Syr is still early, we have decided to directly stick to Native versioning tools. What this means for iOS is that we ship a  .framework  file with ObjectiveC binaries. (source is always available here on github)  This  .framework  will let you quickly and rapidly get started no matter what existing project setup you have. A  .framework  file is allowed to have multiple versions of a binary embedded, we hope this helps with easy of upgrades through a more portable versioning structure within the same distribution.  Download PATH_TO_FRAMEWORK_HERE  Include with your XCode project.  Start a new Syr JavaScript project.", 
+            "title": "An Existing Application"
         }
     ]
 }
