@@ -37,6 +37,10 @@ module.exports = {
           plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: "file-loader?name=images/.[ext]"
+      }
     ],
   },
 
