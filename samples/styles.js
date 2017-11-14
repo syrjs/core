@@ -9,7 +9,7 @@ let styles = {
     backgroundColor: '#404040',
     position: 'absolute',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   secondaryView: {
     height: 125,

@@ -1,6 +1,6 @@
 {
   "name": "syr",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
@@ -23,11 +23,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.32",
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-transform-jsx": "^2.0.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
     "coveralls": "^2.13.1",
     "css-js": "^1.0.6",
     "file-loader": "^1.1.5",
