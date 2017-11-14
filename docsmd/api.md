@@ -199,19 +199,28 @@ class MyComponent extends Component {
   constructor() {
     // runs when object is created in javascript
   }
+
   render() {
     // when what this class should return as it's rendering tree
   }
+
   componentDidMount() {
     // this fires when component has been added to the rendering surface
   }
+
   componentWillUnmount() {
     // fires when component is removed from rendering surface
   }
+
   componentWillUpdate() {
+    // fires immediately before rendering when new props or state are being received
+  }
+
+  shouldComponentUpdate() {
     // fires before component will update, you can return false
     // to prevent an update
   }
+
   componentDidUpdate() {
     // component updated, runs after the component state was changed
   }
