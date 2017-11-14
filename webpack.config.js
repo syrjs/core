@@ -35,7 +35,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['babel-preset-env'],
+          presets: ['env'],
           plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
         },
       },
