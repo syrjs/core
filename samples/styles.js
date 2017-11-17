@@ -1,12 +1,31 @@
 import { Dimensions } from '../index.js';
 let styles = {
+  stage: {
+    top: 0,
+    left: 0,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+    backgroundColor: '#404040'
+  },
+  scrimView: {
+    top: 0,
+    left: 0,
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width,
+  },
+  gradientView: {
+    top:0,
+    left:0,
+    width: Dimensions.get('window').width,
+    height:75,
+    backgroundColor:'#000000'
+  },
   mainView: {
     top: 0,
     left: 0,
     height: Dimensions.get('window').height,
     width: Dimensions.get('window').width,
     color: '#000000',
-    backgroundColor: '#404040',
     position: 'absolute',
   },
   secondaryView: {
@@ -51,6 +70,12 @@ let styles = {
     position: 'absolute',
     borderRadius: 62.5,
   },
+  ryi: {
+    top: Dimensions.get('window').height - (Dimensions.get('window').height / 2),
+    height: Dimensions.get('window').height / 2,
+    width: Dimensions.get('window').width,
+    backgroundColor: '#ffffff'
+  }
 };
 
 export { styles };

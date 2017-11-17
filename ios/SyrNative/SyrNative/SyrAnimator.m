@@ -60,24 +60,48 @@
   [CATransaction begin];
   NSNumber* from = [animation objectForKey:@"value"];
   NSNumber* to = [animation objectForKey:@"toValue"];
+  NSString* animatedProperty = [animation objectForKey:@"animatedProperty"];
+  
   double duration = [[animation objectForKey:@"duration"] integerValue];
   duration = duration / 1000; // we get it as ms from the js
-
-  CABasicAnimation *coreAnimation = [CABasicAnimation   animationWithKeyPath:@"transform.rotation.z"];
-  coreAnimation.duration = duration;
-  coreAnimation.additive = YES;
-  coreAnimation.removedOnCompletion = YES;
-  coreAnimation.fillMode = kCAFillModeForwards;
-  coreAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([from longValue])];
-  coreAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([to longValue])];
   
-  SyrAnimatorDelegate* delegate = [[SyrAnimatorDelegate alloc] init];
-  delegate.bridge = bridge;
-  delegate.targetId = targetId;
-  delegate.animation = animation;
-  coreAnimation.delegate = delegate;
-
-  [[component valueForKey:@"layer"] addAnimation:coreAnimation forKey:@"rotation"];
+  if([animatedProperty containsString:@"opacity"]) {
+    // fade out
+    CAKeyframeAnimation *fadeInAndOutAnimation = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
+    fadeInAndOutAnimation.beginTime = CACurrentMediaTime();
+    fadeInAndOutAnimation.duration = duration;
+    fadeInAndOutAnimation.keyTimes = @[@0.0, @1.0];
+    fadeInAndOutAnimation.values = @[@1.0, @0.0];
+    fadeInAndOutAnimation.additive = NO;
+    fadeInAndOutAnimation.removedOnCompletion = false;
+    fadeInAndOutAnimation.fillMode = kCAFillModeForwards;
+    
+    SyrAnimatorDelegate* delegate = [[SyrAnimatorDelegate alloc] init];
+    delegate.bridge = bridge;
+    delegate.targetId = targetId;
+    delegate.animation = animation;
+    fadeInAndOutAnimation.delegate = delegate;
+    
+    [[component valueForKey:@"layer"] addAnimation:fadeInAndOutAnimation forKey:@"opacityOUT"];
+  } else {
+    // rotation
+    CABasicAnimation *coreAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    coreAnimation.duration = duration;
+    coreAnimation.additive = YES;
+    coreAnimation.removedOnCompletion = YES;
+    coreAnimation.fillMode = kCAFillModeForwards;
+    coreAnimation.fromValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([from longValue])];
+    coreAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS([to longValue])];
+    
+    SyrAnimatorDelegate* delegate = [[SyrAnimatorDelegate alloc] init];
+    delegate.bridge = bridge;
+    delegate.targetId = targetId;
+    delegate.animation = animation;
+    coreAnimation.delegate = delegate;
+    
+    [[component valueForKey:@"layer"] addAnimation:coreAnimation forKey:@"rotation"];
+  }
+  
   [CATransaction commit];
 }
 
