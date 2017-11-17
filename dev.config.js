@@ -33,10 +33,14 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['babel-preset-es2015'],
+          presets: ['env'],
           plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: "file-loader?name=images/.[ext]"
+      }
     ],
   },
 

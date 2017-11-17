@@ -15,6 +15,6 @@ Syr uses a React like API with a custom JS API bridge, that allows an SDK develo
 
 A carefully crafted SDK can be enhanced or tested without needing to deploy multiple binaries.
 
-The ultimate goal was not to recreate React, nor chase something like Preact. Through the magic of Babel and Webpack, we've adopted a similar set of technologies that allow us ease and familiar use, while meeting the goal of pushing AST over the JavaScript Bridges in each native environment (including the web).
+Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
 
 The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
