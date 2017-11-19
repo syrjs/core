@@ -37,6 +37,16 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
     [text  setFont:[UIFont systemFontOfSize:[fontSize doubleValue]]];
   }
   
+  NSString* alignment = [style valueForKey:@"textAlign"];
+  
+  if([alignment containsString:@"center"]) {
+    [text setTextAlignment:UITextAlignmentCenter];
+  } else if ([alignment containsString:@"right"]) {
+    [text setTextAlignment:UITextAlignmentRight];
+  } else {
+    [text setTextAlignment:UITextAlignmentLeft];
+  }
+  
   return [self styleView:text withStyle:style];
 }
 

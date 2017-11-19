@@ -83,6 +83,18 @@
     fadeInAndOutAnimation.delegate = delegate;
     
     [[component valueForKey:@"layer"] addAnimation:fadeInAndOutAnimation forKey:@"opacityOUT"];
+  } else if([animatedProperty containsString:@"height"]) {
+    UIView* compView = (UIView*) component;
+    [UIView animateWithDuration:duration
+     animations:^{
+       CGRect frame = compView.frame;
+       // adjust size of frame to desired value
+       frame.size.height = [to integerValue];
+       compView.frame  = frame; // set frame on your view to the adjusted size
+     }
+     completion:^(BOOL finished){
+  
+     }];
   } else {
     // rotation
     CABasicAnimation *coreAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];

@@ -37,6 +37,8 @@
 		D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D7E07D1F11E7DD0039C3A9 /* SyrRaster.m */; };
 		D2DE8FF71FBF608D00EEF358 /* SyrLinearGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = D2DE8FF51FBF608D00EEF358 /* SyrLinearGradient.h */; };
 		D2DE8FF81FBF608D00EEF358 /* SyrLinearGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE8FF61FBF608D00EEF358 /* SyrLinearGradient.m */; };
+		D2DE8FFB1FC0E46B00EEF358 /* SyrStackedView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2DE8FF91FC0E46B00EEF358 /* SyrStackedView.h */; };
+		D2DE8FFC1FC0E46B00EEF358 /* SyrStackedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DE8FFA1FC0E46B00EEF358 /* SyrStackedView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,7 +73,9 @@
 		D2D7E07C1F11E7DD0039C3A9 /* SyrRaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrRaster.h; sourceTree = "<group>"; };
 		D2D7E07D1F11E7DD0039C3A9 /* SyrRaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrRaster.m; sourceTree = "<group>"; };
 		D2DE8FF51FBF608D00EEF358 /* SyrLinearGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrLinearGradient.h; sourceTree = "<group>"; };
-		D2DE8FF61FBF608D00EEF358 /* SyrLinearGradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrLinearGradient.m; sourceTree = "<group>"; };
+		D2DE8FF61FBF608D00EEF358 /* SyrLinearGradient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SyrLinearGradient.m; sourceTree = "<group>"; };
+		D2DE8FF91FC0E46B00EEF358 /* SyrStackedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrStackedView.h; sourceTree = "<group>"; };
+		D2DE8FFA1FC0E46B00EEF358 /* SyrStackedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrStackedView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */,
 				D2DE8FF51FBF608D00EEF358 /* SyrLinearGradient.h */,
 				D2DE8FF61FBF608D00EEF358 /* SyrLinearGradient.m */,
+				D2DE8FF91FC0E46B00EEF358 /* SyrStackedView.h */,
+				D2DE8FFA1FC0E46B00EEF358 /* SyrStackedView.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -176,6 +182,7 @@
 				D2D7E06A1F0F69050039C3A9 /* SyrCore.h in Headers */,
 				D266C47F1F9AAD2000BB0A90 /* SyrText.h in Headers */,
 				D2D3122A1F9520AF008A9CCC /* SyrEventHandler.h in Headers */,
+				D2DE8FFB1FC0E46B00EEF358 /* SyrStackedView.h in Headers */,
 				D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +260,7 @@
 				D24A90621F86C2BF003DAD64 /* SyrBridge.m in Sources */,
 				D2D7E06B1F0F69050039C3A9 /* SyrCore.m in Sources */,
 				D2DE8FF81FBF608D00EEF358 /* SyrLinearGradient.m in Sources */,
+				D2DE8FFC1FC0E46B00EEF358 /* SyrStackedView.m in Sources */,
 				D2D3122B1F9520AF008A9CCC /* SyrEventHandler.m in Sources */,
 				D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */,
 				D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */,

@@ -13,6 +13,7 @@
 
 +(NSObject*) render: (NSDictionary*) component {
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
+  scrollView.contentSize = CGSizeMake(320,800);
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
   scrollView.frame = [self styleFrame:style];
   return scrollView;

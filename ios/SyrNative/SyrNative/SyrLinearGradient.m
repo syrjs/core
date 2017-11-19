@@ -18,10 +18,14 @@
   CAGradientLayer *gradientLayer = [CAGradientLayer layer];
   gradientLayer.frame = view.layer.bounds;
   
-  gradientLayer.colors = [NSArray arrayWithObjects:
-                          (id)[UIColor colorWithWhite:1.0f alpha:1.0f].CGColor,
-                          (id)[UIColor colorWithWhite:0.0f alpha:0.9f].CGColor,
-                          nil];
+  NSMutableArray* colors = [[NSMutableArray alloc] init];
+  NSArray* gradientColors = [[component objectForKey:@"attributes"] objectForKey:@"colors"];
+  
+  for(id color in gradientColors) {
+    [colors addObject:[self colorFromHash:color].CGColor];
+  }
+  
+  gradientLayer.colors = colors;
   
   gradientLayer.locations = [NSArray arrayWithObjects:
                              [NSNumber numberWithFloat:0.0f],
