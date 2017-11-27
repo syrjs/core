@@ -15,12 +15,9 @@ class MyComponent extends Component {
     super();
   }
   render() {
-    return (
-      <View></View>
-    );
+    return <View />;
   }
-  componentDidMount() {
-  }
+  componentDidMount() {}
 }
 
 Render(MyComponent);
