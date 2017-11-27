@@ -72,10 +72,12 @@
 // build the component tree
 -(void) build: (NSDictionary*) astDict {
   NSObject* component = [self createComponent:astDict];
-  [self buildChildren:astDict withViewParent:component];
-	[_rootView addSubview:component];
-  [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-  [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+  if(component != nil) {
+    [self buildChildren:astDict withViewParent:component];
+    [_rootView addSubview:component];
+    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+    [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+  }
 }
 
 // build children in the tree
@@ -86,14 +88,28 @@
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
       
-      if(subchildren != [NSNull null]) {
-        if(subchildren.count > 0){
-          [self buildChildren:child withViewParent:nsComponent];
+      // component is not of type available
+      // should do a strict check if it is derived from component
+      if(nsComponent != nil) {
+        if(subchildren != [NSNull null]) {
+          if(subchildren.count > 0){
+            [self buildChildren:child withViewParent:nsComponent];
+          }
+        }
+        
+        [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+        [view addSubview:nsComponent];
+      } else {
+        
+        // render it's children to it's own parent
+        if(subchildren != [NSNull null]) {
+          if(subchildren.count > 0){
+            [self buildChildren:child withViewParent:view];
+          }
         }
       }
       
-      [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-      [view addSubview:nsComponent];
     }
   }
 
@@ -113,22 +129,24 @@
   // populate return
   NSObject* __unsafe_unretained returnComponent;
   
-  // get render method
-  SEL selector = NSSelectorFromString(@"render:");
-  if ([class respondsToSelector:selector]) {
+  if(class != nil) {
+    // get render method
+    SEL selector = NSSelectorFromString(@"render:");
+    if ([class respondsToSelector:selector]) {
+      
+      // invoke render method, pass component
+      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+      [inv setSelector:selector];
+      [inv setTarget:class];
+      
+      [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+      [inv invoke];
+      
+      // set reference to returnComponent borrow
+      [inv getReturnValue:&returnComponent];
+    }
     
-    // invoke render method, pass component
-    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
-    [inv setSelector:selector];
-    [inv setTarget:class];
-
-    [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-    [inv invoke];
-    
-    // set reference to returnComponent borrow
-    [inv getReturnValue:&returnComponent];
   }
-  
   
   // return the component that was created
   return returnComponent;

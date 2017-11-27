@@ -26,7 +26,7 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 * font weight
 * font family and weight (buttons)
 * text alignment (right/center)
-* touch events on non buttons
+* touch events on non buttons (touchable opacity )
 * scroll view
 * stacked view
 * dynamic layout heights
