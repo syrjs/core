@@ -11,12 +11,12 @@ import { Dimensions } from './lib/dimensions';
 import { ScrollView } from './lib/scrollview';
 import { LinearGradient } from './lib/lineargradient';
 
-const DOMRaster = require('./lib/rasters/dom');
-const WKRaster = require('./lib/rasters/wkwebview');
+import { DOMRaster } from './lib/rasters/dom';
+import { WKRaster } from './lib/rasters/wkwebview';
 
-if (window.webkit && window.webkit.messageHandlers) {
+if (window.SyrBridge || (window.webkit && window.webkit.messageHandlers)) {
   RasterManager.setRaster(WKRaster);
-} else {
+}  else {
   RasterManager.setRaster(DOMRaster);
 }
 
