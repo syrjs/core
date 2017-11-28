@@ -18,17 +18,3 @@ A carefully crafted SDK can be enhanced or tested without needing to deploy mult
 Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
 
 The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
-
-
-### todo list
-
-* style opacity
-* font weight
-* font family and weight (buttons)
-* text alignment (right/center)
-* touch events on non buttons (touchable opacity )
-* scroll view
-* stacked view
-* dynamic layout heights
-* state preservation and updates
-* animations fade-in
