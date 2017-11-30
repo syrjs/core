@@ -18,3 +18,7 @@ A carefully crafted SDK can be enhanced or tested without needing to deploy mult
 Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
 
 The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
+
+### syr development example
+
+![native_checkout_syr](https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif)
