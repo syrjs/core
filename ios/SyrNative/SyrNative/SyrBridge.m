@@ -94,7 +94,7 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
   
   components.queryItems = queryItems;
-  
+  NSLog(components.URL.absoluteString);
   [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
 
