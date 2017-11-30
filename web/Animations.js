@@ -1,7 +1,8 @@
 import { Events } from '../lib/events';
 
 class animations {
-
+  //using Web Animations API for now....will include a polyfill for unsupported browsers.
+  //this provides a clean structure for all the animations....doing rotate for the demo.
   animateInterpolate(message) {
     let animationValues = message.animation;
     let keyframes = [];
@@ -48,11 +49,7 @@ class animations {
   }
 
   animate(message) {
-    console.log(message.animation);
-
       (message.animation.value !== undefined)? this.animateInterpolate(message) : this.animateComponentXY(message);
-      //using Web Animations API for now....will include a polyfill for unsupported browsers.
-      //this provides a clean structure for all the animations....doing rotate for the demo.
   }
 
 }
