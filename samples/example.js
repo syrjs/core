@@ -14,21 +14,54 @@ class MyComponent extends Component {
   constructor() {
     super();
     this.spinAnimation = new Animated.Value(0);
-    styles.square.transform = [this.spinAnimation];
+    this.opacityInAnimation = new Animated.Value(0);
+    this.opacityOutAnimation = new Animated.Value(1);
+    this.moveAimation = new Animated.ValueXY({ x: 0, y: 600 });
+    styles.square.transform = [
+      { rotateZ: this.spinAnimation },
+      { opacity: this.opacityInAnimation },
+      { opacity: this.opacityOutAnimation },
+      this.moveAimation,
+    ];
   }
   render() {
-    return <Animated.View style={styles.square}></Animated.View>
+    return <Animated.View style={styles.square} />;
+  }
+  moveUp() {
+    Animated.timing(this.moveAimation, {
+      toValue: { x: 0, y: 0 },
+      duration: 5000,
+    }).start(() => {
+      this.spin();
+    });
+  }
+  fadeIn() {
+    Animated.timing(this.opacityInAnimation, {
+      toValue: 1,
+      duration: 5000,
+    }).start(() => {
+      this.fadeOut();
+    });
+  }
+  fadeOut() {
+    Animated.timing(this.opacityOutAnimation, {
+      toValue: 0,
+      duration: 5000,
+    }).start(() => {
+      this.fadeIn();
+    });
   }
   spin() {
     Animated.timing(this.spinAnimation, {
       toValue: 360,
-      duration: 1000
-    }).start(()=>{
+      duration: 5000,
+    }).start(() => {
       this.spin();
     });
   }
   componentDidMount() {
-    this.spin();
+    this.fadeIn();
+    this.moveUp();
   }
 }
 
