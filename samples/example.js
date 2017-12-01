@@ -1,14 +1,15 @@
 import { Component, Render, View, Dimensions, Animated } from '../index';
 
 const styles = {
-  square: {
-    width: 100,
+  square : {
+    width: 200,
     height: 100,
-    backgroundColor: '#ff0000',
-    top: Dimensions.get('window').height / 2 - 50,
-    left: Dimensions.get('window').width / 2 - 50,
-  },
-};
+    backgroundColor: '#ff00ff',
+    top: (Dimensions.get('window').height/2) - 50,
+    left: (Dimensions.get('window').width/2) - 100,
+    borderRadius: 30
+  }
+}
 class MyComponent extends Component {
   constructor() {
     super();
