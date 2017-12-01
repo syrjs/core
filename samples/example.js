@@ -1,15 +1,15 @@
 import { Component, Render, View, Dimensions, Animated } from '../index';
 
 const styles = {
-  square: {
+  square : {
     width: 200,
     height: 100,
     backgroundColor: '#ff00ff',
-    top: Dimensions.get('window').height / 2 - 50,
-    left: Dimensions.get('window').width / 2 - 100,
-    borderRadius: 30,
-  },
-};
+    top: (Dimensions.get('window').height/2) - 50,
+    left: (Dimensions.get('window').width/2) - 100,
+    borderRadius: 30
+  }
+}
 class MyComponent extends Component {
   constructor() {
     super();
@@ -54,7 +54,7 @@ class MyComponent extends Component {
   spin() {
     Animated.timing(this.spinAnimation, {
       toValue: 360,
-      duration: 1000,
+      duration: 5000,
     }).start(() => {
       this.spin();
     });
