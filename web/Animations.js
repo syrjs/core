@@ -6,19 +6,24 @@ class animations {
   animateInterpolate(message) {
     let animationValues = message.animation;
     let keyframes = [];
-    if(message.animation.animatedProperty) {
-    switch(message.animation.animatedProperty) {
-      case 'opacity': keyframes = [
+    if(animationValues.animatedProperty) {
+    switch(true) {
+      case /opacity/.test(animationValues.animatedProperty): keyframes = [
                                     {opacity: animationValues.value},
                                     {opacity: animationValues.toValue}
                                   ];
-                                  break;
+                      break;
+      case /rotate|rotate[XYZ]/.test(animationValues.animatedProperty) : keyframes = [
+                                                            {transform: `${animationValues.animatedProperty}(${animationValues.value}deg)`},
+                                                            {transform: `${animationValues.animatedProperty}(${animationValues.toValue}deg)`}
+                                                          ]
+                                             break;
       //will need to include other cases for height,width, x, y transformations
     }
   } else { //default to z animations A.K.A rotate
     keyframes = [
-                  {transform: `rotate(${animationValues.value}deg)`},
-                  {transform: `rotate(${animationValues.toValue}deg)`}
+                  {transform: `rotateZ(${animationValues.value}deg)`},
+                  {transform: `rotateZ(${animationValues.toValue}deg)`}
                 ]
   }
 
