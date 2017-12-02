@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#import "SyrAnimationDelegate.h"
 
 @interface SyrHeightWidthAnimation : NSObject
-
+@property SyrAnimationDelegate* delegate;
+-(void) animate:(NSObject*) component withAnimation: (NSDictionary*) animation;
 @end

@@ -68,8 +68,11 @@
     [opacityAnimation animate:component withAnimation:animation];
   }
   
-  if([animatedProperty containsString:@"height"]) {
-    
+  if([animatedProperty containsString:@"height"] ||
+     [animatedProperty containsString:@"width"]) {
+    SyrHeightWidthAnimation* hwAnimation = [[SyrHeightWidthAnimation alloc] init];
+    hwAnimation.delegate = delegate;
+    [hwAnimation animate:component withAnimation:animation];
   }
   
 }
