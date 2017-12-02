@@ -5,12 +5,8 @@
 //  Created by Anderson,Derek on 10/20/17.
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "SyrBridge.h"
-
-#define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
 @interface SyrAnimator : NSObject
 +(void) animate: (NSObject*) component withAnimation: (NSDictionary*) animationDict withBridge: (SyrBridge*) bridge withTargetId: (NSString*) targetId;
