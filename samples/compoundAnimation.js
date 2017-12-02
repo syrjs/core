@@ -17,7 +17,8 @@ class MyComponent extends Component {
   constructor() {
     super();
     this.slideAnimation = new Animated.ValueXY({x: 0, y: 0});
-    styles.slideAnimation.transform = [ this.slideAnimation ];
+    this.rotationAnimation = new Animated.Value(0);
+    styles.slideAnimation.transform = [ this.slideAnimation, {z: this.rotationAnimation} ];
   }
   render() {
     return <View style={styles.stage}>
@@ -55,8 +56,18 @@ class MyComponent extends Component {
       });
     });
   }
+  rotate() {
+        // start Z axis spinning animation
+        Animated.timing(this.rotationAnimation, {
+          toValue: 360,
+          duration: 5000
+        }).start(()=>{
+          this.rotate();
+        });
+  }
   componentDidMount() {
     this.slide();
+    this.rotate();
   }
 }
 
