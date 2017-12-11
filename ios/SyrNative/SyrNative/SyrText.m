@@ -19,7 +19,7 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
 +(NSObject*) render: (NSDictionary*) component {
   UILabel *text = [[UILabel alloc] init];
   text.backgroundColor = [UIColor clearColor];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   text.frame = [self styleFrame:style];
   text.text = [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
   

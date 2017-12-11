@@ -1,44 +1,67 @@
 import { Component, Render, View, Dimensions, Animated } from '../index';
 
 const styles = {
-  stage : {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
-  },
   square : {
-    width: 100,
+    width: 200,
     height: 100,
-    backgroundColor: '#aa00ff',
-    top: 0,
-    left: 0,
+    backgroundColor: '#ff00ff',
+    top: (Dimensions.get('window').height/2) - 50,
+    left: (Dimensions.get('window').width/2) - 100,
+    borderRadius: 30
   }
 }
 class MyComponent extends Component {
   constructor() {
     super();
-    this.growAnimation = new Animated.Value(0);
-    styles.square.transform = [ {height: this.growAnimation} ];
+    this.spinAnimation = new Animated.Value(0);
+    this.opacityInAnimation = new Animated.Value(0);
+    this.opacityOutAnimation = new Animated.Value(1);
+    this.moveAimation = new Animated.ValueXY({ x: 0, y: 600 });
+    styles.square.transform = [
+      { rotateZ: this.spinAnimation },
+      { opacity: this.opacityInAnimation },
+      { opacity: this.opacityOutAnimation },
+      this.moveAimation,
+    ];
   }
   render() {
-    return <View style={styles.stage}>
-      <Animated.View style={styles.square}></Animated.View>
-    </View>
+    return <Animated.View style={styles.square}></Animated.View>;
   }
-  growShrink() {
-    Animated.timing(this.growAnimation, {
-      toValue: 300,
-      duration: 1000
-    }).start(()=>{
-      Animated.timing(this.growAnimation, {
-        toValue: 100,
-        duration: 1000
-      }).start(()=>{
-        this.growShrink();
-      })
-    })
+  moveUp() {
+    Animated.timing(this.moveAimation, {
+      toValue: { x: 0, y: 0 },
+      duration: 5000,
+    }).start(() => {
+      this.spin();
+    });
+  }
+  fadeIn() {
+    Animated.timing(this.opacityInAnimation, {
+      toValue: 1,
+      duration: 5000,
+    }).start(() => {
+      this.fadeOut();
+    });
+  }
+  fadeOut() {
+    Animated.timing(this.opacityOutAnimation, {
+      toValue: 0,
+      duration: 5000,
+    }).start(() => {
+      this.fadeIn();
+    });
+  }
+  spin() {
+    Animated.timing(this.spinAnimation, {
+      toValue: 360,
+      duration: 5000,
+    }).start(() => {
+      this.spin();
+    });
   }
   componentDidMount() {
-    this.growShrink();
+    this.fadeIn();
+    this.moveUp();
   }
 }
 

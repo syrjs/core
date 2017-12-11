@@ -13,7 +13,7 @@
 
 +(NSObject*) render: (NSDictionary*) component {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   NSString* buttonTitle =  [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
   
   NSString* titleColor = [style valueForKey:@"color"];

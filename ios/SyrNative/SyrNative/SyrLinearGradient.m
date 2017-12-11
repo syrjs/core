@@ -12,7 +12,7 @@
 
 +(NSObject*) render: (NSDictionary*) component {
   UIView* view = [[UIView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   view.frame = [self styleFrame:style];
   
   CAGradientLayer *gradientLayer = [CAGradientLayer layer];

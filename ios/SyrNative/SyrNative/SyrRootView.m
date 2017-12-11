@@ -11,6 +11,7 @@
 
 @interface SyrRootView()
 @property SyrCore* instance;
+@property NSDictionary* props;
 @end
 
 @implementation SyrRootView
@@ -23,14 +24,23 @@
   return self;
 }
 
+- (NSDictionary*)appProperties {
+  return _props;
+}
+
+- (void)setAppProperties:(NSDictionary *)passedProps{
+  _props = passedProps;
+}
+
 /**
  this view holds the Syr rendering
  */
-- (id) initWithBundlePath: (NSString*) bundlePath {
+- (id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps {
   self = [super init];
   if (self)
   {
     self.instance = [[SyrCore alloc] init];
+    self.props = initialProps;
     [_instance runApp:bundlePath rootView:self];
   }
   return self;
