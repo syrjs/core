@@ -66,7 +66,7 @@
 
 -(void) update: (NSDictionary*) astDict {
  	// todo - reimpliment state update with animations in mind
-  //NSLog(@"update");
+  NSLog(@"update");
 }
 
 // build the component tree
