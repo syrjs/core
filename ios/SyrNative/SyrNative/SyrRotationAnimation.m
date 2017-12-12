@@ -16,7 +16,8 @@
   [CATransaction begin];
   NSNumber* from = [animation objectForKey:@"value"];
   NSNumber* to = [animation objectForKey:@"toValue"];
-  NSString* animatedProperty = [animation objectForKey:@"animatedProperty"];
+  
+  NSString* animatedProperty = [[animation objectForKey:@"animatedProperty"] substringFromIndex: [[animation objectForKey:@"animatedProperty"] length] - 1];
   
   double duration = [[animation objectForKey:@"duration"] integerValue];
   duration = duration / 1000; // we get it as ms from the js
