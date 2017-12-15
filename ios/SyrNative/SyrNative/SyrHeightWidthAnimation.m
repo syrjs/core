@@ -21,6 +21,8 @@
   
   NSNumber* width = [NSNumber numberWithFloat:[currentFrame CGRectValue].size.width];
   NSNumber* height = [NSNumber numberWithFloat:[currentFrame CGRectValue].size.height];
+  NSNumber* x = [NSNumber numberWithFloat:[currentFrame CGRectValue].origin.x];
+  NSNumber* y = [NSNumber numberWithFloat:[currentFrame CGRectValue].origin.y];
   
   if([animatedProperty containsString:@"height"]) {
     height = toValue;
@@ -33,7 +35,7 @@
   if ([component respondsToSelector:selector]) {
     [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
     [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = CGRectMake(0, 0, [width doubleValue], [height doubleValue]);
+        CGRect frame = CGRectMake([x doubleValue], [y doubleValue], [width doubleValue], [height doubleValue]);
         [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
     } completion:^(BOOL finished) {
       [_delegate animationDidStop:nil finished:finished];
