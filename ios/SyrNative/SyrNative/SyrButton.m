@@ -8,6 +8,7 @@
 
 #import "SyrButton.h"
 #import "SyrEventHandler.h"
+#import "SyrStyler.h"
 
 @implementation SyrButton
 
@@ -18,11 +19,11 @@
   
   NSString* titleColor = [style valueForKey:@"color"];
   if(titleColor != nil) {
-    [button setTitleColor:[self colorFromHash:titleColor] forState:UIControlStateNormal];
+    [button setTitleColor:[SyrStyler colorFromHash:titleColor] forState:UIControlStateNormal];
   }
   
   [button setTitle:buttonTitle forState:UIControlStateNormal];
-  button.frame = [self styleFrame:style];
+  button.frame = [SyrStyler styleFrame:style];
   
   NSNumber* fontSize = [style valueForKey:@"fontSize"];
   if(fontSize != nil) {
@@ -35,7 +36,7 @@
   button.tag = [tag integerValue];
   
   // Add an action in current code file (i.e. target)
-  return [self styleView:button withStyle:style];
+  return [SyrStyler styleView:button withStyle:style];
 }
 
 @end

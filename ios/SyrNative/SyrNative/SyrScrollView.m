@@ -7,6 +7,7 @@
 //
 
 #import "SyrScrollView.h"
+#import "SyrStyler.h"
 
 @implementation SyrScrollView
 
@@ -15,7 +16,7 @@
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
   scrollView.contentSize = CGSizeMake(320,800);
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  scrollView.frame = [self styleFrame:style];
+  scrollView.frame = [SyrStyler styleFrame:style];
   return scrollView;
 }
 

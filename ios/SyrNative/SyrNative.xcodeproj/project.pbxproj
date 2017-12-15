@@ -36,6 +36,10 @@
 		D29AD66D1FA176DD00DE7CF0 /* SyrNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */; };
 		D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */; };
 		D29AD6A21FA536D500DE7CF0 /* SyrScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */; };
+		D2B1F56B1FE349BF004A42EF /* SyrBundleManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B1F5691FE349BF004A42EF /* SyrBundleManager.h */; };
+		D2B1F56C1FE349BF004A42EF /* SyrBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */; };
+		D2B1F56F1FE34B17004A42EF /* SyrStyler.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B1F56D1FE34B17004A42EF /* SyrStyler.h */; };
+		D2B1F5701FE34B17004A42EF /* SyrStyler.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1F56E1FE34B17004A42EF /* SyrStyler.m */; };
 		D2D3122A1F9520AF008A9CCC /* SyrEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D312281F9520AF008A9CCC /* SyrEventHandler.h */; };
 		D2D3122B1F9520AF008A9CCC /* SyrEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D312291F9520AF008A9CCC /* SyrEventHandler.m */; };
 		D2D3122E1F955D18008A9CCC /* SyrView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D3122C1F955D18008A9CCC /* SyrView.h */; };
@@ -81,6 +85,10 @@
 		D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SyrNative.bundle; sourceTree = "<group>"; };
 		D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrScrollView.h; sourceTree = "<group>"; };
 		D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrScrollView.m; sourceTree = "<group>"; };
+		D2B1F5691FE349BF004A42EF /* SyrBundleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrBundleManager.h; sourceTree = "<group>"; };
+		D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrBundleManager.m; sourceTree = "<group>"; };
+		D2B1F56D1FE34B17004A42EF /* SyrStyler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrStyler.h; sourceTree = "<group>"; };
+		D2B1F56E1FE34B17004A42EF /* SyrStyler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrStyler.m; sourceTree = "<group>"; };
 		D2D312281F9520AF008A9CCC /* SyrEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrEventHandler.h; sourceTree = "<group>"; };
 		D2D312291F9520AF008A9CCC /* SyrEventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrEventHandler.m; sourceTree = "<group>"; };
 		D2D3122C1F955D18008A9CCC /* SyrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrView.h; sourceTree = "<group>"; };
@@ -167,6 +175,10 @@
 				D266C47A1F9AAD0700BB0A90 /* SyrComponent.m */,
 				D266C49C1F9ABE4E00BB0A90 /* SyrAnimator.h */,
 				D266C49D1F9ABE4E00BB0A90 /* SyrAnimator.m */,
+				D2B1F5691FE349BF004A42EF /* SyrBundleManager.h */,
+				D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */,
+				D2B1F56D1FE34B17004A42EF /* SyrStyler.h */,
+				D2B1F56E1FE34B17004A42EF /* SyrStyler.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -209,12 +221,14 @@
 				D266C49A1F9ABAE400BB0A90 /* SyrButton.h in Headers */,
 				D2DE8FF71FBF608D00EEF358 /* SyrLinearGradient.h in Headers */,
 				D2D7E0351F0F672D0039C3A9 /* SyrNative.h in Headers */,
+				D2B1F56F1FE34B17004A42EF /* SyrStyler.h in Headers */,
 				D2D3122E1F955D18008A9CCC /* SyrView.h in Headers */,
 				D266C4A71F9B275E00BB0A90 /* SyrAnimatedView.h in Headers */,
 				D229B7001FD12C5D004D651B /* SyrXYAnimation.h in Headers */,
 				D24A90651F86C841003DAD64 /* SyrRootView.h in Headers */,
 				D2D7E07E1F11E7DD0039C3A9 /* SyrRaster.h in Headers */,
 				D24A90611F86C2BF003DAD64 /* SyrBridge.h in Headers */,
+				D2B1F56B1FE349BF004A42EF /* SyrBundleManager.h in Headers */,
 				D229B7041FD12C77004D651B /* SyrHeightWidthAnimation.h in Headers */,
 				D229B7081FD12C99004D651B /* SyrRotationAnimation.h in Headers */,
 				D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */,
@@ -308,11 +322,13 @@
 				D229B7011FD12C5D004D651B /* SyrXYAnimation.m in Sources */,
 				D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */,
 				D229B6FD1FD12C3D004D651B /* SyrOpacityAnimation.m in Sources */,
+				D2B1F56C1FE349BF004A42EF /* SyrBundleManager.m in Sources */,
 				D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */,
 				D266C47C1F9AAD0700BB0A90 /* SyrComponent.m in Sources */,
 				D229B7051FD12C77004D651B /* SyrHeightWidthAnimation.m in Sources */,
 				D229B7091FD12C99004D651B /* SyrRotationAnimation.m in Sources */,
 				D266C4971F9AB65200BB0A90 /* SyrImage.m in Sources */,
+				D2B1F5701FE34B17004A42EF /* SyrStyler.m in Sources */,
 				D266C4801F9AAD2000BB0A90 /* SyrText.m in Sources */,
 				D266C49B1F9ABAE400BB0A90 /* SyrButton.m in Sources */,
 				D266C49F1F9ABE4E00BB0A90 /* SyrAnimator.m in Sources */,

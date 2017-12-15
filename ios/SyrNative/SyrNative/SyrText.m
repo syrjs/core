@@ -7,6 +7,7 @@
 //
 
 #import "SyrText.h"
+#import "SyrStyler.h"
 
 @implementation SyrText
 
@@ -20,12 +21,12 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
   UILabel *text = [[UILabel alloc] init];
   text.backgroundColor = [UIColor clearColor];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  text.frame = [self styleFrame:style];
+  text.frame = [SyrStyler styleFrame:style];
   text.text = [[component objectForKey:@"instance"] valueForKey:@"value"];
   
   NSString* textColor = [style valueForKey:@"color"];
   if(textColor != nil) {
-    text.textColor = [self colorFromHash:textColor];
+    text.textColor = [SyrStyler colorFromHash:textColor];
   }
   
   NSString* fontName = [style valueForKey:@"fontFamily"];
@@ -47,7 +48,7 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
     [text setTextAlignment:UITextAlignmentLeft];
   }
   
-  return [self styleView:text withStyle:style];
+  return [SyrStyler styleView:text withStyle:style];
 }
 
 @end
