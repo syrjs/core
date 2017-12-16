@@ -21,7 +21,6 @@
 + (void)SYR_CONCAT(__syr_export__, method)
 
 @interface SyrComponent : NSObject
-+(NSObject*) render: (NSDictionary*) component;
-+(NSObject*) render: (NSDictionary*) component withInstance:(NSObject*) instance;
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
 +(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body;
 @end

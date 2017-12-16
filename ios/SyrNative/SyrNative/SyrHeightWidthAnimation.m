@@ -22,7 +22,6 @@
   NSNumber* width = [NSNumber numberWithFloat:[currentFrame CGRectValue].size.width];
   NSNumber* height = [NSNumber numberWithFloat:[currentFrame CGRectValue].size.height];
 
-  
   if([animatedProperty containsString:@"height"]) {
     height = toValue;
   } else {

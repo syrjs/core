@@ -11,14 +11,15 @@
 
 @implementation SyrText
 
-SYR_EXPORT_MODULE()
-
-SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
-  [self sendEventWithName:@"EventReminder" body:@{@"name": name}];
-}
-
-+(NSObject*) render: (NSDictionary*) component {
-  UILabel *text = [[UILabel alloc] init];
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
+  UILabel *text;
+  
+  if(componentInstance != nil) {
+    text = (UILabel*)componentInstance;
+  } else {
+    text = [[UILabel alloc] init];
+  }
+  
   text.backgroundColor = [UIColor clearColor];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   text.frame = [SyrStyler styleFrame:style];

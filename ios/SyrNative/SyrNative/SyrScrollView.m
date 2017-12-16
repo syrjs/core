@@ -12,7 +12,7 @@
 @implementation SyrScrollView
 
 
-+(NSObject*) render: (NSDictionary*) component {
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
 	UIScrollView *scrollView = [[UIScrollView alloc] init];
   scrollView.contentSize = CGSizeMake(320,800);
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];

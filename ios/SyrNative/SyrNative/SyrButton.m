@@ -12,7 +12,7 @@
 
 @implementation SyrButton
 
-+(NSObject*) render: (NSDictionary*) component {
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];

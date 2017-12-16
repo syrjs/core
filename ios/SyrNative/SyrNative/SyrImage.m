@@ -11,7 +11,7 @@
 
 @implementation SyrImage
 
-+(NSObject*) render: (NSDictionary*) component {
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"source"]  valueForKey:@"uri"];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   UIImage* image = [UIImage imageNamed:source];
