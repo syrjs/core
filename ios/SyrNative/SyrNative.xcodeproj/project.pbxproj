@@ -40,6 +40,8 @@
 		D2B1F56C1FE349BF004A42EF /* SyrBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */; };
 		D2B1F56F1FE34B17004A42EF /* SyrStyler.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B1F56D1FE34B17004A42EF /* SyrStyler.h */; };
 		D2B1F5701FE34B17004A42EF /* SyrStyler.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1F56E1FE34B17004A42EF /* SyrStyler.m */; };
+		D2B1F5731FE499B1004A42EF /* SyrTouchableOpacity.h in Headers */ = {isa = PBXBuildFile; fileRef = D2B1F5711FE499B1004A42EF /* SyrTouchableOpacity.h */; };
+		D2B1F5741FE499B1004A42EF /* SyrTouchableOpacity.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1F5721FE499B1004A42EF /* SyrTouchableOpacity.m */; };
 		D2D3122A1F9520AF008A9CCC /* SyrEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D312281F9520AF008A9CCC /* SyrEventHandler.h */; };
 		D2D3122B1F9520AF008A9CCC /* SyrEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D312291F9520AF008A9CCC /* SyrEventHandler.m */; };
 		D2D3122E1F955D18008A9CCC /* SyrView.h in Headers */ = {isa = PBXBuildFile; fileRef = D2D3122C1F955D18008A9CCC /* SyrView.h */; };
@@ -89,6 +91,8 @@
 		D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrBundleManager.m; sourceTree = "<group>"; };
 		D2B1F56D1FE34B17004A42EF /* SyrStyler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrStyler.h; sourceTree = "<group>"; };
 		D2B1F56E1FE34B17004A42EF /* SyrStyler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrStyler.m; sourceTree = "<group>"; };
+		D2B1F5711FE499B1004A42EF /* SyrTouchableOpacity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrTouchableOpacity.h; sourceTree = "<group>"; };
+		D2B1F5721FE499B1004A42EF /* SyrTouchableOpacity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrTouchableOpacity.m; sourceTree = "<group>"; };
 		D2D312281F9520AF008A9CCC /* SyrEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrEventHandler.h; sourceTree = "<group>"; };
 		D2D312291F9520AF008A9CCC /* SyrEventHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrEventHandler.m; sourceTree = "<group>"; };
 		D2D3122C1F955D18008A9CCC /* SyrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrView.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				D2DE8FF61FBF608D00EEF358 /* SyrLinearGradient.m */,
 				D2DE8FF91FC0E46B00EEF358 /* SyrStackedView.h */,
 				D2DE8FFA1FC0E46B00EEF358 /* SyrStackedView.m */,
+				D2B1F5711FE499B1004A42EF /* SyrTouchableOpacity.h */,
+				D2B1F5721FE499B1004A42EF /* SyrTouchableOpacity.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 				D266C4961F9AB65200BB0A90 /* SyrImage.h in Headers */,
 				D266C47B1F9AAD0700BB0A90 /* SyrComponent.h in Headers */,
 				D266C49E1F9ABE4E00BB0A90 /* SyrAnimator.h in Headers */,
+				D2B1F5731FE499B1004A42EF /* SyrTouchableOpacity.h in Headers */,
 				D229B70C1FD21352004D651B /* SyrAnimationDelegate.h in Headers */,
 				D2D7E06A1F0F69050039C3A9 /* SyrCore.h in Headers */,
 				D266C47F1F9AAD2000BB0A90 /* SyrText.h in Headers */,
@@ -323,6 +330,7 @@
 				D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */,
 				D229B6FD1FD12C3D004D651B /* SyrOpacityAnimation.m in Sources */,
 				D2B1F56C1FE349BF004A42EF /* SyrBundleManager.m in Sources */,
+				D2B1F5741FE499B1004A42EF /* SyrTouchableOpacity.m in Sources */,
 				D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */,
 				D266C47C1F9AAD0700BB0A90 /* SyrComponent.m in Sources */,
 				D229B7051FD12C77004D651B /* SyrHeightWidthAnimation.m in Sources */,

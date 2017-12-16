@@ -8,6 +8,18 @@
 
 #import "SyrEventHandler.h"
 
+@interface SyrEventHandler()
+@property NSMutableArray* eventDelegates;
+@end
+
+@implementation SyrEventDelegate
+- (void) handleSingleTap:(id)sender {
+  NSLog(@"touch, %@", _callbackId);
+  NSDictionary* event = @{@"guid":_callbackId, @"type":@"onPress"};
+  [_bridge sendEvent:event];
+}
+@end
+
 @implementation SyrEventHandler
 
 + (id) sharedInstance {
@@ -15,9 +27,18 @@
   @synchronized(self) {
     if (instance == nil) {
       instance = [[self alloc] init];
+      instance.eventDelegates = [[NSMutableArray alloc] init];
     }
   }
   return instance;
+}
+
+-(SyrEventDelegate*) assignDelegate:(NSString*)guid {
+   SyrEventDelegate* delegate = [[SyrEventDelegate alloc] init];
+  delegate.callbackId = guid;
+  delegate.bridge = _bridge;
+  [_eventDelegates addObject:delegate];
+  return delegate;
 }
 
 /** 
@@ -30,5 +51,6 @@
   NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
   [_bridge sendEvent:event];
 }
+
 
 @end
