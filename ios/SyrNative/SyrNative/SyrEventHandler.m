@@ -14,7 +14,6 @@
 
 @implementation SyrEventDelegate
 - (void) handleSingleTap:(id)sender {
-  NSLog(@"touch, %@", _callbackId);
   NSDictionary* event = @{@"guid":_callbackId, @"type":@"onPress"};
   [_bridge sendEvent:event];
 }

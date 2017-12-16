@@ -24,6 +24,7 @@
   if ([component respondsToSelector:selector]) {
     [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
     [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+      NSNumber* currentFrame = [component valueForKeyPath:@"frame"];
       CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], [currentFrame CGRectValue].size.width, [currentFrame CGRectValue].size.height);
       [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
     } completion:^(BOOL finished) {

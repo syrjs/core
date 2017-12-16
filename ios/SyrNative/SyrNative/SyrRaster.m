@@ -66,7 +66,12 @@
 
 -(void) update: (NSDictionary*) astDict {
  	// todo - reimpliment state update with animations in mind
-  NSLog(@"update");
+  [self syncState:astDict];
+}
+
+-(void) syncState: (NSDictionary*) component {
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
+  NSObject* componentInstance = [_components objectForKey:guid];
 }
 
 // build the component tree

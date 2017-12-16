@@ -22,5 +22,6 @@
 
 @interface SyrComponent : NSObject
 +(NSObject*) render: (NSDictionary*) component;
++(NSObject*) render: (NSDictionary*) component withInstance:(NSObject*) instance;
 +(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body;
 @end
