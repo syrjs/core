@@ -15,6 +15,7 @@
 +(NSObject*) render: (NSDictionary*) component {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
   NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
   NSString* titleColor = [style valueForKey:@"color"];
@@ -32,7 +33,7 @@
 
   //[button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
-  [button addTarget:[SyrEventHandler sharedInstance] action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+  [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
   button.tag = [tag integerValue];
   
   // Add an action in current code file (i.e. target)
