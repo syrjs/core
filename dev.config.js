@@ -33,8 +33,8 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['env'],
-          plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
+          presets: ['env', 'es2015'],
+          plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
         },
       },
       {
