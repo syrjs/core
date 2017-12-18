@@ -7,25 +7,27 @@
 //
 
 #import "SyrText.h"
+#import "SyrStyler.h"
 
 @implementation SyrText
 
-SYR_EXPORT_MODULE()
-
-SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
-  [self sendEventWithName:@"EventReminder" body:@{@"name": name}];
-}
-
-+(NSObject*) render: (NSDictionary*) component {
-  UILabel *text = [[UILabel alloc] init];
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
+  UILabel *text;
+  
+  if(componentInstance != nil) {
+    text = (UILabel*)componentInstance;
+  } else {
+    text = [[UILabel alloc] init];
+  }
+  
   text.backgroundColor = [UIColor clearColor];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  text.frame = [self styleFrame:style];
-  text.text = [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  text.frame = [SyrStyler styleFrame:style];
+  text.text = [[component objectForKey:@"instance"] valueForKey:@"value"];
   
   NSString* textColor = [style valueForKey:@"color"];
   if(textColor != nil) {
-    text.textColor = [self colorFromHash:textColor];
+    text.textColor = [SyrStyler colorFromHash:textColor];
   }
   
   NSString* fontName = [style valueForKey:@"fontFamily"];
@@ -47,7 +49,7 @@ SYR_EXPORT_METHOD(sendMeAnEvent:(NSString*)name){
     [text setTextAlignment:UITextAlignmentLeft];
   }
   
-  return [self styleView:text withStyle:style];
+  return [SyrStyler styleView:text withStyle:style];
 }
 
 @end

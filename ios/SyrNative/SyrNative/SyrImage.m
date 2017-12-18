@@ -7,15 +7,16 @@
 //
 
 #import "SyrImage.h"
+#import "SyrStyler.h"
 
 @implementation SyrImage
 
-+(NSObject*) render: (NSDictionary*) component {
-  NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
+  NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"source"]  valueForKey:@"uri"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   UIImage* image = [UIImage imageNamed:source];
   UIImageView* imageHolder = [[UIImageView alloc] initWithImage:image];
-  imageHolder.frame = [self styleFrame:style];
+  imageHolder.frame = [SyrStyler styleFrame:style];
   return imageHolder;
 }
 

@@ -7,13 +7,14 @@
 //
 
 #import "SyrLinearGradient.h"
+#import "SyrStyler.h"
 
 @implementation SyrLinearGradient
 
-+(NSObject*) render: (NSDictionary*) component {
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view = [[UIView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  view.frame = [self styleFrame:style];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  view.frame = [SyrStyler styleFrame:style];
   
   CAGradientLayer *gradientLayer = [CAGradientLayer layer];
   gradientLayer.frame = view.layer.bounds;
@@ -22,7 +23,7 @@
   NSArray* gradientColors = [[component objectForKey:@"attributes"] objectForKey:@"colors"];
   
   for(id color in gradientColors) {
-    [colors addObject:[self colorFromHash:color].CGColor];
+    [colors addObject:[SyrStyler colorFromHash:color].CGColor];
   }
   
   gradientLayer.colors = colors;
@@ -34,7 +35,7 @@
   
   [view.layer addSublayer:gradientLayer];
   
-  return [self styleView:view withStyle:style];
+  return [SyrStyler styleView:view withStyle:style];
 }
 
 @end

@@ -8,21 +8,23 @@
 
 #import "SyrButton.h"
 #import "SyrEventHandler.h"
+#import "SyrStyler.h"
 
 @implementation SyrButton
 
-+(NSObject*) render: (NSDictionary*) component {
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  NSString* buttonTitle =  [[[component objectForKey:@"instance"] objectForKey:@"state"] valueForKey:@"value"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
+  NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
   NSString* titleColor = [style valueForKey:@"color"];
   if(titleColor != nil) {
-    [button setTitleColor:[self colorFromHash:titleColor] forState:UIControlStateNormal];
+    [button setTitleColor:[SyrStyler colorFromHash:titleColor] forState:UIControlStateNormal];
   }
   
   [button setTitle:buttonTitle forState:UIControlStateNormal];
-  button.frame = [self styleFrame:style];
+  button.frame = [SyrStyler styleFrame:style];
   
   NSNumber* fontSize = [style valueForKey:@"fontSize"];
   if(fontSize != nil) {
@@ -31,11 +33,11 @@
 
   //[button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
-  [button addTarget:[SyrEventHandler sharedInstance] action:@selector(btnSelected:) forControlEvents:UIControlEventTouchUpInside];
+  [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
   button.tag = [tag integerValue];
   
   // Add an action in current code file (i.e. target)
-  return [self styleView:button withStyle:style];
+  return [SyrStyler styleView:button withStyle:style];
 }
 
 @end

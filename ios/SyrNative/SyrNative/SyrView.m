@@ -7,14 +7,20 @@
 //
 
 #import "SyrView.h"
+#import "SyrStyler.h"
 
 @implementation SyrView
 
-+(NSObject*) render: (NSDictionary*) component {
-  UIView* view = [[UIView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
-  view.frame = [self styleFrame:style];
-  return [self styleView:view withStyle:style];
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
+  UIView* view;
+  if(componentInstance != nil) {
+    view = (UIView*)componentInstance;
+  } else {
+    view = [[UIView alloc] init];
+  }
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  view.frame = [SyrStyler styleFrame:style];
+  return [SyrStyler styleView:view withStyle:style];
 }
 
 @end

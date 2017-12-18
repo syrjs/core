@@ -25,7 +25,7 @@ class MyComponent extends Component {
     ];
   }
   render() {
-    return <Animated.View style={styles.square} />;
+    return <Animated.View style={styles.square}></Animated.View>;
   }
   moveUp() {
     Animated.timing(this.moveAimation, {

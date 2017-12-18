@@ -42,12 +42,6 @@
   return self;
 }
 
-- (void)buttonPressed:(UIButton *)button  {
-  NSNumber* tagNumber = [NSNumber numberWithInt:button.tag];
-  NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
-  [self sendEvent:event];
-}
-
 - (id) initWithRootView: (SyrRootView*) rootView {
   self = [super init];
   if (self)
@@ -57,6 +51,13 @@
   }
   return self;
 }
+
+- (void)buttonPressed:(UIButton *)button  {
+  NSNumber* tagNumber = [NSNumber numberWithInt:button.tag];
+  NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
+  [self sendEvent:event];
+}
+
 - (void) addView {
   // create a root view
   [_rootView addSubview:_bridgedBrowser];
@@ -90,6 +91,14 @@
   // setup some environment stuff for the interpreter
   NSNumber* width = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.width];
   NSNumber* height = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.height];
+  NSDictionary* bootupProps = [rootView appProperties];
+  
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:bootupProps
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:nil];
+
+
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
   

@@ -10,5 +10,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SyrRootView : UIView
-- (id) initWithBundlePath: (NSString*) bundlePath;
+@property NSDictionary* appProperties;
+-(id)initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps;
 @end
