@@ -199,7 +199,7 @@ exports.default = function (_ref) {
     };
 
     var JSXElement = function JSXElement(node) {
-      return jsxObjectTransformer(t.objectExpression([t.objectProperty(t.identifier(nameProperty), JSXElementName(node.openingElement.name)), t.objectProperty(t.identifier(attributesProperty), JSXAttributes(node.openingElement.attributes)), t.objectProperty(t.identifier(childrenProperty), node.closingElement ? JSXChildren(node.children) : t.nullLiteral()), t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))]));
+      return jsxObjectTransformer(t.objectExpression([t.objectProperty(t.identifier(nameProperty), JSXElementName(node.openingElement.name)), t.objectProperty(t.identifier(attributesProperty), JSXAttributes(node.openingElement.attributes)), t.objectProperty(t.identifier(childrenProperty), node.children ? JSXChildren(node.children) : t.nullLiteral()), t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))]));
     };
 
     var JSXChild = transformOnType({ JSXText: JSXText, JSXElement: JSXElement, JSXExpressionContainer: JSXExpressionContainer });
