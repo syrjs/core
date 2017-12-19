@@ -6,7 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/example.js'],
+    app: ['./samples/index.js'],
   },
 
   output: {
@@ -34,7 +34,7 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['env'],
-          plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
+          plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
         },
       },
       {
