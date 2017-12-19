@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17,7 +17,7 @@ exports.default = function (_ref) {
       if (transformer) {
         return transformer(node);
       }
-      throw new Error(node.type + " could not be transformed");
+      throw new Error(node.type + ' could not be transformed');
     };
   };
 
@@ -113,7 +113,7 @@ exports.default = function (_ref) {
     };
 
     var JSXNamespacedName = function JSXNamespacedName(node) {
-      return t.stringLiteral(node.namespace.name + ":" + node.name.name);
+      return t.stringLiteral(node.namespace.name + ':' + node.name.name);
     };
 
     var _JSXMemberExpression = transformOnType({
@@ -175,7 +175,7 @@ exports.default = function (_ref) {
               break;
             }
           default:
-            throw new Error(node.type + " cannot be used as a JSX attribute");
+            throw new Error(node.type + ' cannot be used as a JSX attribute');
         }
       });
 
@@ -238,30 +238,25 @@ exports.default = function (_ref) {
   };
 };
 
-var _isString = require("lodash/isString");
+var _isString = require('lodash/isString');
 
 var _isString2 = _interopRequireDefault(_isString);
 
-var _identity = require("lodash/identity");
+var _identity = require('lodash/identity');
 
 var _identity2 = _interopRequireDefault(_identity);
 
-var _ary = require("lodash/ary");
+var _ary = require('lodash/ary');
 
 var _ary2 = _interopRequireDefault(_ary);
 
-var _esutils = require("esutils");
+var _esutils = require('esutils');
 
 var _esutils2 = _interopRequireDefault(_esutils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-require("babel-core").transform("code", {
-  presets: ["es2015"]
-});
-
 
 var nameProperty = 'elementName';
 var attributesProperty = 'attributes';
