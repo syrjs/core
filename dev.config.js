@@ -34,7 +34,7 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['env'],
-          plugins: [['babel-plugin-transform-jsx', { useVariables: true }]],
+          plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
         },
       },
       {

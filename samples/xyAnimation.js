@@ -1,54 +1,59 @@
 import { Component, Render, View, Dimensions, Animated } from '../index';
 
 const styles = {
-  stage : {
+  stage: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height
+    height: Dimensions.get('window').height,
   },
-  slideAnimation : {
+  slideAnimation: {
     width: 100,
     height: 100,
     backgroundColor: '#aa00ff',
     top: 0,
     left: 0,
-  }
-}
+  },
+};
 class MyComponent extends Component {
   constructor() {
     super();
-    this.slideAnimation = new Animated.ValueXY({x: 0, y: 0});
-    styles.slideAnimation.transform = [ this.slideAnimation ];
+    this.slideAnimation = new Animated.ValueXY({ x: 0, y: 0 });
+    styles.slideAnimation.transform = [this.slideAnimation];
   }
   render() {
-    return <View style={styles.stage}>
-      <Animated.View style={styles.slideAnimation}></Animated.View>
-    </View>
+    return (
+      <View style={styles.stage}>
+        <Animated.View style={styles.slideAnimation} />
+      </View>
+    );
   }
-  slide(){
+  slide() {
     this.slideAnimation.y = 0;
     this.slideAnimation.x = 0;
     Animated.timing(this.slideAnimation, {
       toValue: { x: 0, y: Dimensions.get('window').height - 100 },
       duration: 1000,
-    }).start(()=>{
+    }).start(() => {
       // todo maintain this through state
       this.slideAnimation.y = Dimensions.get('window').height - 100;
       Animated.timing(this.slideAnimation, {
-        toValue: { x: Dimensions.get('window').width - 100, y: Dimensions.get('window').height - 100 },
+        toValue: {
+          x: Dimensions.get('window').width - 100,
+          y: Dimensions.get('window').height - 100,
+        },
         duration: 1000,
-      }).start(()=>{
+      }).start(() => {
         this.slideAnimation.y = Dimensions.get('window').height - 100;
         this.slideAnimation.x = Dimensions.get('window').width - 100;
         Animated.timing(this.slideAnimation, {
-          toValue: { x: Dimensions.get('window').width - 100, y: 0},
+          toValue: { x: Dimensions.get('window').width - 100, y: 0 },
           duration: 1000,
-        }).start(()=>{
+        }).start(() => {
           this.slideAnimation.y = 0;
           this.slideAnimation.x = Dimensions.get('window').width - 100;
           Animated.timing(this.slideAnimation, {
-            toValue: { x: 0, y: 0},
+            toValue: { x: 0, y: 0 },
             duration: 1000,
-          }).start(()=>{
+          }).start(() => {
             this.slide();
           });
         });
