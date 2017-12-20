@@ -13,6 +13,8 @@
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   UILabel *text;
+
+  // todo: flip to cgsize and introduce wrapping
   
   if(componentInstance != nil) {
     text = (UILabel*)componentInstance;
@@ -32,11 +34,18 @@
   
   NSString* fontName = [style valueForKey:@"fontFamily"];
   NSNumber* fontSize = [style valueForKey:@"fontSize"];
+  NSString* fontWeight = [style valueForKey:@"fontWeight"];
 
   if(fontName != nil && fontSize != nil) {
     [text  setFont:[UIFont fontWithName:fontName size:[fontSize doubleValue]]];
   } else if (fontSize != nil) {
     [text  setFont:[UIFont systemFontOfSize:[fontSize doubleValue]]];
+  }
+  
+  if(fontWeight != nil) {
+    if([fontWeight containsString:@"bold"]) {
+      [text setFont:[UIFont boldSystemFontOfSize:text.font.pointSize]];
+    }
   }
   
   NSString* alignment = [style valueForKey:@"textAlign"];

@@ -27,6 +27,8 @@
     if(y > farthestY) {
       farthestY = y;
       farthestHeight = [NSNumber numberWithDouble:[height doubleValue]+[farthestY doubleValue]];
+    } else {
+      farthestHeight = [NSNumber numberWithDouble:[height doubleValue]];
     }
   }
   

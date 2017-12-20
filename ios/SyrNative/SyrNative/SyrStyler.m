@@ -32,28 +32,60 @@
   }
   
   NSNumber* borderWidth = [style valueForKey:@"borderWidth"];
-  NSString* borderColor = [style valueForKey:@"backgroundColor"];
-  if(borderWidth != nil) {
-    CALayer *upperBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 6.0f);
-    [view.layer addSublayer:upperBorder];
-    
-    CALayer *rightBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 6.0f);
-    [view.layer addSublayer:upperBorder];
-    
-    CALayer *bottomBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 6.0f);
-    [view.layer addSublayer:upperBorder];
-    
-    CALayer *leftBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor whiteColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), 6.0f);
-    [view.layer addSublayer:upperBorder];
+  UIColor* borderColor = [self colorFromHash:[style valueForKey:@"borderColor"]];
+  
+	NSNumber* borderTopWidth = [style valueForKey:@"borderTopWidth"];
+  NSNumber* borderLeftWidth = [style valueForKey:@"borderLeftWidth"];
+  NSNumber* borderRightWidth = [style valueForKey:@"borderRightWidth"];
+  NSNumber* borderBottomWidth = [style valueForKey:@"borderBottomWidth"];
+  
+  if(borderTopWidth == nil) {
+    borderTopWidth = borderWidth;
   }
+  
+  if(borderLeftWidth == nil) {
+    borderLeftWidth = borderWidth;
+  }
+  
+  if(borderRightWidth == nil) {
+    borderRightWidth = borderWidth;
+  }
+  
+  if(borderBottomWidth == nil) {
+    borderBottomWidth = borderWidth;
+  }
+  
+  if(borderWidth != nil) {
+    
+    if(borderTopWidth > 0){
+      CALayer *upperBorder = [CALayer layer];
+      upperBorder.backgroundColor = [borderColor CGColor];
+      upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(view.frame), [borderTopWidth doubleValue]);
+      [view.layer addSublayer:upperBorder];
+    }
+    
+    if(borderRightWidth > 0) {
+      CALayer *rightBorder = [CALayer layer];
+      rightBorder.backgroundColor = [borderColor CGColor];
+      rightBorder.frame = CGRectMake(CGRectGetWidth(view.frame) - [borderRightWidth doubleValue], 0, [borderRightWidth doubleValue], CGRectGetHeight(view.frame));
+      [view.layer addSublayer:rightBorder];
+    }
+    
+    if(borderBottomWidth > 0) {
+      CALayer *bottomBorder = [CALayer layer];
+      bottomBorder.backgroundColor = [borderColor CGColor];
+      bottomBorder.frame = CGRectMake(0, 0, [borderBottomWidth doubleValue], CGRectGetHeight(view.frame));
+      [view.layer addSublayer:bottomBorder];
+    }
+    
+    if(borderLeftWidth > 0) {
+      CALayer *leftBorder = [CALayer layer];
+      leftBorder.backgroundColor = [borderColor CGColor];
+      leftBorder.frame = CGRectMake(0, CGRectGetHeight(view.frame) - [borderLeftWidth doubleValue], CGRectGetWidth(view.frame), [borderLeftWidth doubleValue]);
+      [view.layer addSublayer:leftBorder];
+    }
+  }
+  
   // overflow hidden
   view.layer.masksToBounds = true;
   return view;

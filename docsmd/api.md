@@ -108,6 +108,34 @@ onPress(){
 }
 ```
 
+### TouchableOpacity
+
+An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.
+
+```
+<TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
+  <Image
+    style={styles.icon}
+    source={{ uri: 'icon' }}
+  />
+</TouchableOpacity>
+```
+
+
+### ScrollView
+
+A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.
+
+```
+<ScrollView style={styles.scrollView}>
+  <View style={styles.view}></View>
+</ScrollView>
+```
+
+
+
+### StackView
+
 ## Styling a component
 <sup style="color:red;">watch out! this is under heavy development!</sup>
 

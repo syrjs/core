@@ -122,9 +122,19 @@
           }
         }
         
+      
         [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
         [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-        [view addSubview:nsComponent];
+        
+        // todo: move this out of the raster
+        SEL selector = NSSelectorFromString(@"addArrangedSubview:");
+        if ([view respondsToSelector:selector]) {
+          UIStackView* stackView = (UIStackView*) view;
+          [stackView addArrangedSubview:nsComponent];
+        } else {
+          [view addSubview:nsComponent];
+        }
+        
       } else {
         
         // render it's children to it's own parent

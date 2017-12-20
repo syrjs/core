@@ -8,6 +8,6 @@
 
 #import "SyrComponent.h"
 
-@interface SyrStackedView : SyrComponent
+@interface SyrStackView : SyrComponent
 
 @end

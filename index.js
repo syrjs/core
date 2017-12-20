@@ -12,6 +12,7 @@ import { Events , EventEmitter } from './lib/events';
 
 // syr components
 import { View } from './lib/view';
+import { StackView } from './lib/stackview';
 import { Button } from './lib/button';
 import { Text } from './lib/text';
 import { Image } from './lib/image';
@@ -43,6 +44,7 @@ export {
   Render,
   RasterManager,
   View,
+  StackView,
   Animated,
   Events,
   Button,
