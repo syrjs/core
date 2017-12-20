@@ -7,11 +7,7 @@
   <hr/>
 </div>
 
-### Developer Docs
-
-<a href="https://dmikey.github.io/syr">syr</a>
-
-### Some Info
+<a href="https://dmikey.github.io/syr">Developer Portal</a>
 
 Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.
 
