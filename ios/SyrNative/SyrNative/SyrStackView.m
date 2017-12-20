@@ -23,8 +23,9 @@
     stackView.axis = UILayoutConstraintAxisHorizontal;
   }
   
-  stackView.distribution = UIStackViewDistributionFillEqually;
-
+  stackView.distribution = UIStackViewDistributionFillProportionally;
+  stackView.spacing = 10.0;
+  
   stackView.frame = [SyrStyler styleFrame:style];
   return [SyrStyler styleView:stackView withStyle:style];
 }

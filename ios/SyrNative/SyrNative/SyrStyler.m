@@ -10,11 +10,36 @@
 
 @implementation SyrStyler
 
++(UIColor*) color:(NSString*) color {
+  if([color containsString:@"#"]) {
+    return [SyrStyler colorFromHash:color];
+  }
+  return [SyrStyler colorFromRGBA:color];
+}
+
 +(UIColor*) colorFromHash:(NSString*) color {
   color = [color stringByReplacingOccurrencesOfString:@"#" withString:@"0x"];
   unsigned colorInt = 0;
   [[NSScanner scannerWithString:color] scanHexInt:&colorInt];
   return UIColorFromRGB(colorInt);
+}
+
++(UIColor*) colorFromRGBA:(NSString*) color {
+  NSString* cleanColor = [color stringByReplacingOccurrencesOfString:@"rgba(" withString:@""];
+  cleanColor = [cleanColor stringByReplacingOccurrencesOfString:@"rgb(" withString:@""];
+  cleanColor = [cleanColor stringByReplacingOccurrencesOfString:@")" withString:@""];
+  
+  NSArray* colors = [cleanColor componentsSeparatedByString:@","];
+  NSNumber* red = [colors objectAtIndex:0];
+  NSNumber* green = [colors objectAtIndex:1];
+  NSNumber* blue = [colors objectAtIndex:2];
+  
+  NSNumber* alpha = [colors objectAtIndex:3];
+  if(alpha == nil) {
+    alpha = [NSNumber numberWithInt:1];
+  }
+  
+  return RGBA([red doubleValue], [green doubleValue], [blue doubleValue], [alpha doubleValue]);
 }
 
 +(UIView*) styleView: (UIView*) view withStyle: (NSDictionary*) style {
@@ -23,7 +48,7 @@
   if (backgroundColor == nil) {
     view.backgroundColor = [UIColor clearColor];
   } else {
-    view.backgroundColor = [self colorFromHash:backgroundColor];
+    view.backgroundColor = [self color:backgroundColor];
   }
   
   NSNumber* borderRadius = [style valueForKey:@"borderRadius"];
