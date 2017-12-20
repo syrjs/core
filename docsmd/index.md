@@ -1,33 +1,55 @@
-# ![](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png) Syr <sup style="font-size:14px">Dynamic UI Engine for Shared Systems (SDKs)</sup>
-### Preamble and Ramble
+# ![](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png) Syr
 
-Simply put, Syr is a light weight, reduced implementation of the React-Native pattern. Currently running on iOS only, Android and Web coming.
+Build Native and Web Experiences, using JavaScript. Build once, run everywhere.
 
-The target user of Syr, is a 3rd Party Experience developer, who is creating SDKs for other apps. That developer wants to be able to update those experiences without needing to require the SDK be reintegrated for simple changes, like business logic, and look and feel.
+### Features
 
-Using SyrSDK, apps are written in JavaScript. They are built using familiar tools like `webpack` and Syr uses a superset of the familiar `React-Native` Api.
+Syr is always growing rapidly. Here are some of the awesome features available today!
 
-Distribute Business Logic and UI updates over the wire with the built in bundle manager inside Syr.
+* Lightweight (under 300kb! on iOS)
+* Cross Platform (iOS, Android, Web)
+* Familiar API (React-Native)
+* Components (get started right away!)
+* JavaScript (no need to write native code!)
+* Portable! (Building an SDK? We've got you covered!)
 
+### Syr Apps are Native Apps!
 
-### Why Another Web to Native Framework JS Bridge Thing?
+Applications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.
 
-The story is as old as the hills. We couldn't find that one tool that fit right into our workflow. So we struck out - and made it. We couldn't find another dynamic JavaScript Engine that offered us any of the advantages we required, over React-Native. So we stuck with React-Native for a long time.
+```
+import { Component, Image, ScrollView, Text } from 'syr';
 
-Eventually, we decided we needed to strike out on our own, as React-Native started to fork from our ideals. React-Native required large amounts of overhead to integrate into existing projects - we're trying to ship SDKs, this just isn't working well.
+class myComponent extends Component {
+  render() {
+    return (
+      <ScrollView style={{width: 320, height:200}}>
+        <Image
+          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}
+          style={{width: 320, height:180}}
+        />
+        <Text style={{width: 320, height:300}}>
+          On iOS, a Syr ScrollView uses a native UIScrollView.
+          On Android, it uses a native ScrollView.
 
-We didn't want to write our SDK natively, and then distribute it to React-Native users. We wanted to write our SDK in React-Native and ship it without the React-Native dependency. Sound Familiar?
+          On iOS, a Syr Image uses a native UIImageView.
+          On Android, it uses a native ImageView.
 
-We tried to internalize the code base, but then quickly realized that if we wanted to keep up with changes to iOS(Android), then we had to accept that ReactNative's changes were indeed needed. Which meant internalizing every release going forward.
+          Syr wraps the fundamental native components, giving you
+          the performance of a native app, plus the clean design of JavaScript and a Familiar API.
+        </Text>
+      </ScrollView>
+    );
+  }
+}
+```
 
-It quickly became too much, and we took a breath. Surveyed the land, and decided that we needed to accomplish some goals.
+### How does this compare
 
-* Size. We're shipping SDKs, not Packed Apps. Our End Users are not looking at adding 5 megabytes simply for a payments experience they can throw in the native web browser.
+Syr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!
 
-* Portability. We've quickly learned that the surface area of React-Native was far too wide for us to approach gracefully. The addition of C libraries like Boost, really put the hurt on us since we didn't actually want to live inside a React Eco system. We want to be inside 3rd party; Swift and ObjectiveC and Java apps.
+We've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!
 
-* Look, Smell and Feel like React. React is a hot API right now. It feels familiar to those who use it, and because of it's popularity it's a pattern that is easy to get aquatinted with. We knew we needed to maintain a certain compatibility with it's predictable interface.
+### Playing Catchup
 
-These we're the goals in mind for `SyrSDK`. Thanks to the openness of the internet, we've been able to borrow details on implementation from places like `ReactNative` so we suspect you'll find it's in working order.
-
-Come help contribute! PULL REQUESTS WANTED!
+Syr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!

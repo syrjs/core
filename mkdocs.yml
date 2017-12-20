@@ -1,4 +1,4 @@
-site_name: SyrSDK
+site_name: Syr
 repo_url: "https://github.com/dmikey/syr"
 copyright: "Syr is licensed under the <a href='https://github.com/dmikey/syr/blob/master/LICENSE'>MIT license"
 theme: cinder
