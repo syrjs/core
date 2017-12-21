@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
     <link rel="shortcut icon" href="../img/favicon.ico">
 
-    <title>Api - SyrSDK</title>
+    <title>Api - Syr</title>
 
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
             
 
             <!-- Main title -->
-            <a class="navbar-brand" href="..">SyrSDK</a>
+            <a class="navbar-brand" href="..">Syr</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -71,13 +71,19 @@
                 
                 
                     <li >
-                        <a href="../Syr_0.0.1/">Syr 0.0.1</a>
+                        <a href="../Syr_1.0.0/">Syr 1.0.0</a>
                     </li>
                 
                 
                 
                     <li class="active">
                         <a href="./">Api</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../blog/">Blog</a>
                     </li>
                 
                 
@@ -104,12 +110,12 @@
                 </li>
                 
                     <li >
-                        <a rel="next" href="../Syr_0.0.1/">
+                        <a rel="next" href="../Syr_1.0.0/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../debugging/">
+                        <a rel="prev" href="../blog/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -149,6 +155,12 @@
                 <li class="third-level"><a href="#image">Image</a></li>
             
                 <li class="third-level"><a href="#button">Button</a></li>
+            
+                <li class="third-level"><a href="#touchableopacity">TouchableOpacity</a></li>
+            
+                <li class="third-level"><a href="#scrollview">ScrollView</a></li>
+            
+                <li class="third-level"><a href="#stackview">StackView</a></li>
             
         
             <li class="second-level"><a href="#styling-a-component">Styling a component</a></li>
@@ -281,6 +293,32 @@ onPress(){
 }
 </code></pre>
 
+<h3 id="touchableopacity">TouchableOpacity</h3>
+<p>An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.</p>
+<pre><code>&lt;TouchableOpacity onPress={()=&gt;this.handleBackPress()} style={styles.iconContainer}&gt;
+  &lt;Image
+    style={styles.icon}
+    source={{ uri: 'icon' }}
+  /&gt;
+&lt;/TouchableOpacity&gt;
+</code></pre>
+
+<h3 id="scrollview">ScrollView</h3>
+<p>A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.</p>
+<pre><code>&lt;ScrollView style={styles.scrollView}&gt;
+  &lt;View style={styles.view}&gt;&lt;/View&gt;
+&lt;/ScrollView&gt;
+</code></pre>
+
+<h3 id="stackview">StackView</h3>
+<p><sup style="color:red;">watch out! this is under heavy development!</sup>
+StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.</p>
+<pre><code> &lt;StackView
+            axis=&quot;vertical&quot;
+            style={style}&gt;
+ &lt;/StackView&gt;
+</code></pre>
+
 <h2 id="styling-a-component">Styling a component</h2>
 <p><sup style="color:red;">watch out! this is under heavy development!</sup></p>
 <p>Styling a component is much like basic <code>React-Native</code>. Create a JavaScript literal that describes the layout properties that you would like to affect.</p>
@@ -348,19 +386,28 @@ class MyComponent extends Component {
   constructor() {
     // runs when object is created in javascript
   }
+
   render() {
     // when what this class should return as it's rendering tree
   }
+
   componentDidMount() {
     // this fires when component has been added to the rendering surface
   }
+
   componentWillUnmount() {
     // fires when component is removed from rendering surface
   }
+
   componentWillUpdate() {
+    // fires immediately before rendering when new props or state are being received
+  }
+
+  shouldComponentUpdate() {
     // fires before component will update, you can return false
     // to prevent an update
   }
+
   componentDidUpdate() {
     // component updated, runs after the component state was changed
   }

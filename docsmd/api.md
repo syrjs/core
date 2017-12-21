@@ -132,9 +132,16 @@ A component that introduces scrolling around content inside. We calculate the ma
 </ScrollView>
 ```
 
-
-
 ### StackView
+<sup style="color:red;">watch out! this is under heavy development!</sup>
+StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.
+
+```
+ <StackView
+            axis="vertical"
+            style={style}>
+ </StackView>
+```
 
 ## Styling a component
 <sup style="color:red;">watch out! this is under heavy development!</sup>
