@@ -21,8 +21,9 @@
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   NSDictionary* state =	[[component objectForKey:@"instance"] objectForKey:@"state"];
   
-  if(state != nil) {
+  if([state objectForKey:@"x"] != nil || [state objectForKey:@"x"] != nil) {
     NSLog(@"hello");
+    [style setValue:[state objectForKey:@"x"] forKey:@"left"];
   }
   
   view.frame = [SyrStyler styleFrame:style];
