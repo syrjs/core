@@ -12,8 +12,19 @@
 @implementation SyrAnimatedView
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
-  UIView* view = [[UIView alloc] init];
+  UIView* view;
+  if(componentInstance != nil) {
+    view = (UIView*)componentInstance;
+  } else {
+    view = [[UIView alloc] init];
+  }
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* state =	[[component objectForKey:@"instance"] objectForKey:@"state"];
+  
+  if(state != nil) {
+    NSLog(@"hello");
+  }
+  
   view.frame = [SyrStyler styleFrame:style];
   
   return [SyrStyler styleView:view withStyle:style];
