@@ -12,7 +12,7 @@ You can use `webpack` to both build and serve the bundle for development. This a
 
 ### Fast Track, with a new App.
 
-If you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab `SyrCLI`. This tool will create a new `SyrNative` project for you. And provide the skeleton to get started tinkering right away.
+If you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab ![SyrCLI](https://github.com/MSiddharthReddy/syr-cli). This tool will create a new `SyrNative` project for you. And provide the skeleton to get started tinkering right away.
 
 ### An Existing Application
 
