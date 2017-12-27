@@ -28,3 +28,9 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 ### syr development example
 
 ![native_checkout_syr](https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif)
+
+### Contribs
+
+[<img alt="dmikey" src="https://avatars3.githubusercontent.com/u/328000?v=4&s=117 width=117">](https://github.com/dmikey) |[<img alt="MSiddharthReddy" src="https://avatars3.githubusercontent.com/u/17309023?v=4&s=117 width=117">](https://github.com/MSiddharthReddy) |[<img alt="pvenkatakrishnan" src="https://avatars2.githubusercontent.com/u/2745959?v=4&s=117 width=117">](https://github.com/pvenkatakrishnan) |[<img alt="gabrielcsapo" src="https://avatars0.githubusercontent.com/u/1854811?v=4&s=117 width=117">](https://github.com/gabrielcsapo) |
+:---:|:---:|:---:|:---:|
+[dmikey](https://github.com/dmikey)|[MSiddharthReddy](https://github.com/MSiddharthReddy)|[pvenkatakrishnan](https://github.com/pvenkatakrishnan)|[gabrielcsapo](https://github.com/gabrielcsapo)|
