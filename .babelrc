@@ -1,4 +1,4 @@
 {
-  "presets": [],
-  "plugins": []
+  presets: ['env'],
+  plugins: [['./libs/jsx.js', { useVariables: true }]]
 }
