@@ -36,7 +36,7 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: ['env'],
-          plugins: [['./libs/jsx.js', { useVariables: true }]],
+          plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
         },
       },
     ],
