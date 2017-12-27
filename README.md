@@ -8,6 +8,7 @@
 </div>
 
 [![Build Status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
+[![NPM Version](https://img.shields.io/npm/v/syr.svg)](https://npmjs.org/package/syr)
 
 <a href="https://dmikey.github.io/syr">Developer Portal</a>
 
