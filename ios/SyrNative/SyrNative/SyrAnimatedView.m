@@ -13,20 +13,21 @@
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view;
+  
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   if(componentInstance != nil) {
     view = (UIView*)componentInstance;
+    
   } else {
     view = [[UIView alloc] init];
+    view.frame = [SyrStyler styleFrame:style];
   }
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   NSDictionary* state =	[[component objectForKey:@"instance"] objectForKey:@"state"];
-  
-  if([state objectForKey:@"x"] != nil || [state objectForKey:@"x"] != nil) {
-    NSLog(@"hello");
-    [style setValue:[state objectForKey:@"x"] forKey:@"left"];
-  }
-  
-  view.frame = [SyrStyler styleFrame:style];
+//
+//  if([state objectForKey:@"x"] != nil || [state objectForKey:@"x"] != nil) {
+//    NSLog(@"hello");
+//    [style setValue:[state objectForKey:@"x"] forKey:@"left"]
+//  }
   
   return [SyrStyler styleView:view withStyle:style];
 }

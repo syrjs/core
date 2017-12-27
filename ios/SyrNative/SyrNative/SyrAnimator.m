@@ -85,6 +85,7 @@
   
   SyrXYAnimation* xyAnimation = [[SyrXYAnimation alloc] init];
   xyAnimation.delegate = delegate;
+
   [xyAnimation animate:component withAnimation:animation];
 }
 

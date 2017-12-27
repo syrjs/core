@@ -220,6 +220,7 @@
   
   if(animatedTargetGuid != nil) {
     // need a better way to get the animation dict from this event
+    
     [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"] withBridge:_bridge withTargetId:animatedTargetGuid];
   }
 }
