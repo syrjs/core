@@ -11,8 +11,7 @@
 [![NPM Version](https://img.shields.io/npm/v/syr.svg)](https://npmjs.org/package/syr)
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dmikey)
-
-<a href="https://dmikey.github.io/syr">Developer Portal</a>
+[![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://dmikey.github.io/syr)
 
 Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.
 
