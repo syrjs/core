@@ -7,7 +7,7 @@
   <hr/>
 </div>
 
-[![size][size-badge]][unpkg-dist] [![gzip size][gzip-badge]][unpkg-dist]
+[![Build Status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 
 <a href="https://dmikey.github.io/syr">Developer Portal</a>
 
