@@ -24,4 +24,4 @@ matrix:
       osx_image: xcode9.2
       xcode_project: ios/SyrNative/SyrNative.xcodeproj # path to your xcodeproj folder
       script:
-        - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=Simulator,name=iPhone,OS=10.0'
+        - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=Simulator,name=iPhone 8,OS=11.1'
