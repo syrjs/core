@@ -25,12 +25,10 @@ matrix:
       script:
         - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0.1'
     - language: android
+      before_install: cd android
       android:
         components:
           - build-tools-26.0.2
           - android-26
           - extra
-        before_script:
-          - cd android
-        script:
-          - ./gradlew build connectedCheck
+      script: ./gradlew build connectedCheck
