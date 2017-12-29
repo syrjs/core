@@ -1,9 +1,14 @@
 sudo: false
 
-language: node_js
+language:
+  - node_js
+  - objective-c
 
 node_js:
   - "8"
+
+xcode_project: ios/SyrNative/SyrNative.xcodeproj # path to your xcodeproj folder
+xcode_scheme: SyrNativeUnitTest
 
 cache:
   directories:
