@@ -21,4 +21,6 @@ matrix:
 
     - language: objective-c
       os: osx
-      osx_image: xcode8.3
+      osx_image: xcode9.2
+      xcode_project: ios/SyrNative/SyrNative.xcodeproj # path to your xcodeproj folder
+      xcode_scheme: SyrNativeUnitTests
