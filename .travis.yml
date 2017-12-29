@@ -24,3 +24,9 @@ matrix:
       xcode_project: ios/SyrNative/SyrNative.xcodeproj
       script:
         - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0.1'
+    - language: android
+      android:
+        components:
+          - build-tools-26.0.2
+          - android-26
+          - extra
