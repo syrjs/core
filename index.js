@@ -29,7 +29,7 @@ import { DOMRaster } from './lib/rasters/dom';
 import { WKRaster } from './lib/rasters/wkwebview';
 
 // detecting rendering bridge
-if (window.SyrBridge || (window.webkit && window.webkit.messageHandlers)) {
+if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
   RasterManager.setRaster(WKRaster);
 }  else {
   RasterManager.setRaster(DOMRaster);

@@ -1,6 +1,6 @@
 {
   "name": "syr",
-  "version": "1.2.1",
+  "version": "1.3.0-preview",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
@@ -8,8 +8,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
-    "serve": "webpack-dev-server --config dev.config.js --content-base build/",
-    "prepublish": "npm test; npm run build"
+    "serve": "webpack-dev-server --config dev.config.js --content-base build/"
   },
   "repository": {
     "type": "git",

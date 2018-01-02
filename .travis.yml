@@ -1,38 +1,44 @@
-sudo: false
-
-language: node_js
-
-node_js:
-  - "8"
-
-cache:
-  directories:
-    - node_modules
-
-# Make chrome browser available for testing
-before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
-install:
-  - npm install
-
-script:
-  - npm run test
-  - npm run build
-
-# Necessary to compile native modules for io.js v3 or Node.js v4
-env:
-  - CXX=g++-4.8
-
-after_success:
-  - npm run coverage
-
-# Necessary to compile native modules for io.js v3 or Node.js v4
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+matrix:
+  include:
+    - language: node_js
+      node_js: "8"
+      cache:
+        directories:
+          - node_modules
+      before_install:
+          - export CHROME_BIN=chromium-browser
+          - export DISPLAY=:99.0
+          - sh -e /etc/init.d/xvfb start
+      install:
+        - npm install
+      script:
+        - npm run test
+        - npm run build
+      env:
+        - CXX=g++-4.8
+      after_success:
+        - npm run coverage
+    - language: objective-c
+      os: osx
+      osx_image: xcode9.2
+      xcode_project: ios/SyrNative/SyrNative.xcodeproj
+      script:
+        - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0.1'
+    # - language: android
+    #   before_install: cd android
+    #   android:
+    #     components:
+    #       - platform-tools
+    #       - tools
+    #       - build-tools-24.0.2
+    #       - android-22
+    #       - android-24
+    #       - sys-img-armeabi-v7a-android-22
+    #       - extra-android-m2repository
+    #   before_script:
+    #     # Create and start emulator
+    #     - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+    #     - emulator -avd test -no-skin -no-audio -no-window &
+    #     - android-wait-for-emulator
+    #     - adb shell input keyevent 82 &
+    #   script: ./gradlew build connectedCheck
