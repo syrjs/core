@@ -4,4 +4,4 @@ copyright: "Syr is licensed under the <a href='https://github.com/dmikey/syr/blo
 theme: cinder
 site_dir: docs
 docs_dir: docsmd
-google_analytics: ['UA-111449876-1', 'dmikey.github.io/syr']
+google_analytics: ['UA-111449876-1', 'auto']
