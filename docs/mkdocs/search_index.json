@@ -32,13 +32,13 @@
         }, 
         {
             "location": "/release/", 
-            "text": "Milestone release : 1.0.0\n\n\nChange log will start to feature notes going forward.", 
+            "text": "1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
             "title": "Syr 1.3.1-alpha"
         }, 
         {
-            "location": "/release/#milestone-release-100", 
-            "text": "Change log will start to feature notes going forward.", 
-            "title": "Milestone release : 1.0.0"
+            "location": "/release/#131-alpha", 
+            "text": "Source  Change log will start to feature notes going forward.", 
+            "title": "1.3.1-alpha"
         }, 
         {
             "location": "/api/", 
