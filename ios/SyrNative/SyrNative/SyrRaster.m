@@ -98,6 +98,7 @@
 -(void) build: (NSDictionary*) astDict {
   NSObject* component = [self createComponent:astDict];
   if(component != nil) {
+    NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
     [_rootView addSubview:component];
     [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
@@ -109,7 +110,10 @@
 -(void) buildChildren:(NSDictionary*) component withViewParent: (UIView*) view  {
   if([component isKindOfClass:[NSDictionary class]]) {
     NSArray* children = [component objectForKey:@"children"];
+    
     for(id child in children) {
+      
+      NSLog(@"building %@", [child valueForKey:@"elementName"]);
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
       
@@ -117,9 +121,8 @@
       // should do a strict check if it is derived from component
       if(nsComponent != nil) {
 
-        if([subchildren count] > 0){
-          UIView* parentView = (UIView*)nsComponent;
-          [self buildChildren:child withViewParent:parentView];
+        if(subchildren != [NSNull null] && [subchildren count] > 0){
+          [self buildChildren:child withViewParent:nsComponent];
         }
         
         [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
