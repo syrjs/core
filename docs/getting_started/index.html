@@ -162,11 +162,7 @@
             <li class="second-level"><a href="#setting-up-a-syr-javascript-project">Setting up a Syr JavaScript Project</a></li>
             
         
-            <li class="second-level"><a href="#setting-up-an-ios-application">Setting up an iOS Application</a></li>
-            
-                <li class="third-level"><a href="#fast-track-with-a-new-app">Fast Track, with a new App.</a></li>
-            
-                <li class="third-level"><a href="#an-existing-application">An Existing Application</a></li>
+            <li class="second-level"><a href="#cocoapods">Cocoapods</a></li>
             
         
     
@@ -175,18 +171,25 @@
         <div class="col-md-9" role="main">
 
 <h1 id="getting-started-building">Getting Started Building</h1>
+<p>Starting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.</p>
 <h2 id="setting-up-a-syr-javascript-project">Setting up a Syr JavaScript Project</h2>
-<p>The base of a Syr project, is the JavaScript module that you intend to run inside the native environment. Using this JavaScript project, you will be able to setup an iOS or Android application, and it will be able to load the JavaScript.</p>
-<p>You can use <code>webpack</code> to both build and serve the bundle for development. This allows things like Hot Reloading, so you don't need to refresh your app while you build.</p>
-<h2 id="setting-up-an-ios-application">Setting up an iOS Application</h2>
-<h3 id="fast-track-with-a-new-app">Fast Track, with a new App.</h3>
-<p>If you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab <a href="https://github.com/MSiddharthReddy/syr-cli">SyrCLI</a>. This tool will create a new <code>SyrNative</code> project for you. And provide the skeleton to get started tinkering right away.</p>
-<h3 id="an-existing-application">An Existing Application</h3>
-<p>We've made sure to put labor into making the SDK as portable as possible. While the version of Syr is still early, we have decided to directly stick to Native versioning tools. What this means for iOS is that we ship a <code>.framework</code> file with ObjectiveC binaries. (source is always available here on github)</p>
-<p>This <code>.framework</code> will let you quickly and rapidly get started no matter what existing project setup you have. A <code>.framework</code> file is allowed to have multiple versions of a binary embedded, we hope this helps with easy of upgrades through a more portable versioning structure within the same distribution.</p>
-<p>Download PATH_TO_FRAMEWORK_HERE</p>
-<p>Include with your XCode project.</p>
-<p>Start a new Syr JavaScript project.</p></div>
+<p>Grab the <code>Syr CLI</code> tool to get started quickly. This tool currently requires <code>NPM 8</code> or higher.</p>
+<pre><code class="bash">npm install -g syr-cli
+</code></pre>
+
+<p>Use Syr CLI to Instantly Scaffold a Sample project to start with.</p>
+<pre><code class="bash">syr init ProjectName
+</code></pre>
+
+<p>Syr will generate a base at <code>src/index/js</code>. To launch this file, simply run</p>
+<pre><code class="bash">syr watch
+</code></pre>
+
+<p>This starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at <code>ios/SyrNativeSample.xcodeproj</code> and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.</p>
+<h2 id="cocoapods">Cocoapods</h2>
+<p>If you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.</p>
+<pre><code>pod 'Syr', :git =&gt; 'https://github.com/dmikey/syr.git'
+</code></pre></div>
         
     </div>
 

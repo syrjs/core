@@ -1,27 +1,34 @@
 # Getting Started Building
 
+Starting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.
+
 ## Setting up a Syr JavaScript Project
 
-The base of a Syr project, is the JavaScript module that you intend to run inside the native environment. Using this JavaScript project, you will be able to setup an iOS or Android application, and it will be able to load the JavaScript.
+Grab the `Syr CLI` tool to get started quickly. This tool currently requires `NPM 8` or higher.
 
-You can use `webpack` to both build and serve the bundle for development. This allows things like Hot Reloading, so you don't need to refresh your app while you build.
+```bash
+npm install -g syr-cli
+```
+
+Use Syr CLI to Instantly Scaffold a Sample project to start with.
+
+```bash
+syr init ProjectName
+```
+
+Syr will generate a base at `src/index/js`. To launch this file, simply run
+
+```bash
+syr watch
+```
+
+This starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at `ios/SyrNativeSample.xcodeproj` and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.
 
 
+## Cocoapods
 
-## Setting up an iOS Application
+If you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.
 
-### Fast Track, with a new App.
-
-If you just want to get started with figuring out how Syr can come together for you, and want to start writing some JavaScript that shows up and does stuff inside a Simulator. Please grab [SyrCLI](https://github.com/MSiddharthReddy/syr-cli). This tool will create a new `SyrNative` project for you. And provide the skeleton to get started tinkering right away.
-
-### An Existing Application
-
-We've made sure to put labor into making the SDK as portable as possible. While the version of Syr is still early, we have decided to directly stick to Native versioning tools. What this means for iOS is that we ship a `.framework` file with ObjectiveC binaries. (source is always available here on github)
-
-This `.framework` will let you quickly and rapidly get started no matter what existing project setup you have. A `.framework` file is allowed to have multiple versions of a binary embedded, we hope this helps with easy of upgrades through a more portable versioning structure within the same distribution.
-
-Download PATH_TO_FRAMEWORK_HERE
-
-Include with your XCode project.
-
-Start a new Syr JavaScript project.
+```
+pod 'Syr', :git => 'https://github.com/dmikey/syr.git'
+```
