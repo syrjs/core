@@ -17,10 +17,12 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
   
-  SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@""];
+  // init rootView
+  SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@"" initialProperties:@{}];
   rootView.frame = self.view.frame;
+  
+  // attach rootView
   [self.view addSubview:rootView];
 }
 
