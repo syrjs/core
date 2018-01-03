@@ -20,5 +20,3 @@ describe('Component', function() {
     });
   });
 });
-
-
