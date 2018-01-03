@@ -157,7 +157,7 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="first-level active"><a href="#getting-started-building">Getting Started Building</a></li>
+        <li class="first-level active"><a href="#getting-started">Getting Started</a></li>
         
             <li class="second-level"><a href="#setting-up-a-syr-javascript-project">Setting up a Syr JavaScript Project</a></li>
             
@@ -170,8 +170,8 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="getting-started-building">Getting Started Building</h1>
-<p>Starting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.</p>
+<h1 id="getting-started">Getting Started</h1>
+<p>Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.</p>
 <h2 id="setting-up-a-syr-javascript-project">Setting up a Syr JavaScript Project</h2>
 <p>Grab the <code>Syr CLI</code> tool to get started quickly. This tool currently requires <code>NPM 8</code> or higher.</p>
 <pre><code class="bash">npm install -g syr-cli
@@ -181,11 +181,11 @@
 <pre><code class="bash">syr init ProjectName
 </code></pre>
 
-<p>Syr will generate a base at <code>src/index/js</code>. To launch this file, simply run</p>
+<p>Syr will generate a base at <code>src/index/js</code>. To launch this file, simply run the following command from the base of your project.</p>
 <pre><code class="bash">syr watch
 </code></pre>
 
-<p>This starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at <code>ios/SyrNativeSample.xcodeproj</code> and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.</p>
+<p>This command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at <code>ios/SyrNativeSample.xcodeproj</code> and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.</p>
 <h2 id="cocoapods">Cocoapods</h2>
 <p>If you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.</p>
 <pre><code>pod 'Syr', :git =&gt; 'https://github.com/dmikey/syr.git'

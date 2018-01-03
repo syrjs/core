@@ -217,17 +217,17 @@
         }, 
         {
             "location": "/getting_started/", 
-            "text": "Getting Started Building\n\n\nStarting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.\n\n\nSetting up a Syr JavaScript Project\n\n\nGrab the \nSyr CLI\n tool to get started quickly. This tool currently requires \nNPM 8\n or higher.\n\n\nnpm install -g syr-cli\n\n\n\n\nUse Syr CLI to Instantly Scaffold a Sample project to start with.\n\n\nsyr init ProjectName\n\n\n\n\nSyr will generate a base at \nsrc/index/js\n. To launch this file, simply run\n\n\nsyr watch\n\n\n\n\nThis starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at \nios/SyrNativeSample.xcodeproj\n and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.\n\n\nCocoapods\n\n\nIf you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.\n\n\npod 'Syr', :git =\n 'https://github.com/dmikey/syr.git'", 
+            "text": "Getting Started\n\n\nOur CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.\n\n\nSetting up a Syr JavaScript Project\n\n\nGrab the \nSyr CLI\n tool to get started quickly. This tool currently requires \nNPM 8\n or higher.\n\n\nnpm install -g syr-cli\n\n\n\n\nUse Syr CLI to Instantly Scaffold a Sample project to start with.\n\n\nsyr init ProjectName\n\n\n\n\nSyr will generate a base at \nsrc/index/js\n. To launch this file, simply run the following command from the base of your project.\n\n\nsyr watch\n\n\n\n\nThis command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at \nios/SyrNativeSample.xcodeproj\n and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.\n\n\nCocoapods\n\n\nIf you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.\n\n\npod 'Syr', :git =\n 'https://github.com/dmikey/syr.git'", 
             "title": "Getting started"
         }, 
         {
-            "location": "/getting_started/#getting-started-building", 
-            "text": "Starting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.", 
-            "title": "Getting Started Building"
+            "location": "/getting_started/#getting-started", 
+            "text": "Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.", 
+            "title": "Getting Started"
         }, 
         {
             "location": "/getting_started/#setting-up-a-syr-javascript-project", 
-            "text": "Grab the  Syr CLI  tool to get started quickly. This tool currently requires  NPM 8  or higher.  npm install -g syr-cli  Use Syr CLI to Instantly Scaffold a Sample project to start with.  syr init ProjectName  Syr will generate a base at  src/index/js . To launch this file, simply run  syr watch  This starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at  ios/SyrNativeSample.xcodeproj  and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.", 
+            "text": "Grab the  Syr CLI  tool to get started quickly. This tool currently requires  NPM 8  or higher.  npm install -g syr-cli  Use Syr CLI to Instantly Scaffold a Sample project to start with.  syr init ProjectName  Syr will generate a base at  src/index/js . To launch this file, simply run the following command from the base of your project.  syr watch  This command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at  ios/SyrNativeSample.xcodeproj  and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.", 
             "title": "Setting up a Syr JavaScript Project"
         }, 
         {

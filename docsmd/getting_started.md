@@ -1,6 +1,6 @@
-# Getting Started Building
+# Getting Started
 
-Starting with Syr couldn't be easier. Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.
+Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.
 
 ## Setting up a Syr JavaScript Project
 
@@ -16,13 +16,13 @@ Use Syr CLI to Instantly Scaffold a Sample project to start with.
 syr init ProjectName
 ```
 
-Syr will generate a base at `src/index/js`. To launch this file, simply run
+Syr will generate a base at `src/index/js`. To launch this file, simply run the following command from the base of your project.
 
 ```bash
 syr watch
 ```
 
-This starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at `ios/SyrNativeSample.xcodeproj` and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.
+This command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at `ios/SyrNativeSample.xcodeproj` and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.
 
 
 ## Cocoapods
