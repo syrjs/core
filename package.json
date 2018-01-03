@@ -42,5 +42,8 @@
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "jsdom": "^11.5.1"
   }
 }
