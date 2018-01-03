@@ -30,6 +30,7 @@
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.29.0",
     "html-webpack-template": "^6.0.1",
+    "jsdom": "^11.5.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.4.2",
     "mocha-coveralls-reporter": "0.0.5",
@@ -42,8 +43,5 @@
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.4.5"
-  },
-  "dependencies": {
-    "jsdom": "^11.5.1"
   }
 }
