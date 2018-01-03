@@ -13,17 +13,17 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dmikey)
 [![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://dmikey.github.io/syr)
 
-Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.
+Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! 
 
-We want you to be able to package Syr with your Native SDK, and be able to drive dynamic experiences with it.
+The goal to provide, Native SDK developers the benefits of the React Native API, with a much smaller footprint and reduced complexity.
+
+Easily package Syr with your Native SDKs and Apps and drive dynamic updatable experiences with JavaScript.
 
 Syr uses a React like API with a custom JS API bridge, that allows an SDK developer to bundle an updatable experience through Apple's iTunes terms.
 
-A carefully crafted SDK can be enhanced or tested without needing to deploy multiple binaries.
+### Read the Docs
 
-Syr uses a React like API with a custom JS-API bridge, that allows any developer to bundle an updatable experience.
-
-The Native Libraries, are crafted that you can use a simple 'Find and Replace' method to sandbox them off from the rest of the world. We've gone out of our way to ensure portability for SDK developers, who want to the benefits of a dynamic script based UI, and the benefits of native integration.
+https://dmikey.github.io/syr/api
 
 ### syr development example
 
