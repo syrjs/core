@@ -27,8 +27,13 @@
         }, 
         {
             "location": "/release/", 
-            "text": "1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
-            "title": "1.3.1-alpha"
+            "text": "1.3.2-alpha\n\n\nSource\n\n\n\n\nFixes bad null check during child construction\n\n\n\n\n1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
+            "title": "1.3.2-alpha"
+        }, 
+        {
+            "location": "/release/#132-alpha", 
+            "text": "Source   Fixes bad null check during child construction", 
+            "title": "1.3.2-alpha"
         }, 
         {
             "location": "/release/#131-alpha", 

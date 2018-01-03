@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Syr'
-  s.version          = '1.3.1-alpha'
+  s.version          = '1.3.2-alpha'
   s.summary          = 'minimally obtrusive reactisque view engine, aimed at native developers'
 
 # This description is used to generate tags and improve search results.
