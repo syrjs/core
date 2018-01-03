@@ -116,13 +116,12 @@
       // component is not of type available
       // should do a strict check if it is derived from component
       if(nsComponent != nil) {
-        if(subchildren != [NSNull null]) {
-          if(subchildren.count > 0){
-            [self buildChildren:child withViewParent:nsComponent];
-          }
+
+        if([subchildren count] > 0){
+          UIView* parentView = (UIView*)nsComponent;
+          [self buildChildren:child withViewParent:parentView];
         }
         
-      
         [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
         [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
         
