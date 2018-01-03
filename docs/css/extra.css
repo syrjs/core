@@ -1,10 +1,12 @@
 body.homepage .container .col-md-3 {
   display: none;
 }
-
 @media(min-width: 992px) {
   body.homepage .container .col-md-9 {
     width: 100%;
   }
+}
+body {
+  
 }
 
