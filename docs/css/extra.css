@@ -1,12 +1,14 @@
 body.homepage .container .col-md-3 {
   display: none;
 }
+
+.nav.navbar-nav li:first-child {
+  display: none;
+}
+
 @media(min-width: 992px) {
   body.homepage .container .col-md-9 {
     width: 100%;
   }
-}
-body {
-  
 }
 
