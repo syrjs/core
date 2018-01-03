@@ -1,6 +1,9 @@
+import { Component, Render, RasterManager, TouchableOpacity } from '../index';
+const assert = require('assert');
+
 //including JSDOM to test browser rendering.
-require(./testsetup).testDom();
-const captureStream = require(./testsetup).captureStream;
+require('./testsetup').testDom();
+const captureStream = require('./testsetup').captureStream;
 
 describe('TouchableOpacity', function() {
   class TouchableTest extends Component {
