@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Syr\n\n\nBuild Native and Web Experiences, using JavaScript. Build once, run everywhere.\n\n\n\n\n\n\n\n\nFeatures\n\n\nSyr is always growing rapidly. Here are some of the awesome features available today!\n\n\n\n\nLightweight (under 300kb! on iOS)\n\n\nCross Platform (iOS, Android, Web)\n\n\nFamiliar API (React-Native)\n\n\nComponents (get started right away!)\n\n\nJavaScript (no need to write native code!)\n\n\nPortable! (Building an SDK? We've got you covered!)\n\n\n\n\nSyr Apps are Native Apps!\n\n\nApplications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.\n\n\nimport { Component, Image, ScrollView, Text } from 'syr';\n\nclass myComponent extends Component {\n  render() {\n    return (\n      \nScrollView style={{width: 320, height:200}}\n\n        \nImage\n          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}\n          style={{width: 320, height:180}}\n        /\n\n        \nText style={{width: 320, height:300}}\n\n          On iOS, a Syr ScrollView uses a native UIScrollView.\n          On Android, it uses a native ScrollView.\n\n          On iOS, a Syr Image uses a native UIImageView.\n          On Android, it uses a native ImageView.\n\n          Syr wraps the fundamental native components, giving you\n          the performance of a native app, plus the clean design of JavaScript and a Familiar API.\n        \n/Text\n\n      \n/ScrollView\n\n    );\n  }\n}\n\n\n\n\nHow does this compare\n\n\nSyr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!\n\n\nWe've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!\n\n\nPlaying Catchup\n\n\nSyr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!", 
+            "text": "Syr\n\n\n\nNative App Experiences using JavaScript. Build once, run everywhere, even on Web.\n\n\n\n\n\n\n\n\n\n\n\n\nFeatures\n\n\nSyr is always growing rapidly. Here are some of the awesome features available today!\n\n\n\n\nLightweight (under 300kb! on iOS)\n\n\nCross Platform (iOS, Android, Web)\n\n\nFamiliar API (React-Native)\n\n\nComponents (get started right away!)\n\n\nJavaScript (no need to write native code!)\n\n\nPortable! (Building an SDK? We've got you covered!)\n\n\n\n\nSyr Apps are Native Apps!\n\n\nApplications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.\n\n\nimport { Component, Image, ScrollView, Text } from 'syr';\n\nclass myComponent extends Component {\n  render() {\n    return (\n      \nScrollView style={{width: 320, height:200}}\n\n        \nImage\n          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}\n          style={{width: 320, height:180}}\n        /\n\n        \nText style={{width: 320, height:300}}\n\n          On iOS, a Syr ScrollView uses a native UIScrollView.\n          On Android, it uses a native ScrollView.\n\n          On iOS, a Syr Image uses a native UIImageView.\n          On Android, it uses a native ImageView.\n\n          Syr wraps the fundamental native components, giving you\n          the performance of a native app, plus the clean design of JavaScript and a Familiar API.\n        \n/Text\n\n      \n/ScrollView\n\n    );\n  }\n}\n\n\n\n\nHow does this compare\n\n\nSyr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!\n\n\nWe've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!\n\n\nPlaying Catchup\n\n\nSyr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!", 
             "title": "Home"
         }, 
         {
             "location": "/#syr", 
-            "text": "Build Native and Web Experiences, using JavaScript. Build once, run everywhere.", 
+            "text": "Native App Experiences using JavaScript. Build once, run everywhere, even on Web.", 
             "title": "Syr"
         }, 
         {
@@ -33,7 +33,7 @@
         {
             "location": "/release/", 
             "text": "Milestone release : 1.0.0\n\n\nChange log will start to feature notes going forward.", 
-            "title": "Syr 1.3.1-preview"
+            "title": "Syr 1.3.1-alpha"
         }, 
         {
             "location": "/release/#milestone-release-100", 
@@ -199,6 +199,46 @@
             "location": "/getting_started/#cocoapods", 
             "text": "If you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.  pod 'Syr', :git =  'https://github.com/dmikey/syr.git'", 
             "title": "Cocoapods"
+        }, 
+        {
+            "location": "/debugging/", 
+            "text": "Debugging Syr Applications\n\n\nIn addition to using native platform debugging tools, like XCode, and Apple Instruments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.\n\n\nOpening Safari Developer tools while a Syr App is running.\n\n\n\n\nDebug Pause with Breakpoints and Console.\n\n\n\n\nTimelines, Memory Usage, Object Allocation", 
+            "title": "Debugging"
+        }, 
+        {
+            "location": "/debugging/#debugging-syr-applications", 
+            "text": "In addition to using native platform debugging tools, like XCode, and Apple Instruments. We also use Safari Developer tools to debug on iOS, and Chrome on Android.", 
+            "title": "Debugging Syr Applications"
+        }, 
+        {
+            "location": "/debugging/#opening-safari-developer-tools-while-a-syr-app-is-running", 
+            "text": "", 
+            "title": "Opening Safari Developer tools while a Syr App is running."
+        }, 
+        {
+            "location": "/debugging/#debug-pause-with-breakpoints-and-console", 
+            "text": "", 
+            "title": "Debug Pause with Breakpoints and Console."
+        }, 
+        {
+            "location": "/debugging/#timelines-memory-usage-object-allocation", 
+            "text": "", 
+            "title": "Timelines, Memory Usage, Object Allocation"
+        }, 
+        {
+            "location": "/community/", 
+            "text": "Chat\n\n\nRealtime On \nGitter\n\n\nSocial Media\n\n\nMention us @\nSyrSDK", 
+            "title": "Community"
+        }, 
+        {
+            "location": "/community/#chat", 
+            "text": "Realtime On  Gitter", 
+            "title": "Chat"
+        }, 
+        {
+            "location": "/community/#social-media", 
+            "text": "Mention us @ SyrSDK", 
+            "title": "Social Media"
         }, 
         {
             "location": "/blog/", 

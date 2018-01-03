@@ -1,11 +1,14 @@
 # ![](https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png) Syr
 
-Build Native and Web Experiences, using JavaScript. Build once, run everywhere.
+<div style="float:right">
+Native App Experiences using JavaScript. Build once, run everywhere, even on Web.
+</div>
 
 [![Build Status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
 [![NPM Version](https://img.shields.io/npm/v/syr.svg)](https://npmjs.org/package/syr)
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 
+<br/>
 ### Features
 
 Syr is always growing rapidly. Here are some of the awesome features available today!

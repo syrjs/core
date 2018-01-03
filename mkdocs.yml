@@ -7,9 +7,14 @@ docs_dir: docsmd
 google_analytics: ['UA-111449876-1', 'auto']
 copyright: Copyright Derek M. Anderson , Licensed under MIT
 include_next_prev: false
+extra_css:
+    - css/extra.css
 pages:
     - Home: index.md
-    - Syr 1.3.1-preview: release.md
-    - API: api.md
-    - Getting Started: getting_started.md
+    - Syr 1.3.1-alpha: release.md
+    - Docs:
+      - API: api.md
+      - Getting Started: getting_started.md
+      - Debugging: debugging.md
+    - Community: community.md
     - Blog: blog.md

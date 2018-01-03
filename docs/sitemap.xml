@@ -18,16 +18,30 @@
     
 
     
+        
     <url>
      <loc>/api/</loc>
      <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
+    <url>
+     <loc>/getting_started/</loc>
+     <lastmod>2018-01-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/debugging/</loc>
+     <lastmod>2018-01-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
     <url>
-     <loc>/getting_started/</loc>
+     <loc>/community/</loc>
      <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
