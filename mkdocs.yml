@@ -5,4 +5,4 @@ theme: cinder
 site_dir: docs
 docs_dir: docsmd
 google_analytics: ['UA-111449876-1', 'auto']
-copyright: Derek M. Anderson
+copyright: Copyright Derek M. Anderson , Licensed under MIT
