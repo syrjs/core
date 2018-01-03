@@ -2,17 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Syr\n\n\n\nNative App Experiences using JavaScript. Build once, run everywhere, even on Web.\n\n\n\n\n\n\n\n\n\n\n\n\nFeatures\n\n\nSyr is always growing rapidly. Here are some of the awesome features available today!\n\n\n\n\nLightweight (under 300kb! on iOS)\n\n\nCross Platform (iOS, Android, Web)\n\n\nFamiliar API (React-Native)\n\n\nComponents (get started right away!)\n\n\nJavaScript (no need to write native code!)\n\n\nPortable! (Building an SDK? We've got you covered!)\n\n\n\n\nSyr Apps are Native Apps!\n\n\nApplications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.\n\n\nimport { Component, Image, ScrollView, Text } from 'syr';\n\nclass myComponent extends Component {\n  render() {\n    return (\n      \nScrollView style={{width: 320, height:200}}\n\n        \nImage\n          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}\n          style={{width: 320, height:180}}\n        /\n\n        \nText style={{width: 320, height:300}}\n\n          On iOS, a Syr ScrollView uses a native UIScrollView.\n          On Android, it uses a native ScrollView.\n\n          On iOS, a Syr Image uses a native UIImageView.\n          On Android, it uses a native ImageView.\n\n          Syr wraps the fundamental native components, giving you\n          the performance of a native app, plus the clean design of JavaScript and a Familiar API.\n        \n/Text\n\n      \n/ScrollView\n\n    );\n  }\n}\n\n\n\n\nHow does this compare\n\n\nSyr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!\n\n\nWe've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!\n\n\nPlaying Catchup\n\n\nSyr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!", 
+            "text": "Features\n\n\n\n\nLightweight (under 300kb! on iOS)\n\n\nCross Platform (iOS, Android, Web)\n\n\nFamiliar API (React-Native)\n\n\nComponents (get started right away!)\n\n\nJavaScript (no need to write native code!)\n\n\nPortable! (Building an SDK? We've got you covered!)\n\n\n\n\nSyr Apps are Native Apps!\n\n\nApplications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.\n\n\nimport { Component, Image, ScrollView, Text } from 'syr';\n\nclass myComponent extends Component {\n  render() {\n    return (\n      \nScrollView style={{width: 320, height:200}}\n\n        \nImage\n          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}\n          style={{width: 320, height:180}}\n        /\n\n        \nText style={{width: 320, height:300}}\n\n          On iOS, a Syr ScrollView uses a native UIScrollView.\n          On Android, it uses a native ScrollView.\n\n          On iOS, a Syr Image uses a native UIImageView.\n          On Android, it uses a native ImageView.\n\n          Syr wraps the fundamental native components, giving you\n          the performance of a native app, plus the clean design of JavaScript and a Familiar API.\n        \n/Text\n\n      \n/ScrollView\n\n    );\n  }\n}\n\n\n\n\nHow does this compare\n\n\nSyr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!\n\n\nWe've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!\n\n\nPlaying Catchup\n\n\nSyr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!", 
             "title": "Home"
         }, 
         {
-            "location": "/#syr", 
-            "text": "Native App Experiences using JavaScript. Build once, run everywhere, even on Web.", 
-            "title": "Syr"
-        }, 
-        {
             "location": "/#features", 
-            "text": "Syr is always growing rapidly. Here are some of the awesome features available today!   Lightweight (under 300kb! on iOS)  Cross Platform (iOS, Android, Web)  Familiar API (React-Native)  Components (get started right away!)  JavaScript (no need to write native code!)  Portable! (Building an SDK? We've got you covered!)", 
+            "text": "Lightweight (under 300kb! on iOS)  Cross Platform (iOS, Android, Web)  Familiar API (React-Native)  Components (get started right away!)  JavaScript (no need to write native code!)  Portable! (Building an SDK? We've got you covered!)", 
             "title": "Features"
         }, 
         {
@@ -33,7 +28,7 @@
         {
             "location": "/release/", 
             "text": "1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
-            "title": "Syr 1.3.1-alpha"
+            "title": "1.3.1-alpha"
         }, 
         {
             "location": "/release/#131-alpha", 
