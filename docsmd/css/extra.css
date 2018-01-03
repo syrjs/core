@@ -2,7 +2,7 @@ body.homepage .container .col-md-3 {
   display: none;
 }
 
-.nav.navbar-nav li:first-child {
+.nav.navbar-nav > li:first-child {
   display: none;
 }
 
