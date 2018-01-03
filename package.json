@@ -4,7 +4,7 @@
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --compilers js:babel-core/register",
+    "test": "nyc mocha --compilers js:babel-core/register test/*test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
@@ -30,6 +30,7 @@
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.29.0",
     "html-webpack-template": "^6.0.1",
+    "jsdom": "^11.5.1",
     "json-loader": "^0.5.4",
     "mocha": "^3.4.2",
     "mocha-coveralls-reporter": "0.0.5",
