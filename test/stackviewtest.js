@@ -7,7 +7,7 @@ require('./testsetup').testDom();
 describe('StackView', function() {
   class ScrollViewTest extends Component {
     render() {
-      return <StackView style={{height: 50, width: 100}}>Hello World</StackView>;
+      return <StackView axis='horizontal' style={{height: 50, width: 100}}>Hello World</StackView>;
     }
   }
 
@@ -15,9 +15,14 @@ describe('StackView', function() {
   const element = document.querySelector('div');
 
   it('should have predefined styles', function() {
-    assert.equal(element.style['overflow-x'], 'hidden');
-    assert.equal(element.style['overflow-y'], 'scroll');
-    assert.equal(element.style['white-space'], 'nowrap');
+    assert.equal(element.style['display'], 'flex');
+    assert.equal(element.style['flex-direction'], 'horizontal');
+    assert.equal(element.style['align-items'], 'center');
+    assert.equal(element.style['justify-content'], 'space-around');
+  });
+
+  it('should have user-defined orientation (vertical/horizontal)', function() {
+    assert.equal(element.style['flex-direction'], 'horizontal');
   });
 
   it('should have user-defined styles (height & width)', function() {
