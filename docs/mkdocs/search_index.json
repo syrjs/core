@@ -181,6 +181,56 @@
             "title": "Building your first class"
         }, 
         {
+            "location": "/cli/", 
+            "text": "CLI Tools\n\n\nEase development, by using \nsyr-cli\n. This tool scaffolds projects, repairs links for native modules, and helps spin up development servers.\n\n\nInstall\n\n\nnpm install -g syr-cli\n\n\n\n\nUsage\n\n\ninit\n\n\nCreates a project inside a directory with the specified project name. Installs needed \nnpm\n modules, and creates an empty set of Native projects that have the required \nSyr\n libraries to start development.\n\n\n$ syr init myProjectName\n\n\n\n\nwatch\n\n\nStarts webpack development server for the project.\n\n\n$ syr watch\n\n\n\n\nlink\n\n\nFixes any bad paths for \nNative Modules\n that reside in the \nnode_modules\n folder.\n\n\n$ syr link\n\n\n\n\nComing Soon\n\n\neject\n\n\nPulls the native libraries together for cloaked distribution. Provide a \nPrefix\n that should be used. This will become a private version of Syr. Great for distribution in SDKs.\n\n\n$ syr eject DMKA\n\n\n\n\nstart\n\n\nStarts \nsyr watch\n and spins up simulator/emulator instances to point at development server. Helping non native developers get started fast!\n\n\n$ syr start ios\n\n\n\n\n$ syr start android", 
+            "title": "CLI"
+        }, 
+        {
+            "location": "/cli/#cli-tools", 
+            "text": "Ease development, by using  syr-cli . This tool scaffolds projects, repairs links for native modules, and helps spin up development servers.", 
+            "title": "CLI Tools"
+        }, 
+        {
+            "location": "/cli/#install", 
+            "text": "npm install -g syr-cli", 
+            "title": "Install"
+        }, 
+        {
+            "location": "/cli/#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/cli/#init", 
+            "text": "Creates a project inside a directory with the specified project name. Installs needed  npm  modules, and creates an empty set of Native projects that have the required  Syr  libraries to start development.  $ syr init myProjectName", 
+            "title": "init"
+        }, 
+        {
+            "location": "/cli/#watch", 
+            "text": "Starts webpack development server for the project.  $ syr watch", 
+            "title": "watch"
+        }, 
+        {
+            "location": "/cli/#link", 
+            "text": "Fixes any bad paths for  Native Modules  that reside in the  node_modules  folder.  $ syr link", 
+            "title": "link"
+        }, 
+        {
+            "location": "/cli/#coming-soon", 
+            "text": "", 
+            "title": "Coming Soon"
+        }, 
+        {
+            "location": "/cli/#eject", 
+            "text": "Pulls the native libraries together for cloaked distribution. Provide a  Prefix  that should be used. This will become a private version of Syr. Great for distribution in SDKs.  $ syr eject DMKA", 
+            "title": "eject"
+        }, 
+        {
+            "location": "/cli/#start", 
+            "text": "Starts  syr watch  and spins up simulator/emulator instances to point at development server. Helping non native developers get started fast!  $ syr start ios  $ syr start android", 
+            "title": "start"
+        }, 
+        {
             "location": "/getting_started/", 
             "text": "Getting Started\n\n\nOur CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.\n\n\nSetting up a Syr JavaScript Project\n\n\nGrab the \nSyr CLI\n tool to get started quickly. This tool currently requires \nNPM 8\n or higher.\n\n\nnpm install -g syr-cli\n\n\n\n\nUse Syr CLI to Instantly Scaffold a Sample project to start with.\n\n\nsyr init ProjectName\n\n\n\n\nSyr will generate a base at \nsrc/index/js\n. To launch this file, simply run the following command from the base of your project.\n\n\nsyr watch\n\n\n\n\nThis command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at \nios/SyrNativeSample.xcodeproj\n and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.\n\n\nCocoapods\n\n\nIf you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.\n\n\npod 'Syr', :git =\n 'https://github.com/dmikey/syr.git'", 
             "title": "Getting Started"

@@ -26,6 +26,12 @@
     </url>
         
     <url>
+     <loc>/cli/</loc>
+     <lastmod>2018-01-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>/getting_started/</loc>
      <lastmod>2018-01-04</lastmod>
      <changefreq>daily</changefreq>
