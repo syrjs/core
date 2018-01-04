@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <link rel="shortcut icon" href="../images/favicon.ico">
+
+    <title>CLI - Syr</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.4.0.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/hack-2.018.min.css">
+    <link href='../css/googleapi-fonts.css' rel='stylesheet' type='text/css'>
+    <link href='../css/googleapi-fonts-2.css' rel='stylesheet' type='text/css'>
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/cinder.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+
+
+    <link href="../css/extra.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="../js/html5shiv-3.7.0.js"></script>
+            <script src="../js/respond.min-1.3.0.js"></script>
+        <![endif]-->
+
+    <script src="../js/webfont-1.5.18.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-111449876-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" style="padding:0" href=".."><img src="/syr/images/syr_piggie.png" height=45> Syr</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                    
+                        
+                            <li >
+                                <a href="..">Home</a>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            <li >
+                                <a href="../release/">1.3.2-alpha</a>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                
+                                    
+<li >
+    <a href="../api/">API</a>
+</li>
+
+                                
+                                    
+<li class="active">
+    <a href="./">CLI</a>
+</li>
+
+                                
+                                    
+<li >
+    <a href="../getting_started/">Getting Started</a>
+</li>
+
+                                
+                                    
+<li >
+    <a href="../debugging/">Debugging</a>
+</li>
+
+                                
+                                </ul>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            <li >
+                                <a href="../community/">Community</a>
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            <li >
+                                <a href="../blog/">Blog</a>
+                            </li>
+                        
+                    
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/dmikey/syr">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="first-level active"><a href="#cli-tools">CLI Tools</a></li>
+        
+            <li class="second-level"><a href="#install">Install</a></li>
+            
+        
+            <li class="second-level"><a href="#usage">Usage</a></li>
+            
+                <li class="third-level"><a href="#init">init</a></li>
+            
+                <li class="third-level"><a href="#watch">watch</a></li>
+            
+                <li class="third-level"><a href="#link">link</a></li>
+            
+        
+            <li class="second-level"><a href="#coming-soon">Coming Soon</a></li>
+            
+                <li class="third-level"><a href="#eject">eject</a></li>
+            
+                <li class="third-level"><a href="#start">start</a></li>
+            
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="cli-tools">CLI Tools</h1>
+<p>Ease development, by using <code>syr-cli</code>. This tool scaffolds projects, repairs links for native modules, and helps spin up development servers.</p>
+<h2 id="install">Install</h2>
+<pre><code class="bash">npm install -g syr-cli
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+<h3 id="init">init</h3>
+<p>Creates a project inside a directory with the specified project name. Installs needed <code>npm</code> modules, and creates an empty set of Native projects that have the required <code>Syr</code> libraries to start development.</p>
+<pre><code class="bash">$ syr init myProjectName
+</code></pre>
+
+<h3 id="watch">watch</h3>
+<p>Starts webpack development server for the project.</p>
+<pre><code class="bash">$ syr watch
+</code></pre>
+
+<h3 id="link">link</h3>
+<p>Fixes any bad paths for <code>Native Modules</code> that reside in the <code>node_modules</code> folder.</p>
+<pre><code class="bash">$ syr link
+</code></pre>
+
+<h2 id="coming-soon">Coming Soon</h2>
+<h3 id="eject">eject</h3>
+<p>Pulls the native libraries together for cloaked distribution. Provide a <code>Prefix</code> that should be used. This will become a private version of Syr. Great for distribution in SDKs.</p>
+<pre><code class="bash">$ syr eject DMKA
+</code></pre>
+
+<h3 id="start">start</h3>
+<p>Starts <code>syr watch</code> and spins up simulator/emulator instances to point at development server. Helping non native developers get started fast!</p>
+<pre><code class="bash">$ syr start ios
+</code></pre>
+
+<pre><code class="bash">$ syr start android
+</code></pre></div>
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright Derek M. Anderson , Licensed under MIT<br></small>
+        
+        <small>Built with 🍕 in San Jose California.</p></small>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+    var base_url = '..';
+    </script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>
