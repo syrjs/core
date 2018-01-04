@@ -4,6 +4,50 @@
 	<title>SyrNativeSample [syrDebugger]</title>
 </head>
 <body>
-	<script src="http://127.0.0.1:8080/assets/app.min.js"></script>
+  <script>
+    
+    // emit error to bridge
+    function emitError(message) {
+      window.webkit.messageHandlers['SyrNative'].postMessage({
+     		type: 'error',
+     		ast: JSON.stringify(message),
+     	});
+    }
+  
+    // hook errors
+    window.onerror = function myErrorHandler(errorMsg, url, lineNumber, colnumber, error) {
+      emitError({
+                level: 'error',
+                errorMsg: errorMsg
+    	});
+      console.log(window.event);
+      return false;
+    }
+  
+  	// load script
+    function loadScript(url, callback){
+      var script = document.createElement("script")
+      script.type = "text/javascript";
+      script.onload = function(){
+        callback();
+      };
+      script.src = url;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    }
+  
+    // currently assuming dev mode
+    var scriptDidLoad = false;
+    setTimeout(function(){
+      if(!scriptDidLoad) {
+               emitError({ errorMsg: 'Could Not Connect to Syr Server', level: 'error' });
+      }
+    }, 2000);
+    
+    // load dev script
+    loadScript('http://127.0.0.1:8080/assets/app.min.js', function(){
+          console.log('app loaded');
+    			scriptDidLoad = true;
+    });
+  </script>
 </body>
 </html>

@@ -244,4 +244,37 @@
   free(methods);
 }
 
+-(void) showInfoMessage: (NSDictionary*) message withRootView:(SyrRootView*) rootView {
+  UIView* view = [[UIView alloc] init];
+  NSError *jsonError;
+  NSData *objectData = [[message valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *astDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                          options:NSJSONReadingMutableContainers
+                                                            error:&jsonError];
+  
+  NSString* level = [astDict valueForKey:@"level"];
+  NSString* errorMsg = [astDict valueForKey:@"errorMsg"];
+  
+  UILabel *text = [[UILabel alloc] init];
+  text.backgroundColor = [UIColor clearColor];
+  
+  text.frame = rootView.frame;
+  text.text = errorMsg;
+  [text setFont:[UIFont systemFontOfSize:20.0]];
+  [text setTextAlignment:UITextAlignmentCenter];
+  
+  view.frame = rootView.frame;
+  
+  if([level containsString:@"error"]) {
+    view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.9f];
+    text.textColor = [UIColor whiteColor];
+  } else {
+    view.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.9f];
+    text.textColor = [UIColor blackColor];
+  }
+  [view addSubview:text];
+  _rootView = rootView;
+  [rootView addSubview:view];
+}
+
 @end

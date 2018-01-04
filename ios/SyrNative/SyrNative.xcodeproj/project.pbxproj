@@ -35,6 +35,8 @@
 		D266C49F1F9ABE4E00BB0A90 /* SyrAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D266C49D1F9ABE4E00BB0A90 /* SyrAnimator.m */; };
 		D266C4A71F9B275E00BB0A90 /* SyrAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = D266C4A51F9B275E00BB0A90 /* SyrAnimatedView.h */; };
 		D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D266C4A61F9B275E00BB0A90 /* SyrAnimatedView.m */; };
+		D271B2A91FFED873004603B4 /* SyrInfoBox.h in Headers */ = {isa = PBXBuildFile; fileRef = D271B2A71FFED873004603B4 /* SyrInfoBox.h */; };
+		D271B2AA1FFED873004603B4 /* SyrInfoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D271B2A81FFED873004603B4 /* SyrInfoBox.m */; };
 		D29AD66D1FA176DD00DE7CF0 /* SyrNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */; };
 		D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */; };
 		D29AD6A21FA536D500DE7CF0 /* SyrScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */; };
@@ -99,6 +101,8 @@
 		D266C49D1F9ABE4E00BB0A90 /* SyrAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrAnimator.m; sourceTree = "<group>"; };
 		D266C4A51F9B275E00BB0A90 /* SyrAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrAnimatedView.h; sourceTree = "<group>"; };
 		D266C4A61F9B275E00BB0A90 /* SyrAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrAnimatedView.m; sourceTree = "<group>"; };
+		D271B2A71FFED873004603B4 /* SyrInfoBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrInfoBox.h; sourceTree = "<group>"; };
+		D271B2A81FFED873004603B4 /* SyrInfoBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrInfoBox.m; sourceTree = "<group>"; };
 		D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SyrNative.bundle; sourceTree = "<group>"; };
 		D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrScrollView.h; sourceTree = "<group>"; };
 		D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrScrollView.m; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				D2B1F56A1FE349BF004A42EF /* SyrBundleManager.m */,
 				D2B1F56D1FE34B17004A42EF /* SyrStyler.h */,
 				D2B1F56E1FE34B17004A42EF /* SyrStyler.m */,
+				D271B2A71FFED873004603B4 /* SyrInfoBox.h */,
+				D271B2A81FFED873004603B4 /* SyrInfoBox.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D271B2A91FFED873004603B4 /* SyrInfoBox.h in Headers */,
 				D266C49A1F9ABAE400BB0A90 /* SyrButton.h in Headers */,
 				D2DE8FF71FBF608D00EEF358 /* SyrLinearGradient.h in Headers */,
 				D2D7E0351F0F672D0039C3A9 /* SyrNative.h in Headers */,
@@ -330,7 +337,7 @@
 		D2D7E0271F0F672D0039C3A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Anderson,Derek";
 				TargetAttributes = {
 					D25B497F1FF6BEAE0063E878 = {
@@ -395,6 +402,7 @@
 			files = (
 				D24A90661F86C841003DAD64 /* SyrRootView.m in Sources */,
 				D24A90621F86C2BF003DAD64 /* SyrBridge.m in Sources */,
+				D271B2AA1FFED873004603B4 /* SyrInfoBox.m in Sources */,
 				D2D7E06B1F0F69050039C3A9 /* SyrCore.m in Sources */,
 				D2DE8FF81FBF608D00EEF358 /* SyrLinearGradient.m in Sources */,
 				D2DE8FFC1FC0E46B00EEF358 /* SyrStackView.m in Sources */,
@@ -488,7 +496,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -496,7 +506,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -540,7 +554,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -548,7 +564,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "SyrRootView.h"
 #import "SyrBridge.h"
+#import "SyrInfoBox.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed: ((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -23,5 +24,6 @@ alpha:   1.]
 -(void) parseAST: (NSDictionary*) astString withRootView:(SyrRootView*) rootView;
 -(void) registerComponent: (NSString*) component;
 -(void) setupAnimation: (NSDictionary*) animationDict;
+-(void) showInfoMessage: (NSDictionary*) message withRootView:(SyrRootView*) rootView;
 @property NSMutableDictionary* nativemodules;
 @end

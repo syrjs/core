@@ -130,6 +130,8 @@
     
     // animations define the thread they are on
     [_raster setupAnimation:syrMessage];
+  } else if([messageType containsString:@"error"]) {
+    [_raster showInfoMessage:syrMessage withRootView:_rootView];
   }
 }
 
@@ -212,6 +214,12 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
       }];
     });
   });
+}
+
+- (void)webView:(WKWebView *)webView
+didFailProvisionalNavigation:(WKNavigation *)navigation
+      withError:(NSError *)error {
+  NSLog(@"error");
 }
 
 /**
