@@ -27,7 +27,7 @@ describe('TouchableOpacity', function() {
      hook.unhook();
    });
 
-  it('should execute onclick and log the given string', function() {
+  it('should execute onclick and execute the given function. (in this case a console.log)', function() {
     const event = document.createEvent("HTMLEvents");
     event.initEvent("click", false, true);
     element.dispatchEvent(event);
