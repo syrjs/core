@@ -25,6 +25,10 @@ Syr uses a React like API with a custom JS API bridge, that allows an SDK develo
 
 https://dmikey.github.io/syr/api
 
+### Roadmap
+
+https://github.com/dmikey/syr/milestones
+
 ### syr development example
 
 ![native_checkout_syr](https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif)
