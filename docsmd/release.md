@@ -1,3 +1,11 @@
+## 1.3.4-alpha
+
+[Source](https://github.com/dmikey/syr/releases/tag/1.3.4-alpha)
+
+* Corrects Text Styling , Retrieves from Attributes instead of Instance
+* Cleans up Boilerplate Project and Removes missing Assets folder
+* Removes noise
+
 ## 1.3.3-alpha
 
 [Source](https://github.com/dmikey/syr/releases/tag/1.3.3-alpha)
