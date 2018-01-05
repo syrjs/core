@@ -113,6 +113,9 @@
     
     for(id child in children) {
       
+      if(child != [NSNull null]) {
+      
+      
       NSLog(@"building %@", [child valueForKey:@"elementName"]);
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
@@ -146,6 +149,8 @@
           }
         }
       }
+      
+    }
       
     }
   }
