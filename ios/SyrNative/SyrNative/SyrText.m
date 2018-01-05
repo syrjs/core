@@ -23,7 +23,7 @@
   }
   
   text.backgroundColor = [UIColor clearColor];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"attributes"] valueForKey:@"style"];
   text.frame = [SyrStyler styleFrame:style];
   text.text = [[component objectForKey:@"instance"] valueForKey:@"value"];
   
