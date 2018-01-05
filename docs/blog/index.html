@@ -180,7 +180,10 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="first-level active"><a href="#why-react-native-didnt-fit-well">Why React-Native Didn't Fit Well</a></li>
+        <li class="first-level active"><a href="#syr-on-the-inside-how-syr-renders-part-1">Syr On The Inside, How Syr Renders Part 1</a></li>
+        
+    
+        <li class="first-level "><a href="#why-react-native-didnt-fit-well">Why React-Native Didn't Fit Well</a></li>
         
     
     </ul>
@@ -190,7 +193,57 @@
 <h1>Syr Blog</h1>
 
 <p><br/></p>
-<h3 id="why-react-native-didnt-fit-well">Why React-Native Didn't Fit Well</h3>
+<h2 id="syr-on-the-inside-how-syr-renders-part-1">Syr On The Inside, How Syr Renders Part 1</h2>
+<p>A Deeper Dive into how Syr renders and constructs instances. Syr uses a <code>Virtual-DOM</code> like structure. This is the <code>Instance-Tree</code> for the application.</p>
+<p>When using Syr, a <code>Component</code> is defined. This base <code>Component</code> is then constructed at <code>run-time</code> and represents the application for the entirety of its existence inside the <code>Guest</code> system. We transport messages with this structure to the <code>Host</code> system, where rendering is setup.</p>
+<p>A basic component defined in Syr.</p>
+<pre><code class="javascript">class MyComponent extends Component {
+    render() {
+        return &lt;View&gt;Hello World&lt;/View&gt;;
+    }
+}
+</code></pre>
+
+<p>Since JavaScript constructors are sugared function constructors we end up with an object with a <code>render</code> function attached that will return an AST structure.</p>
+<h3>What about the JSX?</h3>
+
+<p>If you're not familiar with <code>JSX</code>, a quick recap is that it is a way for us to represent JavaScript <code>Classes</code> in an elegant composition based manner.</p>
+<p>Syr ships with a <code>JSX</code> transform for <code>Babel</code>. We've forked this implementation from <code>babel-plugin-transform-jsx</code> by Caleb Meredith. One feature added is <code>UUID</code> at transpile time. We leverage this to recompute state without needing to diff a tree and transport those changes to the Host system.</p>
+<p>Syr transpiles <code>JSX</code> directly into an AST tree. Following is an example of what JSX looks like, and what the corresponding tree looks like after going through <code>Babel</code>.</p>
+<pre><code class="javascript">&lt;View&gt;
+    &lt;Text&gt;Hello World&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre>
+
+<p>Converts into</p>
+<pre><code class="javascript">{
+    elementName: function(), // instanceof View
+    attributes: {},
+    children: [
+        {
+            elementName: function(), // instanceof Text
+            attributes: {},
+            children: []
+        }
+    ]
+}
+</code></pre>
+
+<h3>We have an AST Tree now what?</h3>
+
+<p>When the application is parsed and loaded, it sits idle until the developer executes the <code>Render</code> method.</p>
+<pre><code class="javascript">Render(MyComponent);
+</code></pre>
+
+<p>This method takes the AST from the component and creates instances of the classes for the tree. It then uses the <code>JavaScript to Native Bridge</code> to send messages containing the UI structure. </p>
+<p>Syr's <code>Host</code> Bridge implementations receive the AST Tree representing the UI. The Bridge sends this tree to the Raster, where the elements are constructed on the <code>Host</code> environment, and cached against the <code>UUID</code> for later state control. </p>
+<p>The <code>Host</code> environment attaches these controls to a <code>RootView</code>, and once complete sends a message back to the <code>Guest</code> environment, informing it of the <code>UUID</code> which was constructed and rendered, and kicks off the <code>componentDidMount</code> lifecycle event.</p>
+<p>The <code>Host</code> environment and the <code>Guest</code> environment exchange a series of messages that continue while the application is executing. We'll continue to break those Classes down in future posts, stay tuned!</p>
+<p>Want to contribute? Head over to our <a href="https://github.com/dmikey/syr/issues" target="_new">issues</a> page, and grab one to work on today! Any contribution welcome!</p>
+<p><br/>
+<i>Written By <a href="http://www.twitter.com/dmikeyanderson" target="_new">Derek</a> on January 5, 2018</i>
+<br/><br/><hr/><br/></p>
+<h2 id="why-react-native-didnt-fit-well">Why React-Native Didn't Fit Well</h2>
 <p>Keeping a developer journal is something that I've been meaning to keep up with. But building the library and framework has been an amazing chore, and entertaining task at the same time! I thought it would be good to keep documenting the progress and the work that has been done to make something like Syr.</p>
 <p>This project originated at PayPal. We originally had set out to write a new experience using the beloved React-Native. We iterated through several versions of React Native. From the early Teens to the late Forties. We came to the conclusion that as much as we really liked the ecosystem, the platform was not where we needed.</p>
 <p>Ultimately we wanted create an SDK for Native applications. We had hoped to leverage React Native to drive multi-platform, javascript developer support, live updates, and more. While React Native had a bunch of upsides, it hadn't been created for our use case. We were trying to fit our feet into the wrong shoes.</p>
