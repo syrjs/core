@@ -12,7 +12,6 @@
 		D2EC21C61F4D257300DFA7C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */; };
 		D2EC21C91F4D257300DFA7C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C81F4D257300DFA7C9 /* ViewController.m */; };
 		D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */; };
-		D2EC21CE1F4D257300DFA7C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */; };
 		D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */; };
 		D2EC21DF1F4D259500DFA7C9 /* SyrNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -24,6 +23,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D2D7E02F1F0F672D0039C3A9;
 			remoteInfo = SyrNative;
+		};
+		D2E9EA7020002671000A268E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D25B49801FF6BEAE0063E878;
+			remoteInfo = SyrNativeUnitTests;
 		};
 		D2EC21DC1F4D257D00DFA7C9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,7 +71,6 @@
 		D2EC21C71F4D257300DFA7C9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D2EC21C81F4D257300DFA7C9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D2EC21CB1F4D257300DFA7C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2EC21D01F4D257300DFA7C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2EC21D21F4D257300DFA7C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2EC21D81F4D257C00DFA7C9 /* SyrNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyrNative.xcodeproj; path = ../SyrNative/SyrNative.xcodeproj; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 				D2EC21C71F4D257300DFA7C9 /* ViewController.h */,
 				D2EC21C81F4D257300DFA7C9 /* ViewController.m */,
 				D2EC21CA1F4D257300DFA7C9 /* Main.storyboard */,
-				D2EC21CD1F4D257300DFA7C9 /* Assets.xcassets */,
 				D2EC21CF1F4D257300DFA7C9 /* LaunchScreen.storyboard */,
 				D2EC21D21F4D257300DFA7C9 /* Info.plist */,
 				D2EC21C11F4D257300DFA7C9 /* Supporting Files */,
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */,
+				D2E9EA7120002671000A268E /* SyrNativeUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +209,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D2E9EA7120002671000A268E /* SyrNativeUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SyrNativeUnitTests.xctest;
+			remoteRef = D2E9EA7020002671000A268E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -219,7 +231,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */,
-				D2EC21CE1F4D257300DFA7C9 /* Assets.xcassets in Resources */,
 				D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
