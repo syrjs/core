@@ -199,7 +199,19 @@ exports.default = function (_ref) {
     };
 
     var JSXElement = function JSXElement(node) {
-      return jsxObjectTransformer(t.objectExpression([t.objectProperty(t.identifier(nameProperty), JSXElementName(node.openingElement.name)), t.objectProperty(t.identifier(attributesProperty), JSXAttributes(node.openingElement.attributes)), t.objectProperty(t.identifier(childrenProperty), node.children ? JSXChildren(node.children) : t.nullLiteral()), t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))]));
+      let transformArray = [
+        t.objectProperty(t.identifier(nameProperty),
+        JSXElementName(node.openingElement.name)),
+        t.objectProperty(t.identifier(attributesProperty),
+        JSXAttributes(node.openingElement.attributes)),
+        t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))
+      ];
+      
+      if(node.children) transformArray.push(t.objectProperty(t.identifier(childrenProperty), JSXChildren(node.children)));
+
+      return jsxObjectTransformer(t.objectExpression(
+        transformArray
+      ));
     };
 
     var JSXChild = transformOnType({ JSXText: JSXText, JSXElement: JSXElement, JSXExpressionContainer: JSXExpressionContainer });
