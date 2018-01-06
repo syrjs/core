@@ -1,4 +1,10 @@
 {
-  presets: ['env'],
+  presets: [
+    ["env", {
+      "targets": {
+        "browsers": ["Android >= 5", "safari >= 7"]
+      }
+    }]
+  ],
   plugins: [['./libs/jsx.js', { useVariables: true }]]
 }
