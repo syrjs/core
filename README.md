@@ -27,6 +27,27 @@ https://dmikey.github.io/syr/api
 
 ### Roadmap
 
+Even (starting with 2) releases are stable, Odd (starting with 1) releases are development builds. Every fourth (starting with 4.0.0) release is an LTS and will be branched as well as tagged.
+
+* LTS Currently means support beyond 2 Stable Releases. Support for 4.0.0 will be sunset when 8.0.0 is released, as 6.0.0 will become the lowest LTS version.
+
+How contributions will be scheduled for intake starting with version 2.0.0.
+
+Major
+
+* Any Native Code Change in the Core Library Results in an Immediate Major Change.
+* Any Guest deprecations must force a major change.
+
+Minor
+
+* Any Guest System Rendering Changes.
+* If new dependent features are changed, which causes instability it must be promoted to `Major` release schedule.
+
+Patch
+
+* Corrects undesired consistent behavior.
+* Adds new features without collision
+
 https://github.com/dmikey/syr/milestones
 
 ### Development Example
