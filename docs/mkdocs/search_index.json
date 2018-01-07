@@ -27,8 +27,13 @@
         }, 
         {
             "location": "/release/", 
-            "text": "1.3.3-alpha\n\n\nSource\n\n\n\n\nAdds Red and Yellow Boxes for Error Reporting to Developer\n\n\n\n\n1.3.2-alpha\n\n\nSource\n\n\n\n\nFixes bad null check during child construction\n\n\n\n\n1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
-            "title": "1.3.3-alpha"
+            "text": "1.3.4-alpha\n\n\nSource\n\n\n\n\nCorrects Text Styling , Retrieves from Attributes instead of Instance\n\n\nCleans up Boilerplate Project and Removes missing Assets folder\n\n\nRemoves noise\n\n\n\n\n1.3.3-alpha\n\n\nSource\n\n\n\n\nAdds Red and Yellow Boxes for Error Reporting to Developer\n\n\n\n\n1.3.2-alpha\n\n\nSource\n\n\n\n\nFixes bad null check during child construction\n\n\n\n\n1.3.1-alpha\n\n\nSource\n\n\nChange log will start to feature notes going forward.", 
+            "title": "1.3.4-alpha"
+        }, 
+        {
+            "location": "/release/#134-alpha", 
+            "text": "Source   Corrects Text Styling , Retrieves from Attributes instead of Instance  Cleans up Boilerplate Project and Removes missing Assets folder  Removes noise", 
+            "title": "1.3.4-alpha"
         }, 
         {
             "location": "/release/#133-alpha", 
