@@ -35,7 +35,13 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['env'],
+          presets: [
+            ["env", {
+              "targets": {
+                "browsers": ["Android >= 5", "safari >= 7"]
+              }
+            }]
+          ],
           plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
         },
       },
