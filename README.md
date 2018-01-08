@@ -24,3 +24,12 @@ The Native Libraries, are crafted that you can use a simple 'Find and Replace' m
 ### syr development example
 
 ![native_checkout_syr](https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif)
+
+### Running the local Sample
+
+* Clone the repo
+* `npm install`
+* `npm run serve`
+*  Open [SyrNativeSample](https://github.com/dmikey/syr/tree/master/ios/SyrNativeSample/SyrNativeSample.xcodeproj) in xcode
+*  Run the project in xcode.
+
