@@ -5,9 +5,5 @@ package com.example.dereanderson.syrnativeandroid;
  * https://syr.js.org
  * Created by Derek Anderson on 1/8/18.
  */
-
-public class SyrBundle {
-    public SyrBundle(SyrBundleManager manager) {
-
-    }
+public class SyrEvents {
 }

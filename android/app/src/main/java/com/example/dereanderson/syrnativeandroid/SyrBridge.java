@@ -32,8 +32,13 @@ public class SyrBridge {
     @JavascriptInterface
     public void message(String message) {
         try {
-            JSONObject obj = new JSONObject(message);
-            mRaster.parseAST();
+            JSONObject jsonObject = new JSONObject(message);
+            String messageType = jsonObject.getString("type");
+
+            if(messageType.equals("gui")) {
+                mRaster.parseAST(jsonObject);
+            }
+
         } catch (Throwable tx) {
             Log.e("SyrBridge", "Could not parse malformed JSON: \"" + message + "\"");
         }
