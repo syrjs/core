@@ -72,7 +72,7 @@ exports.default = function (_ref) {
       // Otherwise, we won‘t be mapping.
       jsxObjectTransformer = _identity2.default;
     }
-
+    // console.dir('Object Transformer >>>>', jsxObjectTransformer);
     return {
       variablesRegex: variablesRegex,
       jsxObjectTransformer: jsxObjectTransformer
@@ -199,18 +199,15 @@ exports.default = function (_ref) {
     };
 
     var JSXElement = function JSXElement(node) {
-      let transformArray = [
-        t.objectProperty(t.identifier(nameProperty),
-        JSXElementName(node.openingElement.name)),
-        t.objectProperty(t.identifier(attributesProperty),
-        JSXAttributes(node.openingElement.attributes)),
-        t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))
-      ];
-      
-      if(node.children) transformArray.push(t.objectProperty(t.identifier(childrenProperty), JSXChildren(node.children)));
-
       return jsxObjectTransformer(t.objectExpression(
-        transformArray
+        [
+          t.objectProperty(t.identifier(nameProperty),
+          JSXElementName(node.openingElement.name)),
+          t.objectProperty(t.identifier(attributesProperty),
+          JSXAttributes(node.openingElement.attributes)),
+          t.objectProperty(t.identifier(childrenProperty), JSXChildren(node.children)),
+          t.objectProperty(t.identifier(uniqueId), t.stringLiteral(guid()))
+        ]
       ));
     };
 
@@ -222,6 +219,12 @@ exports.default = function (_ref) {
       // an optimization as we minimize the number of nodes created.
       // This step just turns `['1', '2']` into `['12']`.
       .reduce(function (children, child) {
+        //if it is a child is an empty expression dont append the child just return current array.
+        //This removes 'empty' or 'null' spaces in the children.
+        if(child.type === 'JSXEmptyExpression') {
+          return _toConsumableArray(children);
+        }
+
         var lastChild = children.length > 0 ? children[children.length - 1] : null;
 
         // If this is a string literal, and the last child is a string literal, merge them.
