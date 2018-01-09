@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -13,26 +14,24 @@ import org.json.JSONObject;
 
 public class SyrText implements SyrBaseModule {
 
-    private RelativeLayout mRelativeLayout;
-    public Context mContext;
-
     @Override
-    public void render(JSONObject component) {
-        // add text view
-        TextView tv = new TextView(mContext);
-        tv.setText("Dynamic Text!");
+    public View render(JSONObject component, Context context) {
+        String value = "";
+        try {
+            JSONObject instance = component.getJSONObject("instance");
+            value = instance.getString("value");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        TextView tv = new TextView(context);
+        tv.setText(value);
+        return tv;
     }
-
-    @Override
-    public void addChild(View child) {}
 
     @Override
     public String getName() {
         return "Text";
     }
 
-    @Override
-    public void setContext(Context context) {
-        mContext = context;
-    }
 }

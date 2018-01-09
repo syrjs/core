@@ -16,7 +16,8 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.square}>
-      <Text>Hello World Test</Text>
+      <Text>I'm Just Checking to Make Sure!</Text>
+      <Text>Two of These!</Text>
     </View>;
   }
   componentDidMount() {

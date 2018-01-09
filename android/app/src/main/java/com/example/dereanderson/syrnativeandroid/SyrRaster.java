@@ -3,7 +3,10 @@ package com.example.dereanderson.syrnativeandroid;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Layout;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +29,7 @@ public class SyrRaster {
     private Handler uiHandler;
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
+    private HashMap<String, Object> mModuleInstances;
 
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
@@ -54,56 +58,51 @@ public class SyrRaster {
     public void parseAST(JSONObject jsonObject) {
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            final SyrBaseModule component = createComponent(ast);
+            final View component = createComponent(ast);
             final String elementName = ast.getString("elementName");
             JSONArray children = ast.getJSONArray("children");
-
             String guid = ast.getString("guid");
 
-            // abstract this out into classes, check to see how Java lets you register
-            // with decorators
+            if(children.length() > 0) {
+                buildChildren(children, (ViewGroup) component);
+            }
+
             uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    component.render(ast);
+                    mRootview.addView(component);
                 }
             });
-
-            if(children.length() > 0) {
-                buildChildren(children, component);
-            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void buildChildren(JSONArray children, Object viewParent) {
+    private void buildChildren(JSONArray children, ViewGroup viewParent) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
-                    Object component = createComponent(child);
+                    View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
-                    buildChildren(childChildren, component);
-                    Log.i("Stuff","buildChildren: yo");
+                    viewParent.addView(component);
+
+                    if(component instanceof ViewGroup) {
+                        buildChildren(childChildren, (ViewGroup) component);
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
     }
 
-    private SyrBaseModule createComponent(JSONObject child) throws JSONException {
+    private View createComponent(JSONObject child) throws JSONException {
         String className = child.getString("elementName");
-        Class baseClass = mModuleMap.get(className).getClass();
-        SyrBaseModule component = null;
-        try {
-            component = (SyrBaseModule) baseClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        component.setContext(mContext);
-        return component;
+        SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
+        View returnView = null;
+
+        returnView = componentModule.render(child, mContext);
+
+        return returnView;
     }
 }
