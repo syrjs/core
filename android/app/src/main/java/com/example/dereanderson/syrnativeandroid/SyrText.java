@@ -19,6 +19,8 @@ public class SyrText implements SyrBaseModule {
     public View render(JSONObject component, Context context) {
         String value = "";
         JSONObject style = null;
+        Integer left = 0;
+        Integer top = 0;
 
         try {
             JSONObject instance = component.getJSONObject("instance");
@@ -26,6 +28,8 @@ public class SyrText implements SyrBaseModule {
 
             if(attributes.has("style")) {
                 style = attributes.getJSONObject("style");
+                left = style.getInt("left");
+                top = style.getInt("top");
             }
 
             value = instance.getString("value");
@@ -38,7 +42,7 @@ public class SyrText implements SyrBaseModule {
 
         if(style != null) {
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(50, 300, 0, 0);
+            lp.setMargins(left, top, 0, 0);
             tv.setLayoutParams(lp);
         }
 
