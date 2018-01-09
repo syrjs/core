@@ -15,14 +15,9 @@ class MyComponent extends Component {
     super();
   }
   render() {
-    return <Animated.View style={styles.square}>
-    <Text>Hello World Test</Text>
-    <Image src="foo"/>
-    <Button>Foo Button</Button>
-      <View>
-        <Text>Hello World Sub Text</Text>
-      </View>
-    </Animated.View>;
+    return <View style={styles.square}>
+      <Text>Hello World Test</Text>
+    </View>;
   }
   componentDidMount() {
     console.log('component did mount');

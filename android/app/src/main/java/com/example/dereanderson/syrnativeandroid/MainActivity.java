@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // register NativeModules
         modules.add(new SyrView());
+        modules.add(new SyrText());
 
         // get the javascript bundle
         SyrBundle bundle = new SyrBundleManager().setBundleAssetName("").build();
