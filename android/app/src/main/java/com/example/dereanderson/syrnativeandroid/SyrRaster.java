@@ -9,6 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * Syr Project
@@ -21,23 +24,40 @@ public class SyrRaster {
     private Context mContext;
     private SyrRootView mRootview;
     private Handler uiHandler;
+    private List<SyrBaseModule> mModules;
+    private HashMap<String, Object> mModuleMap;
 
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
+        mModuleMap = new HashMap<String, Object>();
         mContext = c;
     }
 
     public void setRootview(SyrRootView rootview) {
         mRootview = rootview;
+
+        // main thread looper for UI updates
         uiHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public void setModules(List<SyrBaseModule> modules) {
+        mModules = modules;
+
+        // map module names, these will be the JSX tags
+        for (int i = 0; i < modules.size(); i++) {
+            SyrBaseModule module = modules.get(i);
+            String moduleName = module.getName();
+            mModuleMap.put(moduleName, module);
+        }
     }
 
     public void parseAST(JSONObject jsonObject) {
         try {
-            JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            JSONArray children = ast.getJSONArray("children");
-            Object component = createComponent(ast);
+            final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
+            final SyrBaseModule component = createComponent(ast);
             final String elementName = ast.getString("elementName");
+            JSONArray children = ast.getJSONArray("children");
+
             String guid = ast.getString("guid");
 
             // abstract this out into classes, check to see how Java lets you register
@@ -45,10 +65,7 @@ public class SyrRaster {
             uiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(elementName.contains("View")) {
-
-                    }
-                    Log.i("Stuff","parseAST: yo");
+                    component.render(ast);
                 }
             });
 
@@ -75,8 +92,18 @@ public class SyrRaster {
             }
     }
 
-    private Object createComponent(JSONObject child) {
-        Object component = SyrView.render(mContext, child);
+    private SyrBaseModule createComponent(JSONObject child) throws JSONException {
+        String className = child.getString("elementName");
+        Class baseClass = mModuleMap.get(className).getClass();
+        SyrBaseModule component = null;
+        try {
+            component = (SyrBaseModule) baseClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        component.setContext(mContext);
         return component;
     }
 }

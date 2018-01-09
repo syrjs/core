@@ -17,8 +17,8 @@ import org.json.JSONObject;
 
 
 public class SyrBridge {
-    Context mContext;
-    SyrRaster mRaster;
+    private Context mContext;
+    private SyrRaster mRaster;
 
     /** Instantiate the interface and set the context */
     SyrBridge(Context c) {

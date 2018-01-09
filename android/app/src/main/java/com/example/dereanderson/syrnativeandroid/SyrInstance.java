@@ -1,5 +1,7 @@
 package com.example.dereanderson.syrnativeandroid;
 
+import java.util.List;
+
 /**
  * Syr Project
  * https://syr.js.org
@@ -7,8 +9,9 @@ package com.example.dereanderson.syrnativeandroid;
  */
 
 public class SyrInstance {
-    SyrBridge mBridge;
-    SyrRaster mRaster;
+    private SyrBridge mBridge;
+    private SyrRaster mRaster;
+    private List<SyrBaseModule> mModules;
 
     public SyrInstance(SyrInstanceManager manager) {
         // start syr root activity
@@ -19,8 +22,17 @@ public class SyrInstance {
         return this;
     }
 
+    public SyrInstance setNativeModules(List<SyrBaseModule> modules) {
+        mModules = modules;
+        return this;
+    }
+
     public SyrInstance setRaster(SyrRaster raster) {
+        // set the raster for the bridge instance
         mRaster = raster;
+
+        // pass down native modules
+        mRaster.setModules(mModules);
         mBridge.setRaster(mRaster);
         return this;
     }
@@ -28,6 +40,5 @@ public class SyrInstance {
     public void loadBundle() {
         mBridge.loadBundle();
     }
-
 
 }

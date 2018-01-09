@@ -1,6 +1,7 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import org.json.JSONObject;
@@ -10,10 +11,14 @@ import org.json.JSONObject;
  * https://syr.js.org
  * Created by Derek Anderson on 1/8/18.
  */
-public class SyrView {
+public class SyrView implements SyrBaseModule {
 
-    static public Object render(Context context, JSONObject component) {
-        RelativeLayout relativeLayout = new RelativeLayout(context);
+    private RelativeLayout mRelativeLayout;
+    public Context mContext;
+
+    @Override
+    public void render(JSONObject component) {
+        RelativeLayout relativeLayout = new RelativeLayout(mContext);
 
         // need to find positioning
         RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(
@@ -21,11 +26,20 @@ public class SyrView {
                 RelativeLayout.LayoutParams.FILL_PARENT);
 
         relativeLayout.setLayoutParams(rlp);
-
-        return relativeLayout;
     }
 
-    static public void addChild(Object instance, Object child) {
+    @Override
+    public void addChild(View child) {
+        mRelativeLayout.addView(child);
+    }
 
+    @Override
+    public String getName() {
+        return "View";
+    }
+
+    @Override
+    public void setContext(Context context) {
+        mContext = context;
     }
 }
