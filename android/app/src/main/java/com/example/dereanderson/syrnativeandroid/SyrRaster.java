@@ -79,6 +79,10 @@ public class SyrRaster {
         }
     }
 
+    public void clearRootView() {
+        mRootview.removeAllViews();
+    }
+
     private void buildChildren(JSONArray children, ViewGroup viewParent) {
             try {
                 for (int i = 0; i < children.length(); i++) {
