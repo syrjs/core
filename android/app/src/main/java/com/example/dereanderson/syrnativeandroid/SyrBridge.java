@@ -59,7 +59,6 @@ public class SyrBridge {
             }
         });
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }

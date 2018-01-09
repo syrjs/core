@@ -16,7 +16,7 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.square}>
-      <Text>I'm Just Checking to Make Sure!</Text>
+      <Text style={{left: 50, top:300}}>I'm Just Checking to Make Sure!</Text>
       <Text>Two of These!</Text>
     </View>;
   }
