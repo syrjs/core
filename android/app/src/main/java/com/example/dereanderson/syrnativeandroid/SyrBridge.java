@@ -6,6 +6,7 @@ import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import org.json.JSONObject;
 
@@ -17,8 +18,9 @@ import org.json.JSONObject;
 
 
 public class SyrBridge {
-    Context mContext;
-    SyrRaster mRaster;
+    private Context mContext;
+    private SyrRaster mRaster;
+    private WebView mBridgedBrowser;
 
     /** Instantiate the interface and set the context */
     SyrBridge(Context c) {
@@ -32,24 +34,44 @@ public class SyrBridge {
     @JavascriptInterface
     public void message(String message) {
         try {
-            JSONObject obj = new JSONObject(message);
-            mRaster.parseAST();
+            JSONObject jsonObject = new JSONObject(message);
+            String messageType = jsonObject.getString("type");
+
+            if(messageType.equals("gui")) {
+                mRaster.parseAST(jsonObject);
+            }
+
         } catch (Throwable tx) {
             Log.e("SyrBridge", "Could not parse malformed JSON: \"" + message + "\"");
         }
     }
 
     public void loadBundle() {
-        WebView wv = new WebView(mContext);
-        wv.addJavascriptInterface(this, "SyrBridge");
+        mBridgedBrowser = new WebView(mContext);
+        mBridgedBrowser.addJavascriptInterface(this, "SyrBridge");
+
+        // if the url is changes from it's initial loadURL then cancel
+        mBridgedBrowser.setWebViewClient(new WebViewClient(){
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.i("bridgebrowser", "navigating");
+                mRaster.clearRootView();
+                return false;
+            }
+        });
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-        WebSettings webSettings = wv.getSettings();
+        WebSettings webSettings = mBridgedBrowser.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        wv.loadUrl("http://10.0.2.2:8080");
+        mBridgedBrowser.loadUrl("http://10.0.2.2:8080");
+    }
+
+    public void sendMessage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mBridgedBrowser.evaluateJavascript("SyrEvent({type:'foo'});", null);
+        }
     }
 }
