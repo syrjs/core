@@ -1,4 +1,4 @@
-# 1.3.3-alpha release
+# 1.3.4-alpha release
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr">
@@ -27,15 +27,44 @@ https://dmikey.github.io/syr/api
 
 ### Roadmap
 
+Even (starting with 2) releases are stable, Odd (starting with 1) releases are development builds. Every fourth (starting with 4.0.0) release is an LTS and will be branched as well as tagged.
+
+* LTS Currently means support beyond 2 Stable Releases. Support for 4.0.0 will be sunset when 8.0.0 is released, as 6.0.0 will become the lowest LTS version.
+
+How contributions will be scheduled for intake starting with version 2.0.0.
+
+Major
+
+* Any Native Code Change in the Core Library Results in an Immediate Major Change.
+* Any Guest deprecations must force a major change.
+
+Minor
+
+* Any Guest System Rendering Changes.
+* If new dependent features are changed, which causes instability it must be promoted to `Major` release schedule.
+
+Patch
+
+* Corrects undesired consistent behavior.
+* Adds new features without collision
+
 https://github.com/dmikey/syr/milestones
 
 ### Development Example
 
 ![native_checkout_syr](https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif)
 
+### Running the local Sample
+
+* Clone the repo
+* `npm install`
+* `npm run serve`
+*  Open [ios/SyrNativeSample](https://github.com/dmikey/syr/tree/master/ios/SyrNativeSample/SyrNativeSample.xcodeproj) in xcode
+*  Run the project in xcode.
 
 ## Contributors
 
 [<img alt="dmikey" src="https://avatars3.githubusercontent.com/u/328000?v=4&s=117 width=117">](https://github.com/dmikey) |[<img alt="MSiddharthReddy" src="https://avatars3.githubusercontent.com/u/17309023?v=4&s=117 width=117">](https://github.com/MSiddharthReddy) |[<img alt="pvenkatakrishnan" src="https://avatars2.githubusercontent.com/u/2745959?v=4&s=117 width=117">](https://github.com/pvenkatakrishnan) |[<img alt="gabrielcsapo" src="https://avatars0.githubusercontent.com/u/1854811?v=4&s=117 width=117">](https://github.com/gabrielcsapo) |
 :---:|:---:|:---:|:---:|
 [dmikey](https://github.com/dmikey)|[MSiddharthReddy](https://github.com/MSiddharthReddy)|[pvenkatakrishnan](https://github.com/pvenkatakrishnan)|[gabrielcsapo](https://github.com/gabrielcsapo)|
+
