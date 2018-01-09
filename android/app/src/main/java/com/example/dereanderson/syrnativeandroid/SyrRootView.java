@@ -11,13 +11,19 @@ import android.widget.FrameLayout;
 
 public class SyrRootView extends FrameLayout {
 
+    private Context mContext;
+
     public SyrRootView(Context context) {
         super(context);
+
+        // use application context so we don't get memory leaks
+        // when activities are bound to context, we'll leak
+        mContext = context.getApplicationContext();
     }
 
     public SyrRootView startSyrApplication(SyrInstance instance, SyrBundle bundle) {
-        SyrBridge bridge = new SyrBridge(getContext());
-        SyrRaster raster = new SyrRaster(getContext());
+        SyrBridge bridge = new SyrBridge(mContext);
+        SyrRaster raster = new SyrRaster(mContext);
         raster.setRootview(this);
         instance.setBridge(bridge).setRaster(raster).loadBundle();
         return this;
