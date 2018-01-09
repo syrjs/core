@@ -1,10 +1,13 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -16,7 +19,19 @@ public class SyrView implements SyrBaseModule {
 
     @Override
     public View render(JSONObject component, Context context) {
-        return new RelativeLayout(context);
+        RelativeLayout layout = new RelativeLayout(context);
+        JSONObject style = null;
+
+        try {
+            style = component.getJSONObject("attributes").getJSONObject("style");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        layout.setLayoutParams(SyrStyler.styleLayout(style));
+        SyrStyler.styleView(layout, style);
+
+        return layout;
     }
 
     @Override

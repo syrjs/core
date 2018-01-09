@@ -16,8 +16,8 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.square}>
-      <Text style={{left: 120, top:300}}>Did this reload?!</Text>
-      <Text>Two of These!</Text>
+      <Text style={{left: 230, top:300}}>Off to the Races?!</Text>
+      <Text style={{left: 230, top:150}}>Two of These!</Text>
     </View>;
   }
   componentDidMount() {
