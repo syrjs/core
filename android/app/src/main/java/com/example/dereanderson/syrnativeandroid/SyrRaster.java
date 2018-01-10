@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Layout;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.WeakHashMap;
 
 
 /**
@@ -26,6 +28,7 @@ public class SyrRaster {
 
     private Context mContext;
     private SyrRootView mRootview;
+    private SyrBridge mBridge;
     private Handler uiHandler;
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
@@ -55,13 +58,17 @@ public class SyrRaster {
         }
     }
 
+    public void setBridge(SyrBridge bridge) {
+        mBridge = bridge;
+    }
+
     public void parseAST(JSONObject jsonObject) {
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
             final View component = createComponent(ast);
             final String elementName = ast.getString("elementName");
+            final String guid = ast.getString("guid");
             JSONArray children = ast.getJSONArray("children");
-            String guid = ast.getString("guid");
 
             if(children.length() > 0) {
                 buildChildren(children, (ViewGroup) component);
@@ -71,6 +78,7 @@ public class SyrRaster {
                 @Override
                 public void run() {
                     mRootview.addView(component);
+                    emitComponentDidMount(guid);
                 }
             });
 
@@ -83,13 +91,31 @@ public class SyrRaster {
         mRootview.removeAllViews();
     }
 
+    public void emitComponentDidMount(String guid){
+
+        // send event for componentDidMount
+        HashMap<String, String> eventMap = new HashMap<String, String>();
+        eventMap.put("type", "componentDidMount");
+        eventMap.put("guid", guid);
+        mBridge.sendEvent(eventMap);
+    }
+
     private void buildChildren(JSONArray children, ViewGroup viewParent) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
                     View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
+                    final String guid = child.getString("guid");
                     viewParent.addView(component);
+
+                    // bridge posts needs to be gui threads
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            emitComponentDidMount(guid);
+                        }
+                    });
 
                     if(component instanceof ViewGroup) {
                         buildChildren(childChildren, (ViewGroup) component);
