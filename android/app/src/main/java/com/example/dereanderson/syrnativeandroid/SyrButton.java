@@ -2,6 +2,7 @@ package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.View;
 import android.widget.Button;
 
