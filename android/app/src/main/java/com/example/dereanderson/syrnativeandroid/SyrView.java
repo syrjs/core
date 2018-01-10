@@ -10,6 +10,8 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 /**
  * Syr Project
  * https://syr.js.org
@@ -24,12 +26,15 @@ public class SyrView implements SyrBaseModule {
 
         try {
             style = component.getJSONObject("attributes").getJSONObject("style");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         layout.setLayoutParams(SyrStyler.styleLayout(style));
         SyrStyler.styleView(layout, style);
+
+
 
         return layout;
     }
