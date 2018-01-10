@@ -17,7 +17,7 @@ class MyComponent extends Component {
   render() {
     return <View style={styles.square}>
       <Text style={{left: 0, top:245}}>Two of These!</Text>
-      <Button>Foo Bar Moar</Button>
+      <Button style={{left:50,backgroundColor: '#ffffff', width:200, height:200}}>Foo Bar Moar</Button>
       <Image style={{top:150,left:(300/2)-(75/2), height:75, width:75}}/>
     </View>;
   }
