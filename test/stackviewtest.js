@@ -1,8 +1,9 @@
 import { Component, Render, RasterManager, StackView } from '../index';
 const assert = require('assert');
+const initHTML = `<!DOCTYPE html><body></body></html>`;
 
 //including JSDOM to test browser rendering.
-require('./testsetup').testDom();
+require('./testsetup').testDom(initHTML);
 
 describe('StackView', function() {
   class ScrollViewTest extends Component {

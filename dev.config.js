@@ -47,9 +47,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       inject: false,
-      appMountId: 'app',
       title: 'Test Fixture',
       mobile: true,
+      bodyHtmlSnippet: '<div id="root"></div>',
       template: require('html-webpack-template'),
       links: [],
     }),
