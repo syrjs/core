@@ -16,8 +16,9 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.square}>
-      <Text style={{left: 10, top:30}}>Off to the Races?!</Text>
-      <Text style={{left: 10, top:15}}>Two of These!</Text>
+      <Text style={{left: 0, top:245}}>Two of These!</Text>
+      <Button>Foo Bar Moar</Button>
+      <Image style={{top:150,left:(300/2)-(75/2), height:75, width:75}}/>
     </View>;
   }
   componentDidMount() {

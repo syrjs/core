@@ -78,11 +78,7 @@ public class SyrRaster {
                 @Override
                 public void run() {
                     mRootview.addView(component);
-
-                    HashMap<String, String> eventMap = new HashMap<String, String>();
-                    eventMap.put("type", "componentDidMount");
-                    eventMap.put("guid", guid);
-                    mBridge.sendEvent(eventMap);
+                    emitComponentDidMount(guid);
                 }
             });
 
@@ -95,13 +91,31 @@ public class SyrRaster {
         mRootview.removeAllViews();
     }
 
+    public void emitComponentDidMount(String guid){
+
+        // send event for componentDidMount
+        HashMap<String, String> eventMap = new HashMap<String, String>();
+        eventMap.put("type", "componentDidMount");
+        eventMap.put("guid", guid);
+        mBridge.sendEvent(eventMap);
+    }
+
     private void buildChildren(JSONArray children, ViewGroup viewParent) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
                     View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
+                    final String guid = child.getString("guid");
                     viewParent.addView(component);
+
+                    // bridge posts needs to be gui threads
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            emitComponentDidMount(guid);
+                        }
+                    });
 
                     if(component instanceof ViewGroup) {
                         buildChildren(childChildren, (ViewGroup) component);
