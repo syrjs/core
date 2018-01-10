@@ -2,9 +2,9 @@
 exports.testDom = function(initHTML) {
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const win = new JSDOM(initHTML).window;
-global.document = win.document;
-global.HTMLElement = win.HTMLElement;
+global.window = new JSDOM(initHTML).window;
+global.document = window.document;
+global.HTMLElement = window.HTMLElement;
 }
 
 //https://stackoverflow.com/questions/18543047/mocha-monitor-application-output
