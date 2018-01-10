@@ -1,6 +1,7 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +21,7 @@ public class SyrButton implements SyrBaseModule {
 
         try {
             JSONObject instance = component.getJSONObject("instance");
-            if(component.has("attributes") && component.has("style")){
+            if(component.has("attributes") && component.getJSONObject("attributes").has("style")){
 
                 style = component.getJSONObject("attributes").getJSONObject("style");
 
@@ -28,6 +29,7 @@ public class SyrButton implements SyrBaseModule {
                 SyrStyler.styleView(button, style);
 
             }
+
             button.setText(instance.getString("value"));
         } catch (JSONException e) {
             e.printStackTrace();
