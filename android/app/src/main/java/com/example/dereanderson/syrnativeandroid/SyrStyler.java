@@ -2,6 +2,7 @@ package com.example.dereanderson.syrnativeandroid;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -45,15 +46,29 @@ public class SyrStyler{
     }
 
     static public void styleView(View component, JSONObject style) {
+
         if(style.has("backgroundColor")) {
             try {
+                String borderRadius = null;
                 String backgroundColor = style.getString("backgroundColor");
 
-                if(component instanceof Button) {
-                    component.getBackground().setColorFilter(Color.parseColor(backgroundColor), PorterDuff.Mode.MULTIPLY);
-                } else {
-                    component.setBackgroundColor(Color.parseColor(backgroundColor));
+                if(style.has("borderRadius")) {
+                    borderRadius = style.getString("borderRadius");
                 }
+
+//                if(component instanceof Button) {
+//                    component.getBackground().setColorFilter(Color.parseColor(backgroundColor), PorterDuff.Mode.MULTIPLY);
+//                } else {
+                    if(borderRadius != null) {
+                        GradientDrawable gd = new GradientDrawable(
+                                GradientDrawable.Orientation.TOP_BOTTOM,
+                                new int[] {Color.parseColor(backgroundColor), Color.parseColor(backgroundColor)});
+                        gd.setCornerRadius(30f);
+                        component.setBackground(gd);
+                    } else {
+                        component.setBackgroundColor(Color.parseColor(backgroundColor));
+                    }
+//                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -1,4 +1,4 @@
-import { Component, Render, View, Dimensions, Animated, Text, Button, Image, TouchableOpacity } from '../index';
+import { Component, Render, View, Dimensions, Animated, Text, Button, Image, TouchableOpacity, LinearGradient } from '../index';
 
 console.log(Dimensions.get('window'));
 const styles = {
@@ -17,10 +17,14 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.square}>
-      <Text style={{left: 0, top:245}}>Two of These!</Text>
-      <Button onPress={()=>this.onPress()} style={{left:50,backgroundColor: '#ffffff', width:200, height:200}}>Foo Bar Moar</Button>
-      <TouchableOpacity onPress={()=>this.onPress()} style={{top:150,left:(300/2)-(75/2), height:75, width:75}}><Image style={{height:75, width:75}}/></TouchableOpacity>
+      <LinearGradient style={{width:500,height:220}}/>
+      <Text style={{left: 0, top:245, color: "#00ffff", fontSize:74, fontWeight:"bold"}}>Two of These!</Text>
+      <Button onPress={()=>this.onPress()} style={{left:50,backgroundColor: '#000000', color:"#ffffff", width:200, height:200, borderRadius:30}}>Foo Bar Moar</Button>
+      <TouchableOpacity onPress={()=>this.onImagePress()} style={{top:150,left:(300/2)-(75/2), height:75, width:75}}><Image style={{height:75, width:75}}/></TouchableOpacity>
     </View>;
+  }
+  onImagePress() {
+    console.log('Image was pressed!');
   }
   onPress() {
     console.log('I was pressed!');

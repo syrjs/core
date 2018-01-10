@@ -3,6 +3,7 @@ package com.example.dereanderson.syrnativeandroid;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,8 +32,18 @@ public class SyrButton implements SyrBaseModule {
                 style = component.getJSONObject("attributes").getJSONObject("style");
                 button.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(button, style);
+                if(style.has("color")) {
+                    button.setTextColor(Color.parseColor(style.getString("color")));
+                }
 
-            }
+                if(style.has("fontWeight")) {
+                    if(style.getString("fontWeight").contains("bold")){
+                        button.setTypeface(null, Typeface.BOLD);
+                    }
+                }
+             }
+
+
 
             button.setText(instance.getString("value"));
             button.setOnClickListener(new View.OnClickListener() {
