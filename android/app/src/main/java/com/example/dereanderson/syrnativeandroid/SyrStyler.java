@@ -1,8 +1,10 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import org.json.JSONException;
@@ -46,7 +48,12 @@ public class SyrStyler{
         if(style.has("backgroundColor")) {
             try {
                 String backgroundColor = style.getString("backgroundColor");
-                component.setBackgroundColor(Color.parseColor(backgroundColor));
+
+                if(component instanceof Button) {
+                    component.getBackground().setColorFilter(Color.parseColor(backgroundColor), PorterDuff.Mode.MULTIPLY);
+                } else {
+                    component.setBackgroundColor(Color.parseColor(backgroundColor));
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
