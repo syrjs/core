@@ -1,8 +1,10 @@
 //including JSDOM to test browser rendering.
-exports.testDom = function() {
+exports.testDom = function(initHTML) {
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-global.document = new JSDOM(`<!DOCTYPE html><body></body></html>`).window.document;
+const win = new JSDOM(initHTML).window;
+global.document = win.document;
+global.HTMLElement = win.HTMLElement;
 }
 
 //https://stackoverflow.com/questions/18543047/mocha-monitor-application-output
