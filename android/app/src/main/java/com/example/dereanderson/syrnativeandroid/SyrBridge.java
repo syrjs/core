@@ -25,6 +25,7 @@ public class SyrBridge {
     private Context mContext;
     private SyrRaster mRaster;
     private WebView mBridgedBrowser;
+    public HashMap<String, String> bootParams = new HashMap<String,String>();
 
     /** Instantiate the interface and set the context */
     SyrBridge(Context c) {
@@ -70,7 +71,9 @@ public class SyrBridge {
         WebSettings webSettings = mBridgedBrowser.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        mBridgedBrowser.loadUrl("http://10.0.2.2:8080");
+        String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s", bootParams.get("height"), bootParams.get("width"));
+
+        mBridgedBrowser.loadUrl(loadURL);
     }
 
     public void sendEvent(HashMap<String, String> event) {

@@ -45,10 +45,12 @@ public class MainActivity extends AppCompatActivity {
         // create a new Rootview
         SyrRootView rootview = new SyrRootView(this);
 
-        // start the Syr Application
-        rootview.startSyrApplication(instance, bundle);
 
         // set the content of the to the Rootview
         setContentView(rootview);
+
+        // start the Syr Application
+        rootview.startSyrApplication(instance, bundle);
+
     }
 }

@@ -18,6 +18,8 @@ public class SyrInstance {
     }
 
     public SyrInstance setBridge(SyrBridge bridge) {
+        // set the bridge for the event handler
+        SyrEventHandler.getInstance().mBridge = bridge;
         mBridge = bridge;
         return this;
     }
