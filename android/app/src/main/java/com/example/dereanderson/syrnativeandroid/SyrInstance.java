@@ -34,6 +34,7 @@ public class SyrInstance {
         // pass down native modules
         mRaster.setModules(mModules);
         mBridge.setRaster(mRaster);
+        mRaster.setBridge(mBridge);
         return this;
     }
 

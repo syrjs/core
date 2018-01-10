@@ -8,7 +8,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.WeakHashMap;
 
 /**
  * Syr Project
@@ -69,9 +73,12 @@ public class SyrBridge {
         mBridgedBrowser.loadUrl("http://10.0.2.2:8080");
     }
 
-    public void sendMessage() {
+    public void sendEvent(HashMap<String, String> event) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            mBridgedBrowser.evaluateJavascript("SyrEvent({type:'foo'});", null);
+            JSONObject message = new JSONObject(event);
+            String msg = message.toString();
+            String eventJS = String.format("SyrEvents.emit(%s);", msg);
+            mBridgedBrowser.evaluateJavascript(eventJS, null);
         }
     }
 }

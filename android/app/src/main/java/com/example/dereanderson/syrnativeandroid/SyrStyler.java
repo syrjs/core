@@ -3,7 +3,9 @@ package com.example.dereanderson.syrnativeandroid;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -12,11 +14,42 @@ import org.json.JSONObject;
 
 public class SyrStyler{
     static public ViewGroup.LayoutParams styleLayout(JSONObject style) {
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(100,100);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,0);
+        try {
+            Integer left = 0;
+            Integer top = 0;
+
+            if(style.has("width") && style.has("height")) {
+
+                params.height = style.getInt("height");
+                params.width = style.getInt("width");
+
+            }
+
+            if(style.has("left")) {
+                left = style.getInt("left");
+            }
+
+            if(style.has("top")) {
+                top = style.getInt("top");
+            }
+
+            params.setMargins(left,top,0,0);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return params;
     }
 
     static public void styleView(View component, JSONObject style) {
-        component.setBackgroundColor(Color.parseColor("#000000"));
+        if(style.has("backgroundColor")) {
+            try {
+                String backgroundColor = style.getString("backgroundColor");
+                component.setBackgroundColor(Color.parseColor(backgroundColor));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
