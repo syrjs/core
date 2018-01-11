@@ -2,6 +2,7 @@ package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * Syr Project
@@ -24,6 +27,7 @@ public class SyrView implements SyrBaseModule {
 
         try {
             style = component.getJSONObject("attributes").getJSONObject("style");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

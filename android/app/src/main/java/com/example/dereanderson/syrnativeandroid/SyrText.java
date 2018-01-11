@@ -1,6 +1,10 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -21,6 +25,7 @@ public class SyrText implements SyrBaseModule {
         JSONObject style = null;
         Integer left = 0;
         Integer top = 0;
+        TextView textView = new TextView(context);
 
         try {
             JSONObject instance = component.getJSONObject("instance");
@@ -30,6 +35,21 @@ public class SyrText implements SyrBaseModule {
                 style = attributes.getJSONObject("style");
                 left = style.getInt("left");
                 top = style.getInt("top");
+                if(style.has("color")) {
+                    textView.setTextColor(Color.parseColor(style.getString("color")));
+                }
+
+                if(style.has("fontSize")) {
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,style.getInt("fontSize"));
+                }
+
+                if(style.has("fontWeight")) {
+                    if(style.getString("fontWeight").contains("bold")){
+                        textView.setTypeface(null, Typeface.BOLD);
+                    }
+                }
+
+//
             }
 
             value = instance.getString("value");
@@ -37,16 +57,15 @@ public class SyrText implements SyrBaseModule {
             e.printStackTrace();
         }
 
-        TextView tv = new TextView(context);
-        tv.setText(value);
+        textView.setText(value);
 
         if(style != null) {
             RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             lp.setMargins(left, top, 0, 0);
-            tv.setLayoutParams(lp);
+            textView.setLayoutParams(lp);
         }
 
-        return tv;
+        return textView;
     }
 
     @Override

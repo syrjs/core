@@ -14,6 +14,10 @@ public class SyrRootView extends FrameLayout {
     private Context mContext;
     private SyrBridge mBridge;
     private SyrRaster mRaster;
+    private SyrInstance mInstance;
+    private Boolean mLoaded = false;
+    private int mHeight;
+    private int mWidth;
 
     public SyrRootView(Context context) {
         super(context);
@@ -27,7 +31,7 @@ public class SyrRootView extends FrameLayout {
         mBridge = new SyrBridge(mContext);
         mRaster = new SyrRaster(mContext);
         mRaster.setRootview(this);
-        instance.setBridge(mBridge).setRaster(mRaster).loadBundle();
+        mInstance = instance;
         return this;
     }
 
@@ -37,4 +41,17 @@ public class SyrRootView extends FrameLayout {
         mRaster = null;
     }
 
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        mHeight = this.getWidth();
+        mWidth = this.getHeight();
+
+        if(mHeight > 0 && mWidth > 0 && !mLoaded) {
+            mLoaded = true;
+            mBridge.bootParams.put("height", Integer.toString(mHeight));
+            mBridge.bootParams.put("width", Integer.toString(mWidth));
+            mInstance.setBridge(mBridge).setRaster(mRaster).loadBundle();
+        }
+    }
 }
