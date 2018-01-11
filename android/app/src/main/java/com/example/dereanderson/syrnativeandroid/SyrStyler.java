@@ -49,26 +49,33 @@ public class SyrStyler{
 
         if(style.has("backgroundColor")) {
             try {
-                String borderRadius = null;
+                Integer borderRadius = null;
                 String backgroundColor = style.getString("backgroundColor");
 
+                GradientDrawable gd = new GradientDrawable(
+                        GradientDrawable.Orientation.TOP_BOTTOM,
+                        new int[] {Color.parseColor(backgroundColor), Color.parseColor(backgroundColor)});
+
                 if(style.has("borderRadius")) {
-                    borderRadius = style.getString("borderRadius");
+                    borderRadius = style.getInt("borderRadius");
                 }
 
-//                if(component instanceof Button) {
-//                    component.getBackground().setColorFilter(Color.parseColor(backgroundColor), PorterDuff.Mode.MULTIPLY);
-//                } else {
-                    if(borderRadius != null) {
-                        GradientDrawable gd = new GradientDrawable(
-                                GradientDrawable.Orientation.TOP_BOTTOM,
-                                new int[] {Color.parseColor(backgroundColor), Color.parseColor(backgroundColor)});
-                        gd.setCornerRadius(30f);
-                        component.setBackground(gd);
-                    } else {
-                        component.setBackgroundColor(Color.parseColor(backgroundColor));
-                    }
-//                }
+                if(borderRadius != null) {
+                    gd.setCornerRadius(borderRadius);
+                    component.setBackground(gd);
+                } else {
+                    component.setBackgroundColor(Color.parseColor(backgroundColor));
+                }
+
+                if(style.has("borderColor") && style.has("borderWidth")) {
+                    // borders on views
+                    gd.setStroke(style.getInt("borderWidth"), Color.parseColor(style.getString("borderColor")));
+
+                } else  if(style.has("borderColor")) {
+
+                    gd.setStroke(3, Color.parseColor(style.getString("borderColor")));
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

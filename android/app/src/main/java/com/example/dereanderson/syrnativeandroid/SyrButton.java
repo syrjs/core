@@ -43,8 +43,6 @@ public class SyrButton implements SyrBaseModule {
                 }
              }
 
-
-
             button.setText(instance.getString("value"));
             button.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
