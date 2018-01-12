@@ -188,13 +188,15 @@
             
                 <li class="third-level"><a href="#view">View</a></li>
             
-                <li class="third-level"><a href="#textview">TextView</a></li>
-            
                 <li class="third-level"><a href="#animatedview">Animated.View</a></li>
+            
+                <li class="third-level"><a href="#textview">TextView</a></li>
             
                 <li class="third-level"><a href="#image">Image</a></li>
             
                 <li class="third-level"><a href="#button">Button</a></li>
+            
+                <li class="third-level"><a href="#lineargradient">LinearGradient</a></li>
             
                 <li class="third-level"><a href="#touchableopacity">TouchableOpacity</a></li>
             
@@ -212,6 +214,22 @@
                 <li class="third-level"><a href="#left">left</a></li>
             
                 <li class="third-level"><a href="#top">top</a></li>
+            
+                <li class="third-level"><a href="#color">color</a></li>
+            
+                <li class="third-level"><a href="#backgroundcolor">backgroundColor</a></li>
+            
+                <li class="third-level"><a href="#borderradius">borderRadius</a></li>
+            
+                <li class="third-level"><a href="#borderwidth">borderWidth</a></li>
+            
+                <li class="third-level"><a href="#bordercolor">borderColor</a></li>
+            
+                <li class="third-level"><a href="#fontsize">fontSize</a></li>
+            
+                <li class="third-level"><a href="#fontweight">fontWeight</a></li>
+            
+                <li class="third-level"><a href="#textalign">textAlign</a></li>
             
         
             <li class="second-level"><a href="#rendering">Rendering</a></li>
@@ -310,21 +328,21 @@ render(){
 }
 </code></pre>
 
-<h3 id="textview">TextView</h3>
-<p>A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a <code>value</code> property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a <code>TextView</code></p>
-<pre><code  class="javascript">import { TextView } from 'syr';
-
-render(){
-  return &lt;TextView&gt;&lt;/TextView&gt;
-}
-</code></pre>
-
 <h3 id="animatedview">Animated.View</h3>
 <p>An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.</p>
 <pre><code  class="javascript">import { Animated } from 'syr';
 
 render(){
   return &lt;Animated.View&gt;&lt;/Animated.View&gt;
+}
+</code></pre>
+
+<h3 id="textview">TextView</h3>
+<p>A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a <code>value</code> property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a <code>TextView</code></p>
+<pre><code  class="javascript">import { TextView } from 'syr';
+
+render(){
+  return &lt;TextView&gt;&lt;/TextView&gt;
 }
 </code></pre>
 
@@ -349,30 +367,54 @@ onPress(){
 }
 </code></pre>
 
+<h3 id="lineargradient">LinearGradient</h3>
+<p>A <code>View</code> that has a linear gradient applied to the background.</p>
+<pre><code  class="javascript">import { LinearGradient } from 'syr';
+
+render() {
+  return &lt;LinearGradient colors={['#000000', '#FFFFFF']} style={{ height:150, width:300 }}/&gt;
+}
+</code></pre>
+
 <h3 id="touchableopacity">TouchableOpacity</h3>
 <p>An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.</p>
-<pre><code  class="">&lt;TouchableOpacity onPress={()=&gt;this.handleBackPress()} style={styles.iconContainer}&gt;
-  &lt;Image
-    style={styles.icon}
-    source={{ uri: 'icon' }}
-  /&gt;
-&lt;/TouchableOpacity&gt;
+<pre><code  class="javascript">import { TouchableOpacity, Image } from 'syr';
+
+render() {
+  return &lt;TouchableOpacity onPress={()=&gt;this.handleBackPress()} style={styles.iconContainer}&gt;
+          &lt;Image
+            style={styles.icon}
+            source={{ uri: 'icon' }}
+          /&gt;
+  &lt;/TouchableOpacity&gt;
+}
 </code></pre>
 
 <h3 id="scrollview">ScrollView</h3>
 <p>A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.</p>
-<pre><code  class="">&lt;ScrollView style={styles.scrollView}&gt;
-  &lt;View style={styles.view}&gt;&lt;/View&gt;
-&lt;/ScrollView&gt;
+<pre><code  class="javascript">import { ScrollView, View } from 'syr';
+
+render() {
+  return &lt;ScrollView style={{height: 300, width: 300}}&gt;
+      &lt;View style={{height: 500, width: 500}}&gt;&lt;/View&gt;
+  &lt;/ScrollView&gt;
+}
 </code></pre>
 
 <h3 id="stackview">StackView</h3>
 <p><sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup></p>
 <p>StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.</p>
-<pre><code  class=""> &lt;StackView
+<pre><code  class="javascript">import { StackView, View } from 'syr';
+
+render() {
+  return &lt;StackView
             axis=&quot;vertical&quot;
             style={style}&gt;
- &lt;/StackView&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+  &lt;/StackView&gt;
+}
 </code></pre>
 
 <h2 id="styling-a-component">Styling a component</h2>
@@ -415,6 +457,63 @@ onPress(){
 <p>Set the origin top of a frame.</p>
 <pre><code  class="javascript">let style = {
   top: 50
+}
+</code></pre>
+
+<h3 id="color">color</h3>
+<p>Set the foreground color of a component. Normally text color. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  color: '#FFFFFF'
+}
+</code></pre>
+
+<h3 id="backgroundcolor">backgroundColor</h3>
+<p>Set the background color of a component. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  backgroundColor: '#000000'
+}
+</code></pre>
+
+<h3 id="borderradius">borderRadius</h3>
+<p>Set the border radius of a component. Slight variations exist for curvature on each platform. Combine with PixelRatio to soften corners.</p>
+<pre><code  class="javascript">let style = {
+  borderRadius: 15
+}
+</code></pre>
+
+<h3 id="borderwidth">borderWidth</h3>
+<p>Set the width of the border on a component.</p>
+<pre><code  class="javascript">let style = {
+  borderWidth: 3
+}
+</code></pre>
+
+<h3 id="bordercolor">borderColor</h3>
+<p>Set the color of the border on a component. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  borderColor: '#FF00FF'
+}
+</code></pre>
+
+<h3 id="fontsize">fontSize</h3>
+<p>Set the font size, normally only useful for <code>TextView</code>. Due to variations in screen sizes, we recommend using <code>PixelRatio</code> to obtain the DisplayPoint to PixelSize.</p>
+<pre><code  class="javascript">let style = {
+  fontSize: 24
+}
+</code></pre>
+
+<h3 id="fontweight">fontWeight</h3>
+<p>Set the font weight, normally only useful for <code>TextView</code>. Currently accepts <code>normal</code> or <code>bold</code>.</p>
+<pre><code  class="javascript">let style = {
+  fontWeight: 'bold'
+}
+</code></pre>
+
+<h3 id="textalign">textAlign</h3>
+<p><sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup></p>
+<p>Set the text alignment direction. Currently accepts <code>left</code>|<code>center</code>|<code>right</code>. These will be changing to <code>start</code>|<code>middle</code>|<code>end</code> once internationalization support lands.</p>
+<pre><code  class="javascript">let style = {
+  textAlign: 'center'
 }
 </code></pre>
 
