@@ -51,10 +51,10 @@ class MyComponent extends Component {
   constructor() {
 
     // platform specific styling
-    if(Platform.OS === 'web') {
+    if(Platform.isWeb) {
       styles.button.border = '0';
     }
-    
+
     super();
   }
   render() {
@@ -67,6 +67,7 @@ class MyComponent extends Component {
   }
   componentDidMount() {
     console.log('componentDidMount');
+    console.log(Platform.Version, Platform.OS, Platform.isWeb)
   }
 }
 

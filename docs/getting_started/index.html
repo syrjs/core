@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../images/favicon.ico">
 
     <title>Getting Started - Syr</title>
-
+    <script src="../js/jquery-1.10.2.min.js"></script>
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.4.0.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/hack-2.018.min.css">
@@ -197,21 +197,21 @@
 <p>Our CLI tools will help you get started creating a new project from scratch quickly. This is the easiest way to get started developing Syr applications today.</p>
 <h2 id="setting-up-a-syr-javascript-project">Setting up a Syr JavaScript Project</h2>
 <p>Grab the <code>Syr CLI</code> tool to get started quickly. This tool currently requires <code>NPM 8</code> or higher.</p>
-<pre><code class="bash">npm install -g syr-cli
+<pre><code  class="bash">npm install -g syr-cli
 </code></pre>
 
 <p>Use Syr CLI to Instantly Scaffold a Sample project to start with.</p>
-<pre><code class="bash">syr init ProjectName
+<pre><code  class="bash">syr init ProjectName
 </code></pre>
 
 <p>Syr will generate a base at <code>src/index/js</code>. To launch this file, simply run the following command from the base of your project.</p>
-<pre><code class="bash">syr watch
+<pre><code  class="bash">syr watch
 </code></pre>
 
 <p>This command starts the Webpack Dev Server. Open the Syr iOS Sample Project, located at <code>ios/SyrNativeSample.xcodeproj</code> and simply press play. The sample project will connect to the Webpack Server, and begin executing your application.</p>
 <h2 id="cocoapods">Cocoapods</h2>
 <p>If you have an existing project, we recommend using Cocoapods to quickly grab the Syr Classes and add them to your project.</p>
-<pre><code>pod 'Syr', :git =&gt; 'https://github.com/dmikey/syr.git'
+<pre><code  class="">pod 'Syr', :git =&gt; 'https://github.com/dmikey/syr.git'
 </code></pre></div>
         
     </div>
@@ -224,7 +224,6 @@
         <small>Built with 🍕 in San Jose California.</p></small>
     </footer>
 
-    <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
     <script src="../js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>

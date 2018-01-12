@@ -20,3 +20,6 @@ pages:
       - Debugging: debugging.md
     - Community: community.md
     - Blog: blog.md
+markdown_extensions:
+  - markdown_fenced_code_tabs:
+      single_block_as_tab: false
