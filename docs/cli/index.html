@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../images/favicon.ico">
 
     <title>CLI - Syr</title>
-
+    <script src="../js/jquery-1.10.2.min.js"></script>
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.4.0.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/hack-2.018.min.css">
@@ -209,38 +209,64 @@
 <h1 id="cli-tools">CLI Tools</h1>
 <p>Ease development, by using <code>syr-cli</code>. This tool scaffolds projects, repairs links for native modules, and helps spin up development servers.</p>
 <h2 id="install">Install</h2>
-<pre><code class="bash">npm install -g syr-cli
+<pre><code  class="bash">npm install -g syr-cli
 </code></pre>
 
 <h2 id="usage">Usage</h2>
 <h3 id="init">init</h3>
 <p>Creates a project inside a directory with the specified project name. Installs needed <code>npm</code> modules, and creates an empty set of Native projects that have the required <code>Syr</code> libraries to start development.</p>
-<pre><code class="bash">$ syr init myProjectName
+<pre><code  class="bash">$ syr init myProjectName
 </code></pre>
 
 <h3 id="watch">watch</h3>
 <p>Starts webpack development server for the project.</p>
-<pre><code class="bash">$ syr watch
+<pre><code  class="bash">$ syr watch
 </code></pre>
 
 <h3 id="link">link</h3>
 <p>Fixes any bad paths for <code>Native Modules</code> that reside in the <code>node_modules</code> folder.</p>
-<pre><code class="bash">$ syr link
+<pre><code  class="bash">$ syr link
 </code></pre>
 
 <h2 id="coming-soon">Coming Soon</h2>
 <h3 id="eject">eject</h3>
 <p>Pulls the native libraries together for cloaked distribution. Provide a <code>Prefix</code> that should be used. This will become a private version of Syr. Great for distribution in SDKs.</p>
-<pre><code class="bash">$ syr eject DMKA
+<pre><code  class="bash">$ syr eject DMKA
 </code></pre>
 
 <h3 id="start">start</h3>
 <p>Starts <code>syr watch</code> and spins up simulator/emulator instances to point at development server. Helping non native developers get started fast!</p>
-<pre><code class="bash">$ syr start ios
+<p>
+                <div class="code-nav-container">
+                    
+        <ul class="nav nav-tabs">
+            
+        <li class="nav-item active">
+            <a href="#tab-7-bash" aria-controls="tab-7-bash" role="tab" data-toggle="tab" data-lang="bash">Bash</a>
+        </li>
+    
+        <li class="nav-item ">
+            <a href="#tab-7-bash" aria-controls="tab-7-bash" role="tab" data-toggle="tab" data-lang="bash">Bash</a>
+        </li>
+    
+        </ul>
+    
+        <div class="tab-content">
+            
+        <div role="tabpanel" class="tab-pane active" id="tab-7-bash">
+            <pre><code  class="bash">$ syr start ios
 </code></pre>
-
-<pre><code class="bash">$ syr start android
-</code></pre></div>
+        </div>
+    
+        <div role="tabpanel" class="tab-pane " id="tab-7-bash">
+            <pre><code  class="bash">$ syr start android
+</code></pre>
+        </div>
+    
+        </div>
+    
+                </div>
+                    </p></div>
         
     </div>
 
@@ -252,7 +278,6 @@
         <small>Built with 🍕 in San Jose California.</p></small>
     </footer>
 
-    <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
     <script src="../js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>

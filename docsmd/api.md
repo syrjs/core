@@ -133,7 +133,8 @@ A component that introduces scrolling around content inside. We calculate the ma
 ```
 
 ### StackView
-<sup style="color:red;">watch out! this is under heavy development!</sup>
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
+
 StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.
 
 ```
@@ -144,7 +145,7 @@ StackView allows a developers to align and space out content. In lieu of having 
 ```
 
 ## Styling a component
-<sup style="color:red;">watch out! this is under heavy development!</sup>
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
 
 Styling a component is much like basic `React-Native`. Create a JavaScript literal that describes the layout properties that you would like to affect.
 
@@ -266,12 +267,16 @@ class MyComponent extends Component {
 ## Events
 
 ### Notifying JavaScript from Native
-If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass `SyrComponent.h`.
+If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event.
 
-```objc
-[self sendEventWithName:@"FooParty" body:@{@"name": eventName}];
+```objc fct_label="iOS"
+[self sendEventWithName:@"FooParty" body:@{@"name": @"party at my desk"}];
 ```
-
+```java fct_label="Android"
+HashMap<String, String> eventPayload = new HashMap<String, String>();
+eventPayload.put("name", "part at my desk");
+SyrInstance.getInstance(this).sendEvent("FooParty", "party at my desk")
+```
 ### Subscribing to Events from JavaScript
 JavaScript can subscribe to the events that are being passed down from the native layer.
 
@@ -370,23 +375,78 @@ class MyComponent extends Component {
 Render(MyComponent);
 ```
 
+## Platform
+
+### OS
+
+Retrieve the `Platform` name the application running under.
+
+```javascript
+let OS = Platform.OS // "ios" || "android" || "browser_name"
+```
+
+
+### Version
+
+Retrieve the version of the `Platform` the application is running under. For `iOS` returns the version running. For `Android`, returns the API level. For `Web` returns the browser version.
+
+```javascript
+let Version = Platform.Version // iOS : 11.2 , Android : 24 , Web : 63
+```
+
+### isWeb
+<sup style="color:blue;">⚠️&nbsp;&nbsp;deviates from react-native</sup>
+
+Provides `boolean` value, if the application is displaying inside a Web Browser or now.
+
+```javascript
+if(Platform.isWeb) {
+  // do something with web platform
+}
+```
+## Pixel Ratio
+
+If you are creating cross platform applications, you typically need to deal with varied resolutions across similar physical screens, and densities of physical pixels that map to virtual pixels. The `PixelRatio` class can help you detect values you need to ensure you have consistent layouts across platforms.
+
+### get
+
+Returns the pixel ratio of the device. Use this ratio to determine which quality images you should be using in your application. Returns a precision value, such as `1, 1.5, 2, 2.5`. Use in combination with `getPixelSizeForLayoutSize` to keep resolution scaled.
+
+```javascript
+let dpi = PixelRatio.get();
+
+```
+
+### getPixelSizeForLayoutSize
+
+Returns interpolated pixels based on device resolution width. `(currentScreenWidth / 640)*DisplayPoints`, we ensure we take the smaller of the two screen measurements, so we scale appropriately for Landscape based on the resolution for the physical screen. `640` is based on the standard width of the iPhone 5s and SE.
+
+```javascript
+let virtualPixelSize = PixelRatio.getPixelSizeForLayoutSize(75); // pass DisplayPoints
+```
+
 ## Creating Native Modules
 
 Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.
 
-Syr Native Modules are always used in the `Class` invocation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate` pattern.
+Syr Native Modules are always used in the `Class` invocation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate/singelton` pattern.
 
 ### Building your first class
 
-`MyNativeModule.h`
-```objc
+```objc fct_label="iOS"
+//
+// MyNativeModule.h
+//
+
 #import "SyrComponent.h"
 
 @interface MyNativeModule : SyrComponent
 @end
-```
-`MyNativeModule.m`
-```objc
+
+//
+// MyNativeModule.m
+//
+
 #import "MyNativeModule.h"
 
 @implementation MyNativeModule
@@ -410,6 +470,48 @@ SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 
 @end
 
+```
+
+```java fct_label="Android"
+//
+// MainActivity.java
+//
+// Native Modules must be registered manually on Android
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  modules.add(new MyNativeModule());
+
+  ...
+  ...
+  ...
+
+  instance.setNativeModules(modules);
+}
+
+//
+// MyNativeModule.java
+//
+
+public class SyrView implements SyrBaseModule {
+  // this module provide a render stub
+  @Override
+  public View render(JSONObject component, Context context) {
+        View view = new View(context);
+        return view;
+  }
+
+  // this is the JSX tag that the component will be mapped to
+  @Override
+  public String getName() {
+      return "View";
+  }
+
+  // expose methods to the Javascript Environment
+  @SyrMethod
+  public void testExportMethod(String message, int duration) {
+
+  }
+}
 ```
 
 Accessing the native modules from javascript.

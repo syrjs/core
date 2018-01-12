@@ -24,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // hide action bar aka title bar
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
+
         // register NativeModules
         List<SyrBaseModule> modules = new ArrayList<>();
 

@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/release/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,25 +21,25 @@
         
     <url>
      <loc>/api/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/cli/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/getting_started/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/debugging/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -48,7 +48,7 @@
     
     <url>
      <loc>/community/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -56,7 +56,7 @@
     
     <url>
      <loc>/blog/</loc>
-     <lastmod>2018-01-07</lastmod>
+     <lastmod>2018-01-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

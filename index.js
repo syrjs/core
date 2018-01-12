@@ -24,6 +24,7 @@ import { ScrollView } from './lib/scrollview';
 import { NativeModules } from './lib/nativemodules';
 import { Dimensions } from './lib/dimensions';
 import { PixelRatio } from './lib/pixelratio';
+import { Platform } from './lib/platform';
 
 // rendering platforms
 import { DOMRaster } from './lib/rasters/dom';
@@ -57,5 +58,6 @@ export {
   ScrollView,
   LinearGradient,
   TouchableOpacity,
-  PixelRatio
+  PixelRatio,
+  Platform
 };
