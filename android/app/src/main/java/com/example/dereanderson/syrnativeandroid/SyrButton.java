@@ -52,7 +52,6 @@ public class SyrButton implements SyrBaseModule {
                     eventMap.put("type", "onPress");
                     eventMap.put("guid", guid);
                     SyrEventHandler.getInstance().sendEvent(eventMap);
-
                 }
             });
         } catch (JSONException e) {

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -49,6 +50,16 @@ public class SyrText implements SyrBaseModule {
                     }
                 }
 
+                if(style.has("textAlign")) {
+                    if(style.getString("textAlign").contains("center")) {
+                        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                    } else if(style.getString("textAlign").contains("right")) {
+                        textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                    } else {
+                        textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                    }
+                }
 //
             }
 
@@ -60,7 +71,7 @@ public class SyrText implements SyrBaseModule {
         textView.setText(value);
 
         if(style != null) {
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
             lp.setMargins(left, top, 0, 0);
             textView.setLayoutParams(lp);
         }

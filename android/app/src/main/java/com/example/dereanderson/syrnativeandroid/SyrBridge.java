@@ -8,11 +8,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 /**
  * Syr Project
@@ -71,9 +74,22 @@ public class SyrBridge {
         WebSettings webSettings = mBridgedBrowser.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s", bootParams.get("height"), bootParams.get("width"));
+        ArrayList<String> exportedMethods = mRaster.exportedMethods;
+        JSONArray exportedMethodArray = new JSONArray(exportedMethods);
+        try {
+            String exportedMethodString = URLEncoder.encode(exportedMethodArray.toString(), "UTF-8");
+            String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
+            String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s",
+                    bootParams.get("height"),
+                    bootParams.get("width"),
+                    screenDensity);
 
-        mBridgedBrowser.loadUrl(loadURL);
+            mBridgedBrowser.loadUrl(loadURL);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void sendEvent(HashMap<String, String> event) {

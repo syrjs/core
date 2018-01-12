@@ -3,9 +3,7 @@ package com.example.dereanderson.syrnativeandroid;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Layout;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,10 +11,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.WeakHashMap;
-
 
 /**
  * Syr Project
@@ -33,6 +33,7 @@ public class SyrRaster {
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
     private HashMap<String, Object> mModuleInstances;
+    public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
@@ -54,7 +55,41 @@ public class SyrRaster {
         for (int i = 0; i < modules.size(); i++) {
             SyrBaseModule module = modules.get(i);
             String moduleName = module.getName();
-            mModuleMap.put(moduleName, module);
+            String className = module.getClass().getName();
+
+            // register the modules that are being passed
+            // if name is available, then register
+            // otherwise throw a warn, and skip registration
+            if(mModuleMap.containsKey(module)) {
+                String loadURL = String.format("Module name already taken %s", className);
+                Log.w("SyrRaster", "Module name already taken");
+            } else {
+                mModuleMap.put(moduleName, module);
+            }
+
+            // get modules exportable methods
+            getExportedMethods(module.getClass());
+        }
+    }
+
+    public void getExportedMethods(Class clazz) {
+        ArrayList<String> methods = new ArrayList<String>();
+        while (clazz != null) {
+            for (Method method : clazz.getDeclaredMethods()) {
+                int modifiers = method.getModifiers();
+                String methodName = method.getName();
+                Annotation[] annos = method.getAnnotations();
+                for(Annotation anno:annos){
+                    if(anno.toString().contains("SyrMethod")) {
+                        // this is a native method to export over the bridge
+                        if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
+                            String moduleMethodName = String.format("%s_%s",clazz.getName(), methodName);
+                            exportedMethods.add(moduleMethodName);
+                        }
+                    }
+                }
+            }
+            clazz = clazz.getSuperclass();
         }
     }
 

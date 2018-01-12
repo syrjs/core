@@ -1,4 +1,4 @@
-import { Component, Render, View, Dimensions, Animated, Text, Button, Image, TouchableOpacity, LinearGradient } from '../index';
+import { Component, Render, View, Dimensions, Animated, Text, Button, Image, TouchableOpacity, LinearGradient, PixelRatio } from '../index';
 
 const styles = {
   stage: {
@@ -7,16 +7,21 @@ const styles = {
     backgroundColor: '#eeeeee'
   },
   button: {
-    height:150,
-    top:Dimensions.get('window').height - 200,
-    width:Dimensions.get('window').width - 200,
-    left: (Dimensions.get('window').width/2) - (Dimensions.get('window').width - 200)/2,
+    height:PixelRatio.getPixelSizeForLayoutSize(125),
+    top:Dimensions.get('window').height - PixelRatio.getPixelSizeForLayoutSize(200),
+    left:(Dimensions.get('window').width/2) - (Dimensions.get('window').width - PixelRatio.getPixelSizeForLayoutSize(200))/2,
+    width:Dimensions.get('window').width - PixelRatio.getPixelSizeForLayoutSize(200),
     backgroundColor:"#0070ba", color: "#ffffff",
     borderRadius:15
   },
   text: {
-    left: (Dimensions.get('window').width/2) - 500,
-    top:(Dimensions.get('window').height/2) - 145, color: "#000000", fontSize:74
+    color: "#000000",
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(48),
+    width: Dimensions.get('window').width,
+    height: 50,
+    top: PixelRatio.getPixelSizeForLayoutSize(50),
+    left: 0,
+    textAlign:'center'
   }
 };
 class MyComponent extends Component {
@@ -25,12 +30,11 @@ class MyComponent extends Component {
   }
   render() {
     return <View style={styles.stage}>
-      <View style={{width:250,height:250,backgroundColor:"#ff00ff"}}></View>
       <Text style={styles.text}>
        Welcome to Syr Applications!
       </Text>
       <Button style={styles.button}>
-        Syr Demo Button
+        Test Button
       </Button>
      </View>;
   }
