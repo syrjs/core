@@ -6,13 +6,15 @@ describe('JSX', function() {
     it('should not include comments in children', function() {
       class MyComponent extends Component {
         render() {
-          return <View>
-          {/*These are comments*/}
-          <View/>
-          {/*These are comments*/}
-          <Text> Hello </Text>
-          {/*These are comments*/}
-          </View>;
+          return (
+            <View>
+              {/*These are comments*/}
+              <View />
+              {/*These are comments*/}
+              <Text> Hello </Text>
+              {/*These are comments*/}
+            </View>
+          );
         }
       }
 

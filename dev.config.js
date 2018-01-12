@@ -51,7 +51,7 @@ module.exports = {
       mobile: true,
       bodyHtmlSnippet: '<div id="root"></div>',
       template: require('html-webpack-template'),
-      bodyHtmlSnippet: '<style>body{margin:0;}</style>',
+      bodyHtmlSnippet: '<style>body{margin:0;font-family:arial;}</style>',
       links: []
     }),
   ],
