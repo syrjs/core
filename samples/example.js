@@ -39,7 +39,7 @@ class MyComponent extends Component {
      </View>;
   }
   componentDidMount() {
-
+    console.log(PixelRatio.get());
     console.log('componentDidMount');
   }
 }
