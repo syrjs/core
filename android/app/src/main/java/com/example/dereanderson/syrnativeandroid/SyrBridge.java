@@ -79,7 +79,7 @@ public class SyrBridge {
         try {
             String exportedMethodString = URLEncoder.encode(exportedMethodArray.toString(), "UTF-8");
             String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-            String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s",
+            String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android",
                     bootParams.get("height"),
                     bootParams.get("width"),
                     screenDensity);

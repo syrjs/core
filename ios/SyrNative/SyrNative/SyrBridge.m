@@ -104,6 +104,7 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"screen_density" value:[screenScaleNS stringValue]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
   
   components.queryItems = queryItems;
   NSLog(components.URL.absoluteString);

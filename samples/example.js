@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   LinearGradient,
   PixelRatio,
+  Platform
 } from '../index';
 
 const styles = {
@@ -19,7 +20,7 @@ const styles = {
     backgroundColor: '#eeeeee',
   },
   button: {
-    height: PixelRatio.getPixelSizeForLayoutSize(125),
+    height: PixelRatio.getPixelSizeForLayoutSize(75),
     top:
       Dimensions.get('window').height -
       PixelRatio.getPixelSizeForLayoutSize(200),
@@ -33,7 +34,8 @@ const styles = {
       PixelRatio.getPixelSizeForLayoutSize(200),
     backgroundColor: '#0070ba',
     color: '#ffffff',
-    borderRadius: 15,
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(15),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(26),
   },
   text: {
     color: '#000000',
@@ -47,6 +49,12 @@ const styles = {
 };
 class MyComponent extends Component {
   constructor() {
+
+    // platform specific styling
+    if(Platform.OS === 'web') {
+      styles.button.border = '0';
+    }
+    
     super();
   }
   render() {
@@ -58,7 +66,6 @@ class MyComponent extends Component {
     );
   }
   componentDidMount() {
-    console.log(PixelRatio.get());
     console.log('componentDidMount');
   }
 }
