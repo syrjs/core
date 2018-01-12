@@ -57,6 +57,17 @@ render(){
   }}></View>
 }
 ```
+### Animated.View
+
+An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
+
+```javascript
+import { Animated } from 'syr';
+
+render(){
+  return <Animated.View></Animated.View>
+}
+```
 
 ### TextView
 
@@ -67,18 +78,6 @@ import { TextView } from 'syr';
 
 render(){
   return <TextView></TextView>
-}
-```
-
-### Animated.View
-
-An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
-
-```javascript
-import { Animated } from 'syr';
-
-render(){
-  return <Animated.View></Animated.View>
 }
 ```
 
@@ -108,17 +107,33 @@ onPress(){
 }
 ```
 
+### LinearGradient
+
+A `View` that has a linear gradient applied to the background.
+
+```javascript
+import { LinearGradient } from 'syr';
+
+render() {
+  return <LinearGradient colors={['#000000', '#FFFFFF']} style={{ height:150, width:300 }}/>
+}
+```
+
 ### TouchableOpacity
 
 An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.
 
-```
-<TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
-  <Image
-    style={styles.icon}
-    source={{ uri: 'icon' }}
-  />
-</TouchableOpacity>
+```javascript
+import { TouchableOpacity, Image } from 'syr';
+
+render() {
+  return <TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
+          <Image
+            style={styles.icon}
+            source={{ uri: 'icon' }}
+          />
+  </TouchableOpacity>
+}
 ```
 
 
@@ -126,10 +141,14 @@ An invisible clickable view. Use it to encapsulate components for which you want
 
 A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.
 
-```
-<ScrollView style={styles.scrollView}>
-  <View style={styles.view}></View>
-</ScrollView>
+```javascript
+import { ScrollView, View } from 'syr';
+
+render() {
+  return <ScrollView style={{height: 300, width: 300}}>
+      <View style={{height: 500, width: 500}}></View>
+  </ScrollView>
+}
 ```
 
 ### StackView
@@ -137,11 +156,18 @@ A component that introduces scrolling around content inside. We calculate the ma
 
 StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.
 
-```
- <StackView
+```javascript
+import { StackView, View } from 'syr';
+
+render() {
+  return <StackView
             axis="vertical"
             style={style}>
- </StackView>
+    <View style={{height: 50, width: 50}}></View>
+    <View style={{height: 50, width: 50}}></View>
+    <View style={{height: 50, width: 50}}></View>
+  </StackView>
+}
 ```
 
 ## Styling a component
@@ -201,6 +227,88 @@ Set the origin top of a frame.
 ```javascript
 let style = {
   top: 50
+}
+```
+
+### color
+
+Set the foreground color of a component. Normally text color. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  color: '#FFFFFF'
+}
+```
+
+### backgroundColor
+
+Set the background color of a component. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  backgroundColor: '#000000'
+}
+```
+
+### borderRadius
+
+Set the border radius of a component. Slight variations exist for curvature on each platform. Combine with PixelRatio to soften corners.
+
+```javascript
+let style = {
+  borderRadius: 15
+}
+```
+
+### borderWidth
+
+Set the width of the border on a component.
+
+```javascript
+let style = {
+  borderWidth: 3
+}
+```
+
+### borderColor
+
+Set the color of the border on a component. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  borderColor: '#FF00FF'
+}
+```
+
+### fontSize
+
+Set the font size, normally only useful for `TextView`. Due to variations in screen sizes, we recommend using `PixelRatio` to obtain the DisplayPoint to PixelSize.
+
+```javascript
+let style = {
+  fontSize: 24
+}
+```
+
+### fontWeight
+
+Set the font weight, normally only useful for `TextView`. Currently accepts `normal` or `bold`.
+
+```javascript
+let style = {
+  fontWeight: 'bold'
+}
+```
+
+### textAlign
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
+
+Set the text alignment direction. Currently accepts `left`|`center`|`right`. These will be changing to `start`|`middle`|`end` once internationalization support lands.
+
+
+```javascript
+let style = {
+  textAlign: 'center'
 }
 ```
 
