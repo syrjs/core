@@ -44,8 +44,8 @@ public class SyrRootView extends FrameLayout {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        mHeight = this.getWidth();
-        mWidth = this.getHeight();
+        mWidth = this.getWidth();
+        mHeight = this.getHeight();
 
         if(mHeight > 0 && mWidth > 0 && !mLoaded) {
             mLoaded = true;

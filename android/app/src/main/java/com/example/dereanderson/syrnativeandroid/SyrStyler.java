@@ -49,7 +49,7 @@ public class SyrStyler{
 
         if(style.has("backgroundColor")) {
             try {
-                Integer borderRadius = null;
+
                 String backgroundColor = style.getString("backgroundColor");
 
                 GradientDrawable gd = new GradientDrawable(
@@ -57,14 +57,8 @@ public class SyrStyler{
                         new int[] {Color.parseColor(backgroundColor), Color.parseColor(backgroundColor)});
 
                 if(style.has("borderRadius")) {
-                    borderRadius = style.getInt("borderRadius");
-                }
-
-                if(borderRadius != null) {
+                    Integer borderRadius = style.getInt("borderRadius");
                     gd.setCornerRadius(borderRadius);
-                    component.setBackground(gd);
-                } else {
-                    component.setBackgroundColor(Color.parseColor(backgroundColor));
                 }
 
                 if(style.has("borderColor") && style.has("borderWidth")) {
@@ -75,6 +69,8 @@ public class SyrStyler{
 
                     gd.setStroke(3, Color.parseColor(style.getString("borderColor")));
                 }
+
+                component.setBackground(gd);
 
             } catch (JSONException e) {
                 e.printStackTrace();

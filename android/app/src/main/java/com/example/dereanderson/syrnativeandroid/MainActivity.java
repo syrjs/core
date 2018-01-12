@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         modules.add(new SyrImage());
         modules.add(new SyrTouchableOpacity());
         modules.add(new SyrLinearGradient());
+        modules.add(new SyrScrollview());
 
         // get the javascript bundle
         SyrBundle bundle = new SyrBundleManager().setBundleAssetName("").build();
@@ -47,12 +48,11 @@ public class MainActivity extends AppCompatActivity {
         // create a new Rootview
         SyrRootView rootview = new SyrRootView(this);
 
-
-        // set the content of the to the Rootview
-        setContentView(rootview);
-
         // start the Syr Application
         rootview.startSyrApplication(instance, bundle);
 
+
+        // set the content of the to the Rootview
+        setContentView(rootview);
     }
 }

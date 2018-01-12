@@ -10,7 +10,13 @@ const captureStream = require('./testsetup').captureStream;
 describe('TouchableOpacity', function() {
   class TouchableTest extends Component {
     render() {
-      return <TouchableOpacity onPress={() => console.log('Touchable OnClick works')}>Hello World</TouchableOpacity>;
+      return (
+        <TouchableOpacity
+          onPress={() => console.log('Touchable OnClick works')}
+        >
+          Hello World
+        </TouchableOpacity>
+      );
     }
   }
 
@@ -22,18 +28,17 @@ describe('TouchableOpacity', function() {
   });
 
   let hook;
-   beforeEach(function(){
-     hook = captureStream(process.stdout);
-   });
-   afterEach(function(){
-     hook.unhook();
-   });
-
-  it('should execute onclick and execute the given function. (in this case a console.log)', function() {
-    const event = document.createEvent("HTMLEvents");
-    event.initEvent("click", false, true);
-    element.dispatchEvent(event);
-    assert.equal(hook.captured(),'Touchable OnClick works\n');
+  beforeEach(function() {
+    hook = captureStream(process.stdout);
+  });
+  afterEach(function() {
+    hook.unhook();
   });
 
+  it('should execute onclick and execute the given function. (in this case a console.log)', function() {
+    const event = document.createEvent('HTMLEvents');
+    event.initEvent('click', false, true);
+    element.dispatchEvent(event);
+    assert.equal(hook.captured(), 'Touchable OnClick works\n');
+  });
 });

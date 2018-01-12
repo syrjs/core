@@ -42,4 +42,9 @@ public class SyrView implements SyrBaseModule {
     public String getName() {
         return "View";
     }
+
+    @SyrMethod
+    public void testExportMethod(String message, int duration) {
+
+    }
 }

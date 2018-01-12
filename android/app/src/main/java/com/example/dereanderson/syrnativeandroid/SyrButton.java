@@ -1,5 +1,6 @@
 package com.example.dereanderson.syrnativeandroid;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -21,7 +22,7 @@ public class SyrButton implements SyrBaseModule {
 
     @Override
     public View render(JSONObject component, Context context) {
-        Button button = new Button(context);
+        final Button button = new Button(context);
         JSONObject style = null;
 
         try {
@@ -32,6 +33,7 @@ public class SyrButton implements SyrBaseModule {
                 style = component.getJSONObject("attributes").getJSONObject("style");
                 button.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(button, style);
+
                 if(style.has("color")) {
                     button.setTextColor(Color.parseColor(style.getString("color")));
                 }
