@@ -23,6 +23,7 @@ public class SyrButton implements SyrBaseModule {
     @Override
     public View render(JSONObject component, Context context) {
         final Button button = new Button(context);
+        button.setAllCaps(false);
         JSONObject style = null;
 
         try {

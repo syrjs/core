@@ -37,8 +37,8 @@ public class SyrImage implements SyrBaseModule {
         if(style != null) {
 
         }
-
-        imageView.setImageResource(R.drawable.ic_add_a_photo_black_24dp);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setImageResource(R.drawable.ic_muppets_misspiggy);
         return imageView;
     }
 
