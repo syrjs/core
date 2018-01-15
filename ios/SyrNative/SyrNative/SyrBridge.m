@@ -79,9 +79,9 @@
   NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
-  NSURL* syrBridgeUrl = [NSURL fileURLWithPath:syrBridgePath];
+  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];//[NSURL fileURLWithPath:syrBridgePath];
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
-  
+
   // pass native module names and selectors to the javascript side
   NSMutableArray *queryItems = [NSMutableArray array];
   for (NSString *key in _raster.nativemodules) {
@@ -110,7 +110,9 @@
   
   components.queryItems = queryItems;
   NSLog(components.URL.absoluteString);
-  [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
+  
+  NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
+  [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
 
 /**

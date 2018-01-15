@@ -61,7 +61,7 @@ class MyComponent extends Component {
     return (
       <View style={styles.stage}>
         <Text style={styles.text}>Welcome to Syr Applications!</Text>
-        <Button style={styles.button}>Test Button</Button>
+        <Button style={styles.button}>Test Button 1</Button>
       </View>
     );
   }

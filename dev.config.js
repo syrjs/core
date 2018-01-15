@@ -14,6 +14,11 @@ module.exports = {
     filename: 'assets/[name].min.js',
   },
 
+  devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true
+  },
+
   // resolve files
   // we reference a bunch of files in the build tool
   // command dir is the project path
@@ -49,9 +54,8 @@ module.exports = {
       inject: false,
       title: 'Test Fixture',
       mobile: true,
-      bodyHtmlSnippet: '<div id="root"></div>',
       template: require('html-webpack-template'),
-      bodyHtmlSnippet: '<style>body{margin:0;font-family:arial;}</style>',
+      bodyHtmlSnippet: '<div id="root"></div><style>body{margin:0;font-family:arial;}</style>',
       links: []
     }),
   ],

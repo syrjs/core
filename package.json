@@ -8,8 +8,7 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
-    "serve": "webpack-dev-server --config dev.config.js --content-base build/",
-    "serve-droid": "webpack-dev-server --port 8080 --host 0.0.0.0 --config dev.config.js --content-base build/"
+    "serve": "webpack-dev-server --config dev.config.js --content-base build/"
   },
   "repository": {
     "type": "git",
