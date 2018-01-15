@@ -1,19 +1,21 @@
 const webpack = require('webpack');
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    syr: ['./index.js'],
-    app: ['./samples/example.js']
+    app: ['./samples/example.js'],
   },
 
   output: {
-    path: path.resolve('./dist'),
-    filename: '[name].min.js',
-    library: 'syr',
-    libraryTarget: 'var',
+    path: path.resolve('dist'),
+    filename: 'assets/[name].min.js',
+  },
+
+  devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true
   },
 
   // resolve files
@@ -38,15 +40,30 @@ module.exports = {
           presets: [
             ["env", {
               "targets": {
-                "browsers": ["Android >= 5", "safari >= 7"]
+                "browsers": ["Android >= 5", "safari >= 7"],
+                "uglify": true
               }
             }]
           ],
           plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
-        },
+        }
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        loader: "file-loader?name=images/.[ext]"
+      }
+
     ],
   },
 
-  plugins: [new UglifyJSPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: false,
+      title: 'Test Fixture',
+      mobile: true,
+      template: require('html-webpack-template'),
+      bodyHtmlSnippet: '<div id="root"></div><style>body{margin:0;font-family:arial;}</style>',
+      links: []
+    })
+  ],
 };

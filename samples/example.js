@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   LinearGradient,
   PixelRatio,
-  Platform
+  Platform,
 } from '../index';
 
 const styles = {
@@ -49,9 +49,8 @@ const styles = {
 };
 class MyComponent extends Component {
   constructor() {
-
     // platform specific styling
-    if(Platform.isWeb) {
+    if (Platform.isWeb) {
       styles.button.border = '0';
     }
 
@@ -67,7 +66,7 @@ class MyComponent extends Component {
   }
   componentDidMount() {
     console.log('componentDidMount');
-    console.log(Platform.Version, Platform.OS, Platform.isWeb)
+    console.log(Platform.Version, Platform.OS, Platform.isWeb);
   }
 }
 

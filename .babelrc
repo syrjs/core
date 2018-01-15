@@ -1,10 +1,11 @@
 {
-  presets: [
+  "presets": [
     ["env", {
       "targets": {
-        "browsers": ["Android >= 5", "safari >= 7"]
+        "browsers": ["Android >= 5", "safari >= 7"],
+        "uglify": true
       }
     }]
   ],
-  plugins: [['./libs/jsx.js', { useVariables: true }]]
+  "plugins": [["./libs/jsx.js", { "useVariables": true }]]
 }
