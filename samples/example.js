@@ -46,7 +46,14 @@ const styles = {
     left: 0,
     textAlign: 'center',
   },
+  image: {
+    width: PixelRatio.getPixelSizeForLayoutSize(241),
+    height: PixelRatio.getPixelSizeForLayoutSize(299),
+    top: (Dimensions.get('window').height/2) - (PixelRatio.getPixelSizeForLayoutSize(299)/2),
+    left: (Dimensions.get('window').width/2) - (PixelRatio.getPixelSizeForLayoutSize(241)/2)
+  }
 };
+
 class MyComponent extends Component {
   constructor() {
     // platform specific styling
@@ -55,18 +62,30 @@ class MyComponent extends Component {
     }
 
     super();
+
+    this.spinPiggyAnimation = new Animated.Value(0);
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
-      <View style={styles.stage}>
+      <Animated.View style={styles.stage}>
         <Text style={styles.text}>Welcome to Syr Applications!</Text>
+        <Animated.Image source={{uri:"piggy"}} style={styles.image}/>
         <Button style={styles.button}>Test Button 1</Button>
-      </View>
+      </Animated.View>
     );
   }
+  spinPiggy() {
+    Animated.timing(this.spinPiggyAnimation, {
+      toValue: 360,
+      duration: 2000
+    }).start(()=>{
+      console.log('running again')
+      this.spinPiggy();
+    });
+  }
   componentDidMount() {
-    console.log('componentDidMount');
-    console.log(Platform.Version, Platform.OS, Platform.isWeb);
+    this.spinPiggy()
   }
 }
 
