@@ -13,6 +13,11 @@ import {
   Platform,
 } from '../index';
 
+// currently required to pull images in to web.
+// maps with iOS
+// need a better way to handle these through the image loader
+require('./images/piggy.png');
+
 const styles = {
   stage: {
     width: Dimensions.get('window').width,
@@ -64,7 +69,8 @@ class MyComponent extends Component {
     super();
 
     this.spinPiggyAnimation = new Animated.Value(0);
-    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
+    this.opacityAnimation = new Animated.Value(1);
+    styles.image.transform = [{ rotatex: this.spinPiggyAnimation, opacity: this.opacityAnimation }];
   }
   render() {
     return (
@@ -78,11 +84,14 @@ class MyComponent extends Component {
   spinPiggy() {
     Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 2000
+      duration: 1000
     }).start(()=>{
-      console.log('running again')
-      this.spinPiggy();
+
     });
+    Animated.timing(this.opacityAnimation, {
+      toValue: 0,
+      duration: 1000
+    }).start();
   }
   componentDidMount() {
     this.spinPiggy()

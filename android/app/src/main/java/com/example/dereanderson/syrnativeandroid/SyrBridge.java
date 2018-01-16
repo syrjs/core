@@ -47,7 +47,10 @@ public class SyrBridge {
 
             if(messageType.equals("gui")) {
                 mRaster.parseAST(jsonObject);
+            } else if(messageType.equals("animation")) {
+                mRaster.setupAnimation(jsonObject);
             }
+
 
         } catch (Throwable tx) {
             Log.e("SyrBridge", "Could not parse malformed JSON: \"" + message + "\"");

@@ -32,7 +32,7 @@ public class SyrRaster {
     private Handler uiHandler;
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
-    private HashMap<String, Object> mModuleInstances;
+    private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /** Instantiate the interface and set the context */
@@ -48,6 +48,7 @@ public class SyrRaster {
         uiHandler = new Handler(Looper.getMainLooper());
     }
 
+    /** Sets the native modules that will be used in this Context */
     public void setModules(List<SyrBaseModule> modules) {
         mModules = modules;
 
@@ -72,6 +73,7 @@ public class SyrRaster {
         }
     }
 
+    /** Get all Exported Bridged Methods */
     public void getExportedMethods(Class clazz) {
         ArrayList<String> methods = new ArrayList<String>();
         while (clazz != null) {
@@ -97,6 +99,7 @@ public class SyrRaster {
         mBridge = bridge;
     }
 
+    /** parse the AST sent from the Syr Bridge */
     public void parseAST(JSONObject jsonObject) {
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
@@ -122,14 +125,30 @@ public class SyrRaster {
         }
     }
 
+    public void setupAnimation(JSONObject astDict) {
+        try {
+            String animationStringify = astDict.getString("ast");
+            JSONObject animation = new JSONObject(animationStringify);
+            String animatedTarget = animation.getString("guid");
+            View animationTarget = (View) mModuleInstances.get(animatedTarget);
+            if(animatedTarget != null) {
+                SyrAnimator.animate(animationTarget, animation, mBridge);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /** removes all sub view from the root */
     public void clearRootView() {
         mRootview.removeAllViews();
     }
 
-    public void emitComponentDidMount(String guid){
+    public void emitComponentDidMount(String guid) {
 
         // send event for componentDidMount
-        HashMap<String, String> eventMap = new HashMap<String, String>();
+        HashMap<String, String> eventMap = new HashMap<>();
         eventMap.put("type", "componentDidMount");
         eventMap.put("guid", guid);
         mBridge.sendEvent(eventMap);
@@ -167,6 +186,7 @@ public class SyrRaster {
         View returnView = null;
 
         returnView = componentModule.render(child, mContext);
+        mModuleInstances.put(child.getString("guid"), returnView);
 
         return returnView;
     }
