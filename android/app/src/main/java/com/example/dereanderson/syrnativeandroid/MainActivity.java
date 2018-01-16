@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         modules.add(new SyrTouchableOpacity());
         modules.add(new SyrLinearGradient());
         modules.add(new SyrScrollview());
+        modules.add(new SyrAnimatedImage());
+        modules.add(new SyrAnimatedView());
+        modules.add(new SyrAnimatedText());
 
         // get the javascript bundle
         SyrBundle bundle = new SyrBundleManager().setBundleAssetName("").build();
