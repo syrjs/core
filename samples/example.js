@@ -67,10 +67,12 @@ class MyComponent extends Component {
     }
 
     super();
-
+    this.state = {};
     this.spinPiggyAnimation = new Animated.Value(0);
+    this.movePiggyAnimation = new Animated.ValueXY({x:0, y:0});
+    this.heightAnimation = new Animated.Value(styles.image.height);
     this.opacityAnimation = new Animated.Value(1);
-    styles.image.transform = [{ rotatex: this.spinPiggyAnimation, opacity: this.opacityAnimation }];
+    styles.image.transform = [this.movePiggyAnimation,{ rotatex: this.spinPiggyAnimation, opacity: this.opacityAnimation, height:this.heightAnimation }];
   }
   render() {
     return (
@@ -84,14 +86,23 @@ class MyComponent extends Component {
   spinPiggy() {
     Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 1000
+      duration: 2000
     }).start(()=>{
 
     });
-    Animated.timing(this.opacityAnimation, {
-      toValue: 0,
-      duration: 1000
-    }).start();
+
+    Animated.timing(this.movePiggyAnimation, {
+      toValue: {
+        y: styles.image.top,
+        x: styles.image.left
+      },
+      duration:2000
+    }).start(()=>{
+      Animated.timing(this.heightAnimation, {
+        toValue: PixelRatio.getPixelSizeForLayoutSize(400),
+        duration: 1000
+      }).start();
+    })
   }
   componentDidMount() {
     this.spinPiggy()
