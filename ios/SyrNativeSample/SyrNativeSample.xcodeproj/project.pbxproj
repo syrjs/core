@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24FBF70200C18FA0063FAC4 /* SyrExample.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24FBF6F200C18FA0063FAC4 /* SyrExample.xcassets */; };
 		D2C0356C1F9E65BB009BE5E0 /* SyrNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EC21DD1F4D257D00DFA7C9 /* SyrNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2EC21C31F4D257300DFA7C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C21F4D257300DFA7C9 /* main.m */; };
 		D2EC21C61F4D257300DFA7C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */; };
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D24FBF6F200C18FA0063FAC4 /* SyrExample.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SyrExample.xcassets; sourceTree = "<group>"; };
 		D2EC21BE1F4D257300DFA7C9 /* SyrNativeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyrNativeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC21C21F4D257300DFA7C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2EC21C41F4D257300DFA7C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		D2EC21C01F4D257300DFA7C9 /* SyrNativeSample */ = {
 			isa = PBXGroup;
 			children = (
+				D24FBF6F200C18FA0063FAC4 /* SyrExample.xcassets */,
 				D2EC21C41F4D257300DFA7C9 /* AppDelegate.h */,
 				D2EC21C51F4D257300DFA7C9 /* AppDelegate.m */,
 				D2EC21C71F4D257300DFA7C9 /* ViewController.h */,
@@ -230,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24FBF70200C18FA0063FAC4 /* SyrExample.xcassets in Resources */,
 				D2EC21D11F4D257300DFA7C9 /* LaunchScreen.storyboard in Resources */,
 				D2EC21CC1F4D257300DFA7C9 /* Main.storyboard in Resources */,
 			);

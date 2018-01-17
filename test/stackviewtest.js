@@ -1,13 +1,18 @@
 import { Component, Render, RasterManager, StackView } from '../index';
 const assert = require('assert');
+const initHTML = `<!DOCTYPE html><body></body></html>`;
 
 //including JSDOM to test browser rendering.
-require('./testsetup').testDom();
+require('./testsetup').testDom(initHTML);
 
 describe('StackView', function() {
   class ScrollViewTest extends Component {
     render() {
-      return <StackView axis='horizontal' style={{height: 50, width: 100}}>Hello World</StackView>;
+      return (
+        <StackView axis="horizontal" style={{ height: 50, width: 100 }}>
+          Hello World
+        </StackView>
+      );
     }
   }
 
@@ -29,5 +34,4 @@ describe('StackView', function() {
     assert.equal(element.style['height'], '50px');
     assert.equal(element.style['width'], '100px');
   });
-
 });

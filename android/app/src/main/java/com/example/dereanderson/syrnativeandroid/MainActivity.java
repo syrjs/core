@@ -2,6 +2,7 @@ package com.example.dereanderson.syrnativeandroid;
 
 import com.example.dereanderson.syrnativeandroid.SyrBridge;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,42 +14,52 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        RelativeLayout layout = (RelativeLayout)findViewById(R.id.SyrRootView);
-
-        WebView wv = new WebView(this);
-        wv.addJavascriptInterface(new SyrBridge(this), "SyrBridge");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
+        // hide action bar aka title bar
+        try
+        {
+            this.getSupportActionBar().hide();
         }
+        catch (NullPointerException e){}
 
-        WebSettings webSettings = wv.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        // register NativeModules
+        List<SyrBaseModule> modules = new ArrayList<>();
 
-        wv.loadUrl("http://10.0.2.2:8080");
+        // register NativeModules
+        modules.add(new SyrView());
+        modules.add(new SyrText());
+        modules.add(new SyrButton());
+        modules.add(new SyrImage());
+        modules.add(new SyrTouchableOpacity());
+        modules.add(new SyrLinearGradient());
+        modules.add(new SyrScrollview());
 
-        // add text view
-        TextView tv = new TextView(this);
-        tv.setText("Dynamic Text!");
-        layout.addView(tv);
+        // get the javascript bundle
+        SyrBundle bundle = new SyrBundleManager().setBundleAssetName("").build();
 
-        //testing creating button
-        Button bt = new Button(this);
-        bt.setText("A Button");
-        bt.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+        // create an instance of Syr
+        SyrInstance instance = new SyrInstanceManager().setJSBundleFile(bundle).build();
 
-        layout.addView(bt);
+        // expose the desired native modules to the instance
+        instance.setNativeModules(modules);
 
+        // create a new Rootview
+        SyrRootView rootview = new SyrRootView(this);
+
+        // start the Syr Application
+        rootview.startSyrApplication(instance, bundle);
+
+
+        // set the content of the to the Rootview
+        setContentView(rootview);
     }
 }
-
-

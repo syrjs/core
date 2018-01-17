@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../images/favicon.ico">
 
     <title>API - Syr</title>
-
+    <script src="../js/jquery-1.10.2.min.js"></script>
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.4.0.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/hack-2.018.min.css">
@@ -188,13 +188,15 @@
             
                 <li class="third-level"><a href="#view">View</a></li>
             
-                <li class="third-level"><a href="#textview">TextView</a></li>
-            
                 <li class="third-level"><a href="#animatedview">Animated.View</a></li>
+            
+                <li class="third-level"><a href="#textview">TextView</a></li>
             
                 <li class="third-level"><a href="#image">Image</a></li>
             
                 <li class="third-level"><a href="#button">Button</a></li>
+            
+                <li class="third-level"><a href="#lineargradient">LinearGradient</a></li>
             
                 <li class="third-level"><a href="#touchableopacity">TouchableOpacity</a></li>
             
@@ -212,6 +214,22 @@
                 <li class="third-level"><a href="#left">left</a></li>
             
                 <li class="third-level"><a href="#top">top</a></li>
+            
+                <li class="third-level"><a href="#color">color</a></li>
+            
+                <li class="third-level"><a href="#backgroundcolor">backgroundColor</a></li>
+            
+                <li class="third-level"><a href="#borderradius">borderRadius</a></li>
+            
+                <li class="third-level"><a href="#borderwidth">borderWidth</a></li>
+            
+                <li class="third-level"><a href="#bordercolor">borderColor</a></li>
+            
+                <li class="third-level"><a href="#fontsize">fontSize</a></li>
+            
+                <li class="third-level"><a href="#fontweight">fontWeight</a></li>
+            
+                <li class="third-level"><a href="#textalign">textAlign</a></li>
             
         
             <li class="second-level"><a href="#rendering">Rendering</a></li>
@@ -236,6 +254,22 @@
                 <li class="third-level"><a href="#rotation">Rotation</a></li>
             
         
+            <li class="second-level"><a href="#platform">Platform</a></li>
+            
+                <li class="third-level"><a href="#os">OS</a></li>
+            
+                <li class="third-level"><a href="#version">Version</a></li>
+            
+                <li class="third-level"><a href="#isweb">isWeb</a></li>
+            
+        
+            <li class="second-level"><a href="#pixel-ratio">Pixel Ratio</a></li>
+            
+                <li class="third-level"><a href="#get">get</a></li>
+            
+                <li class="third-level"><a href="#getpixelsizeforlayoutsize">getPixelSizeForLayoutSize</a></li>
+            
+        
             <li class="second-level"><a href="#creating-native-modules">Creating Native Modules</a></li>
             
                 <li class="third-level"><a href="#building-your-first-class">Building your first class</a></li>
@@ -251,7 +285,7 @@
 <h2 id="components">Components</h2>
 <h3 id="a-component">A Component</h3>
 <p>SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.</p>
-<pre><code class="javascript">import { Component } from 'syr';
+<pre><code  class="javascript">import { Component } from 'syr';
 
 class MyComponent extends Component {
   constructor() {
@@ -264,7 +298,7 @@ class MyComponent extends Component {
 
 <h3 id="view">View</h3>
 <p>A <code>View</code> component is the basic component that renders to a surface (the <code>RootView</code>). This component can be rendered to a <code>SyrRootView</code>.</p>
-<pre><code class="javascript">import { View } from 'syr';
+<pre><code  class="javascript">import { View } from 'syr';
 
 render(){
   return &lt;View&gt;&lt;/View&gt;
@@ -272,7 +306,7 @@ render(){
 </code></pre>
 
 <p>It can also own components, that will render to the surface as a child. Such as another <code>View</code>.</p>
-<pre><code class="javascript">import { View } from 'syr';
+<pre><code  class="javascript">import { View } from 'syr';
 
 render(){
   return &lt;View&gt;
@@ -282,7 +316,7 @@ render(){
 </code></pre>
 
 <p>Because a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.</p>
-<pre><code class="javascript">import { View } from 'syr';
+<pre><code  class="javascript">import { View } from 'syr';
 
 render(){
   return &lt;View style={{
@@ -294,27 +328,27 @@ render(){
 }
 </code></pre>
 
-<h3 id="textview">TextView</h3>
-<p>A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a <code>value</code> property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a <code>TextView</code></p>
-<pre><code class="javascript">import { TextView } from 'syr';
-
-render(){
-  return &lt;TextView&gt;&lt;/TextView&gt;
-}
-</code></pre>
-
 <h3 id="animatedview">Animated.View</h3>
 <p>An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.</p>
-<pre><code class="javascript">import { Animated } from 'syr';
+<pre><code  class="javascript">import { Animated } from 'syr';
 
 render(){
   return &lt;Animated.View&gt;&lt;/Animated.View&gt;
 }
 </code></pre>
 
+<h3 id="textview">TextView</h3>
+<p>A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a <code>value</code> property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a <code>TextView</code></p>
+<pre><code  class="javascript">import { TextView } from 'syr';
+
+render(){
+  return &lt;TextView&gt;&lt;/TextView&gt;
+}
+</code></pre>
+
 <h3 id="image">Image</h3>
 <p>A component for displaying an Image. It is self terminated as it can not hold any children.</p>
-<pre><code class="javascript">import { Image } from 'syr';
+<pre><code  class="javascript">import { Image } from 'syr';
 
 render(){
   return &lt;Image source={{uri:&quot;file_name&quot;}} style={{ height:150, width:300 }}/&gt;
@@ -323,7 +357,7 @@ render(){
 
 <h3 id="button">Button</h3>
 <p>A clickable component. Returns an onPress event.</p>
-<pre><code class="javascript">import { Button } from 'syr';
+<pre><code  class="javascript">import { Button } from 'syr';
 
 render(){
   return &lt;Button onPress={this.onPress} style={{ height:150, width:300 }}&gt;Press Me&lt;/Button&gt;
@@ -333,79 +367,160 @@ onPress(){
 }
 </code></pre>
 
+<h3 id="lineargradient">LinearGradient</h3>
+<p>A <code>View</code> that has a linear gradient applied to the background.</p>
+<pre><code  class="javascript">import { LinearGradient } from 'syr';
+
+render() {
+  return &lt;LinearGradient colors={['#000000', '#FFFFFF']} style={{ height:150, width:300 }}/&gt;
+}
+</code></pre>
+
 <h3 id="touchableopacity">TouchableOpacity</h3>
 <p>An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.</p>
-<pre><code>&lt;TouchableOpacity onPress={()=&gt;this.handleBackPress()} style={styles.iconContainer}&gt;
-  &lt;Image
-    style={styles.icon}
-    source={{ uri: 'icon' }}
-  /&gt;
-&lt;/TouchableOpacity&gt;
+<pre><code  class="javascript">import { TouchableOpacity, Image } from 'syr';
+
+render() {
+  return &lt;TouchableOpacity onPress={()=&gt;this.handleBackPress()} style={styles.iconContainer}&gt;
+          &lt;Image
+            style={styles.icon}
+            source={{ uri: 'icon' }}
+          /&gt;
+  &lt;/TouchableOpacity&gt;
+}
 </code></pre>
 
 <h3 id="scrollview">ScrollView</h3>
 <p>A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.</p>
-<pre><code>&lt;ScrollView style={styles.scrollView}&gt;
-  &lt;View style={styles.view}&gt;&lt;/View&gt;
-&lt;/ScrollView&gt;
+<pre><code  class="javascript">import { ScrollView, View } from 'syr';
+
+render() {
+  return &lt;ScrollView style={{height: 300, width: 300}}&gt;
+      &lt;View style={{height: 500, width: 500}}&gt;&lt;/View&gt;
+  &lt;/ScrollView&gt;
+}
 </code></pre>
 
 <h3 id="stackview">StackView</h3>
-<p><sup style="color:red;">watch out! this is under heavy development!</sup>
-StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.</p>
-<pre><code> &lt;StackView
+<p><sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup></p>
+<p>StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.</p>
+<pre><code  class="javascript">import { StackView, View } from 'syr';
+
+render() {
+  return &lt;StackView
             axis=&quot;vertical&quot;
             style={style}&gt;
- &lt;/StackView&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+    &lt;View style={{height: 50, width: 50}}&gt;&lt;/View&gt;
+  &lt;/StackView&gt;
+}
 </code></pre>
 
 <h2 id="styling-a-component">Styling a component</h2>
-<p><sup style="color:red;">watch out! this is under heavy development!</sup></p>
+<p><sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup></p>
 <p>Styling a component is much like basic <code>React-Native</code>. Create a JavaScript literal that describes the layout properties that you would like to affect.</p>
-<pre><code class="javascript">let style = {
+<pre><code  class="javascript">let style = {
   height: 50,
   width: 100
 }
 </code></pre>
 
 <p>You then bind the style to the rendering node.</p>
-<pre><code class="javascript">render() {
+<pre><code  class="javascript">render() {
   return &lt;View style={style}&gt;&lt;/View&gt;
 }
 </code></pre>
 
 <h3 id="height">height</h3>
 <p>Set the height of a frame.</p>
-<pre><code class="javascript">let style = {
+<pre><code  class="javascript">let style = {
   height: 50
 }
 </code></pre>
 
 <h3 id="width">width</h3>
 <p>Set the width of a frame.</p>
-<pre><code class="javascript">let style = {
+<pre><code  class="javascript">let style = {
   width: 100
 }
 </code></pre>
 
 <h3 id="left">left</h3>
 <p>Set the origin left for a frame.</p>
-<pre><code class="javascript">let style = {
+<pre><code  class="javascript">let style = {
   left: 50
 }
 </code></pre>
 
 <h3 id="top">top</h3>
 <p>Set the origin top of a frame.</p>
-<pre><code class="javascript">let style = {
+<pre><code  class="javascript">let style = {
   top: 50
+}
+</code></pre>
+
+<h3 id="color">color</h3>
+<p>Set the foreground color of a component. Normally text color. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  color: '#FFFFFF'
+}
+</code></pre>
+
+<h3 id="backgroundcolor">backgroundColor</h3>
+<p>Set the background color of a component. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  backgroundColor: '#000000'
+}
+</code></pre>
+
+<h3 id="borderradius">borderRadius</h3>
+<p>Set the border radius of a component. Slight variations exist for curvature on each platform. Combine with PixelRatio to soften corners.</p>
+<pre><code  class="javascript">let style = {
+  borderRadius: 15
+}
+</code></pre>
+
+<h3 id="borderwidth">borderWidth</h3>
+<p>Set the width of the border on a component.</p>
+<pre><code  class="javascript">let style = {
+  borderWidth: 3
+}
+</code></pre>
+
+<h3 id="bordercolor">borderColor</h3>
+<p>Set the color of the border on a component. Accepts HEX and RGBA.</p>
+<pre><code  class="javascript">let style = {
+  borderColor: '#FF00FF'
+}
+</code></pre>
+
+<h3 id="fontsize">fontSize</h3>
+<p>Set the font size, normally only useful for <code>TextView</code>. Due to variations in screen sizes, we recommend using <code>PixelRatio</code> to obtain the DisplayPoint to PixelSize.</p>
+<pre><code  class="javascript">let style = {
+  fontSize: 24
+}
+</code></pre>
+
+<h3 id="fontweight">fontWeight</h3>
+<p>Set the font weight, normally only useful for <code>TextView</code>. Currently accepts <code>normal</code> or <code>bold</code>.</p>
+<pre><code  class="javascript">let style = {
+  fontWeight: 'bold'
+}
+</code></pre>
+
+<h3 id="textalign">textAlign</h3>
+<p><sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup></p>
+<p>Set the text alignment direction. Currently accepts <code>left</code>|<code>center</code>|<code>right</code>. These will be changing to <code>start</code>|<code>middle</code>|<code>end</code> once internationalization support lands.</p>
+<pre><code  class="javascript">let style = {
+  textAlign: 'center'
 }
 </code></pre>
 
 <h2 id="rendering">Rendering</h2>
 <p>SyrSDK uses the concept of a <code>raster</code>. It tries to detect the environment it's in, based on the availability of the <code>SyrNative</code> bridge. Rendering to the <code>RootView</code> surface is as easy as creating the component, and handing it to the raster.</p>
 <p>We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's <code>constructor</code>, and then the <code>lifeCycle</code> events.</p>
-<pre><code class="javascript">import { Component, Render } from 'syr';
+<pre><code  class="javascript">import { Component, Render } from 'syr';
 
 class MyApp extends Component {
   render() {
@@ -420,7 +535,7 @@ Render(MyComponent);
 <h2 id="lifecycle">LifeCycle</h2>
 <p>Syr supports Life Cycle events to help control the flow of the program. To take advantage of these add the following to javascript classes.</p>
 <h3 id="method-stubs">Method stubs</h3>
-<pre><code>import { Component } from 'syr';
+<pre><code  class="">import { Component } from 'syr';
 
 class MyComponent extends Component {
   constructor() {
@@ -457,13 +572,43 @@ class MyComponent extends Component {
 
 <h2 id="events">Events</h2>
 <h3 id="notifying-javascript-from-native">Notifying JavaScript from Native</h3>
-<p>If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass <code>SyrComponent.h</code>.</p>
-<pre><code class="objc">[self sendEventWithName:@&quot;FooParty&quot; body:@{@&quot;name&quot;: eventName}];
+<p>If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event.</p>
+<p>
+                <div class="code-nav-container">
+                    
+        <ul class="nav nav-tabs">
+            
+        <li class="nav-item active">
+            <a href="#tab-0-objc" aria-controls="tab-0-objc" role="tab" data-toggle="tab" data-lang="objc">iOS</a>
+        </li>
+    
+        <li class="nav-item ">
+            <a href="#tab-0-java" aria-controls="tab-0-java" role="tab" data-toggle="tab" data-lang="java">Android</a>
+        </li>
+    
+        </ul>
+    
+        <div class="tab-content">
+            
+        <div role="tabpanel" class="tab-pane active" id="tab-0-objc">
+            <pre><code  class="objc">[self sendEventWithName:@&quot;FooParty&quot; body:@{@&quot;name&quot;: @&quot;party at my desk&quot;}];
 </code></pre>
-
+        </div>
+    
+        <div role="tabpanel" class="tab-pane " id="tab-0-java">
+            <pre><code  class="java">HashMap&lt;String, String&gt; eventPayload = new HashMap&lt;String, String&gt;();
+eventPayload.put(&quot;name&quot;, &quot;part at my desk&quot;);
+SyrInstance.getInstance(this).sendEvent(&quot;FooParty&quot;, &quot;party at my desk&quot;)
+</code></pre>
+        </div>
+    
+        </div>
+    
+                </div>
+                    </p>
 <h3 id="subscribing-to-events-from-javascript">Subscribing to Events from JavaScript</h3>
 <p>JavaScript can subscribe to the events that are being passed down from the native layer.</p>
-<pre><code class="javascript">import { NativeEventEmitter } from 'syr';
+<pre><code  class="javascript">import { NativeEventEmitter } from 'syr';
 
 
 const subscription = NativeEventEmitter.addListener(
@@ -478,7 +623,7 @@ subscription.remove();
 <h2 id="animations">Animations</h2>
 <p>Syr has support for animations. With Syr animations you can run animations transitions in parallel, or sequence. Animations allow for the shift in x,y position and size. If you need a more complex animation you can use <code>Animated.Value</code> to bind a transform to the component.</p>
 <h3 id="slide">Slide</h3>
-<pre><code class="javascript">import { Component, Render, Animated } from 'syr';
+<pre><code  class="javascript">import { Component, Render, Animated } from 'syr';
 
 class MyComponent extends Component {
   constructor() {
@@ -515,7 +660,7 @@ Render(MyComponent);
 </code></pre>
 
 <h3 id="rotation">Rotation</h3>
-<pre><code class="javascript">import { Component, Render, Animated } from 'syr';
+<pre><code  class="javascript">import { Component, Render, Animated } from 'syr';
 
 class MyComponent extends Component {
   constructor() {
@@ -553,19 +698,74 @@ class MyComponent extends Component {
 Render(MyComponent);
 </code></pre>
 
+<h2 id="platform">Platform</h2>
+<h3 id="os">OS</h3>
+<p>Retrieve the <code>Platform</code> name the application running under.</p>
+<pre><code  class="javascript">let OS = Platform.OS // &quot;ios&quot; || &quot;android&quot; || &quot;browser_name&quot;
+</code></pre>
+
+<h3 id="version">Version</h3>
+<p>Retrieve the version of the <code>Platform</code> the application is running under. For <code>iOS</code> returns the version running. For <code>Android</code>, returns the API level. For <code>Web</code> returns the browser version.</p>
+<pre><code  class="javascript">let Version = Platform.Version // iOS : 11.2 , Android : 24 , Web : 63
+</code></pre>
+
+<h3 id="isweb">isWeb</h3>
+<p><sup style="color:blue;">⚠️&nbsp;&nbsp;deviates from react-native</sup></p>
+<p>Provides <code>boolean</code> value, if the application is displaying inside a Web Browser or now.</p>
+<pre><code  class="javascript">if(Platform.isWeb) {
+  // do something with web platform
+}
+</code></pre>
+
+<h2 id="pixel-ratio">Pixel Ratio</h2>
+<p>If you are creating cross platform applications, you typically need to deal with varied resolutions across similar physical screens, and densities of physical pixels that map to virtual pixels. The <code>PixelRatio</code> class can help you detect values you need to ensure you have consistent layouts across platforms.</p>
+<h3 id="get">get</h3>
+<p>Returns the pixel ratio of the device. Use this ratio to determine which quality images you should be using in your application. Returns a precision value, such as <code>1, 1.5, 2, 2.5</code>. Use in combination with <code>getPixelSizeForLayoutSize</code> to keep resolution scaled.</p>
+<pre><code  class="javascript">let dpi = PixelRatio.get();
+
+</code></pre>
+
+<h3 id="getpixelsizeforlayoutsize">getPixelSizeForLayoutSize</h3>
+<p>Returns interpolated pixels based on device resolution width. <code>(currentScreenWidth / 640)*DisplayPoints</code>, we ensure we take the smaller of the two screen measurements, so we scale appropriately for Landscape based on the resolution for the physical screen. <code>640</code> is based on the standard width of the iPhone 5s and SE.</p>
+<pre><code  class="javascript">let virtualPixelSize = PixelRatio.getPixelSizeForLayoutSize(75); // pass DisplayPoints
+</code></pre>
+
 <h2 id="creating-native-modules">Creating Native Modules</h2>
 <p>Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.</p>
-<p>Syr Native Modules are always used in the <code>Class</code> invocation method. What this means is that if you want to store instanced information (some value) on your class <code>Natively</code> you need to use the <code>sharedDelegate</code> pattern.</p>
+<p>Syr Native Modules are always used in the <code>Class</code> invocation method. What this means is that if you want to store instanced information (some value) on your class <code>Natively</code> you need to use the <code>sharedDelegate/singelton</code> pattern.</p>
 <h3 id="building-your-first-class">Building your first class</h3>
-<p><code>MyNativeModule.h</code></p>
-<pre><code class="objc">#import &quot;SyrComponent.h&quot;
+<p>
+                <div class="code-nav-container">
+                    
+        <ul class="nav nav-tabs">
+            
+        <li class="nav-item active">
+            <a href="#tab-1-objc" aria-controls="tab-1-objc" role="tab" data-toggle="tab" data-lang="objc">iOS</a>
+        </li>
+    
+        <li class="nav-item ">
+            <a href="#tab-1-java" aria-controls="tab-1-java" role="tab" data-toggle="tab" data-lang="java">Android</a>
+        </li>
+    
+        </ul>
+    
+        <div class="tab-content">
+            
+        <div role="tabpanel" class="tab-pane active" id="tab-1-objc">
+            <pre><code  class="objc">//
+// MyNativeModule.h
+//
+
+#import &quot;SyrComponent.h&quot;
 
 @interface MyNativeModule : SyrComponent
 @end
-</code></pre>
 
-<p><code>MyNativeModule.m</code></p>
-<pre><code class="objc">#import &quot;MyNativeModule.h&quot;
+//
+// MyNativeModule.m
+//
+
+#import &quot;MyNativeModule.h&quot;
 
 @implementation MyNativeModule
 
@@ -589,9 +789,57 @@ SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 @end
 
 </code></pre>
+        </div>
+    
+        <div role="tabpanel" class="tab-pane " id="tab-1-java">
+            <pre><code  class="java">//
+// MainActivity.java
+//
+// Native Modules must be registered manually on Android
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  modules.add(new MyNativeModule());
 
+  ...
+  ...
+  ...
+
+  instance.setNativeModules(modules);
+}
+
+//
+// MyNativeModule.java
+//
+
+public class SyrView implements SyrBaseModule {
+  // this module provide a render stub
+  @Override
+  public View render(JSONObject component, Context context) {
+        View view = new View(context);
+        return view;
+  }
+
+  // this is the JSX tag that the component will be mapped to
+  @Override
+  public String getName() {
+      return &quot;View&quot;;
+  }
+
+  // expose methods to the Javascript Environment
+  @SyrMethod
+  public void testExportMethod(String message, int duration) {
+
+  }
+}
+</code></pre>
+        </div>
+    
+        </div>
+    
+                </div>
+                    </p>
 <p>Accessing the native modules from javascript.</p>
-<pre><code class="javascript">import { NativeModules } from 'syr';
+<pre><code  class="javascript">import { NativeModules } from 'syr';
 
 let MyNativeModule = NativeModules.MyNativeModule;
 
@@ -608,7 +856,6 @@ MyNativeModule.addEvent('building an app', 'at my desk');
         <small>Built with 🍕 in San Jose California.</p></small>
     </footer>
 
-    <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
     <script src="../js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>

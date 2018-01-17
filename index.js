@@ -18,11 +18,13 @@ import { Text } from './lib/text';
 import { Image } from './lib/image';
 import { LinearGradient } from './lib/lineargradient';
 import { TouchableOpacity } from './lib/touchable';
+import { ScrollView } from './lib/scrollview';
 
 // syr environment
 import { NativeModules } from './lib/nativemodules';
 import { Dimensions } from './lib/dimensions';
-import { ScrollView } from './lib/scrollview';
+import { PixelRatio } from './lib/pixelratio';
+import { Platform } from './lib/platform';
 
 // rendering platforms
 import { DOMRaster } from './lib/rasters/dom';
@@ -55,5 +57,7 @@ export {
   EventEmitter,
   ScrollView,
   LinearGradient,
-  TouchableOpacity
+  TouchableOpacity,
+  PixelRatio,
+  Platform
 };

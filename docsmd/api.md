@@ -57,6 +57,17 @@ render(){
   }}></View>
 }
 ```
+### Animated.View
+
+An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
+
+```javascript
+import { Animated } from 'syr';
+
+render(){
+  return <Animated.View></Animated.View>
+}
+```
 
 ### TextView
 
@@ -67,18 +78,6 @@ import { TextView } from 'syr';
 
 render(){
   return <TextView></TextView>
-}
-```
-
-### Animated.View
-
-An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
-
-```javascript
-import { Animated } from 'syr';
-
-render(){
-  return <Animated.View></Animated.View>
 }
 ```
 
@@ -108,17 +107,33 @@ onPress(){
 }
 ```
 
+### LinearGradient
+
+A `View` that has a linear gradient applied to the background.
+
+```javascript
+import { LinearGradient } from 'syr';
+
+render() {
+  return <LinearGradient colors={['#000000', '#FFFFFF']} style={{ height:150, width:300 }}/>
+}
+```
+
 ### TouchableOpacity
 
 An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.
 
-```
-<TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
-  <Image
-    style={styles.icon}
-    source={{ uri: 'icon' }}
-  />
-</TouchableOpacity>
+```javascript
+import { TouchableOpacity, Image } from 'syr';
+
+render() {
+  return <TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
+          <Image
+            style={styles.icon}
+            source={{ uri: 'icon' }}
+          />
+  </TouchableOpacity>
+}
 ```
 
 
@@ -126,25 +141,37 @@ An invisible clickable view. Use it to encapsulate components for which you want
 
 A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.
 
-```
-<ScrollView style={styles.scrollView}>
-  <View style={styles.view}></View>
-</ScrollView>
+```javascript
+import { ScrollView, View } from 'syr';
+
+render() {
+  return <ScrollView style={{height: 300, width: 300}}>
+      <View style={{height: 500, width: 500}}></View>
+  </ScrollView>
+}
 ```
 
 ### StackView
-<sup style="color:red;">watch out! this is under heavy development!</sup>
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
+
 StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.
 
-```
- <StackView
+```javascript
+import { StackView, View } from 'syr';
+
+render() {
+  return <StackView
             axis="vertical"
             style={style}>
- </StackView>
+    <View style={{height: 50, width: 50}}></View>
+    <View style={{height: 50, width: 50}}></View>
+    <View style={{height: 50, width: 50}}></View>
+  </StackView>
+}
 ```
 
 ## Styling a component
-<sup style="color:red;">watch out! this is under heavy development!</sup>
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
 
 Styling a component is much like basic `React-Native`. Create a JavaScript literal that describes the layout properties that you would like to affect.
 
@@ -200,6 +227,88 @@ Set the origin top of a frame.
 ```javascript
 let style = {
   top: 50
+}
+```
+
+### color
+
+Set the foreground color of a component. Normally text color. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  color: '#FFFFFF'
+}
+```
+
+### backgroundColor
+
+Set the background color of a component. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  backgroundColor: '#000000'
+}
+```
+
+### borderRadius
+
+Set the border radius of a component. Slight variations exist for curvature on each platform. Combine with PixelRatio to soften corners.
+
+```javascript
+let style = {
+  borderRadius: 15
+}
+```
+
+### borderWidth
+
+Set the width of the border on a component.
+
+```javascript
+let style = {
+  borderWidth: 3
+}
+```
+
+### borderColor
+
+Set the color of the border on a component. Accepts HEX and RGBA.
+
+```javascript
+let style = {
+  borderColor: '#FF00FF'
+}
+```
+
+### fontSize
+
+Set the font size, normally only useful for `TextView`. Due to variations in screen sizes, we recommend using `PixelRatio` to obtain the DisplayPoint to PixelSize.
+
+```javascript
+let style = {
+  fontSize: 24
+}
+```
+
+### fontWeight
+
+Set the font weight, normally only useful for `TextView`. Currently accepts `normal` or `bold`.
+
+```javascript
+let style = {
+  fontWeight: 'bold'
+}
+```
+
+### textAlign
+<sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
+
+Set the text alignment direction. Currently accepts `left`|`center`|`right`. These will be changing to `start`|`middle`|`end` once internationalization support lands.
+
+
+```javascript
+let style = {
+  textAlign: 'center'
 }
 ```
 
@@ -266,12 +375,16 @@ class MyComponent extends Component {
 ## Events
 
 ### Notifying JavaScript from Native
-If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event, is to subclass `SyrComponent.h`.
+If you need to notify the JavaScript from the Native layer, you can send events, from your native component. The easiest way to get access to this event.
 
-```objc
-[self sendEventWithName:@"FooParty" body:@{@"name": eventName}];
+```objc fct_label="iOS"
+[self sendEventWithName:@"FooParty" body:@{@"name": @"party at my desk"}];
 ```
-
+```java fct_label="Android"
+HashMap<String, String> eventPayload = new HashMap<String, String>();
+eventPayload.put("name", "part at my desk");
+SyrInstance.getInstance(this).sendEvent("FooParty", "party at my desk")
+```
 ### Subscribing to Events from JavaScript
 JavaScript can subscribe to the events that are being passed down from the native layer.
 
@@ -370,23 +483,78 @@ class MyComponent extends Component {
 Render(MyComponent);
 ```
 
+## Platform
+
+### OS
+
+Retrieve the `Platform` name the application running under.
+
+```javascript
+let OS = Platform.OS // "ios" || "android" || "browser_name"
+```
+
+
+### Version
+
+Retrieve the version of the `Platform` the application is running under. For `iOS` returns the version running. For `Android`, returns the API level. For `Web` returns the browser version.
+
+```javascript
+let Version = Platform.Version // iOS : 11.2 , Android : 24 , Web : 63
+```
+
+### isWeb
+<sup style="color:blue;">⚠️&nbsp;&nbsp;deviates from react-native</sup>
+
+Provides `boolean` value, if the application is displaying inside a Web Browser or now.
+
+```javascript
+if(Platform.isWeb) {
+  // do something with web platform
+}
+```
+## Pixel Ratio
+
+If you are creating cross platform applications, you typically need to deal with varied resolutions across similar physical screens, and densities of physical pixels that map to virtual pixels. The `PixelRatio` class can help you detect values you need to ensure you have consistent layouts across platforms.
+
+### get
+
+Returns the pixel ratio of the device. Use this ratio to determine which quality images you should be using in your application. Returns a precision value, such as `1, 1.5, 2, 2.5`. Use in combination with `getPixelSizeForLayoutSize` to keep resolution scaled.
+
+```javascript
+let dpi = PixelRatio.get();
+
+```
+
+### getPixelSizeForLayoutSize
+
+Returns interpolated pixels based on device resolution width. `(currentScreenWidth / 640)*DisplayPoints`, we ensure we take the smaller of the two screen measurements, so we scale appropriately for Landscape based on the resolution for the physical screen. `640` is based on the standard width of the iPhone 5s and SE.
+
+```javascript
+let virtualPixelSize = PixelRatio.getPixelSizeForLayoutSize(75); // pass DisplayPoints
+```
+
 ## Creating Native Modules
 
 Syr lets you create native modules that can bridge across the native to web spectrum. They are capable of providing renderable (Views, Text, Buttons), and having methods callable from JavaScript.
 
-Syr Native Modules are always used in the `Class` invocation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate` pattern.
+Syr Native Modules are always used in the `Class` invocation method. What this means is that if you want to store instanced information (some value) on your class `Natively` you need to use the `sharedDelegate/singelton` pattern.
 
 ### Building your first class
 
-`MyNativeModule.h`
-```objc
+```objc fct_label="iOS"
+//
+// MyNativeModule.h
+//
+
 #import "SyrComponent.h"
 
 @interface MyNativeModule : SyrComponent
 @end
-```
-`MyNativeModule.m`
-```objc
+
+//
+// MyNativeModule.m
+//
+
 #import "MyNativeModule.h"
 
 @implementation MyNativeModule
@@ -410,6 +578,48 @@ SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 
 @end
 
+```
+
+```java fct_label="Android"
+//
+// MainActivity.java
+//
+// Native Modules must be registered manually on Android
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  modules.add(new MyNativeModule());
+
+  ...
+  ...
+  ...
+
+  instance.setNativeModules(modules);
+}
+
+//
+// MyNativeModule.java
+//
+
+public class SyrView implements SyrBaseModule {
+  // this module provide a render stub
+  @Override
+  public View render(JSONObject component, Context context) {
+        View view = new View(context);
+        return view;
+  }
+
+  // this is the JSX tag that the component will be mapped to
+  @Override
+  public String getName() {
+      return "View";
+  }
+
+  // expose methods to the Javascript Environment
+  @SyrMethod
+  public void testExportMethod(String message, int duration) {
+
+  }
+}
 ```
 
 Accessing the native modules from javascript.

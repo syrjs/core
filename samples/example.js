@@ -1,67 +1,91 @@
-import { Component, Render, View, Dimensions, Animated } from '../index';
+import {
+  Component,
+  Render,
+  View,
+  Dimensions,
+  Animated,
+  Text,
+  Button,
+  Image,
+  TouchableOpacity,
+  LinearGradient,
+  PixelRatio,
+  Platform,
+} from '../index';
 
 const styles = {
-  square: {
-    width: 200,
-    height: 100,
-    backgroundColor: '#ff00ff',
-    top: Dimensions.get('window').height / 2 - 50,
-    left: Dimensions.get('window').width / 2 - 100,
-    borderRadius: 30,
+  stage: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: '#eeeeee',
   },
+  button: {
+    height: PixelRatio.getPixelSizeForLayoutSize(75),
+    top:
+      Dimensions.get('window').height -
+      PixelRatio.getPixelSizeForLayoutSize(200),
+    left:
+      Dimensions.get('window').width / 2 -
+      (Dimensions.get('window').width -
+        PixelRatio.getPixelSizeForLayoutSize(200)) /
+        2,
+    width:
+      Dimensions.get('window').width -
+      PixelRatio.getPixelSizeForLayoutSize(200),
+    backgroundColor: '#0070ba',
+    color: '#ffffff',
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(15),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(26),
+  },
+  text: {
+    color: '#000000',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(48),
+    width: Dimensions.get('window').width,
+    height: 50,
+    top: PixelRatio.getPixelSizeForLayoutSize(50),
+    left: 0,
+    textAlign: 'center',
+  },
+  image: {
+    width: PixelRatio.getPixelSizeForLayoutSize(241),
+    height: PixelRatio.getPixelSizeForLayoutSize(299),
+    top: (Dimensions.get('window').height/2) - (PixelRatio.getPixelSizeForLayoutSize(299)/2),
+    left: (Dimensions.get('window').width/2) - (PixelRatio.getPixelSizeForLayoutSize(241)/2)
+  }
 };
+
 class MyComponent extends Component {
   constructor() {
+    // platform specific styling
+    if (Platform.isWeb) {
+      styles.button.border = '0';
+    }
+
     super();
-    this.spinAnimation = new Animated.Value(0);
-    this.opacityInAnimation = new Animated.Value(0);
-    this.opacityOutAnimation = new Animated.Value(1);
-    this.moveAimation = new Animated.ValueXY({ x: 0, y: 600 });
-    styles.square.transform = [
-      { rotateZ: this.spinAnimation },
-      { opacity: this.opacityInAnimation },
-      { opacity: this.opacityOutAnimation },
-      this.moveAimation,
-    ];
+
+    this.spinPiggyAnimation = new Animated.Value(0);
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
-    return <Animated.View style={styles.square} />;
+    return (
+      <Animated.View style={styles.stage}>
+        <Text style={styles.text}>Welcome to Syr Applications!</Text>
+        <Animated.Image source={{uri:"piggy"}} style={styles.image}/>
+        <Button style={styles.button}>Test Button 1</Button>
+      </Animated.View>
+    );
   }
-  moveUp() {
-    Animated.timing(this.moveAimation, {
-      toValue: { x: 0, y: 0 },
-      duration: 5000,
-    }).start(() => {
-      this.spin();
-    });
-  }
-  fadeIn() {
-    Animated.timing(this.opacityInAnimation, {
-      toValue: 1,
-      duration: 5000,
-    }).start(() => {
-      this.fadeOut();
-    });
-  }
-  fadeOut() {
-    Animated.timing(this.opacityOutAnimation, {
-      toValue: 0,
-      duration: 5000,
-    }).start(() => {
-      this.fadeIn();
-    });
-  }
-  spin() {
-    Animated.timing(this.spinAnimation, {
+  spinPiggy() {
+    Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 5000,
-    }).start(() => {
-      this.spin();
+      duration: 2000
+    }).start(()=>{
+      console.log('running again')
+      this.spinPiggy();
     });
   }
   componentDidMount() {
-    this.fadeIn();
-    this.moveUp();
+    this.spinPiggy()
   }
 }
 

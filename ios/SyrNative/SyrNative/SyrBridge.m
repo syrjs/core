@@ -79,9 +79,9 @@
   NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
-  NSURL* syrBridgeUrl = [NSURL fileURLWithPath:syrBridgePath];
+  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];//[NSURL fileURLWithPath:syrBridgePath];
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
-  
+
   // pass native module names and selectors to the javascript side
   NSMutableArray *queryItems = [NSMutableArray array];
   for (NSString *key in _raster.nativemodules) {
@@ -97,14 +97,22 @@
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
 
-
+  CGFloat screenScale = [[UIScreen mainScreen] scale];
+  NSNumber* screenScaleNS = [NSNumber numberWithFloat:screenScale];
+  
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"screen_density" value:[screenScaleNS stringValue]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
+  
   
   components.queryItems = queryItems;
   NSLog(components.URL.absoluteString);
-  [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
+  
+  NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
+  [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
 
 /**
