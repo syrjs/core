@@ -28,7 +28,7 @@ const styles = {
     height: PixelRatio.getPixelSizeForLayoutSize(75),
     top:
       Dimensions.get('window').height -
-      PixelRatio.getPixelSizeForLayoutSize(200),
+      PixelRatio.getPixelSizeForLayoutSize(100),
     left:
       Dimensions.get('window').width / 2 -
       (Dimensions.get('window').width -
@@ -69,10 +69,7 @@ class MyComponent extends Component {
     super();
     this.state = {};
     this.spinPiggyAnimation = new Animated.Value(0);
-    this.movePiggyAnimation = new Animated.ValueXY({x:0, y:0});
-    this.heightAnimation = new Animated.Value(styles.image.height);
-    this.opacityAnimation = new Animated.Value(1);
-    styles.image.transform = [this.movePiggyAnimation,{ rotatex: this.spinPiggyAnimation, opacity: this.opacityAnimation, height:this.heightAnimation }];
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
@@ -88,21 +85,8 @@ class MyComponent extends Component {
       toValue: 360,
       duration: 2000
     }).start(()=>{
-
+      this.spinPiggy()
     });
-
-    Animated.timing(this.movePiggyAnimation, {
-      toValue: {
-        y: styles.image.top,
-        x: styles.image.left
-      },
-      duration:2000
-    }).start(()=>{
-      Animated.timing(this.heightAnimation, {
-        toValue: PixelRatio.getPixelSizeForLayoutSize(400),
-        duration: 1000
-      }).start();
-    })
   }
   componentDidMount() {
     this.spinPiggy()

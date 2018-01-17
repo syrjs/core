@@ -1,11 +1,10 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -22,7 +21,7 @@ import java.util.HashMap;
 public class SyrAnimator {
     // todo: width and height
     // do we need two of these? borrow this from the raster?
-    static private Handler uiHandler = new Handler(Looper.getMainLooper());
+//    static private Handler uiHandler = new Handler(Looper.getMainLooper());
 
     static private String determineAnimationType(JSONObject animationDict) {
         if(animationDict.has("animatedProperty")) {
@@ -46,7 +45,7 @@ public class SyrAnimator {
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                uiHandler.post(new Runnable() {
+               bridge.mRaster.uiHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         HashMap<String, String> eventMap = new HashMap<>();
@@ -151,15 +150,15 @@ public class SyrAnimator {
             }
 
             if(propertyName.contains("height")){
-                ValueAnimator slideAnimator = ValueAnimator
+                ValueAnimator valueAnimator = ValueAnimator
                         .ofInt(fromValue, toValue)
                         .setDuration(duration);
 
-                slideAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(final ValueAnimator animation) {
 
-                        uiHandler.post(new Runnable() {
+                        bridge.mRaster.uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 // get the value the interpolator is at
@@ -175,7 +174,72 @@ public class SyrAnimator {
                     }
                 });
 
-                slideAnimator.start();
+                valueAnimator.addListener(new AnimatorListenerAdapter()
+                {
+                    @Override
+                    public void onAnimationEnd(Animator animation)
+                    {
+                        bridge.mRaster.uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                HashMap<String, String> eventMap = new HashMap<>();
+                                eventMap.put("type", "animationComplete");
+                                eventMap.put("animation", jsonAnimation.toString());
+                                eventMap.put("guid", guid);
+                                bridge.sendEvent(eventMap);
+                            }
+                        });
+                    }
+                });
+
+                valueAnimator.start();
+            }
+
+            if(propertyName.contains("width")){
+                ValueAnimator valueAnimator = ValueAnimator
+                        .ofInt(fromValue, toValue)
+                        .setDuration(duration);
+
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(final ValueAnimator animation) {
+
+                        bridge.mRaster.uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // get the value the interpolator is at
+                                Integer value = (Integer) animation.getAnimatedValue();
+                                // I'm going to set the layout's height 1:1 to the tick
+                                component.getLayoutParams().width = value.intValue();
+                                // force all layouts to see which ones are affected by
+                                // this layouts height change
+                                component.requestLayout();
+                            }
+                        });
+
+                    }
+                });
+
+                valueAnimator.addListener(new AnimatorListenerAdapter()
+                {
+                    @Override
+                    public void onAnimationEnd(Animator animation)
+                    {
+                        bridge.mRaster.uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                HashMap<String, String> eventMap = new HashMap<>();
+                                eventMap.put("type", "animationComplete");
+                                eventMap.put("animation", jsonAnimation.toString());
+                                eventMap.put("guid", guid);
+                                bridge.sendEvent(eventMap);
+                            }
+                        });
+                    }
+                });
+
+
+                valueAnimator.start();
             }
         }
     }

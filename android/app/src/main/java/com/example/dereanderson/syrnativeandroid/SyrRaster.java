@@ -29,7 +29,7 @@ public class SyrRaster {
     private Context mContext;
     private SyrRootView mRootview;
     private SyrBridge mBridge;
-    private Handler uiHandler;
+    public Handler uiHandler;
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>();

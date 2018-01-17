@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 public class SyrBridge {
     private Context mContext;
-    private SyrRaster mRaster;
+    public SyrRaster mRaster;
     private WebView mBridgedBrowser;
     public HashMap<String, String> bootParams = new HashMap<String,String>();
 
