@@ -8,9 +8,7 @@
 
 #import "SyrComponent.h"
 
-@interface SyrView : SyrComponent{
-    
-}
+@interface SyrView : SyrComponent
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
 @end
 

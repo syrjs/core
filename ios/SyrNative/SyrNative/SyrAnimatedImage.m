@@ -14,5 +14,4 @@
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   return [self render:component withInstance:componentInstance];
 }
-
 @end
