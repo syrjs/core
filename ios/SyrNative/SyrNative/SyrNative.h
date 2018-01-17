@@ -15,3 +15,4 @@ FOUNDATION_EXPORT double SyrVersionNumber;
 FOUNDATION_EXPORT const unsigned char SyrVersionString[];
 
 #import "SyrRootView.h"
+#import "SyrComponent.h"
