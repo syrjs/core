@@ -40,7 +40,7 @@ module.exports = {
           presets: [
             ["env", {
               "targets": {
-                "browsers": ["Android >= 5", "safari >= 7"],
+                "browsers": ["Android >= 4", "safari >= 7"],
                 "uglify": true
               }
             }]

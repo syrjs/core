@@ -30,21 +30,21 @@ import java.util.HashMap;
 
 
 public class SyrBridge {
-    private Context mContext;
+
     public SyrRaster mRaster;
-    private WebView mBridgedBrowser;
     public HashMap<String, String> bootParams = new HashMap<String,String>();
+
     static private Handler uiHandler = new Handler(Looper.getMainLooper());
+    private Context mContext;
+    private WebView mBridgedBrowser;
     private ArrayList<String> queue = new ArrayList<>();
     private Boolean recievingMessage = false;
     private HandlerThread thread = new HandlerThread("SyrWebViewThread");
-    public Handler handler;
+    private Handler webViewHandler;
 
     /** Instantiate the interface and set the context */
-    SyrBridge(Context c) {
+    SyrBridge(Context c) { mContext = c; }
 
-        mContext = c;
-    }
     public void setRaster(SyrRaster raster) {
         mRaster = raster;
     }
@@ -72,10 +72,10 @@ public class SyrBridge {
     public void loadBundle() {
 
         thread.start();
-        handler = new Handler(thread.getLooper());
+        webViewHandler = new Handler(thread.getLooper());
 
         final SyrBridge self = this;
-        handler.post(new Runnable() {
+        webViewHandler.post(new Runnable() {
             @SuppressLint("JavascriptInterface")
             @Override
             public void run() {
@@ -103,7 +103,7 @@ public class SyrBridge {
                 try {
                     String exportedMethodString = URLEncoder.encode(exportedMethodArray.toString(), "UTF-8");
                     String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-                    String loadURL = String.format("http://192.168.1.252:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s",
+                    String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s",
                             bootParams.get("height"),
                             bootParams.get("width"),
                             screenDensity,
@@ -130,7 +130,7 @@ public class SyrBridge {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             String msg = message.toString();
             final String eventJS = String.format("SyrEvents.emit(%s);", msg);
-            handler.post(new Runnable() {
+            webViewHandler.post(new Runnable() {
                 @SuppressLint("JavascriptInterface")
                 @Override
                 public void run() {

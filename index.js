@@ -2,6 +2,8 @@
  * This file glues together a bunch of stuff, to make a superset compatible reactique api
  */
 
+require('./lib/fills');
+
 // core composition
 import { RasterManager } from './lib/rastermanager';
 import { Component } from './lib/component';

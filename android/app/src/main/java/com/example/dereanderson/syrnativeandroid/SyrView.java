@@ -30,7 +30,6 @@ public class SyrView implements SyrBaseModule {
             layout = new RelativeLayout(context);
         }
 
-
         JSONObject style = null;
 
         try {

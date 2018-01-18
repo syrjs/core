@@ -160,8 +160,12 @@ public class SyrRaster {
 
     /** removes all sub view from the root */
     public void clearRootView() {
-
-        //mRootview.removeAllViews();
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mRootview.removeAllViews();
+            }
+        });
     }
 
     public void emitComponentDidMount(String guid) {
@@ -184,12 +188,12 @@ public class SyrRaster {
                     if(!isUpdate) {
                         viewParent.addView(component);
                         // bridge posts needs to be gui threads
-                        uiHandler.postDelayed(new Runnable() {
+                        uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 emitComponentDidMount(guid);
                             }
-                        }, 100);
+                        });
                     }
 
                     if(component instanceof ViewGroup) {
@@ -213,12 +217,12 @@ public class SyrRaster {
             if(mModuleInstances.containsKey(child.getString("guid"))) {
 
                 final View view = (View)mModuleInstances.get(child.getString("guid"));
-                uiHandler.postDelayed(new Runnable() {
+                uiHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         componentModule.render(child, mContext, view);
                     }
-                }, 100);
+                });
 
             } else {
                 returnView = componentModule.render(child, mContext, null);

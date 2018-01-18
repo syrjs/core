@@ -54,9 +54,13 @@ const styles = {
   image: {
     width: PixelRatio.getPixelSizeForLayoutSize(241),
     height: PixelRatio.getPixelSizeForLayoutSize(299),
-    top: (Dimensions.get('window').height/2) - (PixelRatio.getPixelSizeForLayoutSize(299)/2),
-    left: (Dimensions.get('window').width/2) - (PixelRatio.getPixelSizeForLayoutSize(241)/2)
-  }
+    top:
+      Dimensions.get('window').height / 2 -
+      PixelRatio.getPixelSizeForLayoutSize(299) / 2,
+    left:
+      Dimensions.get('window').width / 2 -
+      PixelRatio.getPixelSizeForLayoutSize(241) / 2,
+  },
 };
 
 class MyComponent extends Component {
@@ -71,7 +75,7 @@ class MyComponent extends Component {
     this.state = {
       buttonEnabled: true,
       buttonMessage: 'Pressed: ' + this.num,
-      message: 'Spinning Image: ' + this.spin
+      message: 'Spinning Image: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
     styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
@@ -79,27 +83,28 @@ class MyComponent extends Component {
   render() {
     return (
       <Animated.View style={styles.stage}>
-        <Text style={styles.text}>{ this.state.message }</Text>
-        <Animated.Image source={{uri:"piggy"}} style={styles.image}/>
-        <Button enabled={this.state.buttonEnabled} onPress={()=>this.onPress()} style={styles.button}>{ this.state.buttonMessage }</Button>
+        <Text style={styles.text}>{this.state.message}</Text>
+        <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
+        <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
+          {this.state.buttonMessage}
+        </Button>
       </Animated.View>
     );
   }
   onPress() {
-      this.num += 1;
-      this.setState({
-
-        buttonMessage: 'Pressed: ' + this.num,
-      });
+    this.num += 1;
+    this.setState({
+      buttonMessage: 'Pressed: ' + this.num,
+    });
   }
   spinPiggy() {
     this.spin += 1;
     Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 2000
-    }).start(()=>{
+      duration: 2000,
+    }).start(() => {
       this.setState({
-        message: 'Spinning Image: ' + this.spin
+        message: 'Spinning Image: ' + this.spin,
       });
       this.spinPiggy();
     });
