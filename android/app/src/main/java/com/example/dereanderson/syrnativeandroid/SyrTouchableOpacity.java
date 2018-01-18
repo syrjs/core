@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class SyrTouchableOpacity implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
+    public View render(JSONObject component, Context context, View instance) {
         RelativeLayout layout = new RelativeLayout(context);
         JSONObject style = null;
 

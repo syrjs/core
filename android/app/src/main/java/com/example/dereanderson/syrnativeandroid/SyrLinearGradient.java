@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class SyrLinearGradient implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
+    public View render(JSONObject component, Context context, View instance) {
         View view = new View(context);
         JSONObject style = null;
         JSONArray colors = null;

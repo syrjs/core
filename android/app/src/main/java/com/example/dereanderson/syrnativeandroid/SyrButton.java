@@ -21,14 +21,37 @@ import java.util.HashMap;
 public class SyrButton implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
-        final Button button = new Button(context);
+    public View render(JSONObject component, Context context, View instance) {
+        Button button;
+
+        if(instance != null) {
+            button = (Button) instance;
+        } else {
+            button =  new Button(context);
+
+        }
+
         button.setAllCaps(false);
         JSONObject style = null;
 
         try {
-            JSONObject instance = component.getJSONObject("instance");
+            JSONObject jsonInstance = component.getJSONObject("instance");
+            JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
+            Boolean isEnabled = jsonAttributes.getBoolean("enabled");
             final String guid  = component.getString("guid");
+
+            if(instance == null) {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HashMap<String, String> eventMap = new HashMap<String, String>();
+                        eventMap.put("type", "onPress");
+                        eventMap.put("guid", guid);
+                        SyrEventHandler.getInstance().sendEvent(eventMap);
+                    }
+                });
+            }
+
             if(component.has("attributes") && component.getJSONObject("attributes").has("style")){
 
                 style = component.getJSONObject("attributes").getJSONObject("style");
@@ -46,15 +69,10 @@ public class SyrButton implements SyrBaseModule {
                 }
              }
 
-            button.setText(instance.getString("value"));
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    HashMap<String, String> eventMap = new HashMap<String, String>();
-                    eventMap.put("type", "onPress");
-                    eventMap.put("guid", guid);
-                    SyrEventHandler.getInstance().sendEvent(eventMap);
-                }
-            });
+            button.setEnabled(isEnabled);
+
+            button.setText(jsonInstance.getString("value"));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
