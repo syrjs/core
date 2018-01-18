@@ -19,13 +19,12 @@
     // hook errors
     window.onerror = function myErrorHandler(errorMsg, url, lineNumber, colnumber, error) {
       emitError({
-                level: 'error',
-                errorMsg: errorMsg
+          level: 'error',
+          errorMsg: errorMsg
     	});
-      console.log(window.event);
       return false;
     }
-  
+
   	// load script
     function loadScript(url, callback){
       var script = document.createElement("script")
@@ -44,7 +43,7 @@
                emitError({ errorMsg: 'Could Not Connect to Syr Server', level: 'error' });
       }
     }, 2000);
-    
+
     // load dev script
     loadScript('http://127.0.0.1:8080/assets/app.min.js', function(){
     			scriptDidLoad = true;

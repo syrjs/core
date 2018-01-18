@@ -29,10 +29,10 @@ public class SyrRaster {
     private Context mContext;
     private SyrRootView mRootview;
     private SyrBridge mBridge;
-    private Handler uiHandler;
+    public Handler uiHandler;
     private List<SyrBaseModule> mModules;
     private HashMap<String, Object> mModuleMap;
-    private HashMap<String, Object> mModuleInstances;
+    private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /** Instantiate the interface and set the context */
@@ -48,6 +48,7 @@ public class SyrRaster {
         uiHandler = new Handler(Looper.getMainLooper());
     }
 
+    /** Sets the native modules that will be used in this Context */
     public void setModules(List<SyrBaseModule> modules) {
         mModules = modules;
 
@@ -72,6 +73,7 @@ public class SyrRaster {
         }
     }
 
+    /** Get all Exported Bridged Methods */
     public void getExportedMethods(Class clazz) {
         ArrayList<String> methods = new ArrayList<String>();
         while (clazz != null) {
@@ -97,63 +99,101 @@ public class SyrRaster {
         mBridge = bridge;
     }
 
+    /** parse the AST sent from the Syr Bridge */
     public void parseAST(JSONObject jsonObject) {
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            final View component = createComponent(ast);
-            final String elementName = ast.getString("elementName");
             final String guid = ast.getString("guid");
-            JSONArray children = ast.getJSONArray("children");
 
-            if(children.length() > 0) {
-                buildChildren(children, (ViewGroup) component);
+            Boolean isUpdate = false;
+            if(ast.has("update")) {
+                isUpdate = ast.getBoolean("update");
             }
 
-            uiHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    mRootview.addView(component);
-                    emitComponentDidMount(guid);
-                }
-            });
+            // we shouldn't touch the layout of a view attached to the RootView
+            final View component;
+            if(!isUpdate) {
+                component = createComponent(ast);
+            } else {
+                component = (View)mModuleInstances.get(guid);
+            }
+
+            final String elementName = ast.getString("elementName");
+
+            JSONArray children = ast.getJSONArray("children");
+
+
+            if(children.length() > 0) {
+                buildChildren(children, (ViewGroup) component, isUpdate);
+            }
+
+            if(!isUpdate) {
+                uiHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRootview.addView(component);
+                        emitComponentDidMount(guid);
+                    }
+                }, 100);
+            }
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void clearRootView() {
-        mRootview.removeAllViews();
+    public void setupAnimation(JSONObject astDict) {
+        try {
+            String animationStringify = astDict.getString("ast");
+            JSONObject animation = new JSONObject(animationStringify);
+            String animatedTarget = animation.getString("guid");
+            View animationTarget = (View) mModuleInstances.get(animatedTarget);
+            if(animatedTarget != null) {
+                SyrAnimator.animate(animationTarget, animation, mBridge);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void emitComponentDidMount(String guid){
+
+    /** removes all sub view from the root */
+    public void clearRootView() {
+
+        //mRootview.removeAllViews();
+    }
+
+    public void emitComponentDidMount(String guid) {
 
         // send event for componentDidMount
-        HashMap<String, String> eventMap = new HashMap<String, String>();
+        HashMap<String, String> eventMap = new HashMap<>();
         eventMap.put("type", "componentDidMount");
         eventMap.put("guid", guid);
         mBridge.sendEvent(eventMap);
     }
 
-    private void buildChildren(JSONArray children, ViewGroup viewParent) {
+    private void buildChildren(JSONArray children, ViewGroup viewParent, Boolean isUpdate) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
                     View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
                     final String guid = child.getString("guid");
-                    viewParent.addView(component);
 
-                    // bridge posts needs to be gui threads
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            emitComponentDidMount(guid);
-                        }
-                    });
+                    if(!isUpdate) {
+                        viewParent.addView(component);
+                        // bridge posts needs to be gui threads
+                        uiHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                emitComponentDidMount(guid);
+                            }
+                        }, 100);
+                    }
 
                     if(component instanceof ViewGroup) {
-                        buildChildren(childChildren, (ViewGroup) component);
+                        buildChildren(childChildren, (ViewGroup) component, isUpdate);
                     }
                 }
             } catch (JSONException e) {
@@ -161,13 +201,34 @@ public class SyrRaster {
             }
     }
 
-    private View createComponent(JSONObject child) throws JSONException {
-        String className = child.getString("elementName");
-        SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
+    private View createComponent(final JSONObject child)  {
+        String className = null;
         View returnView = null;
+        String guid = null;
+        try {
+            guid = child.getString("guid");
+            className = child.getString("elementName");
+            final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
 
-        returnView = componentModule.render(child, mContext);
+            if(mModuleInstances.containsKey(child.getString("guid"))) {
 
-        return returnView;
+                final View view = (View)mModuleInstances.get(child.getString("guid"));
+                uiHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        componentModule.render(child, mContext, view);
+                    }
+                }, 100);
+
+            } else {
+                returnView = componentModule.render(child, mContext, null);
+                mModuleInstances.put(child.getString("guid"), returnView);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return (View) mModuleInstances.get(guid);
     }
 }

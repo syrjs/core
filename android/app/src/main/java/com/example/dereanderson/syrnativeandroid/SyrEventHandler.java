@@ -1,5 +1,9 @@
 package com.example.dereanderson.syrnativeandroid;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
 import java.util.HashMap;
 
 /**
@@ -9,6 +13,7 @@ import java.util.HashMap;
  */
 public class SyrEventHandler {
 
+    static private Handler uiHandler = new Handler(Looper.getMainLooper());
     public SyrBridge mBridge;
 
     private static SyrEventHandler sSyrEventHandler;
@@ -22,7 +27,9 @@ public class SyrEventHandler {
         return sSyrEventHandler;
     }
 
-    public void sendEvent(HashMap<String, String> event) {
+    public void sendEvent(final HashMap<String, String> event) {
+
         mBridge.sendEvent(event);
+
     }
 }
