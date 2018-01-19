@@ -28,7 +28,6 @@ public class SyrButton implements SyrBaseModule {
             button = (Button) instance;
         } else {
             button =  new Button(context);
-
         }
 
         button.setAllCaps(false);
