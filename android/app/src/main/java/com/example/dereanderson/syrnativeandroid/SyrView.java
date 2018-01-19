@@ -3,6 +3,7 @@ package com.example.dereanderson.syrnativeandroid;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -52,6 +53,7 @@ public class SyrView implements SyrBaseModule {
 
     @SyrMethod
     public void testExportMethod(String message, int duration) {
-
+        message = message + "  " + this.getClass().getName();
+        Log.i(message, message);
     }
 }

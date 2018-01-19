@@ -11,6 +11,7 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
+  NativeModules
 } from '../index';
 
 // currently required to pull images in to web.
@@ -96,6 +97,8 @@ class MyComponent extends Component {
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
+    console.log(NativeModules);
+    NativeModules.SyrView.testExportMethod("Super", 42);
   }
   spinPiggy() {
     this.spin += 1;
