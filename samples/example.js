@@ -97,7 +97,7 @@ class MyComponent extends Component {
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
-
+    console.log(NativeModules);
     NativeModules.SyrView.testExportMethod("Super", 42);
   }
   spinPiggy() {

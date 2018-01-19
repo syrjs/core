@@ -11,14 +11,6 @@
 
 @implementation SyrText
 
-SYR_EXPORT_MODULE()
-
-SYR_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
-{
-  // do something with Name and Location strings
-}
-
-
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   UILabel *text;
 

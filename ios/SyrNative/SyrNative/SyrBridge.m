@@ -81,11 +81,13 @@
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
   NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];//[NSURL fileURLWithPath:syrBridgePath];
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
-
+  NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
+  
   // pass native module names and selectors to the javascript side
   NSMutableArray *queryItems = [NSMutableArray array];
   for (NSString *key in _raster.nativemodules) {
-    [queryItems addObject:[NSURLQueryItem queryItemWithName:key value:_raster.nativemodules[key]]];
+    NSString *new = [key stringByReplacingOccurrencesOfString: @"__syr_export__" withString:@"_"];
+    [exportedMethods addObject:new];
   }
   
   // setup some environment stuff for the interpreter
@@ -97,6 +99,12 @@
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
 
+  NSData *jsonExportedMethodsData = [NSJSONSerialization dataWithJSONObject:exportedMethods
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:nil];
+  
+  NSString* uriStringExportedMethods = [[NSString alloc] initWithData:jsonExportedMethodsData encoding:NSUTF8StringEncoding];
+  
   CGFloat screenScale = [[UIScreen mainScreen] scale];
   NSNumber* screenScaleNS = [NSNumber numberWithFloat:screenScale];
   
@@ -106,7 +114,7 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"screen_density" value:[screenScaleNS stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
-  
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   
   components.queryItems = queryItems;
   NSLog(components.URL.absoluteString);
@@ -148,8 +156,14 @@
  assume the data types, and use NSObject to pass them through
  */
 - (void)invokeMethodWithMessage: (NSDictionary*) syrMessage {
+  
+  NSData *objectData = [[syrMessage valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *astDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                          options:NSJSONReadingMutableContainers
+                                                            error:nil];
+  
   // get the class
-  NSString* className = [syrMessage valueForKey:@"class"];
+  NSString* className = [astDict valueForKey:@"clazz"];
   Class class = NSClassFromString(className);
   
   // create an instance of the object
@@ -158,7 +172,7 @@
   }
   
   //get render method
-  NSString* selectorString = [syrMessage valueForKey:@"selector"];
+  NSString* selectorString = [NSString stringWithFormat:@"__syr_export__%@", [astDict valueForKey:@"method"]];
   SEL methodSelector = NSSelectorFromString(selectorString);
   if ([class respondsToSelector:methodSelector]) {
     
@@ -169,7 +183,7 @@
     [inv setSelector:methodSelector];
     [inv setTarget:class];
     
-    NSData *argsData = [[syrMessage valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *argsData = [[astDict valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
     id argsObject = [NSJSONSerialization JSONObjectWithData:argsData options:0 error:&error];
