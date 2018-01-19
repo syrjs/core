@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +34,13 @@ public class SyrRaster {
     private SyrBridge mBridge;
     public Handler uiHandler;
     private List<SyrBaseModule> mModules;
-    private HashMap<String, Object> mModuleMap;
+    public HashMap<String,String> registeredModules = new HashMap<>();
+    private HashMap<String, Object> mModuleMap = new HashMap<String, Object>();
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
-        mModuleMap = new HashMap<String, Object>();
         mContext = c;
     }
 
@@ -67,6 +68,7 @@ public class SyrRaster {
                 String loadURL = String.format("Module name already taken %s", className);
                 Log.w("SyrRaster", "Module name already taken");
             } else {
+                registeredModules.put(className, "registered");
                 mModuleMap.put(moduleName, module);
             }
 
@@ -77,7 +79,6 @@ public class SyrRaster {
 
     /** Get all Exported Bridged Methods */
     public void getExportedMethods(Class clazz) {
-        ArrayList<String> methods = new ArrayList<String>();
         String originalClazzName = clazz.getName();
         while (clazz != null) {
             for (Method method : clazz.getDeclaredMethods()) {
@@ -88,7 +89,12 @@ public class SyrRaster {
                     if(anno.toString().contains("SyrMethod")) {
                         // this is a native method to export over the bridge
                         if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
-                            String moduleMethodName = String.format("%s_%s", originalClazzName, methodName);
+                            String paramType= "";
+                            Class<?> [] parameters = method.getParameterTypes();
+                            for(Class _clazz:parameters){
+                                paramType = paramType + _clazz.getName() + "_";
+                            }
+                            String moduleMethodName = String.format("%s_%s_%s", originalClazzName, methodName, paramType);
                             exportedMethods.add(moduleMethodName);
                         }
                     }

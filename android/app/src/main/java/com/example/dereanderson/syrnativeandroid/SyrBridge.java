@@ -18,10 +18,13 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Syr Project
@@ -59,6 +62,9 @@ public class SyrBridge {
                 mRaster.parseAST(jsonObject);
             } else if(messageType.equals("animation")) {
                 mRaster.setupAnimation(jsonObject);
+            } else if(messageType.equals("cmd")) {
+                String commandString = jsonObject.getString("ast");
+                runCMD(commandString);
             }
 
         } catch (Throwable tx) {
@@ -119,6 +125,60 @@ public class SyrBridge {
         });
     }
 
+    public void runCMD(String commandString) throws JSONException, ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        JSONObject commandObj = new JSONObject(commandString);
+        String clazz = commandObj.getString("clazz");
+
+        // ensure that the calls are only going to a registered module
+        // and not an exposed system method
+        if(mRaster.registeredModules.containsKey(clazz)) {
+
+            HashMap<String, Class> primativeClasses = new HashMap<>();
+            primativeClasses.put("boolean", boolean.class);
+            primativeClasses.put("byte", byte.class);
+            primativeClasses.put("char", char.class);
+            primativeClasses.put("double", double.class);
+            primativeClasses.put("float", float.class);
+            primativeClasses.put("int", int.class);
+            primativeClasses.put("long", long.class);
+            primativeClasses.put("short", short.class);
+
+            String methodName = commandObj.getString("method");
+            String argString = commandObj.getString("args");
+            JSONObject argsObj = new JSONObject(argString);
+            ArrayList<Object> argsList = new ArrayList<>();
+
+            for (Iterator<String> iter = argsObj.keys(); iter.hasNext(); ) {
+                String key = iter.next();
+                argsList.add(argsObj.get(key));
+            }
+
+            JSONArray paramsTypes = commandObj.getJSONArray("paramTypes");
+
+
+            Class<?> c = Class.forName(clazz);
+            Object obj = c.newInstance();
+
+            ArrayList<Class> paramsList = new ArrayList<>();
+            for (int i = 0; i < paramsTypes.length(); i++) {
+                String paramType = paramsTypes.getString(i);
+                if (primativeClasses.containsKey(paramType)) {
+                    paramsList.add(primativeClasses.get(paramType));
+                } else {
+                    paramsList.add(Class.forName(paramType));
+                }
+            }
+
+            Class params[] = (Class[]) paramsList.toArray(new Class[paramsList.size()]);
+            Object args[] = (Object[]) argsList.toArray(new Object[argsList.size()]);
+
+            Method m = c.getMethod(methodName, params);
+            Object res = m.invoke(obj, args);
+        } else {
+            Log.w("syrcmdexec", "Unacceptable Class Accessed: " + clazz);
+        }
+
+    }
     public void sendEvent(HashMap<String, String> event) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             JSONObject message = new JSONObject(event);

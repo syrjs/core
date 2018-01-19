@@ -97,6 +97,8 @@ class MyComponent extends Component {
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
+
+    NativeModules.SyrView.testExportMethod("Super", 42);
   }
   spinPiggy() {
     this.spin += 1;
@@ -111,8 +113,7 @@ class MyComponent extends Component {
     });
   }
   componentDidMount() {
-    let SyrView = NativeModules.SyrView;
-    SyrView.testExportMethod();
+    this.spinPiggy();
   }
 }
 
