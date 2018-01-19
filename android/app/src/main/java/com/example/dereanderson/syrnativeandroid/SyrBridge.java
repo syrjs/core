@@ -86,6 +86,7 @@ public class SyrBridge {
                 mBridgedBrowser.addJavascriptInterface(self, "SyrBridge");
 
                 // if the url is changes from it's initial loadURL then cancel
+                // android 19 loadUrl("javascript:;");
                 mBridgedBrowser.setWebViewClient(new WebViewClient(){
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
                         Log.i("bridgebrowser", "navigating");
@@ -172,6 +173,9 @@ public class SyrBridge {
             Class params[] = (Class[]) paramsList.toArray(new Class[paramsList.size()]);
             Object args[] = (Object[]) argsList.toArray(new Object[argsList.size()]);
 
+            // FooMethod
+            // Class params[] = {String.class, int.class}
+            //
             Method m = c.getMethod(methodName, params);
             Object res = m.invoke(obj, args);
         } else {

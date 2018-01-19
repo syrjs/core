@@ -79,7 +79,7 @@ class MyComponent extends Component {
       message: 'Spinning Image: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
-    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation}];
   }
   render() {
     return (
@@ -97,8 +97,10 @@ class MyComponent extends Component {
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
-    console.log(NativeModules);
-    NativeModules.SyrView.testExportMethod("Super", 42);
+
+    if(!Platform.isWeb) {
+      NativeModules.SyrView.testExportMethod("Super", 42);
+    }
   }
   spinPiggy() {
     this.spin += 1;

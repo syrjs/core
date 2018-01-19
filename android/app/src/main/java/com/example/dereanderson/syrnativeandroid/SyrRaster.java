@@ -35,8 +35,8 @@ public class SyrRaster {
     public Handler uiHandler;
     private List<SyrBaseModule> mModules;
     public HashMap<String,String> registeredModules = new HashMap<>();
-    private HashMap<String, Object> mModuleMap = new HashMap<String, Object>();
-    private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>();
+    private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
+    private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
     public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /** Instantiate the interface and set the context */
