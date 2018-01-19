@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -37,8 +38,6 @@ public class SyrBridge {
     static private Handler uiHandler = new Handler(Looper.getMainLooper());
     private Context mContext;
     private WebView mBridgedBrowser;
-    private ArrayList<String> queue = new ArrayList<>();
-    private Boolean recievingMessage = false;
     private HandlerThread thread = new HandlerThread("SyrWebViewThread");
     private Handler webViewHandler;
 
@@ -52,7 +51,6 @@ public class SyrBridge {
     /** Recieve message from the SyrBridge */
     @JavascriptInterface
     public void message(String message) {
-        recievingMessage = true;
         try {
             JSONObject jsonObject = new JSONObject(message);
             String messageType = jsonObject.getString("type");
@@ -66,7 +64,6 @@ public class SyrBridge {
         } catch (Throwable tx) {
             tx.printStackTrace();
         }
-        recievingMessage = false;
     }
 
     public void loadBundle() {
@@ -98,22 +95,25 @@ public class SyrBridge {
                 WebSettings webSettings = mBridgedBrowser.getSettings();
                 webSettings.setJavaScriptEnabled(true);
 
-                ArrayList<String> exportedMethods = mRaster.exportedMethods;
-                JSONArray exportedMethodArray = new JSONArray(exportedMethods);
+                JSONArray jsArray = new JSONArray(mRaster.exportedMethods);
+                String exportedMethods = jsArray.toString();
+                String exportedMethodString = null;
+
                 try {
-                    String exportedMethodString = URLEncoder.encode(exportedMethodArray.toString(), "UTF-8");
-                    String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-                    String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s",
-                            bootParams.get("height"),
-                            bootParams.get("width"),
-                            screenDensity,
-                            android.os.Build.VERSION.SDK_INT);
-
-                    mBridgedBrowser.loadUrl(loadURL);
-
+                    exportedMethodString = URLEncoder.encode(exportedMethods, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+
+                String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
+                String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s",
+                        bootParams.get("height"),
+                        bootParams.get("width"),
+                        screenDensity,
+                        Build.VERSION.SDK_INT,
+                        exportedMethodString);
+
+                mBridgedBrowser.loadUrl(loadURL);
 
             }
         });

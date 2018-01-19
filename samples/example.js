@@ -11,6 +11,7 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
+  NativeModules
 } from '../index';
 
 // currently required to pull images in to web.
@@ -110,7 +111,8 @@ class MyComponent extends Component {
     });
   }
   componentDidMount() {
-    this.spinPiggy();
+    let SyrView = NativeModules.SyrView;
+    SyrView.testExportMethod();
   }
 }
 

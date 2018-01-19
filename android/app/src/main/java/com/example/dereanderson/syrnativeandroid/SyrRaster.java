@@ -3,9 +3,11 @@ package com.example.dereanderson.syrnativeandroid;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,6 +78,7 @@ public class SyrRaster {
     /** Get all Exported Bridged Methods */
     public void getExportedMethods(Class clazz) {
         ArrayList<String> methods = new ArrayList<String>();
+        String originalClazzName = clazz.getName();
         while (clazz != null) {
             for (Method method : clazz.getDeclaredMethods()) {
                 int modifiers = method.getModifiers();
@@ -85,7 +88,7 @@ public class SyrRaster {
                     if(anno.toString().contains("SyrMethod")) {
                         // this is a native method to export over the bridge
                         if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
-                            String moduleMethodName = String.format("%s_%s",clazz.getName(), methodName);
+                            String moduleMethodName = String.format("%s_%s", originalClazzName, methodName);
                             exportedMethods.add(moduleMethodName);
                         }
                     }
@@ -99,8 +102,16 @@ public class SyrRaster {
         mBridge = bridge;
     }
 
+    public void parseAST(final JSONObject jsonObject) {
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                buildInstanceTree(jsonObject);
+            }
+        });
+    }
     /** parse the AST sent from the Syr Bridge */
-    public void parseAST(JSONObject jsonObject) {
+    public void buildInstanceTree(JSONObject jsonObject) {
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
             final String guid = ast.getString("guid");
@@ -122,19 +133,18 @@ public class SyrRaster {
 
             JSONArray children = ast.getJSONArray("children");
 
-
             if(children.length() > 0) {
                 buildChildren(children, (ViewGroup) component, isUpdate);
             }
 
             if(!isUpdate) {
-                uiHandler.postDelayed(new Runnable() {
+                uiHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         mRootview.addView(component);
                         emitComponentDidMount(guid);
                     }
-                }, 100);
+                });
             }
 
 
@@ -157,7 +167,6 @@ public class SyrRaster {
         }
     }
 
-
     /** removes all sub view from the root */
     public void clearRootView() {
         uiHandler.post(new Runnable() {
@@ -177,20 +186,23 @@ public class SyrRaster {
         mBridge.sendEvent(eventMap);
     }
 
-    private void buildChildren(JSONArray children, ViewGroup viewParent, Boolean isUpdate) {
+    private void buildChildren(JSONArray children, final ViewGroup viewParent, Boolean isUpdate) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
-                    View component = createComponent(child);
+                    final View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
                     final String guid = child.getString("guid");
 
                     if(!isUpdate) {
-                        viewParent.addView(component);
-                        // bridge posts needs to be gui threads
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                if(component.getParent() != null){
+                                    RelativeLayout parent = (RelativeLayout) component.getParent();
+                                    parent.removeView(component);
+                                }
+                                viewParent.addView(component);
                                 emitComponentDidMount(guid);
                             }
                         });
@@ -225,6 +237,7 @@ public class SyrRaster {
                 });
 
             } else {
+
                 returnView = componentModule.render(child, mContext, null);
                 mModuleInstances.put(child.getString("guid"), returnView);
             }
