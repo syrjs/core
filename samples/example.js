@@ -13,6 +13,11 @@ import {
   Platform,
 } from '../index';
 
+// currently required to pull images in to web.
+// maps with iOS
+// need a better way to handle these through the image loader
+require('./images/piggy.png');
+
 const styles = {
   stage: {
     width: Dimensions.get('window').width,
@@ -23,7 +28,7 @@ const styles = {
     height: PixelRatio.getPixelSizeForLayoutSize(75),
     top:
       Dimensions.get('window').height -
-      PixelRatio.getPixelSizeForLayoutSize(200),
+      PixelRatio.getPixelSizeForLayoutSize(100),
     left:
       Dimensions.get('window').width / 2 -
       (Dimensions.get('window').width -
@@ -49,9 +54,13 @@ const styles = {
   image: {
     width: PixelRatio.getPixelSizeForLayoutSize(241),
     height: PixelRatio.getPixelSizeForLayoutSize(299),
-    top: (Dimensions.get('window').height/2) - (PixelRatio.getPixelSizeForLayoutSize(299)/2),
-    left: (Dimensions.get('window').width/2) - (PixelRatio.getPixelSizeForLayoutSize(241)/2)
-  }
+    top:
+      Dimensions.get('window').height / 2 -
+      PixelRatio.getPixelSizeForLayoutSize(299) / 2,
+    left:
+      Dimensions.get('window').width / 2 -
+      PixelRatio.getPixelSizeForLayoutSize(241) / 2,
+  },
 };
 
 class MyComponent extends Component {
@@ -60,32 +69,48 @@ class MyComponent extends Component {
     if (Platform.isWeb) {
       styles.button.border = '0';
     }
-
     super();
-
+    this.num = 0;
+    this.spin = 0;
+    this.state = {
+      buttonEnabled: true,
+      buttonMessage: 'Pressed: ' + this.num,
+      message: 'Spinning Image: ' + this.spin,
+    };
     this.spinPiggyAnimation = new Animated.Value(0);
     styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
       <Animated.View style={styles.stage}>
-        <Text style={styles.text}>Welcome to Syr Applications!</Text>
-        <Animated.Image source={{uri:"piggy"}} style={styles.image}/>
-        <Button style={styles.button}>Test Button 1</Button>
+        <Text style={styles.text}>{this.state.message}</Text>
+        <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
+        <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
+          {this.state.buttonMessage}
+        </Button>
       </Animated.View>
     );
   }
+  onPress() {
+    this.num += 1;
+    this.setState({
+      buttonMessage: 'Pressed: ' + this.num,
+    });
+  }
   spinPiggy() {
+    this.spin += 1;
     Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 2000
-    }).start(()=>{
-      console.log('running again')
+      duration: 2000,
+    }).start(() => {
+      this.setState({
+        message: 'Spinning Image: ' + this.spin,
+      });
       this.spinPiggy();
     });
   }
   componentDidMount() {
-    this.spinPiggy()
+    this.spinPiggy();
   }
 }
 

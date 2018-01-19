@@ -15,16 +15,23 @@ import org.json.JSONObject;
 public class SyrImage implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
+    public View render(JSONObject component, Context context, View instance) {
+
+        ImageView imageView;
+        if(instance != null) {
+            imageView = (ImageView) instance;
+            return imageView;
+        } else {
+            imageView = new ImageView(context);
+        }
         String value = "";
         JSONObject style = null;
         JSONObject source = null;
         Integer left = 0;
         Integer top = 0;
-        ImageView imageView = new ImageView(context);
 
         try {
-            JSONObject instance = component.getJSONObject("instance");
+            //JSONObject instance = component.getJSONObject("instance");
             JSONObject attributes = component.getJSONObject("attributes");
 
             if (attributes.has("style")) {

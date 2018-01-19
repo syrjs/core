@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,15 +22,22 @@ import org.json.JSONObject;
 public class SyrText implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
+    public View render(JSONObject component, Context context, View instance) {
+
+        TextView textView;
+        if(instance != null) {
+            textView = (TextView) instance;
+        } else {
+            textView = new TextView(context);
+        }
+
         String value = "";
         JSONObject style = null;
         Integer left = 0;
         Integer top = 0;
-        TextView textView = new TextView(context);
 
         try {
-            JSONObject instance = component.getJSONObject("instance");
+            JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject attributes = component.getJSONObject("attributes");
 
             if(attributes.has("style")) {
@@ -63,7 +71,7 @@ public class SyrText implements SyrBaseModule {
 //
             }
 
-            value = instance.getString("value");
+            value = jsonInstance.getString("value");
         } catch (JSONException e) {
             e.printStackTrace();
         }

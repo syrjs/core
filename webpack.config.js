@@ -40,7 +40,7 @@ module.exports = {
           presets: [
             ["env", {
               "targets": {
-                "browsers": ["Android >= 5", "safari >= 7"],
+                "browsers": ["Android >= 4", "safari >= 7"],
                 "uglify": true
               }
             }]
@@ -50,7 +50,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: "file-loader?name=images/.[ext]"
+        loader: "file-loader?name=images/[name].[ext]"
       }
 
     ],

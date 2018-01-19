@@ -14,15 +14,18 @@
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIButton *button;
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
   
   if(componentInstance != nil) {
     button = (UIButton*)componentInstance;
   } else {
     button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
+    
   }
   
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
+ 
   NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
   NSString* titleColor = [style valueForKey:@"color"];
@@ -40,7 +43,6 @@
 
   //[button sizeToFit];
   NSNumber* tag = [[component valueForKey:@"instance"] valueForKey:@"tag"];
-  [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
   button.tag = [tag integerValue];
   
   // Add an action in current code file (i.e. target)

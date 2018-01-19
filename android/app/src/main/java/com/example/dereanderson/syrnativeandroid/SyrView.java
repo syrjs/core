@@ -21,8 +21,15 @@ import java.util.HashMap;
 public class SyrView implements SyrBaseModule {
 
     @Override
-    public View render(JSONObject component, Context context) {
-        RelativeLayout layout = new RelativeLayout(context);
+    public View render(JSONObject component, Context context, View instance) {
+
+        RelativeLayout layout;
+        if(instance != null) {
+            layout = (RelativeLayout) instance;
+        } else {
+            layout = new RelativeLayout(context);
+        }
+
         JSONObject style = null;
 
         try {
