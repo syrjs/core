@@ -36,8 +36,11 @@ public class SyrButton implements SyrBaseModule {
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
-            Boolean isEnabled = jsonAttributes.getBoolean("enabled");
             final String guid  = component.getString("guid");
+            Boolean isEnabled = true;
+            if(jsonAttributes.has("enabled")) {
+                jsonAttributes.getBoolean("enabled");
+            }
 
             if(instance == null) {
                 button.setOnClickListener(new View.OnClickListener() {

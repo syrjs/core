@@ -42,8 +42,15 @@ public class SyrText implements SyrBaseModule {
 
             if(attributes.has("style")) {
                 style = attributes.getJSONObject("style");
-                left = style.getInt("left");
-                top = style.getInt("top");
+
+                if(style.has("left")) {
+                    left = style.getInt("left");
+                }
+
+                if(style.has("top")) {
+                    top = style.getInt("top");
+                }
+
                 if(style.has("color")) {
                     textView.setTextColor(Color.parseColor(style.getString("color")));
                 }
@@ -68,7 +75,6 @@ public class SyrText implements SyrBaseModule {
                         textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
                     }
                 }
-//
             }
 
             value = jsonInstance.getString("value");

@@ -34,14 +34,16 @@ public class SyrView implements SyrBaseModule {
         JSONObject style = null;
 
         try {
-            style = component.getJSONObject("attributes").getJSONObject("style");
+            JSONObject attributes = component.getJSONObject("attributes");
+            if(attributes.has("style")){
+                style = attributes.getJSONObject("style");
+                layout.setLayoutParams(SyrStyler.styleLayout(style));
+                SyrStyler.styleView(layout, style);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        layout.setLayoutParams(SyrStyler.styleLayout(style));
-        SyrStyler.styleView(layout, style);
 
         return layout;
     }

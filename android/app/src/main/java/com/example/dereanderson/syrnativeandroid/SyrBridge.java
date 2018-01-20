@@ -170,8 +170,8 @@ public class SyrBridge {
                 }
             }
 
-            Class params[] = (Class[]) paramsList.toArray(new Class[paramsList.size()]);
-            Object args[] = (Object[]) argsList.toArray(new Object[argsList.size()]);
+            Class params[] = paramsList.toArray(new Class[paramsList.size()]);
+            Object args[] = argsList.toArray(new Object[argsList.size()]);
 
             // FooMethod
             // Class params[] = {String.class, int.class}

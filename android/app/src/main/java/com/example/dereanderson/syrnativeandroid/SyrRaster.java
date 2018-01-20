@@ -200,23 +200,37 @@ public class SyrRaster {
                     JSONArray childChildren = child.getJSONArray("children");
                     final String guid = child.getString("guid");
 
-                    if(!isUpdate) {
+
+                    if(component == null) {
+                        buildChildren(childChildren, (ViewGroup) viewParent, isUpdate);
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                if(component.getParent() != null){
-                                    RelativeLayout parent = (RelativeLayout) component.getParent();
-                                    parent.removeView(component);
-                                }
-                                viewParent.addView(component);
                                 emitComponentDidMount(guid);
                             }
                         });
+                    } else {
+                        if(!isUpdate) {
+                            uiHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(component.getParent() != null){
+                                        ViewGroup parent = (ViewGroup) component.getParent();
+                                        parent.removeView(component);
+                                    }
+                                    viewParent.addView(component);
+                                    emitComponentDidMount(guid);
+                                }
+                            });
+                        }
+
+                        if(component instanceof ViewGroup) {
+                            buildChildren(childChildren, (ViewGroup) component, isUpdate);
+                        }
+
                     }
 
-                    if(component instanceof ViewGroup) {
-                        buildChildren(childChildren, (ViewGroup) component, isUpdate);
-                    }
+
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -232,6 +246,10 @@ public class SyrRaster {
             className = child.getString("elementName");
             final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
 
+            if(componentModule == null) {
+                return null;
+            }
+
             if(mModuleInstances.containsKey(child.getString("guid"))) {
 
                 final View view = (View)mModuleInstances.get(child.getString("guid"));
@@ -244,6 +262,7 @@ public class SyrRaster {
 
             } else {
 
+                Log.i("CREATE", className);
                 returnView = componentModule.render(child, mContext, null);
                 mModuleInstances.put(child.getString("guid"), returnView);
             }

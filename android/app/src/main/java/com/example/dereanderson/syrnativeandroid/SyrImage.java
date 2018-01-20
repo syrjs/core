@@ -20,7 +20,6 @@ public class SyrImage implements SyrBaseModule {
         ImageView imageView;
         if(instance != null) {
             imageView = (ImageView) instance;
-            return imageView;
         } else {
             imageView = new ImageView(context);
         }
@@ -43,20 +42,21 @@ public class SyrImage implements SyrBaseModule {
             if (attributes.has("source")) {
                 // grabs the source url if present
                 source = attributes.getJSONObject("source");
-                String path = source.toString();
+                String path = source.getString("uri");
 
                 // check if image exists in Resources
                 int pathExists = context.getResources().getIdentifier(path, "drawable", context.getPackageName());
 
                 if (pathExists != 0) {
                     // if exist set image
-                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                     imageView.setImageResource(pathExists);
                 } else {
                     // throw yellow box that image is not found in res/drawable
                     // revert to a friendly image for now
                     imageView.setImageResource(R.drawable.ic_muppets_misspiggy);
                 }
+
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             } else {
                 // throw red box because missing source prop entirely
