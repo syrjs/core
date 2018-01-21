@@ -39,7 +39,7 @@ public class SyrStyler{
                 alphaD = Double.parseDouble(colors[3]);
                 alphaD = 255/alphaD;
             }
-            
+
             int alpha = (int)alphaD;
 
             return Color.argb(175, red, blue, green);
