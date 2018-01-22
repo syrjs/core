@@ -93,6 +93,8 @@ class MyComponent extends Component {
     );
   }
   onPress() {
+
+    console.log('button pressed');
     this.num += 1;
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
