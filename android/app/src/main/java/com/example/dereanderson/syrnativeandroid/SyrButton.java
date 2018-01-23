@@ -37,12 +37,19 @@ public class SyrButton implements SyrBaseModule {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
             final String guid  = component.getString("guid");
-            Boolean isEnabled = true;
-            if(jsonAttributes.has("enabled")) {
-                jsonAttributes.getBoolean("enabled");
+
+            // if enabled prop is passed set it, else default to true
+            Boolean isEnabled;
+            if (jsonAttributes.has("enabled")) {
+                isEnabled = jsonAttributes.getBoolean("enabled");
+            } else {
+                isEnabled = true;
             }
 
-            if(instance == null) {
+            button.setEnabled(isEnabled);
+
+            // create button
+            if (instance == null) {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -54,25 +61,25 @@ public class SyrButton implements SyrBaseModule {
                 });
             }
 
-            if(component.has("attributes") && component.getJSONObject("attributes").has("style")){
+            // set button styles
+            if (component.has("attributes") && component.getJSONObject("attributes").has("style")){
 
                 style = component.getJSONObject("attributes").getJSONObject("style");
                 button.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(button, style);
 
-                if(style.has("color")) {
+                if (style.has("color")) {
                     button.setTextColor(Color.parseColor(style.getString("color")));
                 }
 
-                if(style.has("fontWeight")) {
-                    if(style.getString("fontWeight").contains("bold")){
+                if (style.has("fontWeight")) {
+                    if (style.getString("fontWeight").contains("bold")){
                         button.setTypeface(null, Typeface.BOLD);
                     }
                 }
              }
 
-            button.setEnabled(isEnabled);
-
+             // set button label/text
             button.setText(jsonInstance.getString("value"));
 
         } catch (JSONException e) {
