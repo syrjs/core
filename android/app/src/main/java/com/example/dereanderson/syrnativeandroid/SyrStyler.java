@@ -55,11 +55,15 @@ public class SyrStyler{
             Integer left = 0;
             Integer top = 0;
 
-            if(style.has("width") && style.has("height")) {
+            if(style.has("width")) {
 
-                params.height = style.getInt("height");
                 params.width = style.getInt("width");
 
+            }
+
+            if(style.has("height")) {
+
+                params.height = style.getInt("height");
             }
 
             if(style.has("left")) {
@@ -70,7 +74,7 @@ public class SyrStyler{
                 top = style.getInt("top");
             }
 
-            params.setMargins(left,top,0,0);
+
 
         } catch (JSONException e) {
             e.printStackTrace();

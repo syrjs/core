@@ -21,7 +21,7 @@ public class SyrRootView extends FrameLayout {
 
     public SyrRootView(Context context) {
         super(context);
-
+        this.setClipChildren(false);
         // use application context so we don't get memory leaks
         // when activities are bound to context, we'll leak
         mContext = context;

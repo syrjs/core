@@ -163,11 +163,18 @@ public class SyrRaster {
         try {
             String animationStringify = astDict.getString("ast");
             JSONObject animation = new JSONObject(animationStringify);
-            String animatedTarget = animation.getString("guid");
-            View animationTarget = (View) mModuleInstances.get(animatedTarget);
-            if(animatedTarget != null) {
-                SyrAnimator.animate(animationTarget, animation, mBridge);
+
+            if(animation.has("guid")) {
+                String animatedTarget = animation.getString("guid");
+                View animationTarget = (View) mModuleInstances.get(animatedTarget);
+                if(animationTarget != null) {
+                    SyrAnimator.animate(animationTarget, animation, mBridge);
+                }
+            } else {
+                Log.i("here", "there");
             }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -175,6 +182,7 @@ public class SyrRaster {
 
     /** removes all sub view from the root */
     public void clearRootView() {
+        mModuleInstances.clear();
         uiHandler.post(new Runnable() {
             @Override
             public void run() {

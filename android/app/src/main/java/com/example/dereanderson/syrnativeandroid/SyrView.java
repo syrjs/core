@@ -32,13 +32,32 @@ public class SyrView implements SyrBaseModule {
         }
 
         JSONObject style = null;
-
         try {
             JSONObject attributes = component.getJSONObject("attributes");
             if(attributes.has("style")){
                 style = attributes.getJSONObject("style");
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
+
+                if(style.has("left")) {
+                    layout.setX(style.getInt("left"));
+                }
+
+                if(style.has("top")) {
+                    layout.setY(style.getInt("top"));
+                }
+
                 SyrStyler.styleView(layout, style);
+
+                if(style.has("overflow")) {
+                    String overflow = style.getString("overflow");
+                    if(overflow.contains("hidden")) {
+                        layout.setClipChildren(true);
+                    } else {
+                        layout.setClipChildren(false);
+                    }
+                }
+
+
             }
 
         } catch (JSONException e) {

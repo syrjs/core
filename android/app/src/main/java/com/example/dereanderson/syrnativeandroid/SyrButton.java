@@ -69,7 +69,17 @@ public class SyrButton implements SyrBaseModule {
                         button.setTypeface(null, Typeface.BOLD);
                     }
                 }
-             }
+
+                if(style.has("left")) {
+                    button.setX(style.getInt("left"));
+                }
+
+                if(style.has("top")) {
+                    button.setY(style.getInt("top"));
+                }
+
+
+            }
 
             button.setEnabled(isEnabled);
 

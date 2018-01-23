@@ -60,7 +60,7 @@ public class SyrLinearGradient implements SyrBaseModule {
         }
 
         view.setLayoutParams(SyrStyler.styleLayout(style));
-        SyrStyler.styleView(view, style);
+        //SyrStyler.styleView(view, style);
 
 
 

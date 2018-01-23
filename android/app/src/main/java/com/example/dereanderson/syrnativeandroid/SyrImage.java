@@ -37,6 +37,16 @@ public class SyrImage implements SyrBaseModule {
                 style = attributes.getJSONObject("style");
                 imageView.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(imageView, style);
+
+
+                if(style.has("left")) {
+                    imageView.setX(style.getInt("left"));
+                }
+
+                if(style.has("top")) {
+                    imageView.setY(style.getInt("top"));
+                }
+
             }
 
             if (attributes.has("source")) {

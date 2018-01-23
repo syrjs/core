@@ -20,9 +20,20 @@ public class SyrTouchableOpacity implements SyrBaseModule {
         RelativeLayout layout = new RelativeLayout(context);
         JSONObject style = null;
 
+        layout.setClipChildren(false);
         try {
             final String guid  = component.getString("guid");
             style = component.getJSONObject("attributes").getJSONObject("style");
+
+
+            if(style.has("left")) {
+                layout.setX(style.getInt("left"));
+            }
+
+            if(style.has("top")) {
+                layout.setY(style.getInt("top"));
+            }
+
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

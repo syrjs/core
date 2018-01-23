@@ -35,6 +35,8 @@ public class SyrText implements SyrBaseModule {
         JSONObject style = null;
         Integer left = 0;
         Integer top = 0;
+        Integer height = 0;
+        Integer width = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
@@ -49,6 +51,14 @@ public class SyrText implements SyrBaseModule {
 
                 if(style.has("top")) {
                     top = style.getInt("top");
+                }
+
+                if(style.has("height")) {
+                    height = style.getInt("height");
+                }
+
+                if(style.has("width")) {
+                    width = style.getInt("width");
                 }
 
                 if(style.has("color")) {
@@ -71,8 +81,10 @@ public class SyrText implements SyrBaseModule {
                         textView.setGravity(Gravity.CENTER_HORIZONTAL);
                     } else if(style.getString("textAlign").contains("right")) {
                         textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                        textView.setGravity(Gravity.END);
                     } else {
                         textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                        textView.setGravity(Gravity.START);
                     }
                 }
             }
@@ -85,8 +97,16 @@ public class SyrText implements SyrBaseModule {
         textView.setText(value);
 
         if(style != null) {
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-            lp.setMargins(left, top, 0, 0);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(width, height);
+
+            if(style.has("left")) {
+                textView.setX(left);
+            }
+
+            if(style.has("top")) {
+                textView.setY(top);
+            }
+
             textView.setLayoutParams(lp);
         }
 
