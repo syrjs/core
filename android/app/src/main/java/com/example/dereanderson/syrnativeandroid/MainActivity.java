@@ -24,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        RelativeLayout layout = new RelativeLayout(this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layout.setLayoutParams(layoutParams);
+
+        WebView w = new WebView(this);
+        w.loadUrl("https://taco-cat-sticker-store.myshopify.com");
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        w.setLayoutParams(params);
+        layout.addView(w);
+
         // hide action bar aka title bar
         try
         {
@@ -61,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
         // start the Syr Application
         rootview.startSyrApplication(instance, bundle);
 
+        rootview.setLayoutParams(params);
+        layout.addView(rootview);
 
         // set the content of the to the Rootview
-        setContentView(rootview);
+        setContentView(layout);
     }
 }

@@ -41,8 +41,6 @@ public class SyrBridge {
     static private Handler uiHandler = new Handler(Looper.getMainLooper());
     private Context mContext;
     private WebView mBridgedBrowser;
-    private HandlerThread thread = new HandlerThread("SyrWebViewThread");
-    private Handler webViewHandler;
 
     /** Instantiate the interface and set the context */
     SyrBridge(Context c) { mContext = c; }
@@ -74,11 +72,8 @@ public class SyrBridge {
 
     public void loadBundle() {
 
-        thread.start();
-        webViewHandler = new Handler(thread.getLooper());
-
         final SyrBridge self = this;
-        webViewHandler.post(new Runnable() {
+        uiHandler.post(new Runnable() {
             @SuppressLint("JavascriptInterface")
             @Override
             public void run() {
@@ -194,7 +189,7 @@ public class SyrBridge {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             String msg = message.toString();
             final String eventJS = String.format("SyrEvents.emit(%s);", msg);
-            webViewHandler.post(new Runnable() {
+            uiHandler.post(new Runnable() {
                 @SuppressLint("JavascriptInterface")
                 @Override
                 public void run() {

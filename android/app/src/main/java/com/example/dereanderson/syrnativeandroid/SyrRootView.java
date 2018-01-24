@@ -1,6 +1,8 @@
 package com.example.dereanderson.syrnativeandroid;
 
 import android.content.Context;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
 
 /**
@@ -21,7 +23,15 @@ public class SyrRootView extends FrameLayout {
 
     public SyrRootView(Context context) {
         super(context);
-        this.setClipChildren(false);
+
+        // stop touches from falling (bubbling) through rootview
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
         // use application context so we don't get memory leaks
         // when activities are bound to context, we'll leak
         mContext = context;
