@@ -23,7 +23,7 @@ describe('Render Target', function() {
   it('should render the given element as a child to the target', function() {
     assert.equal(element.style['height'], '50px');
     assert.equal(element.style['width'], '100px');
-    assert.equal(element.innerText, 'Hello World');
+    assert.equal(element.textContent, 'Hello World');
   });
 });
 describe('Render className', function() {
@@ -44,6 +44,6 @@ describe('Render className', function() {
   it('should render the given element with the given class', function() {
     assert.equal(element instanceof HTMLElement, true);
     assert.equal(element instanceof HTMLSpanElement, true);
-    assert.equal(element.innerText, 'Hello World');
+    assert.equal(element.textContent, 'Hello World');
   });
 });
