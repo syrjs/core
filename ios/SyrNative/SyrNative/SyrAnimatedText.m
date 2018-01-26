@@ -12,7 +12,7 @@
 @implementation SyrAnimatedText
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
-  return [SyrText render:component withInstance:componentInstance];
+  return [self render:component withInstance:componentInstance];
 }
 
 @end

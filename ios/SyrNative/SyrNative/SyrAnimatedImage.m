@@ -12,7 +12,6 @@
 @implementation SyrAnimatedImage
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
-  return [SyrImage render:component withInstance:componentInstance];
+  return [self render:component withInstance:componentInstance];
 }
-
 @end

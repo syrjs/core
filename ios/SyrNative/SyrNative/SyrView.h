@@ -9,4 +9,6 @@
 #import "SyrComponent.h"
 
 @interface SyrView : SyrComponent
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
 @end
+

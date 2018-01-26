@@ -5,9 +5,10 @@
 //  Created by Anderson,Derek on 10/20/17.
 //  Copyright © 2017 Anderson,Derek. All rights reserved.
 //
-#import "SyrRaster.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SyrRaster.h"
 
 #define SYR_CONCAT2(A, B) A ## B
 #define SYR_CONCAT(A, B) SYR_CONCAT2(A, B)
@@ -21,6 +22,6 @@
 + (void)SYR_CONCAT(__syr_export__, method)
 
 @interface SyrComponent : NSObject
-+(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
-+(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body;
+-(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
+-(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body;
 @end

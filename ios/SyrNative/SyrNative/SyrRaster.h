@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "SyrRootView.h"
 #import "SyrBridge.h"
-#import "SyrInfoBox.h"
+
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed: ((float)((rgbValue & 0xFF0000) >> 16))/255.0 \

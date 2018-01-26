@@ -6,8 +6,8 @@
 //  Copyright © 2018 Anderson,Derek. All rights reserved.
 //
 
-#import "SyrComponent.h"
+#import "SyrText.h"
 
-@interface SyrAnimatedText : SyrComponent
+@interface SyrAnimatedText : SyrText
 
 @end
