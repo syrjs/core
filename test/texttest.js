@@ -19,6 +19,6 @@ describe('Text View', function() {
   it('should render text with the given styles', function() {
     assert.equal(element.style['height'], '50px');
     assert.equal(element.style['width'], '100px');
-    assert.equal(element.innerText, 'Hello World');
+    assert.equal(element.textContent, 'Hello World');
   });
 });
