@@ -19,13 +19,6 @@ import {
 // need a better way to handle these through the image loader
 require('./images/piggy.png');
 
-// important for mobile development esp around resolution scaling
-// this should mirror the DEVELOPMENT time screen so that
-// PixelRatio.getPixelSizeForLayoutSize(15) === 15
-// it will then be scaled to the correct size on other screens
-// the default is iPhoneSE
-PixelRatio.setBaseScreenSize(PixelRatio.baseDisplays.iPhoneSE);
-
 const styles = {
   stage: {
     width: Dimensions.get('window').width,
@@ -74,18 +67,16 @@ const styles = {
 class InnerComponent extends Component {
   constructor() {
     super();
-    this.state.color = "#ff0000"
+    this.state.color = "#ff00ff"
   }
   render() {
-    return <View style={{height: PixelRatio.getPixelSizeForLayoutSize(300), width: PixelRatio.getPixelSizeForLayoutSize(300), backgroundColor:this.state.color}}></View>
+    return <View style={{height:100, width:100, backgroundColor:this.state.color}}></View>
   }
   componentDidMount() {
     console.log('setting state inner component');
-    setTimeout(()=>{
-      this.setState({
-        color: "#00ff00"
-      })
-    }, 500)
+    this.setState({
+      color: "#00ff00"
+    })
   }
 }
 
@@ -143,7 +134,7 @@ class MyComponent extends Component {
     });
   }
   componentDidMount() {
-    this.spinPiggy();
+    //this.spinPiggy();
   }
 }
 

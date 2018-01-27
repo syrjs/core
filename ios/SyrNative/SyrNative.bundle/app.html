@@ -5,9 +5,6 @@
 </head>
 <body>
   <script>
-    
-    console.log(window.location);
-    
     // emit error to bridge
     function emitError(message) {
       window.webkit.messageHandlers['SyrNative'].postMessage({

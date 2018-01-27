@@ -71,6 +71,9 @@ public class SyrView implements SyrBaseModule {
 
     @SyrMethod
     // java.lang.String , int
+
+    // {NativeModules} from 'syr'
+    // NativeModules.SyrView.testExportMethod('foo', 100);
     public void testExportMethod(String message, int duration) {
         message = message + "  " + this.getClass().getName();
         Log.i(message, message);
