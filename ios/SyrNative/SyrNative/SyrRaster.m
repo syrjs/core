@@ -227,7 +227,7 @@
   
   if(animatedTargetGuid != nil) {
     // need a better way to get the animation dict from this event
-    
+    // {guid: '', animation: {toValue: 360, fromValue: 1, animationproperty:'rotatex', duration:5000}
     [SyrAnimator animate:animatedTarget withAnimation:[componentDict objectForKey:@"animation"] withBridge:_bridge withTargetId:animatedTargetGuid];
   }
 }
@@ -236,6 +236,7 @@
  Prepares class methods for bridge support.
  loops through all the methods that contain a prefix, and then prepares
  an array to send to the js app
+ NativeClass.NativeMethod()
  */
 -(void) registerComponent: (NSString*) className {
   int unsigned numMethods;
