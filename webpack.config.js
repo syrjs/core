@@ -63,7 +63,9 @@ module.exports = {
       mobile: true,
       template: require('html-webpack-template'),
       bodyHtmlSnippet: '<div id="root"></div><style>body{margin:0;font-family:arial;}</style>',
-      scripts: ['https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js'],
+      scripts: [
+        'https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js'
+      ],
       links: []
     })
   ],

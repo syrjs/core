@@ -28,6 +28,15 @@
  
   NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
+  BOOL isEnabled = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"enabled"] boolValue];
+    
+    // if enabled prop = false, disable button, else button is enabled by default
+    if (!isEnabled) {
+        button.enabled = NO;
+    } else {
+        button.enabled = YES;
+    }
+    
   NSString* titleColor = [style valueForKey:@"color"];
   if(titleColor != nil) {
     [button setTitleColor:[SyrStyler colorFromHash:titleColor] forState:UIControlStateNormal];
