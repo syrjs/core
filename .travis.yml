@@ -37,6 +37,8 @@ matrix:
           - sys-img-armeabi-v7a-android-22
           - extra-android-m2repository
         licenses:
+          - 'Android SDK Platform 22'
+          - 'Android SDK Build-Tools 24.0.2'
           - 'Android SDK Platform 26'
           - 'Android SDK Build-Tools 26.0.2'
       before_script:
