@@ -27,7 +27,6 @@ matrix:
     - language: android
       before_install: cd android # move to correct project path for android
       android:
-        cache: true
         components:
           - platform-tools
           - tools
