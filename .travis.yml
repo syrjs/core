@@ -33,9 +33,7 @@ matrix:
           - tools
           - build-tools-26.0.2
           - android-22
-          # - android-25 # travis comes with 25 pre-installed, uncomment if need to explicitly pull it in
           - sys-img-armeabi-v7a-android-22 # we are using a api 22 image to run our tests for now
-          - sys-img-armeabi-v7a-android-25 # experiment switching to api 25 for better emulator
           - extra-android-m2repository
         licenses:
           - 'android-sdk-preview-license-.+'
