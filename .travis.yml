@@ -36,6 +36,9 @@ matrix:
           - android-24
           - sys-img-armeabi-v7a-android-22
           - extra-android-m2repository
+        licenses:
+          - Android SDK Platform 26
+          - Android SDK Build-Tools 26.0.2
       before_script:
         # Create and start emulator
         - android list targets # list pre-installed targets # <---- list all installed targets
