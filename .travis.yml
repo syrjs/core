@@ -39,7 +39,7 @@ matrix:
         licenses:
           - 'android-sdk-preview-license-.+'
           - 'android-sdk-license-.+'
-          - 'google-gdk-license-.+'
+          - 'android-sdk-build-tools-.+'
       before_script:
         # Create and start emulator
         - android list targets # list pre-installed targets # <---- list all installed targets
