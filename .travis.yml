@@ -25,24 +25,21 @@ matrix:
       script:
         - xcodebuild test -project ios/SyrNative/SyrNative.xcodeproj -scheme SyrNativeUnitTests -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0.1'
     - language: android
-      before_install: cd android
+      # before_install: cd android
       android:
-        cache: false # no caching for now
+        cache: true
         components:
           - platform-tools
           - tools
-          - build-tools-24.0.2
           - build-tools-26.0.2
           - android-22
           - android-24
           - sys-img-armeabi-v7a-android-22
           - sys-img-armeabi-v7a-android-24
-          - sys-img-armeabi-v7a-android-26
           - extra-android-m2repository
         licenses:
           - 'android-sdk-preview-license-.+'
           - 'android-sdk-license-.+'
-          - 'android-sdk-build-tools-.+'
       before_script:
         # Create and start emulator
         - android list targets # list pre-installed targets # <---- list all installed targets
