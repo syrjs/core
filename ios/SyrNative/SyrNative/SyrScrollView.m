@@ -13,7 +13,14 @@
 
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
-	UIScrollView *scrollView = [[UIScrollView alloc] init];
+  UIScrollView *scrollView;
+  
+  if(componentInstance != nil) {
+    scrollView = (UIScrollView*)componentInstance;
+  } else {
+    scrollView = [[UIScrollView alloc] init];
+  }
+  
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   scrollView.frame = [SyrStyler styleFrame:style];
   
@@ -35,6 +42,17 @@
   if(farthestHeight < [style objectForKey:@"height"]) {
     farthestHeight = [style objectForKey:@"height"];
   }
+  
+  
+  for (UIView *subview in scrollView.subviews)
+  {
+    CGRect frame = subview.frame;
+    NSNumber* y = [NSNumber numberWithDouble:frame.origin.y];
+    NSNumber* height = [NSNumber numberWithDouble:frame.size.height];
+    if(height > farthestHeight) {
+    	farthestHeight = height;
+  	}
+  };
   
   scrollView.contentSize = CGSizeMake(scrollView.frame.size.width,[farthestHeight doubleValue]);
   return scrollView;
