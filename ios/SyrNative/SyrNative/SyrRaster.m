@@ -147,8 +147,13 @@
         // todo: move this out of the raster
         SEL selector = NSSelectorFromString(@"addArrangedSubview:");
         if ([view respondsToSelector:selector]) {
+          // work around for stackview right now needs to be moved somewhere else
           UIStackView* stackView = (UIStackView*) view;
-          [stackView addArrangedSubview:nsComponent];
+          UIView* containerview = [[UIView alloc] init];
+          CGRect frame = CGRectMake(0, 0,10, 10);
+          containerview.frame = frame;
+          [containerview addSubview:nsComponent];
+          [stackView addArrangedSubview:containerview];
         } else {
           [view addSubview:nsComponent];
         }
