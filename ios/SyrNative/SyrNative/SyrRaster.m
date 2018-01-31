@@ -108,6 +108,7 @@
 
 // build children in the tree
 -(void) buildChildren:(NSDictionary*) component withViewParent: (UIView*) view  {
+  bool recalculateLayout = false;
   if([component isKindOfClass:[NSDictionary class]]) {
     NSArray* children = [component objectForKey:@"children"];
     
@@ -115,10 +116,22 @@
       
       if(child != [NSNull null]) {
       
-      
       NSLog(@"building %@", [child valueForKey:@"elementName"]);
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
+        
+      id attributes = [child objectForKey:@"attributes"];
+      if(attributes != nil) {
+      		id style = [attributes objectForKey:@"style"];
+          if(style != nil) {
+          	NSString* height = [style valueForKey:@"height"];
+            if([height isKindOfClass:[NSString class]]) {
+              if(height != nil && [height containsString:@"auto"]) {
+                recalculateLayout = true;
+              }
+          	}
+        }
+    	}
       
       // component is not of type available
       // should do a strict check if it is derived from component
@@ -149,12 +162,15 @@
           }
         }
       }
-      
     }
-      
     }
+    
+    //
+    if(recalculateLayout) {
+      [self syncState:component];
+    }
+    
   }
-
 }
 
 /**
