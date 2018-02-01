@@ -32,6 +32,9 @@ import { Platform } from './lib/platform';
 import { DOMRaster } from './lib/rasters/dom';
 import { WKRaster } from './lib/rasters/wkwebview';
 
+// central SyrStore (flux Store)
+import { SyrStore } from './lib/store';
+
 // detecting rendering bridge
 if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
   RasterManager.setRaster(WKRaster);
@@ -61,5 +64,6 @@ export {
   LinearGradient,
   TouchableOpacity,
   PixelRatio,
-  Platform
+  Platform,
+  SyrStore
 };
