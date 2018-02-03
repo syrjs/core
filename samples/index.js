@@ -19,6 +19,7 @@ class Rectangle extends Component {
   constructor() {
     super()
     this.state.backgroundColor = '#ffffff';
+    this.state.message = 'hello world';
   }
   render() {
     return (
@@ -28,28 +29,30 @@ class Rectangle extends Component {
         height: 50,
         backgroundColor: this.state.backgroundColor
       }}>
-     <Text style={{width:100, height:50, fontSize: 12, color:'#000000'}}>Hello World</Text>
+     <Text style={{width:100, height:50, fontSize: 12, color:'#000000'}}>{this.state.message}</Text>
     </View>
     )
   }
   componentDidMount() {
     console.log('rectangle mounted with:', this.attributes.color);
-    this.setState({
-        backgroundColor:'#ff0000'
-    })
-    // if(this.attributes.color == 'red') {
-    //
-    // }
-    // if(this.attributes.color == 'blue') {
-    //   this.setState({
-    //     backgroundColor:'#0000ff'
-    //   })
-    // }
-    // if(this.attributes.color == 'green') {
-    //   this.setState({
-    //     backgroundColor:'#00ff00'
-    //   })
-    // }
+    if(this.attributes.color == 'red') {
+      this.setState({
+          backgroundColor:'#ff0000',
+          message: 'red square'
+      });
+    }
+    if(this.attributes.color == 'blue') {
+      this.setState({
+        backgroundColor:'#0000ff',
+        message: 'blue square'
+      })
+    }
+    if(this.attributes.color == 'green') {
+      this.setState({
+        backgroundColor:'#00ff00',
+        message: 'green square'
+      })
+    }
   }
 }
 
