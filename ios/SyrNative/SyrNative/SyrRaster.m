@@ -70,8 +70,8 @@
 }
 
 -(void) syncState: (NSDictionary*) component {
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
-  NSObject* componentInstance = [_components objectForKey:guid];
+  NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
+  NSObject* componentInstance = [_components objectForKey:uuid];
   NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
   NSObject* class = NSClassFromString(className);
   SEL selector = NSSelectorFromString(@"render:withInstance:");
@@ -101,8 +101,8 @@
     NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
     [_rootView addSubview:component];
-    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-    [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
+    [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
   }
 }
 
@@ -141,8 +141,8 @@
           [self buildChildren:child withViewParent:nsComponent];
         }
         
-        [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+        [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
+        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
         
         // todo: move this out of the raster
         SEL selector = NSSelectorFromString(@"addArrangedSubview:");
@@ -226,7 +226,7 @@
                                                                   error:&jsonError];
   
   
-  NSString* animatedTargetGuid = [componentDict objectForKey:@"guid"];
+  NSString* animatedTargetGuid = [componentDict objectForKey:@"uuid"];
   NSObject* animatedTarget = [_components objectForKey:animatedTargetGuid];
   
   // if our holder of animated (likely parent component)
@@ -236,7 +236,7 @@
     NSArray* children = [componentDict objectForKey:@"children"];
     if([children count] > 0){
       for(id child in children) {
-        NSString* childGuid = [child objectForKey:@"guid"];
+        NSString* childGuid = [child objectForKey:@"uuid"];
         animatedTarget = [_components objectForKey:childGuid];
         if(animatedTarget != nil) {
           animatedTargetGuid = childGuid;

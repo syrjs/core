@@ -24,18 +24,16 @@
   }
   
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
- 
   NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
-  BOOL isEnabled = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"enabled"] boolValue];
-    
-    // if enabled prop = false, disable button, else button is enabled by default
-    if (!isEnabled) {
-        button.enabled = NO;
-    } else {
-        button.enabled = YES;
+	// default to button enabled
+  id isEnabled = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] objectForKey:@"enabled"];
+  if(isEnabled != nil) {
+    if([isEnabled boolValue] == NO) {
+      button.enabled = false;
     }
-    
+  }
+  
   NSString* titleColor = [style valueForKey:@"color"];
   if(titleColor != nil) {
     [button setTitleColor:[SyrStyler colorFromHash:titleColor] forState:UIControlStateNormal];
