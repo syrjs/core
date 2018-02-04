@@ -34,7 +34,6 @@ class Rectangle extends Component {
     )
   }
   componentDidMount() {
-    console.log('rectangle mounted with:', this.attributes.color);
     if(this.attributes.color == 'red') {
       this.setState({
           backgroundColor:'#ff0000',
@@ -68,11 +67,13 @@ class Square extends Component {
         <Rectangle color="red" top="0"></Rectangle>
         <Rectangle color="blue" top="60"></Rectangle>
         <Rectangle color="green" top="120"></Rectangle>
+        <View>
+          <View props={this.props}></View>
+        </View>
       </View>
     )
   }
   componentDidMount() {
-    console.log('square mounted!');
   }
 }
 
@@ -89,7 +90,7 @@ class SyrExample extends Component {
     );
   }
   componentDidMount() {
-    console.log('syrExample', this.uuid, this.guid);
+    console.log(this.props);
   }
 }
 
