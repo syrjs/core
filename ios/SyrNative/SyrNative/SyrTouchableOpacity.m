@@ -15,7 +15,7 @@
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view = [[UIView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   // todo: this should actually get dimesions from the inner frames, we don't currently have a 'fit to content' method
   view.frame = [SyrStyler styleFrame:style];
   
