@@ -14,7 +14,7 @@
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIButton *button;
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
+  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   
   if(componentInstance != nil) {
     button = (UIButton*)componentInstance;

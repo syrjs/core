@@ -72,24 +72,27 @@
 -(void) syncState: (NSDictionary*) component {
   NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   NSObject* componentInstance = [_components objectForKey:uuid];
-  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
-  NSObject* class = NSClassFromString(className);
-  SEL selector = NSSelectorFromString(@"render:withInstance:");
-  if ([class respondsToSelector:selector]) {
-    // invoke render method, pass component
-    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
-    [inv setSelector:selector];
-    [inv setTarget:class];
-    
-    [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-    [inv setArgument:&(componentInstance) atIndex:3];
-    [inv invoke];
-  }
   
+  if(componentInstance != nil) {
+    NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+    NSObject* class = NSClassFromString(className);
+    SEL selector = NSSelectorFromString(@"render:withInstance:");
+    if ([class respondsToSelector:selector]) {
+      // invoke render method, pass component
+      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+      [inv setSelector:selector];
+      [inv setTarget:class];
+      
+      [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+      [inv setArgument:&(componentInstance) atIndex:3];
+      [inv invoke];
+    }
+  }
+
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
-      [self syncState:child];
+      //[self syncState:child];
     }
   }
 }
@@ -103,6 +106,10 @@
     [_rootView addSubview:component];
     [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
     [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
+  } else {
+    NSArray* childComponents = [astDict objectForKey:@"children"];
+    NSDictionary* childComponent = [childComponents objectAtIndex:0];
+    [self build:childComponent];
   }
 }
 
