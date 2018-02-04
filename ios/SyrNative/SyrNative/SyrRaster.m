@@ -92,7 +92,7 @@
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
-      //[self syncState:child];
+      [self syncState:child];
     }
   }
 }
