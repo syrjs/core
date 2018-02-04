@@ -20,6 +20,7 @@ class Rectangle extends Component {
     super()
     this.state.backgroundColor = '#ffffff';
     this.state.message = 'hello world';
+    this.xyAnimation = new Animated.ValueXY({x:0, y:0});
   }
   render() {
     return (
@@ -27,13 +28,22 @@ class Rectangle extends Component {
         top: this.attributes.top,
         width: 100,
         height: 50,
-        backgroundColor: this.state.backgroundColor
+        backgroundColor: this.state.backgroundColor,
+        transform:[this.xyAnimation]
       }}>
      <Text style={{width:100, height:50, fontSize: 12, color:'#000000'}}>{this.state.message}</Text>
     </View>
     )
   }
   componentDidMount() {
+    Animated.timing(this.xyAnimation, {
+      toValue: {
+        x:0,
+        y:0
+      },
+      duration: 2000
+    }).start()
+
     if(this.attributes.color == 'red') {
       this.setState({
           backgroundColor:'#ff0000',
@@ -57,23 +67,40 @@ class Rectangle extends Component {
 
 
 class Square extends Component {
+  constructor() {
+    super();
+    this.xyAnimation = new Animated.ValueXY({x:0, y:0});
+
+  }
   render() {
     return (
       <View style={{
         width: 200,
         height: 200,
-        backgroundColor: '#ff00ff'
+        backgroundColor: '#ff00ff',
+        transform:[this.xyAnimation]
       }}>
         <Rectangle color="red" top="0"></Rectangle>
         <Rectangle color="blue" top="60"></Rectangle>
         <Rectangle color="green" top="120"></Rectangle>
         <View>
-          <View props={this.props}></View>
+          <View props={this.props}>
+            <View>
+              <View props={this.props}></View>
+            </View>
+          </View>
         </View>
       </View>
     )
   }
   componentDidMount() {
+    Animated.timing(this.xyAnimation, {
+      toValue:{
+        x:0,
+        y:Dimensions.get('window').height - 200
+      },
+      duration:1000
+    }).start()
   }
 }
 
@@ -81,16 +108,18 @@ class SyrExample extends Component {
   render() {
     return (
       <View style={{
-        width: 200,
-        height: 200,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
         backgroundColor: '#000000'
       }}>
-        <Square></Square>
+        <Square props={this.props}></Square>
       </View>
     );
   }
   componentDidMount() {
-    console.log(this.props);
+    this.setProps({
+      foo: 'zooom'
+    })
   }
 }
 

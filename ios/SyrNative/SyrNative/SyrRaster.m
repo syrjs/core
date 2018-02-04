@@ -226,7 +226,7 @@
                                                                   error:&jsonError];
   
   
-  NSString* animatedTargetGuid = [componentDict objectForKey:@"uuid"];
+  NSString* animatedTargetGuid = [componentDict objectForKey:@"guid"];
   NSObject* animatedTarget = [_components objectForKey:animatedTargetGuid];
   
   // if our holder of animated (likely parent component)
