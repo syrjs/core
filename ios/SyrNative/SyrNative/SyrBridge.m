@@ -104,11 +104,12 @@
                                                        error:nil];
   
   NSString* uriStringExportedMethods = [[NSString alloc] initWithData:jsonExportedMethodsData encoding:NSUTF8StringEncoding];
+  NSString* uriStringBootupProps = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
   
   CGFloat screenScale = [[UIScreen mainScreen] scale];
   NSNumber* screenScaleNS = [NSNumber numberWithFloat:screenScale];
   
-  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:uriStringBootupProps]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"screen_density" value:[screenScaleNS stringValue]]];
