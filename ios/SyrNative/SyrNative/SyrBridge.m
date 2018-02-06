@@ -118,7 +118,6 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   
   components.queryItems = queryItems;
-  NSLog(components.URL.absoluteString);
   
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];

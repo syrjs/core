@@ -156,10 +156,10 @@
         if ([view respondsToSelector:selector]) {
           // work around for stackview right now needs to be moved somewhere else
           UIStackView* stackView = (UIStackView*) view;
+          UIView* componentView = (UIView*)nsComponent;
           UIView* containerview = [[UIView alloc] init];
-          CGRect frame = CGRectMake(0, 0,10, 10);
-          containerview.frame = frame;
-          [containerview addSubview:nsComponent];
+          containerview.frame = componentView.frame;
+          [containerview addSubview:componentView];
           [stackView addArrangedSubview:containerview];
         } else {
           [view addSubview:nsComponent];

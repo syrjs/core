@@ -19,6 +19,7 @@
   NSString* spacing = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"spacing"];
   NSString* distribution = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"distribution"];
   NSString* alignment = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"align"];
+  NSString* height = [style valueForKey:@"height"];
   
   if([alignment containsString:@"center"]) {
     stackView.alignment = UIStackViewAlignmentCenter;
@@ -45,17 +46,18 @@
     stackView.distribution = UIStackViewDistributionFillEqually;
   }
   
-  NSNumber* totalHeight = [NSNumber numberWithInt:0];
-  for(id child in [component objectForKey:@"children"]){
-    NSDictionary* childStyle = [[[child objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-    NSNumber* height = [childStyle objectForKey:@"height"];
-    totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
-  }
-  
   stackView.frame = [SyrStyler styleFrame:style];
-  CGRect frame = stackView.frame;
-  frame.size.height = [totalHeight doubleValue];
-  stackView.frame = frame;
+  if(height != nil && [height isKindOfClass:[NSString class]] && [height containsString:@"auto"]) {
+      NSNumber* totalHeight = [NSNumber numberWithInt:0];
+      for(id child in [component objectForKey:@"children"]){
+        NSDictionary* childStyle = [[[child objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+        NSNumber* height = [childStyle objectForKey:@"height"];
+        totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
+      }
+    	CGRect frame = stackView.frame;
+    	frame.size.height = [totalHeight doubleValue];
+    	stackView.frame = frame;
+  }
   
   return [SyrStyler styleView:stackView withStyle:style];
 }
