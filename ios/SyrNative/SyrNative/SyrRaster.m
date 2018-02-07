@@ -178,11 +178,9 @@
     }
     }
     
-    //
     if(recalculateLayout) {
       [self syncState:component];
     }
-    
   }
 }
 
@@ -195,7 +193,7 @@
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   
   // get instance of the class
-  NSObject* class = NSClassFromString(className);
+  Class class = NSClassFromString(className);
   
   // populate return
   NSObject* __unsafe_unretained returnComponent;
@@ -304,7 +302,7 @@
   text.frame = rootView.frame;
   text.text = errorMsg;
   [text setFont:[UIFont systemFontOfSize:20.0]];
-  [text setTextAlignment:UITextAlignmentCenter];
+  [text setTextAlignment:NSTextAlignmentCenter];
   
   view.frame = rootView.frame;
   
