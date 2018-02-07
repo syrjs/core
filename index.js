@@ -12,6 +12,9 @@ import { Component } from './lib/component';
 import { Animated } from './lib/animated';
 import { Events , EventEmitter } from './lib/events';
 
+// fillers for native platforms
+import { Networking } from './lib/networking';
+
 // syr components
 import { View } from './lib/view';
 import { StackView } from './lib/stackview';

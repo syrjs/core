@@ -37,6 +37,8 @@
 		D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D266C4A61F9B275E00BB0A90 /* SyrAnimatedView.m */; };
 		D271B2A91FFED873004603B4 /* SyrInfoBox.h in Headers */ = {isa = PBXBuildFile; fileRef = D271B2A71FFED873004603B4 /* SyrInfoBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D271B2AA1FFED873004603B4 /* SyrInfoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D271B2A81FFED873004603B4 /* SyrInfoBox.m */; };
+		D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = D2968144202AC64F005EE04C /* SyrNetworking.h */; };
+		D2968147202AC64F005EE04C /* SyrNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D2968145202AC64F005EE04C /* SyrNetworking.m */; };
 		D29AD66D1FA176DD00DE7CF0 /* SyrNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */; };
 		D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D29AD6A21FA536D500DE7CF0 /* SyrScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */; };
@@ -107,6 +109,8 @@
 		D266C4A61F9B275E00BB0A90 /* SyrAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrAnimatedView.m; sourceTree = "<group>"; };
 		D271B2A71FFED873004603B4 /* SyrInfoBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrInfoBox.h; sourceTree = "<group>"; };
 		D271B2A81FFED873004603B4 /* SyrInfoBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrInfoBox.m; sourceTree = "<group>"; };
+		D2968144202AC64F005EE04C /* SyrNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrNetworking.h; sourceTree = "<group>"; };
+		D2968145202AC64F005EE04C /* SyrNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrNetworking.m; sourceTree = "<group>"; };
 		D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SyrNative.bundle; sourceTree = "<group>"; };
 		D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyrScrollView.h; sourceTree = "<group>"; };
 		D29AD6A01FA536D500DE7CF0 /* SyrScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyrScrollView.m; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				D2B1F56E1FE34B17004A42EF /* SyrStyler.m */,
 				D271B2A71FFED873004603B4 /* SyrInfoBox.h */,
 				D271B2A81FFED873004603B4 /* SyrInfoBox.m */,
+				D2968144202AC64F005EE04C /* SyrNetworking.h */,
+				D2968145202AC64F005EE04C /* SyrNetworking.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 				D229B7081FD12C99004D651B /* SyrRotationAnimation.h in Headers */,
 				D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */,
 				D266C4961F9AB65200BB0A90 /* SyrImage.h in Headers */,
+				D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */,
 				D266C47B1F9AAD0700BB0A90 /* SyrComponent.h in Headers */,
 				D266C49E1F9ABE4E00BB0A90 /* SyrAnimator.h in Headers */,
 				D2CE4DFF200E8365002B7B40 /* SyrAnimatedText.h in Headers */,
@@ -435,6 +442,7 @@
 				D2B1F5701FE34B17004A42EF /* SyrStyler.m in Sources */,
 				D266C4801F9AAD2000BB0A90 /* SyrText.m in Sources */,
 				D266C49B1F9ABAE400BB0A90 /* SyrButton.m in Sources */,
+				D2968147202AC64F005EE04C /* SyrNetworking.m in Sources */,
 				D2CE4DFC200E8269002B7B40 /* SyrAnimatedImage.m in Sources */,
 				D266C49F1F9ABE4E00BB0A90 /* SyrAnimator.m in Sources */,
 				D29AD6A21FA536D500DE7CF0 /* SyrScrollView.m in Sources */,

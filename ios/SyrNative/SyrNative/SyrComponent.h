@@ -18,7 +18,7 @@
 
 // tell syr how to find native class methods to send to JavaScript
 #define SYR_EXPORT_METHOD(method) \
-- (void)SYR_CONCAT(__syr_export__, method)
++ (void)SYR_CONCAT(__syr_export__, method)
 
 @interface SyrComponent : NSObject
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance;
