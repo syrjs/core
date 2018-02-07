@@ -12,6 +12,8 @@
 
 @implementation SyrButton
 
+SYR_EXPORT_MODULE(Button)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIButton *button;
   NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];

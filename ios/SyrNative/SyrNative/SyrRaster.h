@@ -26,4 +26,5 @@ alpha:   1.]
 -(void) setupAnimation: (NSDictionary*) animationDict;
 -(void) showInfoMessage: (NSDictionary*) message withRootView:(SyrRootView*) rootView;
 @property NSMutableDictionary* nativemodules;
+@property NSMutableDictionary* registeredClasses;
 @end

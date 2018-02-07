@@ -11,6 +11,8 @@
 
 @implementation SyrLinearGradient
 
+SYR_EXPORT_MODULE(LinearGradient)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view = [[UIView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];

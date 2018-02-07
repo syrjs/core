@@ -11,6 +11,8 @@
 
 @implementation SyrImage
 
+SYR_EXPORT_MODULE(Image)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   
   NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"source"]  valueForKey:@"uri"];

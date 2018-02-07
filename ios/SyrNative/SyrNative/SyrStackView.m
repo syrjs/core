@@ -11,6 +11,8 @@
 
 @implementation SyrStackView
 
+SYR_EXPORT_MODULE(StackView)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIStackView* stackView = [[UIStackView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];

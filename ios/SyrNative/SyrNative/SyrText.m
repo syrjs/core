@@ -11,6 +11,8 @@
 
 @implementation SyrText
 
+SYR_EXPORT_MODULE(Text)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   UILabel *text;
 

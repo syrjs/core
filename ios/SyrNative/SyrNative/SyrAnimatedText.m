@@ -11,6 +11,8 @@
 
 @implementation SyrAnimatedText
 
+SYR_EXPORT_MODULE(AnimatedText)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   return [SyrText render:component withInstance:componentInstance];
 }

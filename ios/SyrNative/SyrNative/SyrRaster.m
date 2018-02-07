@@ -17,7 +17,6 @@
 @property UIView* rootView;
 @property NSMutableDictionary* components;
 @property NSMutableDictionary* animations;
-@property NSMutableDictionary* registeredClasses;
 @end
 
 @implementation SyrRaster
@@ -193,7 +192,7 @@
  */
 -(NSObject*) createComponent: (NSDictionary*) component {
   // infer the class name from the element tag the raster is sending us
-  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+  NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   
   // get instance of the class
   NSObject* class = NSClassFromString(className);
@@ -269,7 +268,7 @@
  NativeClass.NativeMethod()
  */
 -(void) registerComponent: (NSString*) className withName:(NSString*) name {
-  [_registeredClasses setObject:className  forKey:className];
+  
   int unsigned numMethods;
   Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
   
@@ -278,6 +277,7 @@
     preferedName = className;
   }
   
+  [_registeredClasses setObject:className  forKey:preferedName];
   for (int i = 0; i < numMethods; i++) {
     NSString* selector = NSStringFromSelector(method_getName(methods[i]));
     if([selector containsString:@"__syr_export"]) {

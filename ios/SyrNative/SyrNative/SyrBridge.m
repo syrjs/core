@@ -163,7 +163,7 @@
                                                             error:nil];
   
   // get the class
-  NSString* className = [astDict valueForKey:@"clazz"];
+  NSString* className = [_raster.registeredClasses valueForKey:[astDict valueForKey:@"clazz"]];
   Class class = NSClassFromString(className);
   
   // create an instance of the object
