@@ -11,23 +11,18 @@
 
 @implementation SyrView
 
-SYR_EXPORT_MODULE()
-
-SYR_EXPORT_METHOD(testExportMethod:(NSString *)name duration:(NSInteger *)duration)
-{
-  NSLog(@"sup");
-  // do something with Name and Location strings
-}
+SYR_EXPORT_MODULE(View)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   UIView* view;
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  
   if(componentInstance != nil) {
     view = (UIView*)componentInstance;
   } else {
     view = [[UIView alloc] init];
+    view.frame = [SyrStyler styleFrame:style];
   }
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  view.frame = [SyrStyler styleFrame:style];
   return [SyrStyler styleView:view withStyle:style];
 }
 

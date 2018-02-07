@@ -38,6 +38,7 @@
     _components = [[NSMutableDictionary alloc] init];
     _animations = [[NSMutableDictionary alloc] init];
     _nativemodules = [[NSMutableDictionary alloc] init];
+    _registeredClasses = [[NSMutableDictionary alloc] init];;
   }
   return self;
 }
@@ -92,7 +93,7 @@
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
-      //[self syncState:child];
+      [self syncState:child];
     }
   }
 }
@@ -156,10 +157,10 @@
         if ([view respondsToSelector:selector]) {
           // work around for stackview right now needs to be moved somewhere else
           UIStackView* stackView = (UIStackView*) view;
+          UIView* componentView = (UIView*)nsComponent;
           UIView* containerview = [[UIView alloc] init];
-          CGRect frame = CGRectMake(0, 0,10, 10);
-          containerview.frame = frame;
-          [containerview addSubview:nsComponent];
+          containerview.frame = componentView.frame;
+          [containerview addSubview:componentView];
           [stackView addArrangedSubview:containerview];
         } else {
           [view addSubview:nsComponent];
@@ -177,11 +178,9 @@
     }
     }
     
-    //
     if(recalculateLayout) {
       [self syncState:component];
     }
-    
   }
 }
 
@@ -191,10 +190,10 @@
  */
 -(NSObject*) createComponent: (NSDictionary*) component {
   // infer the class name from the element tag the raster is sending us
-  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+  NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   
   // get instance of the class
-  NSObject* class = NSClassFromString(className);
+  Class class = NSClassFromString(className);
   
   // populate return
   NSObject* __unsafe_unretained returnComponent;
@@ -266,13 +265,21 @@
  an array to send to the js app
  NativeClass.NativeMethod()
  */
--(void) registerComponent: (NSString*) className {
+-(void) registerComponent: (NSString*) className withName:(NSString*) name {
+  
   int unsigned numMethods;
   Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
+  
+  NSString* preferedName = name;
+  if(preferedName.length == 0) {
+    preferedName = className;
+  }
+  
+  [_registeredClasses setObject:className  forKey:preferedName];
   for (int i = 0; i < numMethods; i++) {
     NSString* selector = NSStringFromSelector(method_getName(methods[i]));
     if([selector containsString:@"__syr_export"]) {
-      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", className, selector]];
+      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", preferedName, selector]];
     }
   }
   free(methods);
@@ -295,7 +302,7 @@
   text.frame = rootView.frame;
   text.text = errorMsg;
   [text setFont:[UIFont systemFontOfSize:20.0]];
-  [text setTextAlignment:UITextAlignmentCenter];
+  [text setTextAlignment:NSTextAlignmentCenter];
   
   view.frame = rootView.frame;
   

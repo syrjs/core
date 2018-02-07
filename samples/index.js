@@ -20,7 +20,6 @@ class Rectangle extends Component {
     super()
     this.state.backgroundColor = '#ffffff';
     this.state.message = 'hello world';
-    this.xyAnimation = new Animated.ValueXY({x:0, y:0});
   }
   render() {
     return (
@@ -28,22 +27,13 @@ class Rectangle extends Component {
         top: this.attributes.top,
         width: 100,
         height: 50,
-        backgroundColor: this.state.backgroundColor,
-        transform:[this.xyAnimation]
+        backgroundColor: this.state.backgroundColor
       }}>
      <Text style={{width:100, height:50, fontSize: 12, color:'#000000'}}>{this.state.message}</Text>
     </View>
     )
   }
   componentDidMount() {
-    Animated.timing(this.xyAnimation, {
-      toValue: {
-        x:0,
-        y:0
-      },
-      duration: 2000
-    }).start()
-
     if(this.attributes.color == 'red') {
       this.setState({
           backgroundColor:'#ff0000',

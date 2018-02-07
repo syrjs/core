@@ -11,6 +11,7 @@
 
 @implementation SyrScrollView
 
+SYR_EXPORT_MODULE(ScrollView)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIScrollView *scrollView;

@@ -118,7 +118,6 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   
   components.queryItems = queryItems;
-  NSLog(components.URL.absoluteString);
   
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
@@ -164,7 +163,7 @@
                                                             error:nil];
   
   // get the class
-  NSString* className = [astDict valueForKey:@"clazz"];
+  NSString* className = [_raster.registeredClasses valueForKey:[astDict valueForKey:@"clazz"]];
   Class class = NSClassFromString(className);
   
   // create an instance of the object

@@ -108,21 +108,10 @@ class MyComponent extends Component {
     styles.image.transform = [{ rotatey: this.spinPiggyAnimation}];
   }
   render() {
-    console.log('testing border width')
-    // turn this flag on/off to test borders
-    if (true) {
-      return (
-        <View style={{width: 300, height: 600, left: 20, top: 20, backgroundColor: "#ffffff", borderWidth: 1, borderColor: '#ff99ff'}}>
-            <View style={{width: 250, height: 200, top: 20, left: 20, backgroundColor: "#d81313", borderTopWidth: 2, borderColor: '#000000'}}></View>
-            <View style={{width: 250, height: 200, top: 260, left: 20, backgroundColor: "#1e90ff", borderLeftWidth: 3, borderColor: '#000000'}}></View>
-        </View>
-      )
-    }
-
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
-        <InnerComponent/>
+        {/* <InnerComponent/> */}
         <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
         <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
           {this.state.buttonMessage}
@@ -131,7 +120,6 @@ class MyComponent extends Component {
     );
   }
   onPress() {
-
     console.log('button pressed');
     this.num += 1;
     this.setState({

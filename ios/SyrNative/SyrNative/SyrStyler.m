@@ -50,7 +50,12 @@
     } else {
         view.backgroundColor = [self color:backgroundColor];
     }
-    
+  
+  	NSNumber* borderRadius = [style valueForKey:@"borderRadius"];
+    if (borderRadius) {
+      view.layer.cornerRadius = [borderRadius doubleValue];
+    }
+  
     NSNumber* borderWidth = [style valueForKey:@"borderWidth"];
     UIColor* borderColor = [self colorFromHash:[style valueForKey:@"borderColor"]];
     

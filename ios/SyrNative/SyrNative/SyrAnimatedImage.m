@@ -11,6 +11,8 @@
 
 @implementation SyrAnimatedImage
 
+SYR_EXPORT_MODULE(AnimatedImage)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   return [SyrImage render:component withInstance:componentInstance];
 }
