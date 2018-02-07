@@ -17,7 +17,6 @@ SYR_EXPORT_MODULE(StackView)
   UIStackView* stackView = [[UIStackView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
   NSString* axis = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"axis"];
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
   NSString* spacing = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"spacing"];
   NSString* distribution = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"distribution"];
   NSString* alignment = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"align"];

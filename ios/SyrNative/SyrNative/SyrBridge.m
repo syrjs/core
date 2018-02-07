@@ -25,7 +25,7 @@
 {
   self = [super init];
   if (self!=nil) {
-    _bridgedBrowser = [[NSMutableDictionary alloc] init];
+    _bridgedBrowser = [[WKWebView alloc] init];
     // setup a 0,0,0,0 wkwebview to use the jsbridge
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *controller = [[WKUserContentController alloc] init];
@@ -53,7 +53,7 @@
 }
 
 - (void)buttonPressed:(UIButton *)button  {
-  NSNumber* tagNumber = [NSNumber numberWithInt:button.tag];
+  NSNumber* tagNumber = [NSNumber numberWithDouble:button.tag];
   NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
   [self sendEvent:event];
 }

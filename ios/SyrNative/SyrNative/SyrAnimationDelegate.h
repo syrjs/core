@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "SyrBridge.h"
 
-@interface SyrAnimationDelegate : NSObject
+@interface SyrAnimationDelegate : NSObject <CAAnimationDelegate>
 @property SyrBridge* bridge;
 @property  NSString* targetId;
 @property  NSDictionary* animation;

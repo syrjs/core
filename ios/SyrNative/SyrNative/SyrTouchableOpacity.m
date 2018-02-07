@@ -22,7 +22,8 @@ SYR_EXPORT_MODULE(TouchableOpacity)
   view.frame = [SyrStyler styleFrame:style];
   
   // Setup Tap Code
-  UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:)];
+  SEL selector = NSSelectorFromString(@"handleSingleTap:");
+  UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:selector];
 
   [view addGestureRecognizer:singleFingerTap];
 

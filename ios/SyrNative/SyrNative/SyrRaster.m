@@ -100,7 +100,7 @@
 
 // build the component tree
 -(void) build: (NSDictionary*) astDict {
-  NSObject* component = [self createComponent:astDict];
+  UIView* component = (UIView*)[self createComponent:astDict];
   if(component != nil) {
     NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
@@ -145,8 +145,8 @@
       // should do a strict check if it is derived from component
       if(nsComponent != nil) {
 
-        if(subchildren != [NSNull null] && [subchildren count] > 0){
-          [self buildChildren:child withViewParent:nsComponent];
+        if(subchildren != nil && [subchildren count] > 0){
+          [self buildChildren:child withViewParent:(UIView*)nsComponent];
         }
         
         [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
@@ -163,13 +163,13 @@
           [containerview addSubview:componentView];
           [stackView addArrangedSubview:containerview];
         } else {
-          [view addSubview:nsComponent];
+          [view addSubview:(UIView*)nsComponent];
         }
         
       } else {
         
         // render it's children to it's own parent
-        if(subchildren != [NSNull null]) {
+        if(subchildren != nil) {
           if(subchildren.count > 0){
             [self buildChildren:child withViewParent:view];
           }

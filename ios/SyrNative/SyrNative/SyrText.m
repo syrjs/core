@@ -53,11 +53,11 @@ SYR_EXPORT_MODULE(Text)
   NSString* alignment = [style valueForKey:@"textAlign"];
   
   if([alignment containsString:@"center"]) {
-    [text setTextAlignment:UITextAlignmentCenter];
+    [text setTextAlignment:NSTextAlignmentCenter];
   } else if ([alignment containsString:@"right"]) {
-    [text setTextAlignment:UITextAlignmentRight];
+    [text setTextAlignment:NSTextAlignmentRight];
   } else {
-    [text setTextAlignment:UITextAlignmentLeft];
+    [text setTextAlignment:NSTextAlignmentLeft];
   }
   
   return [SyrStyler styleView:text withStyle:style];

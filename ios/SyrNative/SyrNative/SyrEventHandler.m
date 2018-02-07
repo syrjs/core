@@ -46,7 +46,7 @@
  todo : move to syr button
  */
 - (void) btnSelected:(id)sender {
-  NSNumber* tagNumber = [NSNumber numberWithInt:[sender tag]];
+  NSNumber* tagNumber = [NSNumber numberWithDouble:[sender tag]];
   NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
   [_bridge sendEvent:event];
 }

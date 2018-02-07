@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "SyrRootView.h"
 
-@interface SyrBridge : NSObject <WKScriptMessageHandler>
+@interface SyrBridge : NSObject <WKScriptMessageHandler, WKNavigationDelegate>
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView;
 - (void) rasterRenderedComponent: (NSString*) withComponentId;
 - (void) sendEvent: (NSDictionary*) message;
