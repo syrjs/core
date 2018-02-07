@@ -17,6 +17,7 @@
 @property UIView* rootView;
 @property NSMutableDictionary* components;
 @property NSMutableDictionary* animations;
+@property NSMutableDictionary* registeredClasses;
 @end
 
 @implementation SyrRaster
@@ -38,6 +39,7 @@
     _components = [[NSMutableDictionary alloc] init];
     _animations = [[NSMutableDictionary alloc] init];
     _nativemodules = [[NSMutableDictionary alloc] init];
+    _registeredClasses = [[NSMutableDictionary alloc] init];;
   }
   return self;
 }
@@ -266,13 +268,20 @@
  an array to send to the js app
  NativeClass.NativeMethod()
  */
--(void) registerComponent: (NSString*) className {
+-(void) registerComponent: (NSString*) className withName:(NSString*) name {
+  [_registeredClasses setObject:className  forKey:className];
   int unsigned numMethods;
   Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
+  
+  NSString* preferedName = name;
+  if(preferedName.length == 0) {
+    preferedName = className;
+  }
+  
   for (int i = 0; i < numMethods; i++) {
     NSString* selector = NSStringFromSelector(method_getName(methods[i]));
     if([selector containsString:@"__syr_export"]) {
-      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", className, selector]];
+      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", preferedName, selector]];
     }
   }
   free(methods);

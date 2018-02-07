@@ -22,7 +22,7 @@ alpha:   1.]
 @property SyrBridge* bridge;
 + (id) sharedInstance;
 -(void) parseAST: (NSDictionary*) astString withRootView:(SyrRootView*) rootView;
--(void) registerComponent: (NSString*) component;
+-(void) registerComponent: (NSString*) component withName:(NSString*) name;
 -(void) setupAnimation: (NSDictionary*) animationDict;
 -(void) showInfoMessage: (NSDictionary*) message withRootView:(SyrRootView*) rootView;
 @property NSMutableDictionary* nativemodules;
