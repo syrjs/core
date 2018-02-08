@@ -22,7 +22,8 @@ SYR_EXPORT_MODULE(Button)
     button = (UIButton*)componentInstance;
   } else {
     button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:@selector(handleSingleTap:) forControlEvents:UIControlEventTouchUpInside];
+    SEL selector = NSSelectorFromString(@"handleSingleTap:");
+    [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:selector forControlEvents:UIControlEventTouchUpInside];
   }
   
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];

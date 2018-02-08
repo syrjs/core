@@ -19,8 +19,9 @@ SYR_EXPORT_METHOD(get: (NSDictionary*) requestDict) {
     // get request
     NSString* requestUrl = [requestDict valueForKey:@"url"];
     NSString* guid = [requestDict valueForKey:@"guid"];
+    NSString* method = [requestDict valueForKey:@"method"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:method];
     [request setURL:[NSURL URLWithString:requestUrl]];
     
     NSError *error = nil;
@@ -29,9 +30,10 @@ SYR_EXPORT_METHOD(get: (NSDictionary*) requestDict) {
     // get data
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
     
+    
     // log error if not success just for info
     if([responseCode statusCode] != 200){
-      NSLog(@"Error getting %@, HTTP status code %i", requestUrl, [responseCode statusCode]);
+      NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[responseCode statusCode]);
     }
     
     // get the response

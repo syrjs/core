@@ -10,6 +10,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SyrOpacityAnimation : NSObject
-@property NSObject* delegate;
+@property NSObject<CAAnimationDelegate>* delegate;
 -(void) animate:(NSObject*) component withAnimation: (NSDictionary*) animation;
 @end

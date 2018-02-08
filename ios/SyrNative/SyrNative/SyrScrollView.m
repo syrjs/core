@@ -48,7 +48,6 @@ SYR_EXPORT_MODULE(ScrollView)
   for (UIView *subview in scrollView.subviews)
   {
     CGRect frame = subview.frame;
-    NSNumber* y = [NSNumber numberWithDouble:frame.origin.y];
     NSNumber* height = [NSNumber numberWithDouble:frame.size.height];
     if(height > farthestHeight) {
     	farthestHeight = height;
