@@ -38,6 +38,7 @@
     _components = [[NSMutableDictionary alloc] init];
     _animations = [[NSMutableDictionary alloc] init];
     _nativemodules = [[NSMutableDictionary alloc] init];
+    _registeredClasses = [[NSMutableDictionary alloc] init];;
   }
   return self;
 }
@@ -70,22 +71,25 @@
 }
 
 -(void) syncState: (NSDictionary*) component {
-  NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"guid"];
-  NSObject* componentInstance = [_components objectForKey:guid];
-  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
-  NSObject* class = NSClassFromString(className);
-  SEL selector = NSSelectorFromString(@"render:withInstance:");
-  if ([class respondsToSelector:selector]) {
-    // invoke render method, pass component
-    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
-    [inv setSelector:selector];
-    [inv setTarget:class];
-    
-    [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-    [inv setArgument:&(componentInstance) atIndex:3];
-    [inv invoke];
-  }
+  NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
+  NSObject* componentInstance = [_components objectForKey:uuid];
   
+  if(componentInstance != nil) {
+    NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+    NSObject* class = NSClassFromString(className);
+    SEL selector = NSSelectorFromString(@"render:withInstance:");
+    if ([class respondsToSelector:selector]) {
+      // invoke render method, pass component
+      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+      [inv setSelector:selector];
+      [inv setTarget:class];
+      
+      [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+      [inv setArgument:&(componentInstance) atIndex:3];
+      [inv invoke];
+    }
+  }
+
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
@@ -96,13 +100,17 @@
 
 // build the component tree
 -(void) build: (NSDictionary*) astDict {
-  NSObject* component = [self createComponent:astDict];
+  UIView* component = (UIView*)[self createComponent:astDict];
   if(component != nil) {
     NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
     [_rootView addSubview:component];
-    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
-    [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"guid"]];
+    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
+    [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
+  } else {
+    NSArray* childComponents = [astDict objectForKey:@"children"];
+    NSDictionary* childComponent = [childComponents objectAtIndex:0];
+    [self build:childComponent];
   }
 }
 
@@ -137,31 +145,31 @@
       // should do a strict check if it is derived from component
       if(nsComponent != nil) {
 
-        if(subchildren != [NSNull null] && [subchildren count] > 0){
-          [self buildChildren:child withViewParent:nsComponent];
+        if(subchildren != nil && [subchildren count] > 0){
+          [self buildChildren:child withViewParent:(UIView*)nsComponent];
         }
         
-        [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
-        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"guid"]];
+        [_components setObject:nsComponent forKey:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
+        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
         
         // todo: move this out of the raster
         SEL selector = NSSelectorFromString(@"addArrangedSubview:");
         if ([view respondsToSelector:selector]) {
           // work around for stackview right now needs to be moved somewhere else
           UIStackView* stackView = (UIStackView*) view;
+          UIView* componentView = (UIView*)nsComponent;
           UIView* containerview = [[UIView alloc] init];
-          CGRect frame = CGRectMake(0, 0,10, 10);
-          containerview.frame = frame;
-          [containerview addSubview:nsComponent];
+          containerview.frame = componentView.frame;
+          [containerview addSubview:componentView];
           [stackView addArrangedSubview:containerview];
         } else {
-          [view addSubview:nsComponent];
+          [view addSubview:(UIView*)nsComponent];
         }
         
       } else {
         
         // render it's children to it's own parent
-        if(subchildren != [NSNull null]) {
+        if(subchildren != nil) {
           if(subchildren.count > 0){
             [self buildChildren:child withViewParent:view];
           }
@@ -170,11 +178,9 @@
     }
     }
     
-    //
     if(recalculateLayout) {
       [self syncState:component];
     }
-    
   }
 }
 
@@ -184,10 +190,10 @@
  */
 -(NSObject*) createComponent: (NSDictionary*) component {
   // infer the class name from the element tag the raster is sending us
-  NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
+  NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   
   // get instance of the class
-  NSObject* class = NSClassFromString(className);
+  Class class = NSClassFromString(className);
   
   // populate return
   NSObject* __unsafe_unretained returnComponent;
@@ -236,7 +242,7 @@
     NSArray* children = [componentDict objectForKey:@"children"];
     if([children count] > 0){
       for(id child in children) {
-        NSString* childGuid = [child objectForKey:@"guid"];
+        NSString* childGuid = [child objectForKey:@"uuid"];
         animatedTarget = [_components objectForKey:childGuid];
         if(animatedTarget != nil) {
           animatedTargetGuid = childGuid;
@@ -259,13 +265,21 @@
  an array to send to the js app
  NativeClass.NativeMethod()
  */
--(void) registerComponent: (NSString*) className {
+-(void) registerComponent: (NSString*) className withName:(NSString*) name {
+  
   int unsigned numMethods;
   Method *methods = class_copyMethodList(objc_getMetaClass([className UTF8String]), &numMethods);
+  
+  NSString* preferedName = name;
+  if(preferedName.length == 0) {
+    preferedName = className;
+  }
+  
+  [_registeredClasses setObject:className  forKey:preferedName];
   for (int i = 0; i < numMethods; i++) {
     NSString* selector = NSStringFromSelector(method_getName(methods[i]));
     if([selector containsString:@"__syr_export"]) {
-      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", className, selector]];
+      [_nativemodules setObject:selector forKey:[NSString stringWithFormat:@"%@%@", preferedName, selector]];
     }
   }
   free(methods);
@@ -288,7 +302,7 @@
   text.frame = rootView.frame;
   text.text = errorMsg;
   [text setFont:[UIFont systemFontOfSize:20.0]];
-  [text setTextAlignment:UITextAlignmentCenter];
+  [text setTextAlignment:NSTextAlignmentCenter];
   
   view.frame = rootView.frame;
   

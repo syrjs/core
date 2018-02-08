@@ -13,8 +13,8 @@
 #define SYR_CONCAT(A, B) SYR_CONCAT2(A, B)
 
 // tell syr to register a native class
-#define SYR_EXPORT_MODULE() \
-+ (void)load { [[SyrRaster sharedInstance] registerComponent:NSStringFromClass([self class])]; }
+#define SYR_EXPORT_MODULE(name) \
++ (void)load { [[SyrRaster sharedInstance] registerComponent:NSStringFromClass([self class]) withName:@#name]; }
 
 // tell syr how to find native class methods to send to JavaScript
 #define SYR_EXPORT_METHOD(method) \

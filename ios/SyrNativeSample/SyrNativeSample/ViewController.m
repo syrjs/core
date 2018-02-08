@@ -19,7 +19,7 @@
   [super viewDidLoad];
   
   // init rootView
-  SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@"" initialProperties:@{}];
+  SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@"" initialProperties:@{@"foo": @"baz"}];
   rootView.frame = self.view.frame;
   
   // attach rootView

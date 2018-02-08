@@ -11,7 +11,7 @@
 @implementation SyrHeightWidthAnimation
 
 
--(void) animate:(NSObject*) component withAnimation: (NSDictionary*) animation {
+-(void) animate:(UIView*) component withAnimation: (NSDictionary*) animation {
   NSString* animatedProperty = [animation objectForKey:@"animatedProperty"];
   NSNumber* toValue = [animation objectForKey:@"toValue"];
   double duration = [[animation objectForKey:@"duration"] integerValue];
@@ -32,7 +32,7 @@
   if ([component respondsToSelector:selector]) {
     [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = CGRectMake([currentFrame CGRectValue].origin.x, [currentFrame CGRectValue].origin.y, [width doubleValue], [height doubleValue]);
-        [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
+      	[component setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
     } completion:^(BOOL finished) {
       [_delegate animationDidStop:nil finished:finished];
     }];

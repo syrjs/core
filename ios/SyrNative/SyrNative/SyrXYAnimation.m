@@ -10,7 +10,7 @@
 
 @implementation SyrXYAnimation
 
--(void) animate:(NSObject*) component withAnimation: (NSDictionary*) animation {
+-(void) animate:(UIView*) component withAnimation: (NSDictionary*) animation {
   NSNumber* x = [animation objectForKey:@"x"];
   NSNumber* y = [animation objectForKey:@"y"];
   NSNumber* x2 = [animation objectForKey:@"x2"];
@@ -22,11 +22,11 @@
   // get render method
   SEL selector = NSSelectorFromString(@"setValue:forKey:");
   if ([component respondsToSelector:selector]) {
-    [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
+    [component setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
     [UIView animateWithDuration:[[NSNumber numberWithDouble:duration] floatValue] delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
       NSNumber* currentFrame = [component valueForKeyPath:@"frame"];
       CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], [currentFrame CGRectValue].size.width, [currentFrame CGRectValue].size.height);
-      [component performSelector: selector withObject:[NSValue valueWithCGRect:frame] withObject:@"frame"];
+      [component setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
     } completion:^(BOOL finished) {
       [_delegate animationDidStop:nil finished:finished];
     }];

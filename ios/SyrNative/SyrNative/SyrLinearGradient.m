@@ -11,6 +11,8 @@
 
 @implementation SyrLinearGradient
 
+SYR_EXPORT_MODULE(LinearGradient)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view = [[UIView alloc] init];
   NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
@@ -23,7 +25,8 @@
   NSArray* gradientColors = [[component objectForKey:@"attributes"] objectForKey:@"colors"];
   
   for(id color in gradientColors) {
-    [colors addObject:[SyrStyler colorFromHash:color].CGColor];
+    struct CGColor* cgcolor = [SyrStyler colorFromHash:color].CGColor;
+    [colors addObject: (__bridge id _Nonnull)(cgcolor)];
   }
   
   gradientLayer.colors = colors;

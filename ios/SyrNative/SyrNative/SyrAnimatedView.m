@@ -11,6 +11,8 @@
 
 @implementation SyrAnimatedView
 
+SYR_EXPORT_MODULE(AnimatedView)
+
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   return [SyrView render:component withInstance:componentInstance];
 }

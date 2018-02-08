@@ -25,7 +25,7 @@
 {
   self = [super init];
   if (self!=nil) {
-    _bridgedBrowser = [[NSMutableDictionary alloc] init];
+    _bridgedBrowser = [[WKWebView alloc] init];
     // setup a 0,0,0,0 wkwebview to use the jsbridge
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *controller = [[WKUserContentController alloc] init];
@@ -53,7 +53,7 @@
 }
 
 - (void)buttonPressed:(UIButton *)button  {
-  NSNumber* tagNumber = [NSNumber numberWithInt:button.tag];
+  NSNumber* tagNumber = [NSNumber numberWithDouble:button.tag];
   NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
   [self sendEvent:event];
 }
@@ -104,11 +104,12 @@
                                                        error:nil];
   
   NSString* uriStringExportedMethods = [[NSString alloc] initWithData:jsonExportedMethodsData encoding:NSUTF8StringEncoding];
+  NSString* uriStringBootupProps = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
   
   CGFloat screenScale = [[UIScreen mainScreen] scale];
   NSNumber* screenScaleNS = [NSNumber numberWithFloat:screenScale];
   
-  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:uriStringBootupProps]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"screen_density" value:[screenScaleNS stringValue]]];
@@ -117,7 +118,6 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   
   components.queryItems = queryItems;
-  NSLog(components.URL.absoluteString);
   
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
@@ -163,7 +163,7 @@
                                                             error:nil];
   
   // get the class
-  NSString* className = [astDict valueForKey:@"clazz"];
+  NSString* className = [_raster.registeredClasses valueForKey:[astDict valueForKey:@"clazz"]];
   Class class = NSClassFromString(className);
   
   // create an instance of the object

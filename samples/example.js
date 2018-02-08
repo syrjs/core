@@ -11,7 +11,8 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
-  NativeModules
+  NativeModules,
+  StackView
 } from '../index';
 
 // currently required to pull images in to web.
@@ -110,7 +111,7 @@ class MyComponent extends Component {
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
-        <InnerComponent/>
+        {/* <InnerComponent/> */}
         <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
         <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
           {this.state.buttonMessage}
@@ -119,7 +120,6 @@ class MyComponent extends Component {
     );
   }
   onPress() {
-
     console.log('button pressed');
     this.num += 1;
     this.setState({
