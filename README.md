@@ -63,13 +63,14 @@ https://github.com/dmikey/syr/milestones
 *  Run the project in xcode.
 
 ## Contributors 
-
+<div align="center">
+  
 [<img alt="dmikey" src="https://avatars3.githubusercontent.com/u/328000?v=4&s=117" width=117>](https://github.com/dmikey) |[<img alt="MSiddharthReddy" src="https://avatars3.githubusercontent.com/u/17309023?v=4&s=117" width=117>](https://github.com/MSiddharthReddy) |[<img alt="pvenkatakrishnan" src="https://avatars2.githubusercontent.com/u/2745959?v=4&s=117" width=117>](https://github.com/pvenkatakrishnan) |[<img alt="gabrielcsapo" src="https://avatars0.githubusercontent.com/u/1854811?v=4&s=117" width=117>](https://github.com/gabrielcsapo) |[<img alt="edwinwebb" src="https://avatars1.githubusercontent.com/u/797904?v=4&s=117" width=117>](https://github.com/edwinwebb) |
 :---:|:---:|:---:|:---:|:---:|
 [dmikey](https://github.com/dmikey)|[MSiddharthReddy](https://github.com/MSiddharthReddy)|[pvenkatakrishnan](https://github.com/pvenkatakrishnan)|[gabrielcsapo](https://github.com/gabrielcsapo)| [edwinwebb](https://github.com/edwinwebb)|
 
 
-<img src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr" width=36>
 
+</div>
 
-
+<img align="center" src="https://user-images.githubusercontent.com/328000/29147428-d6619ef2-7d1b-11e7-9cbd-286b7ae5fe49.png" alt="syr" title="syr" width=36>
