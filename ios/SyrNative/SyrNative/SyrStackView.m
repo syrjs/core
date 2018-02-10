@@ -15,11 +15,11 @@ SYR_EXPORT_MODULE(StackView)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIStackView* stackView = [[UIStackView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
-  NSString* axis = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"axis"];
-  NSString* spacing = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"spacing"];
-  NSString* distribution = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"distribution"];
-  NSString* alignment = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"align"];
+  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  NSString* axis = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"axis"];
+  NSString* spacing = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"spacing"];
+  NSString* distribution = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"distribution"];
+  NSString* alignment = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"align"];
   NSString* height = [style valueForKey:@"height"];
   
   if([alignment containsString:@"center"]) {

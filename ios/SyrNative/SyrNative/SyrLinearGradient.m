@@ -15,14 +15,14 @@ SYR_EXPORT_MODULE(LinearGradient)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIView* view = [[UIView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   view.frame = [SyrStyler styleFrame:style];
   
   CAGradientLayer *gradientLayer = [CAGradientLayer layer];
   gradientLayer.frame = view.layer.bounds;
   
   NSMutableArray* colors = [[NSMutableArray alloc] init];
-  NSArray* gradientColors = [[component objectForKey:@"attributes"] objectForKey:@"colors"];
+  NSArray* gradientColors = [[component objectForKey:@"props"] objectForKey:@"colors"];
   
   for(id color in gradientColors) {
     struct CGColor* cgcolor = [SyrStyler colorFromHash:color].CGColor;

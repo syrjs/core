@@ -15,7 +15,7 @@ SYR_EXPORT_MODULE(View)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   UIView* view;
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   
   if(componentInstance != nil) {
     view = (UIView*)componentInstance;

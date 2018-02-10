@@ -105,13 +105,15 @@
     NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
     [_rootView addSubview:component];
-    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
     [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
+    [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
   } else {
     NSArray* childComponents = [astDict objectForKey:@"children"];
     NSDictionary* childComponent = [childComponents objectAtIndex:0];
     [self build:childComponent];
+    [_bridge rasterRenderedComponent:[astDict valueForKey:@"uuid"]];
   }
+  
 }
 
 // build children in the tree
@@ -168,6 +170,9 @@
         
       } else {
         
+        // notify it was 'mounted'
+        
+        [_bridge rasterRenderedComponent:[[child valueForKey:@"instance"] valueForKey:@"uuid"]];
         // render it's children to it's own parent
         if(subchildren != nil) {
           if(subchildren.count > 0){

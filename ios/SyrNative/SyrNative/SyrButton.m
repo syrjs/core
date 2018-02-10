@@ -26,11 +26,11 @@ SYR_EXPORT_MODULE(Button)
     [button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:selector forControlEvents:UIControlEventTouchUpInside];
   }
   
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   NSString* buttonTitle =  [[component objectForKey:@"instance"] valueForKey:@"value"];
   
 	// default to button enabled
-  id isEnabled = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] objectForKey:@"enabled"];
+  id isEnabled = [[[component objectForKey:@"instance"] objectForKey:@"props"] objectForKey:@"enabled"];
   if(isEnabled != nil) {
     if([isEnabled boolValue] == NO) {
       button.enabled = false;

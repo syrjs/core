@@ -15,8 +15,8 @@ SYR_EXPORT_MODULE(Image)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
   
-  NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"source"]  valueForKey:@"uri"];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   UIImage* image = [UIImage imageNamed:source];
   UIImageView* imageHolder;
   
