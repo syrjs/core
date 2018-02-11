@@ -25,7 +25,7 @@ SYR_EXPORT_MODULE(Text)
   }
   
   text.backgroundColor = [UIColor clearColor];
-  NSDictionary* style = [[component objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   text.frame = [SyrStyler styleFrame:style];
   text.text = [[component objectForKey:@"instance"] valueForKey:@"value"];
   
