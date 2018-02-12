@@ -31,8 +31,12 @@ class example extends Component {
   render() {
     return (
       <StackView
-      axis="horizontal"
-      style={{height:300, width:300}}>
+      axis="vertical"
+      style={{height:'auto', width:300}}>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
         <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
         <OtherClass></OtherClass>
       </StackView>

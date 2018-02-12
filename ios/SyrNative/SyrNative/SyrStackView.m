@@ -15,7 +15,7 @@ SYR_EXPORT_MODULE(StackView)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance  {
   UIStackView* stackView = [[UIStackView alloc] init];
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   NSString* axis = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"axis"];
   NSString* spacing = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"spacing"];
   NSString* distribution = [[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"distribution"];
@@ -51,7 +51,7 @@ SYR_EXPORT_MODULE(StackView)
   if(height != nil && [height isKindOfClass:[NSString class]] && [height containsString:@"auto"]) {
       NSNumber* totalHeight = [NSNumber numberWithInt:0];
       for(id child in [component objectForKey:@"children"]){
-        NSDictionary* childStyle = [[[child objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+        NSDictionary* childStyle = [[child objectForKey:@"instance"] valueForKey:@"style"];
         NSNumber* height = [childStyle objectForKey:@"height"];
         totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
       }
