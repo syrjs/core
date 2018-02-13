@@ -51,8 +51,8 @@ SYR_EXPORT_MODULE(StackView)
   if(height != nil && [height isKindOfClass:[NSString class]] && [height containsString:@"auto"]) {
       NSNumber* totalHeight = [NSNumber numberWithInt:0];
       for(id child in [component objectForKey:@"children"]){
-        NSDictionary* childStyle = [[child objectForKey:@"instance"] valueForKey:@"style"];
-        NSNumber* height = [childStyle objectForKey:@"height"];
+        NSDictionary* childStyle = [SyrStackView determineChildStyle:child];;
+        NSNumber* height = [childStyle objectForKey:@"height"];;
         totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
       }
     	CGRect frame = stackView.frame;
@@ -61,6 +61,14 @@ SYR_EXPORT_MODULE(StackView)
   }
   
   return [SyrStyler styleView:stackView withStyle:style];
+}
+
++(NSDictionary*) determineChildStyle: (NSDictionary*) child {
+    NSDictionary* childStyle = [[child objectForKey:@"instance"] valueForKey:@"style"];
+    if(childStyle != nil ){
+        return childStyle;
+    }
+    return [SyrStackView determineChildStyle: [[child objectForKey:@"children"] objectAtIndex:0]];
 }
 
 @end
