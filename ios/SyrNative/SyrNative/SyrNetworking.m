@@ -58,6 +58,8 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
       platformError = @{
                         @"message": [error localizedDescription]
                         };
+    } else {
+        platformError = @{};
     }
     
     // get the response
