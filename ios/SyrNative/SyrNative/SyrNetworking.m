@@ -22,6 +22,8 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     NSString* method = [requestDict valueForKey:@"method"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString* body = [requestDict valueForKey:@"body"];
+    NSDictionary* platformError = nil;
+    
     id headers = [requestDict objectForKey:@"headers"];
     
     if(body != nil) {
@@ -39,8 +41,10 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     [request setHTTPMethod:method];
     [request setURL:[NSURL URLWithString:requestUrl]];
     
+    // todo: forward these errors along with the data response
     NSError *error = nil;
     NSHTTPURLResponse *responseCode = nil;
+  
     
     // get data
     NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
@@ -50,12 +54,20 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
       NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[responseCode statusCode]);
     }
     
+    if(error != nil) {
+      platformError = @{
+                        @"message": [error localizedDescription]
+                        };
+    } else {
+        platformError = @{};
+    }
+    
     // get the response
     NSString* response = [[NSString alloc] initWithData:oResponseData encoding:NSASCIIStringEncoding];
     NSNumber* statusCode = [NSNumber numberWithDouble:[responseCode statusCode]];
     
     // send the response back
-    [self sendEventWithName:@"NetworkingCallback" body:@{@"data": response, @"responseCode": statusCode, @"guid": guid}];
+    [self sendEventWithName:@"NetworkingCallback" body:@{@"data": response, @"responseCode": statusCode, @"guid": guid, @"platformError":platformError}];
   });
 }
 
