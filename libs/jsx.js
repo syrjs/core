@@ -1,5 +1,7 @@
 'use strict';
 
+let uuids = {};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -101,7 +103,16 @@ exports.default = function (_ref) {
       function s4() {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
       }
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+
+      // ensure guids are unique and only increase the length if a collision has been found
+      let uuid = s4();
+      if(uuids[uuid] && uuids[uuid] == 'used') {
+        console.log('uuid duplicated, reassigning')
+        uuid = s4() + s4();
+      }
+      uuids[uuid] = 'used';
+
+      return uuid; //+  s4() +  s4() + s4(); //+ '-' + s4() + '-' + s4() + s4() + s4();
     };
 
     /* ==========================================================================
