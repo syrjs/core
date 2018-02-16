@@ -42,11 +42,11 @@ class OtherClass extends Component {
 class example extends Component {
   constructor() {
     super();
-    this.state.array= [1,2,3];
+    this.state.array= [1];
   }
   componentDidMount() {
     this.setState({
-      array: [1,2,3,4]
+      array: [1,2]
     })
   }
   render() {
