@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/nesteduniqueids.js'],
+    app: ['./samples/stackview.js'],
   },
 
   output: {
