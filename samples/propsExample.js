@@ -14,7 +14,7 @@ let style = {
 
 class ButtonThing extends Component {
   render(){
-    console.log(this.uuid);
+    //console.log(this.uuid);
     return(
       <Button onPress={()=>this.props.press()} style={{width:300, height:150}}>Click Me</Button>
     )
@@ -34,7 +34,7 @@ class HelloWorld extends Component {
     )
   }
   componentWillReceiveProps(nextProps) {
-    console.log('HelloWorld recieve props');
+    //console.log('HelloWorld recieve props');
   }
 }
 
@@ -57,10 +57,10 @@ class SyrExample extends Component {
     this.setState({
       fooProp: "22220nd"
     });
-    console.log('button click');
+    //console.log('button click');
   }
   componentDidMount() {
-    console.log('componentDidMount!');
+    //console.log('componentDidMount!');
 
     setTimeout(()=>{
       style.backgroundColor = "#0000ff";

@@ -24,11 +24,11 @@ class OtherClass extends Component {
     let self = this;
     return (
       <TouchableOpacity onPress={ () => {
-        console.log('My key', this.props.key, this.uuid);
+        //console.log('My key', this.props.key, this.uuid);
         this.setState({
           color: '#000000'
         }, () => {
-          console.log('Changed State :', this.state)
+          //console.log('Changed State :', this.state)
         })
     }} style={{height:50, width:100}}>
           <View style={{height:50, width:100, backgroundColor: this.state.color}}></View>
@@ -67,7 +67,7 @@ class example extends Component {
     })
   }
   onPressHandler(btn) {
-    console.log('click');
+    //console.log('click');
   }
 }
 

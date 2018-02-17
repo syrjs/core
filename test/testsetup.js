@@ -8,7 +8,7 @@ exports.testDom = function(initHTML) {
 };
 
 //https://stackoverflow.com/questions/18543047/mocha-monitor-application-output
-//method to capture console.logs in mocha tests.
+//method to capture //console.logs in mocha tests.
 exports.captureStream = function(stream) {
   var oldWrite = stream.write;
   var buf = '';

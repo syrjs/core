@@ -613,7 +613,7 @@ SyrInstance.getInstance(this).sendEvent(&quot;FooParty&quot;, &quot;party at my 
 
 const subscription = NativeEventEmitter.addListener(
   'FooParty',
-  (event) =&gt; console.log(event.name)
+  (event) =&gt; //console.log(event.name)
 );
 
 // unsubscribe when needed

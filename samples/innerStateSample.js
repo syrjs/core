@@ -74,7 +74,7 @@ class InnerComponent extends Component {
     return <View style={{height:100, width:100, backgroundColor:this.state.color}}></View>
   }
   componentDidMount() {
-    console.log('setting state inner component');
+    //console.log('setting state inner component');
 
     setTimeout(()=>{
       this.setState({
