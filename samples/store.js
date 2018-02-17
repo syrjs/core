@@ -27,7 +27,7 @@ SyrStore.reduce = function(action, payload) {
   switch (action) {
     case "test":
         SyrStore.dispatch(returnNewState(payload));
-        //console.log(action, payload);
+        console.log(action, payload);
       break;
   }
 }

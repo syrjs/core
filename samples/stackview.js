@@ -16,22 +16,10 @@ import {
 } from '../index';
 
 class OtherClass extends Component {
-  constructor(){
-    super();
-    this.state.color = '#ff00ff'
-  }
   render() {
-    let self = this;
     return (
-      <TouchableOpacity onPress={ () => {
-        //console.log('My key', this.props.key, this.uuid);
-        this.setState({
-          color: '#000000'
-        }, () => {
-          //console.log('Changed State :', this.state)
-        })
-    }} style={{height:50, width:100}}>
-          <View style={{height:50, width:100, backgroundColor: this.state.color}}></View>
+      <TouchableOpacity onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>
+          <View style={{height:50, width:100, backgroundColor:'#ff00ff'}}></View>
       </TouchableOpacity>
     )
   }
@@ -40,34 +28,22 @@ class OtherClass extends Component {
 
 
 class example extends Component {
-  constructor() {
-    super();
-    this.state.array= [1];
-  }
-  componentDidMount() {
-    this.setState({
-      array: [1,2]
-    })
-  }
   render() {
     return (
       <StackView
       axis="vertical"
-      style={{height:'auto', width:300}}
-      spacing="100"
-      >
-      {this.returnClass()}
+      style={{height:'auto', width:300}}>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+       <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+        <Button onPress={()=>{this.onPressHandler('+')}} style={{height:50, width:100}}>button</Button>
+        <OtherClass></OtherClass>
       </StackView>
     );
   }
-
-  returnClass() {
-    return this.state.array.map((a) => {
-      return  <OtherClass key={a}></OtherClass>
-    })
-  }
   onPressHandler(btn) {
-    //console.log('click');
+    console.log('click');
   }
 }
 

@@ -394,7 +394,7 @@ import { NativeEventEmitter } from 'syr';
 
 const subscription = NativeEventEmitter.addListener(
   'FooParty',
-  (event) => //console.log(event.name)
+  (event) => console.log(event.name)
 );
 
 // unsubscribe when needed

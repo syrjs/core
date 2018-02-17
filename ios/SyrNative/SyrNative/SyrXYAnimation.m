@@ -11,6 +11,7 @@
 @implementation SyrXYAnimation
 
 -(void) animate:(UIView*) component withAnimation: (NSDictionary*) animation {
+//@TODO REVISIT and figure out a better way to do this.
 //  NSNumber* x = [animation objectForKey:@"x"];
 //  NSNumber* y = [animation objectForKey:@"y"];
   NSNumber* x2 = [animation objectForKey:@"x2"];

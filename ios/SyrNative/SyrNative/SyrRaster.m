@@ -67,19 +67,17 @@
 
 -(void) update: (NSDictionary*) astDict {
  	// todo - reimpliment state update with animations in mind
-  [self syncState:astDict withParent:nil];
+  [self syncState:astDict];
 }
 
--(void) syncState: (NSDictionary*) component  withParent: (NSObject*) parent{
+-(void) syncState: (NSDictionary*) component {
   NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   NSObject* componentInstance = [_components objectForKey:uuid];
-  NSObject* last = parent;
-    
+  
   if(componentInstance != nil) {
     NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
     NSObject* class = NSClassFromString(className);
     SEL selector = NSSelectorFromString(@"render:withInstance:");
-    last = componentInstance;
     if ([class respondsToSelector:selector]) {
       // invoke render method, pass component
       NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
@@ -90,17 +88,12 @@
       [inv setArgument:&(componentInstance) atIndex:3];
       [inv invoke];
     }
-  } else {
-      if(last != nil) {
-          [self buildChildren:component withViewParent:last];
-      }
-
   }
 
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
-      [self syncState:child withParent:last];
+      [self syncState:child];
     }
   }
 }
@@ -125,7 +118,6 @@
 
 // build children in the tree
 -(void) buildChildren:(NSDictionary*) component withViewParent: (UIView*) view  {
-    
   bool recalculateLayout = false;
   if([component isKindOfClass:[NSDictionary class]]) {
     NSArray* children = [component objectForKey:@"children"];
@@ -133,9 +125,7 @@
     for(id child in children) {
       
       if(child != [NSNull null]) {
-          if([_components objectForKey: [[child valueForKey:@"instance"] valueForKey:@"uuid"]] != nil) {
-              break;
-          }
+      
       NSLog(@"building %@", [child valueForKey:@"elementName"]);
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
@@ -151,7 +141,7 @@
               }
           	}
         }
-    }
+    	}
       
       // component is not of type available
       // should do a strict check if it is derived from component
@@ -194,7 +184,7 @@
     }
     
     if(recalculateLayout) {
-      [self syncState:component withParent:nil];
+      [self syncState:component];
     }
   }
 }

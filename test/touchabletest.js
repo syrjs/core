@@ -12,7 +12,7 @@ describe('TouchableOpacity', function() {
     render() {
       return (
         <TouchableOpacity
-          onPress={() => //console.log('Touchable OnClick works')}
+          onPress={() => console.log('Touchable OnClick works')}
         >
           Hello World
         </TouchableOpacity>
@@ -35,7 +35,7 @@ describe('TouchableOpacity', function() {
     hook.unhook();
   });
 
-  it('should execute onclick and execute the given function. (in this case a //console.log)', function() {
+  it('should execute onclick and execute the given function. (in this case a console.log)', function() {
     const event = document.createEvent('HTMLEvents');
     event.initEvent('click', false, true);
     element.dispatchEvent(event);

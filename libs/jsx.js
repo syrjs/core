@@ -107,7 +107,7 @@ exports.default = function (_ref) {
       // ensure guids are unique and only increase the length if a collision has been found
       let uuid = s4();
       if(uuids[uuid] && uuids[uuid] == 'used') {
-        //console.log('uuid duplicated, reassigning')
+        console.log('uuid duplicated, reassigning')
         uuid = s4() + s4();
       }
       uuids[uuid] = 'used';

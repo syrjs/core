@@ -81,7 +81,7 @@ class InnerComponent extends Component {
     return <View style={{height: PixelRatio.getPixelSizeForLayoutSize(300), width: PixelRatio.getPixelSizeForLayoutSize(300), backgroundColor:this.state.color}}></View>
   }
   componentDidMount() {
-    //console.log('setting state inner component');
+    console.log('setting state inner component');
     setTimeout(()=>{
       this.setState({
         color: "#00ff00"
@@ -120,7 +120,7 @@ class MyComponent extends Component {
     );
   }
   onPress() {
-    //console.log('button pressed');
+    console.log('button pressed');
     this.num += 1;
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,

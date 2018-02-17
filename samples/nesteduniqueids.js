@@ -17,7 +17,7 @@ import {
 //     )
 //   }
 //   handlePress() {
-//     //console.log('clicked', this.props.color);
+//     console.log('clicked', this.props.color);
 //   }
 // }
 
@@ -45,7 +45,7 @@ class OtherClass extends Component {
     )
   }
   onPressHandler(){
-    //console.log('yoooooo', this.props.color, this.uuid);
+    console.log('yoooooo', this.props.color, this.uuid);
     this.setState({
       color: this.props.color
     })
