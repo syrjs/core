@@ -67,33 +67,38 @@
 
 -(void) update: (NSDictionary*) astDict {
  	// todo - reimpliment state update with animations in mind
-  [self syncState:astDict];
+  [self syncState:astDict withViewParent:nil];
 }
 
--(void) syncState: (NSDictionary*) component {
+-(void) syncState: (NSDictionary*) component withViewParent: (UIView*) viewParent {
   NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   NSObject* componentInstance = [_components objectForKey:uuid];
+  NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
+  NSObject* class = NSClassFromString(className);
   
-  if(componentInstance != nil) {
-    NSString* className = [NSString stringWithFormat:@"Syr%@", [component valueForKey:@"elementName"]];
-    NSObject* class = NSClassFromString(className);
-    SEL selector = NSSelectorFromString(@"render:withInstance:");
-    if ([class respondsToSelector:selector]) {
-      // invoke render method, pass component
-      NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
-      [inv setSelector:selector];
-      [inv setTarget:class];
-      
-      [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-      [inv setArgument:&(componentInstance) atIndex:3];
-      [inv invoke];
-    }
+  if(componentInstance != nil && class != nil) {
+    	viewParent = componentInstance;
+      SEL selector = NSSelectorFromString(@"render:withInstance:");
+      if ([class respondsToSelector:selector]) {
+        // invoke render method, pass component
+        NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+        [inv setSelector:selector];
+        [inv setTarget:class];
+        
+        [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+        [inv setArgument:&(componentInstance) atIndex:3];
+        [inv invoke];
+      }
+  } else if(componentInstance == nil && class != nil) {
+    NSLog(@"create a new component");
+    UIView* newComponent = (UIView*)[self createComponent:component];
+    [viewParent addSubview:newComponent];
   }
 
   NSArray* children = [component objectForKey:@"children"];
   if(children != [NSNull null]) {
     for(id child in children) {
-      [self syncState:child];
+      [self syncState:child withViewParent:viewParent];
     }
   }
 }
@@ -184,7 +189,7 @@
     }
     
     if(recalculateLayout) {
-      [self syncState:component];
+      [self syncState:component withViewParent:nil];
     }
   }
 }
