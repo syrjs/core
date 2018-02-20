@@ -55,6 +55,12 @@
     if (borderRadius) {
       view.layer.cornerRadius = [borderRadius doubleValue];
     }
+    
+    NSNumber* opacity = [style valueForKey:
+                         @"opacity"];
+    if(opacity != nil) {
+        view.alpha = [opacity floatValue];
+    }
   
     NSNumber* borderWidth = [style valueForKey:@"borderWidth"];
     UIColor* borderColor = [self colorFromHash:[style valueForKey:@"borderColor"]];
