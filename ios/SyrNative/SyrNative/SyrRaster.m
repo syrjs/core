@@ -77,6 +77,7 @@
   NSObject* class = NSClassFromString(className);
   
   if(componentInstance != nil && class != nil) {
+    	// we have an instance and a class, lets update this component
     	viewParent = componentInstance;
       SEL selector = NSSelectorFromString(@"render:withInstance:");
       if ([class respondsToSelector:selector]) {
@@ -90,9 +91,9 @@
         [inv invoke];
       }
   } else if(componentInstance == nil && class != nil) {
-    NSLog(@"create a new component");
-    UIView* newComponent = (UIView*)[self createComponent:component];
-    [viewParent addSubview:newComponent];
+    // we don't have an instance, but a class exists
+    // lets create this instance
+    NSLog(@"create a new component %@", className);
   }
 
   NSArray* children = [component objectForKey:@"children"];
