@@ -93,6 +93,24 @@
   } else if(componentInstance == nil && class != nil) {
     // we don't have an instance, but a class exists
     // lets create this instance
+    UIView* newComponent = [self createComponent:component];
+    [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
+  
+    // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
+    SEL selector = NSSelectorFromString(@"addArrangedSubview:");
+    if ([viewParent respondsToSelector:selector]) {
+      // work around for stackview right now needs to be moved somewhere else
+      UIStackView* stackView = (UIStackView*) viewParent;
+      UIView* componentView = (UIView*)newComponent;
+      UIView* containerview = [[UIView alloc] init];
+      containerview.frame = componentView.frame;
+      [containerview addSubview:componentView];
+      [stackView addArrangedSubview:containerview];
+    } else {
+      [viewParent addSubview:(UIView*)newComponent];
+    }
+    
+    viewParent = newComponent;
     NSLog(@"create a new component %@", className);
   }
 
