@@ -19,7 +19,17 @@ SYR_EXPORT_MODULE(TouchableOpacity)
   NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   // todo: this should actually get dimesions from the inner frames, we don't currently have a 'fit to content' method
-  view.frame = [SyrStyler styleFrame:style];
+    NSString* elementName = [component objectForKey:@"elementName"];
+    if(componentInstance != nil) {
+        view = (UIView*)componentInstance;
+        if([elementName containsString:@"Animated"] == false){
+            view.frame = [SyrStyler styleFrame:style];
+        }
+    } else {
+        view = [[UIView alloc] init];
+        view.frame = [SyrStyler styleFrame:style];
+    }
+    
   
   // Setup Tap Code
   SEL selector = NSSelectorFromString(@"handleSingleTap:");

@@ -14,16 +14,22 @@
 SYR_EXPORT_MODULE(View)
 
 +(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
-  UIView* view;
-  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
-  
-  if(componentInstance != nil) {
-    view = (UIView*)componentInstance;
-  } else {
-    view = [[UIView alloc] init];
-    view.frame = [SyrStyler styleFrame:style];
-  }
-  return [SyrStyler styleView:view withStyle:style];
+    UIView* view;
+    NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
+    
+    // quick check to look for animated
+    NSString* elementName = [component objectForKey:@"elementName"];
+    if(componentInstance != nil) {
+        view = (UIView*)componentInstance;
+        if([elementName containsString:@"Animated"] == false){
+            view.frame = [SyrStyler styleFrame:style];
+        }
+    } else {
+        view = [[UIView alloc] init];
+        view.frame = [SyrStyler styleFrame:style];
+    }
+    
+    return [SyrStyler styleView:view withStyle:style];
 }
 
 @end
