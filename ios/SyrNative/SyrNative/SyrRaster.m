@@ -122,7 +122,12 @@
         // lets create this instance
         UIView* newComponent = [self createComponent:component];
         [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
-      
+        
+        NSDictionary* attributes = [component valueForKey:@"attributes"];
+        if([attributes valueForKey:@"key"]) {
+          NSLog(@"yo");
+        }
+    
         // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
         SEL selector = NSSelectorFromString(@"addArrangedSubview:");
         if ([viewParent respondsToSelector:selector]) {
@@ -132,7 +137,7 @@
           UIView* containerview = [[UIView alloc] init];
           containerview.frame = componentView.frame;
           [containerview addSubview:componentView];
-          [stackView addArrangedSubview:containerview];
+          [stackView insertArrangedSubview:containerview atIndex:1];
         } else {
           [viewParent addSubview:(UIView*)newComponent];
         }
