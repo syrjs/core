@@ -252,4 +252,9 @@ didFailProvisionalNavigation:(WKNavigation *)navigation
   [self sendEvent:event];
 }
 
+- (void) rasterRemovedComponent: (NSString*) withComponentId {
+  NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentWillUnmount"};
+  [self sendEvent:event];
+}
+
 @end

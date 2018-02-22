@@ -83,17 +83,19 @@
       UIView* instance = (UIView*) componentInstance;
       [_components removeObjectForKey:uuid];
       [instance removeFromSuperview];
+      [_bridge rasterRemovedComponent:uuid];
     } else {
-      
+    
       NSArray* children = [component objectForKey:@"children"];
       if(children != [NSNull null]) {
         for(id child in children) {
-            NSString* uuid = [[child objectForKey:@"instance"] valueForKey:@"uuid"];
-            UIView* childInstance = [_components objectForKey:uuid];
+            NSString* childuuid = [[child objectForKey:@"instance"] valueForKey:@"uuid"];
+            UIView* childInstance = [_components objectForKey:childuuid];
           	BOOL unmountChildInstance = [component valueForKey:@"unmount"];
             if(unmountChildInstance == YES) {
-              [_components removeObjectForKey:uuid];
+              [_components removeObjectForKey:childuuid];
               [childInstance removeFromSuperview];
+              [_bridge rasterRemovedComponent:uuid];
             }
         }
       }
@@ -134,7 +136,7 @@
         } else {
           [viewParent addSubview:(UIView*)newComponent];
         }
-        
+        [_bridge rasterRenderedComponent:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
         viewParent = newComponent;
         NSLog(@"create a new component %@", className);
       }
