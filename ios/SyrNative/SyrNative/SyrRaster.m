@@ -123,11 +123,6 @@
         UIView* newComponent = [self createComponent:component];
         [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
         
-        NSDictionary* attributes = [component valueForKey:@"attributes"];
-        if([attributes valueForKey:@"key"]) {
-          NSLog(@"yo");
-        }
-    
         // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
         SEL selector = NSSelectorFromString(@"addArrangedSubview:");
         if ([viewParent respondsToSelector:selector]) {
@@ -137,7 +132,16 @@
           UIView* containerview = [[UIView alloc] init];
           containerview.frame = componentView.frame;
           [containerview addSubview:componentView];
-          [stackView insertArrangedSubview:containerview atIndex:1];
+          
+          // ugly for now but we should be using the key
+          // works for our product setup
+          if([component valueForKey:@"key"]) {
+            NSString* key = [component valueForKey:@"key"];
+            [stackView insertArrangedSubview:containerview atIndex:[key doubleValue]];
+          } else {
+            [stackView addArrangedSubview:containerview];
+          }
+          
         } else {
           [viewParent addSubview:(UIView*)newComponent];
         }
@@ -148,7 +152,20 @@
     
       NSArray* children = [component objectForKey:@"children"];
       if(children != [NSNull null]) {
+        NSString* key = nil;
+        if ([component objectForKey:@"attributes"]) {
+          NSDictionary* attributes = [component objectForKey:@"attributes"];
+          if([attributes objectForKey:@"key"]) {
+            key = [attributes objectForKey:@"key"];
+            NSLog(@"we have key");
+          }
+        }
+    
         for(id child in children) {
+          if(key != nil) {
+            [child setValue:key forKey:@"key"];
+            NSLog(@"add key");
+          }
           [self syncState:child withViewParent:viewParent];
         }
       }

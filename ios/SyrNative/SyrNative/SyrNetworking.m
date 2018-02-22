@@ -63,7 +63,7 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     }
     
     // get the response
-    NSString* response = [[NSString alloc] initWithData:oResponseData encoding:NSASCIIStringEncoding];
+    NSString* response = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
     NSNumber* statusCode = [NSNumber numberWithDouble:[responseCode statusCode]];
     
     // send the response back
