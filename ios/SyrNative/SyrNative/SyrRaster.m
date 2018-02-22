@@ -76,49 +76,75 @@
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   NSObject* class = NSClassFromString(className);
   
-  if(componentInstance != nil && class != nil) {
-    	// we have an instance and a class, lets update this component
-    	viewParent = componentInstance;
-      SEL selector = NSSelectorFromString(@"render:withInstance:");
-      if ([class respondsToSelector:selector]) {
-        // invoke render method, pass component
-        NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
-        [inv setSelector:selector];
-        [inv setTarget:class];
-        
-        [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
-        [inv setArgument:&(componentInstance) atIndex:3];
-        [inv invoke];
-      }
-  } else if(componentInstance == nil && class != nil) {
-    // we don't have an instance, but a class exists
-    // lets create this instance
-    UIView* newComponent = [self createComponent:component];
-    [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
-  
-    // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
-    SEL selector = NSSelectorFromString(@"addArrangedSubview:");
-    if ([viewParent respondsToSelector:selector]) {
-      // work around for stackview right now needs to be moved somewhere else
-      UIStackView* stackView = (UIStackView*) viewParent;
-      UIView* componentView = (UIView*)newComponent;
-      UIView* containerview = [[UIView alloc] init];
-      containerview.frame = componentView.frame;
-      [containerview addSubview:componentView];
-      [stackView addArrangedSubview:containerview];
+  BOOL unmount = [component valueForKey:@"unmount"];
+  if(unmount == YES) {
+    // if the component is flagged for unmounting remove
+    if(componentInstance != nil) {
+      UIView* instance = (UIView*) componentInstance;
+      [_components removeObjectForKey:uuid];
+      [instance removeFromSuperview];
     } else {
-      [viewParent addSubview:(UIView*)newComponent];
+      
+      NSArray* children = [component objectForKey:@"children"];
+      if(children != [NSNull null]) {
+        for(id child in children) {
+            NSString* uuid = [[child objectForKey:@"instance"] valueForKey:@"uuid"];
+            UIView* childInstance = [_components objectForKey:uuid];
+          	BOOL unmountChildInstance = [component valueForKey:@"unmount"];
+            if(unmountChildInstance == YES) {
+              [_components removeObjectForKey:uuid];
+              [childInstance removeFromSuperview];
+            }
+        }
+      }
     }
-    
-    viewParent = newComponent;
-    NSLog(@"create a new component %@", className);
-  }
+    NSLog(@"unmount");
+  } else {
+  		// attempt to update instance
+      if(componentInstance != nil && class != nil) {
+          // we have an instance and a class, lets update this component
+          viewParent = componentInstance;
+          SEL selector = NSSelectorFromString(@"render:withInstance:");
+          if ([class respondsToSelector:selector]) {
+            // invoke render method, pass component
+            NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[class methodSignatureForSelector:selector]];
+            [inv setSelector:selector];
+            [inv setTarget:class];
 
-  NSArray* children = [component objectForKey:@"children"];
-  if(children != [NSNull null]) {
-    for(id child in children) {
-      [self syncState:child withViewParent:viewParent];
-    }
+            [inv setArgument:&(component) atIndex:2]; //arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+            [inv setArgument:&(componentInstance) atIndex:3];
+            [inv invoke];
+          }
+      } else if(componentInstance == nil && class != nil) {
+        // we don't have an instance, but a class exists
+        // lets create this instance
+        UIView* newComponent = [self createComponent:component];
+        [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
+      
+        // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
+        SEL selector = NSSelectorFromString(@"addArrangedSubview:");
+        if ([viewParent respondsToSelector:selector]) {
+          // work around for stackview right now needs to be moved somewhere else
+          UIStackView* stackView = (UIStackView*) viewParent;
+          UIView* componentView = (UIView*)newComponent;
+          UIView* containerview = [[UIView alloc] init];
+          containerview.frame = componentView.frame;
+          [containerview addSubview:componentView];
+          [stackView addArrangedSubview:containerview];
+        } else {
+          [viewParent addSubview:(UIView*)newComponent];
+        }
+        
+        viewParent = newComponent;
+        NSLog(@"create a new component %@", className);
+      }
+    
+      NSArray* children = [component objectForKey:@"children"];
+      if(children != [NSNull null]) {
+        for(id child in children) {
+          [self syncState:child withViewParent:viewParent];
+        }
+      }
   }
 }
 
