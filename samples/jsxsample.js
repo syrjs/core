@@ -1,32 +1,24 @@
+function D() {}
 
-function  D() {
-}
+function E() {}
 
-function E() {
-
-}
-
-function  C() {
-  return (
-    <D></D>
-  )
+function C() {
+  return <D />;
 }
 
 function B() {
   return (
     <D>
       <C>
-        <E></E>
+        <E />
       </C>
       <C>
-        <E></E>
+        <E />
       </C>
     </D>
-  )
+  );
 }
 
 function A() {
-  return (
-    <B></B>
-  )
+  return <B />;
 }
