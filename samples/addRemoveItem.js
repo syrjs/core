@@ -42,7 +42,9 @@ class example extends Component {
   componentDidMount() {
     console.log('setting state');
 
-    this.setState({});
+    this.setState({
+      components: getItems(5)
+    });
   }
 }
 

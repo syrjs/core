@@ -72,6 +72,10 @@
 
 -(void) syncState: (NSDictionary*) component withViewParent: (UIView*) viewParent {
   NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
+    if(uuid = nil) {
+        
+        NSLog(@"instance uuid %@", uuid);
+    }
   NSObject* componentInstance = [_components objectForKey:uuid];
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   NSObject* class = NSClassFromString(className);
