@@ -43,7 +43,7 @@ class example extends Component {
     console.log('setting state');
 
     this.setState({
-      components: getItems(5)
+      components: getItems(5),
     });
   }
 }
