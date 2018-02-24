@@ -11,7 +11,7 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
-  NativeModules
+  NativeModules,
 } from '../index';
 
 // currently required to pull images in to web.
@@ -68,20 +68,23 @@ const styles = {
 class InnerComponent extends Component {
   constructor() {
     super();
-    this.state.color = "#ff00ff"
+    this.state.color = '#ff00ff';
   }
   render() {
-    return <View style={{height:100, width:100, backgroundColor:this.state.color}}></View>
+    return (
+      <View
+        style={{ height: 100, width: 100, backgroundColor: this.state.color }}
+      />
+    );
   }
   componentDidMount() {
     console.log('setting state inner component');
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        color: "#000000"
-      })
+        color: '#000000',
+      });
     }, 1000);
-
   }
 }
 
@@ -100,15 +103,19 @@ class MyComponent extends Component {
       message: 'Spinning Image: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
-    styles.image.transform = [{ rotatey: this.spinPiggyAnimation}];
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
         <Animated.View style={styles.image} />
-        <InnerComponent/>
-        <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
+        <InnerComponent />
+        <Button
+          enabled={this.state.buttonEnabled}
+          onPress={() => this.onPress()}
+          style={styles.button}
+        >
           {this.state.buttonMessage}
         </Button>
       </Animated.View>

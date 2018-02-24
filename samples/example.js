@@ -12,7 +12,7 @@ import {
   PixelRatio,
   Platform,
   NativeModules,
-  StackView
+  StackView,
 } from '../index';
 
 // currently required to pull images in to web.
@@ -75,18 +75,26 @@ const styles = {
 class InnerComponent extends Component {
   constructor() {
     super();
-    this.state.color = "#ff0000"
+    this.state.color = '#ff0000';
   }
   render() {
-    return <View style={{height: PixelRatio.getPixelSizeForLayoutSize(300), width: PixelRatio.getPixelSizeForLayoutSize(300), backgroundColor:this.state.color}}></View>
+    return (
+      <View
+        style={{
+          height: PixelRatio.getPixelSizeForLayoutSize(300),
+          width: PixelRatio.getPixelSizeForLayoutSize(300),
+          backgroundColor: this.state.color,
+        }}
+      />
+    );
   }
   componentDidMount() {
     console.log('setting state inner component');
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        color: "#00ff00"
-      })
-    }, 500)
+        color: '#00ff00',
+      });
+    }, 500);
   }
 }
 
@@ -105,7 +113,7 @@ class MyComponent extends Component {
       message: 'Spinning Image: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
-    styles.image.transform = [{ rotatey: this.spinPiggyAnimation}];
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
@@ -113,7 +121,11 @@ class MyComponent extends Component {
         <Text style={styles.text}>{this.state.message}</Text>
         {/* <InnerComponent/> */}
         <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
-        <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
+        <Button
+          enabled={this.state.buttonEnabled}
+          onPress={() => this.onPress()}
+          style={styles.button}
+        >
           {this.state.buttonMessage}
         </Button>
       </Animated.View>
@@ -126,8 +138,8 @@ class MyComponent extends Component {
       buttonMessage: 'Pressed: ' + this.num,
     });
 
-    if(!Platform.isWeb) {
-      NativeModules.SyrView.testExportMethod("Super", 42);
+    if (!Platform.isWeb) {
+      NativeModules.SyrView.testExportMethod('Super', 42);
     }
   }
   spinPiggy() {
