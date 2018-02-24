@@ -1,4 +1,4 @@
-import { Component, Render, View } from '../index';
+import { Component, Render, View, StackView } from '../index';
 
 class MyView extends Component {
   render() {
@@ -34,9 +34,12 @@ class example extends Component {
   render() {
     console.log('uuid', this.uuid);
     return (
-      <View style={{ width: 100, height: 300, backgroundColor: '#ff00ff' }}>
+      <StackView
+        axis="vertical"
+        style={{ width: 100, height: 300, backgroundColor: '#ff00ff' }}
+      >
         {this.state.components}
-      </View>
+      </StackView>
     );
   }
   componentDidMount() {
