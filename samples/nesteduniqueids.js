@@ -1,10 +1,4 @@
-import {
-  View,
-  Component,
-  Render,
-  TouchableOpacity,
-  StackView
-} from '../index';
+import { View, Component, Render, TouchableOpacity, StackView } from '../index';
 
 // class MyTouchable extends Component {
 //   render() {
@@ -30,46 +24,54 @@ import {
 //   }
 // }
 
-
 class OtherClass extends Component {
   constructor() {
     super();
-    this.state.color="#000000";
+    this.state.color = '#000000';
   }
   render() {
     return (
-      <TouchableOpacity onPress={()=>{this.onPressHandler()}} style={{height:50, width:110, top:this.props.top}}>
-        <AnOtherClass color={this.state.color} left={0}/>
-        <AnOtherClass color={this.state.color} left={55}/>
+      <TouchableOpacity
+        onPress={() => {
+          this.onPressHandler();
+        }}
+        style={{ height: 50, width: 110, top: this.props.top }}
+      >
+        <AnOtherClass color={this.state.color} left={0} />
+        <AnOtherClass color={this.state.color} left={55} />
       </TouchableOpacity>
-    )
+    );
   }
-  onPressHandler(){
+  onPressHandler() {
     console.log('yoooooo', this.props.color, this.uuid);
     this.setState({
-      color: this.props.color
-    })
+      color: this.props.color,
+    });
   }
 }
 class AnOtherClass extends Component {
   render() {
     return (
-      <View style={{height:50, width:50, backgroundColor:this.props.color, left:this.props.left}}></View>
-    )
+      <View
+        style={{
+          height: 50,
+          width: 50,
+          backgroundColor: this.props.color,
+          left: this.props.left,
+        }}
+      />
+    );
   }
 }
 class example extends Component {
   render() {
     return (
-      <StackView
-      axis="vertical"
-      style={{height:'auto', width:300}}>
-        <OtherClass color="#ff00ff" style={{height:50}}></OtherClass>
-        <OtherClass color="#00ff00" style={{height:55}}></OtherClass>
+      <StackView axis="vertical" style={{ height: 'auto', width: 300 }}>
+        <OtherClass color="#ff00ff" style={{ height: 50 }} />
+        <OtherClass color="#00ff00" style={{ height: 55 }} />
       </StackView>
     );
   }
 }
-
 
 Render(example);

@@ -23,7 +23,6 @@ class MyComponent extends Component {
       this.slideAnimation,
       { rotatez: this.rotationAnimation },
     ];
-
   }
   render() {
     return (
