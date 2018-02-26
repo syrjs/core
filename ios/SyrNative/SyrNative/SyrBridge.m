@@ -10,6 +10,7 @@
 #import "SyrEventHandler.h"
 #import "SyrRaster.h"
 #import "SyrEventHandler.h"
+#import "sys/utsname.h"
 
 @interface SyrBridge()
 @property SyrEventHandler* eventHandler;
@@ -126,9 +127,9 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"device_make" value:[self deviceName]]];
   
   components.queryItems = queryItems;
-  
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
@@ -265,6 +266,15 @@ didFailProvisionalNavigation:(WKNavigation *)navigation
 - (void) rasterRemovedComponent: (NSString*) withComponentId {
   NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentWillUnmount"};
   [self sendEvent:event];
+}
+
+- (NSString*) deviceName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
 }
 
 @end
