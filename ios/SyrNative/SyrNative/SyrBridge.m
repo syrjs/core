@@ -127,7 +127,7 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
-  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"device_make" value:[self deviceName]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:[self deviceName]]];
   
   components.queryItems = queryItems;
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
