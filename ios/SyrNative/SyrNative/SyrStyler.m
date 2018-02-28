@@ -56,8 +56,7 @@
       view.layer.cornerRadius = [borderRadius doubleValue];
     }
     
-    NSNumber* opacity = [style valueForKey:
-                         @"opacity"];
+    NSNumber* opacity = [style valueForKey:@"opacity"];
     if(opacity != nil) {
         view.alpha = [opacity floatValue];
     }
@@ -126,7 +125,7 @@
     NSNumber* frameWidth = [styleDictionary objectForKey:@"width"];
     NSNumber* framex = [styleDictionary objectForKey:@"left"];
     NSNumber* framey = [styleDictionary objectForKey:@"top"];
-    return CGRectMake([framex doubleValue], [framey doubleValue], [frameWidth doubleValue], [frameHeight doubleValue]);
+    return CGRectIntegral(CGRectMake([framex doubleValue], [framey doubleValue], [frameWidth doubleValue], [frameHeight doubleValue]));
 }
 
 @end
