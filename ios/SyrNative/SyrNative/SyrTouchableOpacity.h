@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "SyrComponent.h"
+#import "SyrEventHandler.h"
 
 @interface SyrTouchableOpacity : NSObject
 
