@@ -17,8 +17,17 @@ SYR_EXPORT_MODULE(Image)
   
   NSString* source = [[[[component objectForKey:@"instance"] objectForKey:@"props"] valueForKey:@"source"]  valueForKey:@"uri"];
   NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
-  UIImage* image = [UIImage imageNamed:source];
   UIImageView* imageHolder;
+  UIImage* image;
+  
+  NSURL *url = [NSURL URLWithString:source];
+  if (url && url.scheme && url.host)
+  {
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    image = [[UIImage alloc] initWithData:data];
+  } else {
+    image = [UIImage imageNamed:source];
+  }
   
   if(componentInstance != nil) {
     imageHolder = (UIImageView*)componentInstance;
@@ -27,7 +36,6 @@ SYR_EXPORT_MODULE(Image)
     imageHolder = [[UIImageView alloc] initWithImage:image];
   }
   
-
   imageHolder.frame = [SyrStyler styleFrame:style];
   return imageHolder;
 }

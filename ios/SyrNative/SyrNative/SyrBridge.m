@@ -76,6 +76,8 @@
   // load a bundle with the root view we were handed
   // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
+  
+  // todo: lets abstract this out to the bundle manager
   NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
   NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
