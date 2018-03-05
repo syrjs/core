@@ -16,13 +16,13 @@
 @implementation SyrTouchableOpacityView
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   [UIView animateWithDuration:0.25 animations:^{
-    self.alpha = 0;
+    self.alpha = 0.2;
   }];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
   [UIView animateWithDuration:0.25 animations:^{
-    self.alpha = 1;
+    self.alpha = 1.0;
   }];
 }
 @end
