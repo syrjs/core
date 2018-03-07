@@ -95,7 +95,14 @@
           	BOOL unmountChildInstance = [component valueForKey:@"unmount"];
             if(unmountChildInstance == YES) {
               [_components removeObjectForKey:childuuid];
-              [childInstance removeFromSuperview];
+              
+              SEL selector = NSSelectorFromString(@"addArrangedSubview:");
+              if ([viewParent respondsToSelector:selector]) {
+                [childInstance.superview removeFromSuperview];
+              } else {
+                [childInstance removeFromSuperview];
+              }
+              
               [_bridge rasterRemovedComponent:uuid];
             }
         }

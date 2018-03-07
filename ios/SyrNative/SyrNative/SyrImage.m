@@ -29,12 +29,16 @@ SYR_EXPORT_MODULE(Image)
     image = [UIImage imageNamed:source];
   }
   
+//    imageHolder.contentMode = UIViewContentModeScaleAspectFill;
+
+    
   if(componentInstance != nil) {
     imageHolder = (UIImageView*)componentInstance;
     [imageHolder setImage:image];
   } else {
     imageHolder = [[UIImageView alloc] initWithImage:image];
   }
+    
   
   imageHolder.frame = [SyrStyler styleFrame:style];
   return imageHolder;
