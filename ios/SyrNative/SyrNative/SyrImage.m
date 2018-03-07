@@ -28,13 +28,15 @@ SYR_EXPORT_MODULE(Image)
   } else {
     image = [UIImage imageNamed:source];
   }
-  
+
+    
   if(componentInstance != nil) {
     imageHolder = (UIImageView*)componentInstance;
     [imageHolder setImage:image];
   } else {
     imageHolder = [[UIImageView alloc] initWithImage:image];
   }
+    
   
   imageHolder.frame = [SyrStyler styleFrame:style];
   return imageHolder;
