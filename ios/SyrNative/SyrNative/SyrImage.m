@@ -28,8 +28,6 @@ SYR_EXPORT_MODULE(Image)
   } else {
     image = [UIImage imageNamed:source];
   }
-  
-//    imageHolder.contentMode = UIViewContentModeScaleAspectFill;
 
     
   if(componentInstance != nil) {

@@ -17,7 +17,6 @@
 
 @implementation SyrButtonView
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
     [SyrHapticHelper generateFeedback:_feedbackType];
     [UIView animateWithDuration:0.15 animations:^{
         self.alpha = 0.5;
@@ -25,7 +24,6 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
     [UIView animateWithDuration:0.15 animations:^{
         self.alpha = 1.0;
     }];
