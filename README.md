@@ -13,7 +13,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dmikey)
 [![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://dmikey.github.io/syr)
 
-Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! 
+Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries!
 
 The goal to provide, Native SDK developers the benefits of the React Native API, with a much smaller footprint and reduced complexity.
 
@@ -62,12 +62,12 @@ https://github.com/dmikey/syr/milestones
 *  Open [ios/SyrNativeSample](https://github.com/dmikey/syr/tree/master/ios/SyrNativeSample/SyrNativeSample.xcodeproj) in xcode
 *  Run the project in xcode.
 
-## Contributors 
+## Contributors
 <div align="center">
-  
-[<img alt="dmikey" src="https://avatars3.githubusercontent.com/u/328000?v=4&s=117" width=117>](https://github.com/dmikey) |[<img alt="MSiddharthReddy" src="https://avatars3.githubusercontent.com/u/17309023?v=4&s=117" width=117>](https://github.com/MSiddharthReddy) |[<img alt="pvenkatakrishnan" src="https://avatars2.githubusercontent.com/u/2745959?v=4&s=117" width=117>](https://github.com/pvenkatakrishnan) |[<img alt="gabrielcsapo" src="https://avatars0.githubusercontent.com/u/1854811?v=4&s=117" width=117>](https://github.com/gabrielcsapo) |[<img alt="edwinwebb" src="https://avatars1.githubusercontent.com/u/797904?v=4&s=117" width=117>](https://github.com/edwinwebb) |
-:---:|:---:|:---:|:---:|:---:|
-[dmikey](https://github.com/dmikey)|[MSiddharthReddy](https://github.com/MSiddharthReddy)|[pvenkatakrishnan](https://github.com/pvenkatakrishnan)|[gabrielcsapo](https://github.com/gabrielcsapo)| [edwinwebb](https://github.com/edwinwebb)|
+
+[<img alt="dmikey" src="https://avatars3.githubusercontent.com/u/328000?v=4&s=117" width=117>](https://github.com/dmikey) |[<img alt="MSiddharthReddy" src="https://avatars3.githubusercontent.com/u/17309023?v=4&s=117" width=117>](https://github.com/MSiddharthReddy) |[<img alt="pvenkatakrishnan" src="https://avatars2.githubusercontent.com/u/2745959?v=4&s=117" width=117>](https://github.com/pvenkatakrishnan) |[<img alt="gabrielcsapo" src="https://avatars0.githubusercontent.com/u/1854811?v=4&s=117" width=117>](https://github.com/gabrielcsapo) |[<img alt="edwinwebb" src="https://avatars1.githubusercontent.com/u/797904?v=4&s=117" width=117>](https://github.com/edwinwebb) | [<img alt="Sherman-Chen" src="https://avatars3.githubusercontent.com/u/20351341?v=4&s=117" width=117>](https://github.com/Sherman-Chen)
+:---:|:---:|:---:|:---:|:---:|:---:|
+[dmikey](https://github.com/dmikey)|[MSiddharthReddy](https://github.com/MSiddharthReddy)|[pvenkatakrishnan](https://github.com/pvenkatakrishnan)|[gabrielcsapo](https://github.com/gabrielcsapo)| [edwinwebb](https://github.com/edwinwebb)|[Sherman-Chen](https://github.com/Sherman-Chen)
 
 
 

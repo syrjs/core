@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		69AABEBD2050774C00433CAE /* SyrHapticHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEBC2050774C00433CAE /* SyrHapticHelper.m */; };
+=======
+		42A98E212050634900392721 /* SyrSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A98E202050634900392721 /* SyrSwitch.m */; };
+>>>>>>> (feat) Add iOS Switch component
 		D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D229B6FA1FD12C3D004D651B /* SyrOpacityAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D229B6FD1FD12C3D004D651B /* SyrOpacityAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D229B6FB1FD12C3D004D651B /* SyrOpacityAnimation.m */; };
 		D229B7001FD12C5D004D651B /* SyrXYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D229B6FE1FD12C5D004D651B /* SyrXYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,8 +83,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		69AABEBB2050772200433CAE /* SyrHapticHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrHapticHelper.h; sourceTree = "<group>"; };
 		69AABEBC2050774C00433CAE /* SyrHapticHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrHapticHelper.m; sourceTree = "<group>"; };
+=======
+		42A98E1F2050632F00392721 /* SyrSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrSwitch.h; sourceTree = "<group>"; };
+		42A98E202050634900392721 /* SyrSwitch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrSwitch.m; sourceTree = "<group>"; };
+>>>>>>> (feat) Add iOS Switch component
 		D229B6FA1FD12C3D004D651B /* SyrOpacityAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrOpacityAnimation.h; sourceTree = "<group>"; };
 		D229B6FB1FD12C3D004D651B /* SyrOpacityAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrOpacityAnimation.m; sourceTree = "<group>"; };
 		D229B6FE1FD12C5D004D651B /* SyrXYAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrXYAnimation.h; sourceTree = "<group>"; };
@@ -214,8 +223,13 @@
 				D2CE4DFA200E8269002B7B40 /* SyrAnimatedImage.m */,
 				D2CE4DFD200E8365002B7B40 /* SyrAnimatedText.h */,
 				D2CE4DFE200E8365002B7B40 /* SyrAnimatedText.m */,
+<<<<<<< HEAD
 				69AABEBB2050772200433CAE /* SyrHapticHelper.h */,
 				69AABEBC2050774C00433CAE /* SyrHapticHelper.m */,
+=======
+				42A98E1F2050632F00392721 /* SyrSwitch.h */,
+				42A98E202050634900392721 /* SyrSwitch.m */,
+>>>>>>> (feat) Add iOS Switch component
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -444,6 +458,7 @@
 				D229B7051FD12C77004D651B /* SyrHeightWidthAnimation.m in Sources */,
 				D229B7091FD12C99004D651B /* SyrRotationAnimation.m in Sources */,
 				D266C4971F9AB65200BB0A90 /* SyrImage.m in Sources */,
+				42A98E212050634900392721 /* SyrSwitch.m in Sources */,
 				D2B1F5701FE34B17004A42EF /* SyrStyler.m in Sources */,
 				D266C4801F9AAD2000BB0A90 /* SyrText.m in Sources */,
 				D266C49B1F9ABAE400BB0A90 /* SyrButton.m in Sources */,
