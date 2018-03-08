@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface ViewHandler : NSObject
+@interface SyrViewHandler : NSObject
 + (UIViewController*) topMostController;
 @end

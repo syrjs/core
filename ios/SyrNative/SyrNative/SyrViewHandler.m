@@ -6,9 +6,9 @@
 //  Copyright © 2018 Anderson,Derek. All rights reserved.
 //
 
-#import "ViewHandler.h"
+#import "SyrViewHandler.h"
 
-@implementation ViewHandler
+@implementation SyrViewHandler
 + (UIViewController*) topMostController {
     
     // http://pinkstone.co.uk/how-to-avoid-whose-view-is-not-in-the-window-hierarchy-error-when-presenting-a-uiviewcontroller/

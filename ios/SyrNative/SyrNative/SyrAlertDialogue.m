@@ -15,7 +15,7 @@
 //
 
 #import "SyrAlertDialogue.h"
-#import "ViewHandler.h"
+#import "SyrViewHandler.h"
 
 
 @implementation SyrAlertDialogue
@@ -35,7 +35,7 @@ SYR_EXPORT_METHOD(alert:(NSString*)title message:(NSString*)message actions:(NSA
                           }]];
     }
     
-    UIViewController* topMostViewController = [ViewHandler topMostController];
+    UIViewController* topMostViewController = [SyrViewHandler topMostController];
     
     [topMostViewController presentViewController:alert animated:YES completion:nil];
 }
