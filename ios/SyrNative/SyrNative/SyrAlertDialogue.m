@@ -22,25 +22,18 @@
 
 SYR_EXPORT_MODULE(AlertDialogue)
 
-SYR_EXPORT_METHOD(alert){
+SYR_EXPORT_METHOD(alert:(NSString*)title message:(NSString*)message actions:(NSArray*)actions){
     UIAlertController* alert;
-         alert = [UIAlertController alertControllerWithTitle:@"Logout" message:@"Are you sure you want to logout?" preferredStyle:UIAlertControllerStyleAlert];
-
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Yes"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    //Handle your yes please button action here
-                                }];
-    UIAlertAction* noButton = [UIAlertAction
-                               actionWithTitle:@"No"
-                               style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction * action) {
-                                   //Handle no, thanks button
-                               }];
-
-    [alert addAction:yesButton];
-    [alert addAction:noButton];
+         alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(id action in actions) {
+        [alert addAction:[UIAlertAction
+                          actionWithTitle:[action valueForKey:@"title"]
+                          style:UIAlertActionStyleDefault
+                          handler:^(UIAlertAction * action) {
+                              [self sendEventWithName:@"alertDialogue" body:[action valueForKey:@"title"]];
+                          }]];
+    }
     
     UIViewController* topMostViewController = [ViewHandler topMostController];
     
