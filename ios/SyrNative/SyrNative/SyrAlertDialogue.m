@@ -6,14 +6,6 @@
 //  Copyright © 2018 Anderson,Derek. All rights reserved.
 //
 
-//
-//  SyrTextView.m
-//  SyrNative
-//
-//  Created by Anderson,Derek on 10/20/17.
-//  Copyright © 2017 Anderson,Derek. All rights reserved.
-//
-
 #import "SyrAlertDialogue.h"
 #import "SyrViewHandler.h"
 
