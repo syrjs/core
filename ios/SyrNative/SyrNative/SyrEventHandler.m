@@ -17,6 +17,12 @@
   NSDictionary* event = @{@"guid":_callbackId, @"type":@"onPress"};
   [_bridge sendEvent:event];
 }
+
+- (void) handleValueChange: (id)sender {
+    NSString* value = [NSString stringWithFormat:@"%d", [sender isOn]];
+    NSDictionary* event = @{@"guid":_callbackId, @"type":@"onValueChange", @"isOn":value};
+    [_bridge sendEvent:event];
+}
 @end
 
 @implementation SyrEventHandler
