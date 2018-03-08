@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		69AABEBD2050774C00433CAE /* SyrHapticHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEBC2050774C00433CAE /* SyrHapticHelper.m */; };
+		69AABEC02050BDFD00433CAE /* SyrAlertDialogue.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEBF2050BDFD00433CAE /* SyrAlertDialogue.m */; };
+		69AABEC22050C57600433CAE /* ViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEC12050C57600433CAE /* ViewHandler.m */; };
 		D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D229B6FA1FD12C3D004D651B /* SyrOpacityAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D229B6FD1FD12C3D004D651B /* SyrOpacityAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D229B6FB1FD12C3D004D651B /* SyrOpacityAnimation.m */; };
 		D229B7001FD12C5D004D651B /* SyrXYAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = D229B6FE1FD12C5D004D651B /* SyrXYAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,6 +83,10 @@
 /* Begin PBXFileReference section */
 		69AABEBB2050772200433CAE /* SyrHapticHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrHapticHelper.h; sourceTree = "<group>"; };
 		69AABEBC2050774C00433CAE /* SyrHapticHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrHapticHelper.m; sourceTree = "<group>"; };
+		69AABEBE2050BDD400433CAE /* SyrAlertDialogue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrAlertDialogue.h; sourceTree = "<group>"; };
+		69AABEBF2050BDFD00433CAE /* SyrAlertDialogue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrAlertDialogue.m; sourceTree = "<group>"; };
+		69AABEC12050C57600433CAE /* ViewHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewHandler.m; sourceTree = "<group>"; };
+		69AABEC32050C5AB00433CAE /* ViewHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewHandler.h; sourceTree = "<group>"; };
 		D229B6FA1FD12C3D004D651B /* SyrOpacityAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrOpacityAnimation.h; sourceTree = "<group>"; };
 		D229B6FB1FD12C3D004D651B /* SyrOpacityAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrOpacityAnimation.m; sourceTree = "<group>"; };
 		D229B6FE1FD12C5D004D651B /* SyrXYAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrXYAnimation.h; sourceTree = "<group>"; };
@@ -216,6 +222,8 @@
 				D2CE4DFE200E8365002B7B40 /* SyrAnimatedText.m */,
 				69AABEBB2050772200433CAE /* SyrHapticHelper.h */,
 				69AABEBC2050774C00433CAE /* SyrHapticHelper.m */,
+				69AABEBE2050BDD400433CAE /* SyrAlertDialogue.h */,
+				69AABEBF2050BDFD00433CAE /* SyrAlertDialogue.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -246,6 +254,8 @@
 				D271B2A81FFED873004603B4 /* SyrInfoBox.m */,
 				D2968144202AC64F005EE04C /* SyrNetworking.h */,
 				D2968145202AC64F005EE04C /* SyrNetworking.m */,
+				69AABEC12050C57600433CAE /* ViewHandler.m */,
+				69AABEC32050C5AB00433CAE /* ViewHandler.h */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -431,6 +441,7 @@
 				D271B2AA1FFED873004603B4 /* SyrInfoBox.m in Sources */,
 				D2D7E06B1F0F69050039C3A9 /* SyrCore.m in Sources */,
 				D2CE4E00200E8365002B7B40 /* SyrAnimatedText.m in Sources */,
+				69AABEC22050C57600433CAE /* ViewHandler.m in Sources */,
 				D2DE8FF81FBF608D00EEF358 /* SyrLinearGradient.m in Sources */,
 				D2DE8FFC1FC0E46B00EEF358 /* SyrStackView.m in Sources */,
 				D2D3122B1F9520AF008A9CCC /* SyrEventHandler.m in Sources */,
@@ -452,6 +463,7 @@
 				D266C49F1F9ABE4E00BB0A90 /* SyrAnimator.m in Sources */,
 				D29AD6A21FA536D500DE7CF0 /* SyrScrollView.m in Sources */,
 				D229B70D1FD21352004D651B /* SyrAnimationDelegate.m in Sources */,
+				69AABEC02050BDFD00433CAE /* SyrAlertDialogue.m in Sources */,
 				D2D3122F1F955D18008A9CCC /* SyrView.m in Sources */,
 				69AABEBD2050774C00433CAE /* SyrHapticHelper.m in Sources */,
 			);

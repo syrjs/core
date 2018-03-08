@@ -24,6 +24,7 @@ import { Image } from './lib/image';
 import { LinearGradient } from './lib/lineargradient';
 import { TouchableOpacity } from './lib/touchable';
 import { ScrollView } from './lib/scrollview';
+import { AlertDialogue } from './lib/alertDialogue';
 
 // syr environment
 import { NativeModules } from './lib/nativemodules';
@@ -68,5 +69,6 @@ export {
   TouchableOpacity,
   PixelRatio,
   Platform,
+  AlertDialogue,
   SyrStore
 };
