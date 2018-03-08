@@ -27,13 +27,13 @@ SYR_EXPORT_METHOD(alert){
          alert = [UIAlertController alertControllerWithTitle:@"Logout" message:@"Are you sure you want to logout?" preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Yes, please"
+                                actionWithTitle:@"Yes"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
                                     //Handle your yes please button action here
                                 }];
     UIAlertAction* noButton = [UIAlertAction
-                               actionWithTitle:@"No, thanks"
+                               actionWithTitle:@"No"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                    //Handle no, thanks button
