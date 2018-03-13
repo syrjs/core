@@ -65,6 +65,14 @@ SYR_EXPORT_MODULE(StackView)
     	CGRect frame = stackView.frame;
     	frame.size.height = [totalHeight doubleValue];
     	stackView.frame = frame;
+    
+    	// this is stupid and dumb work around
+    	// we need a better notification to parents, to resize
+    	if([stackView.superview isKindOfClass:[UIScrollView class]]) {
+        UIScrollView* parent = (UIScrollView*)stackView.superview;
+        double scrollheight = [totalHeight doubleValue] + 50;
+        parent.contentSize = CGSizeMake(parent.frame.size.width, scrollheight);
+    	}
   }
   
   return [SyrStyler styleView:stackView withStyle:style];
