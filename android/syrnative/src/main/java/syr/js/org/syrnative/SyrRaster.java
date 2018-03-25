@@ -109,47 +109,64 @@ public class SyrRaster {
         uiHandler.post(new Runnable() {
             @Override
             public void run() {
-                buildInstanceTree(jsonObject);
+                try {
+                    final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
+                    if(jsonObject.has("update")) {
+                        Boolean isUpdate = jsonObject.getBoolean("update");
+                        if(!isUpdate) {
+                            buildInstanceTree(ast);
+                        }
+                    } else {
+                        buildInstanceTree(ast);
+                    }
+
+                  } catch (JSONException e) {
+                e.printStackTrace();
             }
+        }
         });
     }
     /** parse the AST sent from the Syr Bridge */
     public void buildInstanceTree(JSONObject jsonObject) {
         try {
-            final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            final String guid = ast.getString("guid");
+            Log.v("jsonObject", jsonObject.toString());
+//            final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
 
-            Boolean isUpdate = false;
-            if(ast.has("update")) {
-                isUpdate = ast.getBoolean("update");
-            }
 
             // we shouldn't touch the layout of a view attached to the RootView
-            final View component;
-            if(!isUpdate) {
-                component = createComponent(ast);
+            final View component = createComponent(jsonObject);
+//            if(!isUpdate) {
+//                component = createComponent(jsonObject);
+//            } else {
+//                component = (View)mModuleInstances.get(jsonObject.getString("uuid"));
+//            }
+
+            if(component != null) {
+                final String elementName = jsonObject.getString("elementName");
+                Log.d("elementName", elementName);
+                final String uuid = jsonObject.getJSONObject("instance").getString("uuid");
+//                Log.d("ast", ast.toString());
+                Log.d("uuid", uuid);
+
+                JSONArray children = jsonObject.getJSONArray("children");
+
+                if(children.length() > 0) {
+                    buildChildren(children, (ViewGroup) component);
+                }
+
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mRootview.addView(component);
+                            emitComponentDidMount(uuid);
+                        }
+                    });
             } else {
-                component = (View)mModuleInstances.get(guid);
+                JSONArray childComponents = jsonObject.getJSONArray("children");
+                JSONObject childComponent = childComponents.getJSONObject(0);
+                buildInstanceTree(childComponent);
+                emitComponentDidMount( jsonObject.getString("uuid"));
             }
-
-            final String elementName = ast.getString("elementName");
-
-            JSONArray children = ast.getJSONArray("children");
-
-            if(children.length() > 0) {
-                buildChildren(children, (ViewGroup) component, isUpdate);
-            }
-
-            if(!isUpdate) {
-                uiHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mRootview.addView(component);
-                        emitComponentDidMount(guid);
-                    }
-                });
-            }
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -197,25 +214,24 @@ public class SyrRaster {
         mBridge.sendEvent(eventMap);
     }
 
-    private void buildChildren(JSONArray children, final ViewGroup viewParent, Boolean isUpdate) {
+    private void buildChildren(JSONArray children, final ViewGroup viewParent) {
             try {
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
                     final View component = createComponent(child);
                     JSONArray childChildren = child.getJSONArray("children");
-                    final String guid = child.getString("guid");
+                    final String uuid = child.getString("uuid");
 
 
                     if(component == null) {
-                        buildChildren(childChildren, (ViewGroup) viewParent, isUpdate);
+                        buildChildren(childChildren, (ViewGroup) viewParent);
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                emitComponentDidMount(guid);
+                                emitComponentDidMount(uuid);
                             }
                         });
                     } else {
-                        if(!isUpdate) {
                             uiHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
@@ -224,19 +240,16 @@ public class SyrRaster {
                                         parent.removeView(component);
                                     }
                                     viewParent.addView(component);
-                                    emitComponentDidMount(guid);
+                                    emitComponentDidMount(uuid);
                                 }
                             });
                         }
 
                         if(component instanceof ViewGroup) {
-                            buildChildren(childChildren, (ViewGroup) component, isUpdate);
+                            buildChildren(childChildren, (ViewGroup) component);
                         }
 
                     }
-
-
-                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -246,34 +259,39 @@ public class SyrRaster {
         String className = null;
         View returnView = null;
         String guid = null;
-        try {
-            guid = child.getString("guid");
-            className = child.getString("elementName");
-            final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
+        if(child.has("elementName")) {
+            try {
+                guid = child.getString("guid");
+                className = child.getString("elementName");
+                final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
 
-            if(componentModule == null) {
-                return null;
+                if (componentModule == null) {
+                    return null;
+                }
+
+                if (mModuleInstances.containsKey(child.getString("guid"))) {
+
+                    final View view = (View) mModuleInstances.get(child.getString("guid"));
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            componentModule.render(child, mContext, view);
+                        }
+                    });
+
+                } else {
+                    returnView = componentModule.render(child, mContext, null);
+                    mModuleInstances.put(child.getString("guid"), returnView);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            if(mModuleInstances.containsKey(child.getString("guid"))) {
-
-                final View view = (View)mModuleInstances.get(child.getString("guid"));
-                uiHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        componentModule.render(child, mContext, view);
-                    }
-                });
-
-            } else {
-                returnView = componentModule.render(child, mContext, null);
-                mModuleInstances.put(child.getString("guid"), returnView);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return (View) mModuleInstances.get(guid);
+        } else {
+            return null;
         }
 
-        return (View) mModuleInstances.get(guid);
     }
 }
