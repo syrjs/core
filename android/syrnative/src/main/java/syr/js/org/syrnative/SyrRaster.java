@@ -129,22 +129,15 @@ public class SyrRaster {
     /** parse the AST sent from the Syr Bridge */
     public void buildInstanceTree(JSONObject jsonObject) {
         try {
-            Log.v("jsonObject", jsonObject.toString());
-//            final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-
-
-            // we shouldn't touch the layout of a view attached to the RootView
             final View component = createComponent(jsonObject);
+            //@TODO move this code out to syncState.
 //            if(!isUpdate) {
-//                component = createComponent(jsonObject);
-//            } else {
 //                component = (View)mModuleInstances.get(jsonObject.getString("uuid"));
 //            }
 
             if(component != null) {
-                final String elementName = jsonObject.getString("elementName");
-                Log.d("elementName", elementName);
-                final String uuid = jsonObject.getJSONObject("instance").getString("uuid");
+//                final String elementName = jsonObject.getString("elementName");
+                final String uuid = jsonObject.getString("uuid");
 //                Log.d("ast", ast.toString());
                 Log.d("uuid", uuid);
 
@@ -162,10 +155,12 @@ public class SyrRaster {
                         }
                     });
             } else {
+
                 JSONArray childComponents = jsonObject.getJSONArray("children");
                 JSONObject childComponent = childComponents.getJSONObject(0);
                 buildInstanceTree(childComponent);
-                emitComponentDidMount( jsonObject.getString("uuid"));
+                //@TODO check if instances uuid needs to be passed.
+                emitComponentDidMount(jsonObject.getString("uuid"));
             }
 
         } catch (JSONException e) {
