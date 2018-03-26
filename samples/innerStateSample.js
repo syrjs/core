@@ -11,7 +11,7 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
-  NativeModules
+  NativeModules,
 } from '../index';
 
 // currently required to pull images in to web.
@@ -67,16 +67,20 @@ const styles = {
 class InnerComponent extends Component {
   constructor() {
     super();
-    this.state.color = "#ff00ff"
+    this.state.color = '#ff00ff';
   }
   render() {
-    return <View style={{height:100, width:100, backgroundColor:this.state.color}}></View>
+    return (
+      <View
+        style={{ height: 100, width: 100, backgroundColor: this.state.color }}
+      />
+    );
   }
   componentDidMount() {
     console.log('setting state inner component');
     this.setState({
-      color: "#00ff00"
-    })
+      color: '#00ff00',
+    });
   }
 }
 
@@ -95,30 +99,33 @@ class MyComponent extends Component {
       message: 'Spinning Image: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
-    styles.image.transform = [{ rotatey: this.spinPiggyAnimation}];
+    styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
   render() {
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
-        <InnerComponent/>
+        <InnerComponent />
         <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
-        <Button enabled={this.state.buttonEnabled} onPress={() => this.onPress()} style={styles.button}>
+        <Button
+          enabled={this.state.buttonEnabled}
+          onPress={() => this.onPress()}
+          style={styles.button}
+        >
           {this.state.buttonMessage}
         </Button>
       </Animated.View>
     );
   }
   onPress() {
-
     console.log('button pressed');
     this.num += 1;
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
 
-    if(!Platform.isWeb) {
-      NativeModules.SyrView.testExportMethod("Super", 42);
+    if (!Platform.isWeb) {
+      NativeModules.SyrView.testExportMethod('Super', 42);
     }
   }
   spinPiggy() {
