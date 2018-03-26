@@ -22,9 +22,9 @@ class OtherClass extends Component {
         onPress={() => {
           this.onPressHandler('+');
         }}
-        style={{ height: 50, width: 100 }}
+        style={{ height: 50, width: 300 }}
       >
-        <View style={{ height: 50, width: 100, backgroundColor: '#ff00ff' }} />
+        <View style={{ height: 50, width: 200, backgroundColor: '#ff00ff' }} />
       </TouchableOpacity>
     );
   }
@@ -37,9 +37,9 @@ class AnOtherClass extends Component {
         onPress={() => {
           this.onPressHandler('+');
         }}
-        style={{ height: 50, width: 100 }}
+        style={{ height: 50, width: 300 }}
       >
-        <View style={{ height: 50, width: 100, backgroundColor: '#ffff00' }} />
+        <View style={{ height: 50, width: 200, backgroundColor: '#ffff00' }} />
       </TouchableOpacity>
     );
   }
@@ -52,9 +52,9 @@ class SomeOtherClass extends Component {
         onPress={() => {
           this.onPressHandler('+');
         }}
-        style={{ height: 50, width: 100 }}
+        style={{ height: 50, width: 300 }}
       >
-        <View style={{ height: 50, width: 100, backgroundColor: '#0000ff' }} />
+        <View style={{ height: 50, width: 200, backgroundColor: '#0000ff' }} />
       </TouchableOpacity>
     );
   }
@@ -63,7 +63,11 @@ class SomeOtherClass extends Component {
 class example extends Component {
   render() {
     return (
-      <StackView axis="vertical" style={{ height: 300, width: 300 }}>
+      <StackView
+        axis="horizontal"
+        spacing={20}
+        style={{ height: 500, width: 800, left: 100, top: 100 }}
+      >
         <OtherClass />
         <AnOtherClass />
         <SomeOtherClass />

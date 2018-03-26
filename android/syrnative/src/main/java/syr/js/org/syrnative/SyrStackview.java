@@ -17,7 +17,6 @@ public class SyrStackview implements SyrBaseModule {
     @Override
     public View render(JSONObject component, Context context, View instance) {
         LinearLayout linearLayout;
-
         if(instance !=null) {
             linearLayout = (LinearLayout) instance;
         } else {
@@ -25,13 +24,17 @@ public class SyrStackview implements SyrBaseModule {
         }
 
         JSONObject style = null;
+        Integer left = 0;
+        Integer top = 0;
+        Integer height = 0;
+        Integer width = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject props = jsonInstance.getJSONObject("props");
             final String guid  = component.getString("guid");
 
-            // set button styles
+            // set linearLayout styles
             if (jsonInstance.has("style")){
 
                 style = jsonInstance.getJSONObject("style");
@@ -46,6 +49,8 @@ public class SyrStackview implements SyrBaseModule {
                     linearLayout.setY(style.getInt("top"));
                 }
 
+               SyrStyler.styleView(linearLayout, style);
+
             }
 
             if(props.has("axis") && props.getString("axis").contains("vertical")) {
@@ -54,9 +59,14 @@ public class SyrStackview implements SyrBaseModule {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
 
+            linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
+
+            //@TODO recalculate the height based on the child elements. THen also pass the new height to the scrollView
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         return linearLayout;
     }

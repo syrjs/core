@@ -36,6 +36,10 @@ public class SyrRaster {
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
     public ArrayList<String> exportedMethods = new ArrayList<String>();
+    private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            1.0f); //equal spacing layoutParams for stackView
 
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
@@ -237,24 +241,13 @@ public class SyrRaster {
                         Log.v("parentTYpe", Boolean.toString(viewParent instanceof LinearLayout));
 
 
-                        //eeewwww siddharth you are starting to write code like Derek... :P
+                        //eeewwww siddharth you are starting to write code like Derek... :P ...that might actually be good
                         //checking to see if the parent is a stackView a.k.a LinearLayout
                         //@TODO if possible do something similar to respondsToSelector on Obj c
                         if (viewParent instanceof LinearLayout) {
-                            Log.v("parentActual", viewParent.getClass().getName());
-                            uiHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (component.getParent() != null) {
-                                        ViewGroup parent = (ViewGroup) component.getParent();
-                                        parent.removeView(component);
-                                    }
-                                    viewParent.addView(component);
-                                    emitComponentDidMount(uuid);
-                                }
-                            });
-
-                        } else {
+                            //@TODO defaulting to equal spacing between components. Need to change it and add spacing concept.
+                            component.setLayoutParams(params);
+                        }
                             //@TODO need better handling
                             uiHandler.post(new Runnable() {
                                 @Override
@@ -263,11 +256,11 @@ public class SyrRaster {
                                         ViewGroup parent = (ViewGroup) component.getParent();
                                         parent.removeView(component);
                                     }
+
                                     viewParent.addView(component);
                                     emitComponentDidMount(uuid);
                                 }
                             });
-                        }
 
                         if (component instanceof ViewGroup) {
                             buildChildren(childChildren, (ViewGroup) component);
