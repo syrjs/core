@@ -1,14 +1,12 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -30,13 +28,12 @@ public class SyrStackview implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
             final String guid  = component.getString("guid");
 
             // set button styles
-            if (component.has("attributes") && component.getJSONObject("attributes").has("style")){
+            if (jsonInstance.has("style")){
 
-                style = component.getJSONObject("attributes").getJSONObject("style");
+                style = jsonInstance.getJSONObject("style");
                 linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(linearLayout, style);
 
@@ -47,6 +44,8 @@ public class SyrStackview implements SyrBaseModule {
                 if(style.has("top")) {
                     linearLayout.setY(style.getInt("top"));
                 }
+
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
 
             }
 

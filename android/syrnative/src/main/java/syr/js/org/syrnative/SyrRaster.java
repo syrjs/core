@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -227,10 +228,38 @@ public class SyrRaster {
                             }
                         });
                     } else {
+                        if (childChildren != null && childChildren.length() > 0) {
+                            buildChildren(childChildren, (ViewGroup) component);
+                        }
+                        //@TODO add component to a cache
+                        // sending did mount event to the JS layer.
+                        emitComponentDidMount(uuid);
+                        Log.v("parentTYpe", Boolean.toString(viewParent instanceof LinearLayout));
+
+
+                        //eeewwww siddharth you are starting to write code like Derek... :P
+                        //checking to see if the parent is a stackView a.k.a LinearLayout
+                        //@TODO if possible do something similar to respondsToSelector on Obj c
+                        if (viewParent instanceof LinearLayout) {
+                            Log.v("parentActual", viewParent.getClass().getName());
                             uiHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if(component.getParent() != null){
+                                    if (component.getParent() != null) {
+                                        ViewGroup parent = (ViewGroup) component.getParent();
+                                        parent.removeView(component);
+                                    }
+                                    viewParent.addView(component);
+                                    emitComponentDidMount(uuid);
+                                }
+                            });
+
+                        } else {
+                            //@TODO need better handling
+                            uiHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (component.getParent() != null) {
                                         ViewGroup parent = (ViewGroup) component.getParent();
                                         parent.removeView(component);
                                     }
@@ -240,10 +269,10 @@ public class SyrRaster {
                             });
                         }
 
-                        if(component instanceof ViewGroup) {
+                        if (component instanceof ViewGroup) {
                             buildChildren(childChildren, (ViewGroup) component);
                         }
-
+                    }
                     }
             } catch (JSONException e) {
                 e.printStackTrace();

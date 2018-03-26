@@ -22,6 +22,7 @@ import syr.js.org.syrnative.SyrInstanceManager;
 import syr.js.org.syrnative.SyrLinearGradient;
 import syr.js.org.syrnative.SyrRootView;
 import syr.js.org.syrnative.SyrScrollview;
+import syr.js.org.syrnative.SyrStackview;
 import syr.js.org.syrnative.SyrText;
 import syr.js.org.syrnative.SyrTouchableOpacity;
 import syr.js.org.syrnative.SyrView;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         modules.add(new SyrTouchableOpacity());
         modules.add(new SyrLinearGradient());
         modules.add(new SyrScrollview());
+        modules.add(new SyrStackview());
         modules.add(new SyrAnimatedImage());
         modules.add(new SyrAnimatedView());
         modules.add(new SyrAnimatedText());
