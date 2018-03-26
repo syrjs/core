@@ -28,6 +28,7 @@ public class SyrStackview implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
+            JSONObject props = jsonInstance.getJSONObject("props");
             final String guid  = component.getString("guid");
 
             // set button styles
@@ -45,8 +46,12 @@ public class SyrStackview implements SyrBaseModule {
                     linearLayout.setY(style.getInt("top"));
                 }
 
-                linearLayout.setOrientation(LinearLayout.VERTICAL);
+            }
 
+            if(props.has("axis") && props.getString("axis").contains("vertical")) {
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+            } else {
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
 
         } catch (JSONException e) {
