@@ -10,6 +10,7 @@
 #import "SyrEventHandler.h"
 #import "SyrRaster.h"
 #import "SyrEventHandler.h"
+#import "sys/utsname.h"
 
 @interface SyrBridge()
 @property SyrEventHandler* eventHandler;
@@ -75,11 +76,23 @@
   // load a bundle with the root view we were handed
   // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
+  
+  // todo: lets abstract this out to the bundle manager
   NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
   NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
-  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];//[NSURL fileURLWithPath:syrBridgePath];
+  
+#if DEBUG
+  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
+#else
+  NSBundle* mainBundle = [NSBundle mainBundle];
+  NSString* pyplBundlePath = [mainBundle pathForResource:@"PYPLCheckout" ofType:@"bundle"];
+  NSBundle* pyplBundle = [NSBundle bundleWithPath:pyplBundlePath];
+  NSString* filePath = [pyplBundle pathForResource:@"syrBundle" ofType:@"html"];
+  NSURL* syrBridgeUrl = [NSURL fileURLWithPath:filePath];
+#endif
+
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
   NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
   
@@ -116,9 +129,9 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform" value:@"ios"]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:[self deviceName]]];
   
   components.queryItems = queryItems;
-  
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
 }
@@ -250,6 +263,20 @@ didFailProvisionalNavigation:(WKNavigation *)navigation
 - (void) rasterRenderedComponent: (NSString*) withComponentId {
   NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentDidMount"};
   [self sendEvent:event];
+}
+
+- (void) rasterRemovedComponent: (NSString*) withComponentId {
+  NSDictionary* event = @{@"guid":withComponentId, @"type":@"componentWillUnmount"};
+  [self sendEvent:event];
+}
+
+- (NSString*) deviceName
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
 }
 
 @end

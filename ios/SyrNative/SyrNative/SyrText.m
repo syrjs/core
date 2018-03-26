@@ -25,7 +25,7 @@ SYR_EXPORT_MODULE(Text)
   }
   
   text.backgroundColor = [UIColor clearColor];
-  NSDictionary* style = [[component objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
   text.frame = [SyrStyler styleFrame:style];
   text.text = [[component objectForKey:@"instance"] valueForKey:@"value"];
   
@@ -37,6 +37,20 @@ SYR_EXPORT_MODULE(Text)
   NSString* fontName = [style valueForKey:@"fontFamily"];
   NSNumber* fontSize = [style valueForKey:@"fontSize"];
   NSString* fontWeight = [style valueForKey:@"fontWeight"];
+  NSString* lineBreak = [style valueForKey:@"lineBreak"];
+  NSNumber* maxLines = [style valueForKey:@"maxLines"];
+
+  if(lineBreak != nil){
+    if([lineBreak containsString:@"normal"]) {
+      [text setLineBreakMode:NSLineBreakByWordWrapping];
+    }
+    if([lineBreak containsString:@"loose"]) {
+      [text setLineBreakMode:NSLineBreakByCharWrapping];
+    }
+    if(maxLines != nil) {
+      [text setNumberOfLines:[maxLines doubleValue]];
+    }
+  }
 
   if(fontName != nil && fontSize != nil) {
     [text  setFont:[UIFont fontWithName:fontName size:[fontSize doubleValue]]];

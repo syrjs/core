@@ -22,14 +22,16 @@ SYR_EXPORT_MODULE(ScrollView)
     scrollView = [[UIScrollView alloc] init];
   }
   
-  NSDictionary* style = [[[component objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+  NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
+  NSDictionary* props = [[component objectForKey:@"instance"] valueForKey:@"props"];
+  
   scrollView.frame = [SyrStyler styleFrame:style];
   
   // determine how big the content frame should be.
   NSNumber* farthestY = [NSNumber numberWithInt:0];
   NSNumber* farthestHeight = [NSNumber numberWithInt:0];
   for(id child in [component objectForKey:@"children"]){
-    NSDictionary* childStyle = [[[child objectForKey:@"instance"] objectForKey:@"attributes"] valueForKey:@"style"];
+    NSDictionary* childStyle = [[child objectForKey:@"instance"] valueForKey:@"style"];
     NSNumber* y = [childStyle objectForKey:@"top"];
     NSNumber* height = [childStyle objectForKey:@"height"];
     if(y > farthestY) {
@@ -53,6 +55,11 @@ SYR_EXPORT_MODULE(ScrollView)
     	farthestHeight = height;
   	}
   };
+  
+  BOOL allowTouches = [props valueForKey:@"allowTouches"];
+  if(allowTouches == YES) {
+  	scrollView.panGestureRecognizer.cancelsTouchesInView = false;
+  }
   
   scrollView.contentSize = CGSizeMake(scrollView.frame.size.width,[farthestHeight doubleValue]);
   return scrollView;

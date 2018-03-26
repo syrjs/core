@@ -169,6 +169,88 @@ render() {
   </StackView>
 }
 ```
+### Haptic Feedback (hapticFeedbackType)
+
+A prop passed into 'TouchableOpacity' and 'Button' to activate the haptic response on the device. Has a total of 6 feedback types:
+- notificationWarning
+- notificationSuccess
+- notificationError
+- impactLight
+- impactMedium
+- impactHeavy
+- selection
+
+```JavaScript
+import { TouchableOpacity } from 'syr';
+render() {
+  return <TouchableOpacity
+          hapticFeedbackType="notificationWarning"
+          onPress={() => { console.log('Pressed') }}
+          style={styles.touchable}
+        />
+}
+OR
+
+import { Button } from 'syr';
+render() {
+  return <Button
+          hapticFeedbackType="notificationSuccess"
+          onPress={() => { console.log('Pressed') }}
+          style={styles.button}
+        />
+}
+```
+
+### Switch
+
+A native Switch for boolean input control
+
+This is a controlled component that takes an `onValueChange` callback. It is recommended to map the result of the `onValueChange` callback to the `value` prop (although it is no necessary).
+
+Props (type, default) include: value (bool, false), tintColor (string, null), onTintColor (string, null), isDisabled (bool, false), style (syr styling object, null), and onValueChange (func, null). Value is the on/off state of the control, tintColor is the off color, onTintColor is the on color. isDisabled is whether the control is entirely disabled, style only accepts positioning {top, left, right, bottom} at the moment as control size will statically follow iOS/Android convention of 51 x 31 for now, onValueChange is the callback to be fired when the control is toggled.
+
+```JavaScript
+import { Switch } from 'syr';
+render() {
+  return <Switch
+            onValueChange={() => console.log('hey I am changing!')}
+            value={true} // it is suggested to map this to your component state
+            tintColor={'#1e90ff'}
+          />
+}
+```
+
+### AlertDialogue
+
+A native alert box that can be used to prompt messages and take feedback from the user.
+
+Takes in three params, title: A string containing the 'Title' for the dialogue box, Message: A string containing the 'Message' for the dialogue box and actions: An array of objects containing information about the buttons to be displayed and the actions to be performed.
+
+```JavaScript
+import { AlertDialogue } from 'syr';
+render() {
+  return <TouchableOpacity
+          onPress={() => {
+            AlertDialogue.alert(
+              'Logout', //This is the title for the alert dialogue box.
+              'Are you sure you want to logout?', //this is the message to be displayed for the alert dialogue box
+              //these are the buttons and their respective callbacks to be executed onPress
+              [
+                {
+                  title: 'Yes',
+                  onPress: () => logoutUser()
+                },
+                {
+                  title: 'No'
+                    onPress: () => doNotLogoutUser()
+                }
+              ]
+            );
+          }}
+          style={styles.notYouContainer}
+        >
+}
+```
 
 ## Styling a component
 <sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>

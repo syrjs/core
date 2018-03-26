@@ -55,6 +55,11 @@
     if (borderRadius) {
       view.layer.cornerRadius = [borderRadius doubleValue];
     }
+    
+    NSNumber* opacity = [style valueForKey:@"opacity"];
+    if(opacity != nil) {
+        view.alpha = [opacity floatValue];
+    }
   
     NSNumber* borderWidth = [style valueForKey:@"borderWidth"];
     UIColor* borderColor = [self colorFromHash:[style valueForKey:@"borderColor"]];
@@ -120,7 +125,7 @@
     NSNumber* frameWidth = [styleDictionary objectForKey:@"width"];
     NSNumber* framex = [styleDictionary objectForKey:@"left"];
     NSNumber* framey = [styleDictionary objectForKey:@"top"];
-    return CGRectMake([framex doubleValue], [framey doubleValue], [frameWidth doubleValue], [frameHeight doubleValue]);
+    return CGRectIntegral(CGRectMake([framex doubleValue], [framey doubleValue], [frameWidth doubleValue], [frameHeight doubleValue]));
 }
 
 @end

@@ -53,6 +53,7 @@ const styles = {
     textAlign: 'center',
   },
   image: {
+    backgroundColor: '#ff00ff',
     width: PixelRatio.getPixelSizeForLayoutSize(241),
     height: PixelRatio.getPixelSizeForLayoutSize(299),
     top:
@@ -78,9 +79,12 @@ class InnerComponent extends Component {
   }
   componentDidMount() {
     console.log('setting state inner component');
-    this.setState({
-      color: '#00ff00',
-    });
+
+    setTimeout(() => {
+      this.setState({
+        color: '#000000',
+      });
+    }, 1000);
   }
 }
 
@@ -105,8 +109,8 @@ class MyComponent extends Component {
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
+        <Animated.View style={styles.image} />
         <InnerComponent />
-        <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
         <Button
           enabled={this.state.buttonEnabled}
           onPress={() => this.onPress()}
@@ -118,15 +122,10 @@ class MyComponent extends Component {
     );
   }
   onPress() {
-    console.log('button pressed');
     this.num += 1;
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
-
-    if (!Platform.isWeb) {
-      NativeModules.SyrView.testExportMethod('Super', 42);
-    }
   }
   spinPiggy() {
     this.spin += 1;
@@ -141,7 +140,7 @@ class MyComponent extends Component {
     });
   }
   componentDidMount() {
-    //this.spinPiggy();
+    this.spinPiggy();
   }
 }
 

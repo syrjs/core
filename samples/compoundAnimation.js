@@ -18,9 +18,10 @@ class MyComponent extends Component {
     super();
     this.slideAnimation = new Animated.ValueXY({ x: 0, y: 0 });
     this.rotationAnimation = new Animated.Value(0);
+
     styles.slideAnimation.transform = [
       this.slideAnimation,
-      { z: this.rotationAnimation },
+      { rotatez: this.rotationAnimation },
     ];
   }
   render() {
