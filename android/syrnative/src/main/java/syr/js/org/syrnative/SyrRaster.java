@@ -141,9 +141,7 @@ public class SyrRaster {
 //            }
 
             if(component != null) {
-//                final String elementName = jsonObject.getString("elementName");
                 final String uuid = jsonObject.getString("uuid");
-//                Log.d("ast", ast.toString());
                 Log.d("uuid", uuid);
 
                 JSONArray children = jsonObject.getJSONArray("children");

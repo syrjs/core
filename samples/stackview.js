@@ -66,7 +66,7 @@ class example extends Component {
       <StackView
         axis="horizontal"
         spacing={20}
-        style={{ height: 500, width: 800, left: 100, top: 100 }}
+        style={{ height: 500, width: 1000, left: 100, top: 100 }}
       >
         <OtherClass />
         <AnOtherClass />

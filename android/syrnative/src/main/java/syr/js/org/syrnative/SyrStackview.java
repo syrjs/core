@@ -24,16 +24,11 @@ public class SyrStackview implements SyrBaseModule {
         }
 
         JSONObject style = null;
-        Integer left = 0;
-        Integer top = 0;
-        Integer height = 0;
-        Integer width = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject props = jsonInstance.getJSONObject("props");
-            final String guid  = component.getString("guid");
-
+            
             // set linearLayout styles
             if (jsonInstance.has("style")){
 
