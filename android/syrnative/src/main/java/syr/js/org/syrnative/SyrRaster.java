@@ -238,14 +238,11 @@ public class SyrRaster {
                         //@TODO add component to a cache
                         // sending did mount event to the JS layer.
                         emitComponentDidMount(uuid);
-                        Log.v("parentTYpe", Boolean.toString(viewParent instanceof LinearLayout));
 
-
-                        //eeewwww siddharth you are starting to write code like Derek... :P ...that might actually be good
                         //checking to see if the parent is a stackView a.k.a LinearLayout
                         //@TODO if possible do something similar to respondsToSelector on Obj c
                         if (viewParent instanceof LinearLayout) {
-                            //@TODO defaulting to equal spacing between components. Need to change it and add spacing concept.
+                            //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
                             component.setLayoutParams(params);
                         }
                             //@TODO need better handling
