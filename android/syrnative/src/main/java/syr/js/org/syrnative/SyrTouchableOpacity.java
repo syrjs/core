@@ -23,7 +23,7 @@ public class SyrTouchableOpacity implements SyrBaseModule {
         layout.setClipChildren(false);
         try {
             final String guid  = component.getString("guid");
-            style = component.getJSONObject("attributes").getJSONObject("style");
+            style = component.getJSONObject("instance").getJSONObject("style");
 
 
             if(style.has("left")) {

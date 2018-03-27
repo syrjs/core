@@ -31,9 +31,9 @@ public class SyrView implements SyrBaseModule {
 
         JSONObject style = null;
         try {
-            JSONObject attributes = component.getJSONObject("attributes");
-            if(attributes.has("style")){
-                style = attributes.getJSONObject("style");
+            JSONObject componentInstance = component.getJSONObject("instance");
+            if(componentInstance.has("style")){
+                style = componentInstance.getJSONObject("style");
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
 
                 if(style.has("left")) {

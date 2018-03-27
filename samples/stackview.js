@@ -22,9 +22,39 @@ class OtherClass extends Component {
         onPress={() => {
           this.onPressHandler('+');
         }}
-        style={{ height: 50, width: 100 }}
+        style={{ height: 50, width: 300 }}
       >
-        <View style={{ height: 50, width: 100, backgroundColor: '#ff00ff' }} />
+        <View style={{ height: 50, width: 200, backgroundColor: '#ff00ff' }} />
+      </TouchableOpacity>
+    );
+  }
+}
+
+class AnOtherClass extends Component {
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.onPressHandler('+');
+        }}
+        style={{ height: 50, width: 300 }}
+      >
+        <View style={{ height: 50, width: 200, backgroundColor: '#ffff00' }} />
+      </TouchableOpacity>
+    );
+  }
+}
+
+class SomeOtherClass extends Component {
+  render() {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.onPressHandler('+');
+        }}
+        style={{ height: 50, width: 300 }}
+      >
+        <View style={{ height: 50, width: 200, backgroundColor: '#0000ff' }} />
       </TouchableOpacity>
     );
   }
@@ -33,48 +63,14 @@ class OtherClass extends Component {
 class example extends Component {
   render() {
     return (
-      <StackView axis="vertical" style={{ height: 400, width: 300 }}>
-        <Button
-          onPress={() => {
-            this.onPressHandler('+');
-          }}
-          style={{ height: 50, width: 100 }}
-        >
-          button
-        </Button>
-        <Button
-          onPress={() => {
-            this.onPressHandler('+');
-          }}
-          style={{ height: 50, width: 100 }}
-        >
-          button
-        </Button>
-        <Button
-          onPress={() => {
-            this.onPressHandler('+');
-          }}
-          style={{ height: 50, width: 100 }}
-        >
-          button
-        </Button>
-        <Button
-          onPress={() => {
-            this.onPressHandler('+');
-          }}
-          style={{ height: 50, width: 100 }}
-        >
-          button
-        </Button>
-        <Button
-          onPress={() => {
-            this.onPressHandler('+');
-          }}
-          style={{ height: 50, width: 100 }}
-        >
-          button
-        </Button>
+      <StackView
+        axis="horizontal"
+        spacing={20}
+        style={{ height: 500, width: 1000, left: 100, top: 100 }}
+      >
         <OtherClass />
+        <AnOtherClass />
+        <SomeOtherClass />
       </StackView>
     );
   }
