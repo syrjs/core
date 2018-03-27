@@ -36,6 +36,7 @@ import { Platform } from './lib/platform';
 // rendering platforms
 import { DOMRaster } from './lib/rasters/dom';
 import { WKRaster } from './lib/rasters/wkwebview';
+import { NoDOM } from './lib/rasters/nodom';
 
 // central SyrStore (flux Store)
 import { SyrStore } from './lib/store';
@@ -44,7 +45,11 @@ import { SyrStore } from './lib/store';
 if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
   RasterManager.setRaster(WKRaster);
 }  else {
-  RasterManager.setRaster(DOMRaster);
+  if(typeof window == 'undefined') {
+    RasterManager.setRaster(NoDOM);
+  } else {
+    RasterManager.setRaster(DOMRaster);
+  }
 }
 
 // export render

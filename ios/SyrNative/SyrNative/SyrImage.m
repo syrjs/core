@@ -29,7 +29,6 @@ SYR_EXPORT_MODULE(Image)
     image = [UIImage imageNamed:source];
   }
 
-    
   if(componentInstance != nil) {
     imageHolder = (UIImageView*)componentInstance;
     [imageHolder setImage:image];
@@ -37,7 +36,6 @@ SYR_EXPORT_MODULE(Image)
     imageHolder = [[UIImageView alloc] initWithImage:image];
   }
     
-  
   imageHolder.frame = [SyrStyler styleFrame:style];
   return imageHolder;
 }
