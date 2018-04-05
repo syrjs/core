@@ -109,13 +109,13 @@ onPress(){
 
 ### LinearGradient
 
-A `View` that has a linear gradient applied to the background.
+A `View` that has a linear gradient applied to the background. Currently supports all 8 ordinal directions.
 
 ```javascript
 import { LinearGradient } from 'syr';
 
 render() {
-  return <LinearGradient colors={['#000000', '#FFFFFF']} style={{ height:150, width:300 }}/>
+  return <LinearGradient colors={['#000000', '#FFFFFF']} direction = {"rightToLeft"} style={{ height:150, width:300 }}/>
 }
 ```
 
