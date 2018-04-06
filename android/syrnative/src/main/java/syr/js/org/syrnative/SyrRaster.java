@@ -270,10 +270,10 @@ public class SyrRaster {
     private View createComponent(final JSONObject child)  {
         String className = null;
         View returnView = null;
-        String guid = null;
+        String uuid = null;
         if(child.has("elementName")) {
             try {
-                guid = child.getString("guid");
+                uuid = child.getString("uuid");
                 className = child.getString("elementName");
                 final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
 
@@ -281,9 +281,9 @@ public class SyrRaster {
                     return null;
                 }
 
-                if (mModuleInstances.containsKey(child.getString("guid"))) {
+                if (mModuleInstances.containsKey(child.getString("uuid"))) {
 
-                    final View view = (View) mModuleInstances.get(child.getString("guid"));
+                    final View view = (View) mModuleInstances.get(child.getString("uuid"));
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -293,14 +293,14 @@ public class SyrRaster {
 
                 } else {
                     returnView = componentModule.render(child, mContext, null);
-                    mModuleInstances.put(child.getString("guid"), returnView);
+                    mModuleInstances.put(child.getString("uuid"), returnView);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            return (View) mModuleInstances.get(guid);
+            return (View) mModuleInstances.get(uuid);
         } else {
             return null;
         }
