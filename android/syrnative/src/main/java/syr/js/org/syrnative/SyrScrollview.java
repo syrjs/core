@@ -19,14 +19,21 @@ public class SyrScrollview implements SyrBaseModule {
         JSONObject style = null;
 
         try {
-            style = component.getJSONObject("attributes").getJSONObject("style");
+//            style = component.getJSONObject("props").getJSONObject("style");
+            JSONObject jsonInstance = component.getJSONObject("instance");
+            JSONObject props = jsonInstance.getJSONObject("props");
 
+            // set linearLayout styles
+            if (jsonInstance.has("style")){
+                style = jsonInstance.getJSONObject("style");
+            }
+            scrollview.setLayoutParams(SyrStyler.styleLayout(style));
+            SyrStyler.styleView(scrollview, style);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        scrollview.setLayoutParams(SyrStyler.styleLayout(style));
-        SyrStyler.styleView(scrollview, style);
+
 
         return scrollview;
     }

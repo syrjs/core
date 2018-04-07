@@ -32,13 +32,13 @@ public class SyrButton implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
+            JSONObject jsonProps =  jsonInstance.getJSONObject("props");
             final String guid  = component.getString("guid");
 
             // if enabled prop is passed set it, else default to true
             Boolean isEnabled;
-            if (jsonAttributes.has("enabled")) {
-                isEnabled = jsonAttributes.getBoolean("enabled");
+            if (jsonProps.has("enabled")) {
+                isEnabled = jsonProps.getBoolean("enabled");
             } else {
                 isEnabled = true;
             }

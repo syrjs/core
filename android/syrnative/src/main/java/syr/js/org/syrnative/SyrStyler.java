@@ -62,7 +62,7 @@ public class SyrStyler{
             }
 
             if(style.has("height")) {
-
+                
                 params.height = style.getInt("height");
             }
 
