@@ -41,8 +41,6 @@ import { NoDOM } from './lib/rasters/nodom';
 // central SyrStore (flux Store)
 import { SyrStore } from './lib/store';
 
-require('./lib/errorhandler');
-
 // detecting rendering bridge
 if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
   RasterManager.setRaster(WKRaster);
