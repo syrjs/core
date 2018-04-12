@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0966F0207FC535003DED80 /* SyrTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F0966EE207FC535003DED80 /* SyrTextField.h */; };
+		0F0966F1207FC535003DED80 /* SyrTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0966EF207FC535003DED80 /* SyrTextField.m */; };
 		42A98E212050634900392721 /* SyrSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 42A98E202050634900392721 /* SyrSwitch.m */; };
 		69AABEBD2050774C00433CAE /* SyrHapticHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEBC2050774C00433CAE /* SyrHapticHelper.m */; };
 		69AABEC02050BDFD00433CAE /* SyrAlertDialogue.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AABEBF2050BDFD00433CAE /* SyrAlertDialogue.m */; };
@@ -82,6 +84,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0966EE207FC535003DED80 /* SyrTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrTextField.h; sourceTree = "<group>"; };
+		0F0966EF207FC535003DED80 /* SyrTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrTextField.m; sourceTree = "<group>"; };
 		42A98E1F2050632F00392721 /* SyrSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrSwitch.h; sourceTree = "<group>"; };
 		42A98E202050634900392721 /* SyrSwitch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyrSwitch.m; sourceTree = "<group>"; };
 		69AABEBB2050772200433CAE /* SyrHapticHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyrHapticHelper.h; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				69AABEBF2050BDFD00433CAE /* SyrAlertDialogue.m */,
 				42A98E1F2050632F00392721 /* SyrSwitch.h */,
 				42A98E202050634900392721 /* SyrSwitch.m */,
+				0F0966EE207FC535003DED80 /* SyrTextField.h */,
+				0F0966EF207FC535003DED80 /* SyrTextField.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 				D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */,
 				D266C4961F9AB65200BB0A90 /* SyrImage.h in Headers */,
 				D266C47B1F9AAD0700BB0A90 /* SyrComponent.h in Headers */,
+				0F0966F0207FC535003DED80 /* SyrTextField.h in Headers */,
 				D266C49E1F9ABE4E00BB0A90 /* SyrAnimator.h in Headers */,
 				D2CE4DFF200E8365002B7B40 /* SyrAnimatedText.h in Headers */,
 				D2B1F5731FE499B1004A42EF /* SyrTouchableOpacity.h in Headers */,
@@ -457,6 +464,7 @@
 				D2B1F5741FE499B1004A42EF /* SyrTouchableOpacity.m in Sources */,
 				D2D7E07F1F11E7DD0039C3A9 /* SyrRaster.m in Sources */,
 				D266C47C1F9AAD0700BB0A90 /* SyrComponent.m in Sources */,
+				0F0966F1207FC535003DED80 /* SyrTextField.m in Sources */,
 				D229B7051FD12C77004D651B /* SyrHeightWidthAnimation.m in Sources */,
 				D229B7091FD12C99004D651B /* SyrRotationAnimation.m in Sources */,
 				D266C4971F9AB65200BB0A90 /* SyrImage.m in Sources */,
