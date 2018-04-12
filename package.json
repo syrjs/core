@@ -1,6 +1,6 @@
 {
   "name": "syr",
-  "version": "1.3.4-alpha",
+  "version": "1.4.5",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "scripts": {

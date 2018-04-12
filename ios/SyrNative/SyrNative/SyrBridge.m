@@ -83,6 +83,8 @@
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
   
+  [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
+
 #if DEBUG
   NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
 #else
