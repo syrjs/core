@@ -7,6 +7,7 @@
 //
 
 #import "SyrTextField.h"
+#import "SyrEventHandler.h"
 
 @implementation SyrTextField
 +(instancetype)sharedInstance {
@@ -19,6 +20,12 @@
 }
 
 +(NSObject *)render:(NSDictionary *)component withInstance:(NSObject *)componentInstance {
+    
+    NSDictionary* instance = [component objectForKey:@"instance"];
+    
+    NSString* guid = [instance valueForKey:@"uuid"];
+    
+    [[SyrEventHandler sharedInstance] assignDelegate:guid];
     
     NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
     
@@ -36,25 +43,25 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
     
     if(reason == UITextFieldDidEndEditingReasonCommitted) {
-        [SyrTextField sendEventWithName:@"TextFieldDidFinishEditing" body:@{@"text":textField.text,@"reason":@"committed"}];
+        [SyrTextField sendEventWithName:@"textAreaDidFinishEditing" body:@{@"text":textField.text,@"reason":@"committed"}];
     } else {
-        [SyrTextField sendEventWithName:@"TextFieldDidFinishEditing" body:@{@"text":textField.text,@"reason":@"cancelled"}];
+        [SyrTextField sendEventWithName:@"textAreaDidFinishEditing" body:@{@"text":textField.text,@"reason":@"cancelled"}];
     }
     
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
-    [SyrTextField sendEventWithName:@"TextFieldBeganEditing" body:@{}];
+    [SyrTextField sendEventWithName:@"textAreaBeganEditing" body:@{}];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [SyrTextField sendEventWithName:@"TextFieldProcessingReturn" body:@{@"text":textField.text}];
+    [SyrTextField sendEventWithName:@"textAreaProcessingReturn" body:@{@"text":textField.text}];
 
     return true;
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField {
-    [SyrTextField sendEventWithName:@"TextFieldClearingText" body:@{@"text":textField.text}];
+    [SyrTextField sendEventWithName:@"textAreaClearingText" body:@{@"text":textField.text}];
 
     return true;
 }
