@@ -257,9 +257,8 @@ Currently iOS only. Current capabilities to return all contacts and to request p
 ```JavaScript
 {import NativeModules} from 'syr';
 //calls the requestPermissions functions at native layer
-requestPermissions() {
   NativeModules.SyrContactManager.requestContactPermissions();
-}
+
 //subscription for the requestContactPermissions, this event will be updated whenever User Accepts Rejects or the native layer throws an error. All of these things will be available in 'result'
 const subscription = NativeEventEmitter.addListener(
   'contactRequestResult',
