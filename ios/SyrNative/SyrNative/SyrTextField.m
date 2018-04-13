@@ -21,12 +21,6 @@
 
 +(NSObject *)render:(NSDictionary *)component withInstance:(NSObject *)componentInstance {
     
-    NSDictionary* instance = [component objectForKey:@"instance"];
-    
-    NSString* guid = [instance valueForKey:@"uuid"];
-    
-    [[SyrEventHandler sharedInstance] assignDelegate:guid];
-    
     NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
     
     UITextField *textField = [[[UITextField alloc]  init] initWithFrame:[SyrStyler styleFrame:style]];
