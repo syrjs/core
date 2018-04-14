@@ -251,6 +251,31 @@ render() {
         >
 }
 ```
+### ContactsAPI
+Currently iOS only. Current capabilities to return all contacts and to request permissions to get contact information. Data for the contacts returned currently is: First Name, Last Name, Birthday, Profile Picture, Phone Number.
+
+```JavaScript
+{import NativeModules} from 'syr';
+//calls the requestPermissions functions at native layer
+  NativeModules.SyrContactManager.requestContactPermissions();
+
+//subscription for the requestContactPermissions, this event will be updated whenever User Accepts Rejects or the native layer throws an error. All of these things will be available in 'result'
+const subscription = NativeEventEmitter.addListener(
+  'contactRequestResult',
+  (event) => console.log(event.result)
+);
+
+//asks the native layer to return all Contacts
+fetchContacts() {
+  NativeModules.SyrContactManager.fetchAllContacts();
+}
+
+//results will contain an array of users with the above mentioned contact information. It can also contain an error if an error was thrown at the native layer
+const subscription = NativeEventEmitter.addListener(
+  'contactResults',
+  (event) => console.log(event.result)
+);
+```
 
 ## Styling a component
 <sup style="color:red;">☠️&nbsp;&nbsp;watch out! this is under heavy development!</sup>
