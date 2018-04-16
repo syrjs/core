@@ -26,7 +26,7 @@ SYR_EXPORT_MODULE(TextArea)
     
     NSDictionary* style = [[component objectForKey:@"instance"] valueForKey:@"style"];
     
-    UITextField *textField = [[[UITextField alloc]  init] initWithFrame:[SyrStyler styleFrame:style]];
+    UITextField *textField = [[UITextField alloc] initWithFrame:[SyrStyler styleFrame:style]];
     
     textField.delegate = SyrTextField.sharedInstance;
     
@@ -53,13 +53,11 @@ SYR_EXPORT_MODULE(TextArea)
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [SyrTextField sendEventWithName:@"textAreaProcessingReturn" body:@{@"text":textField.text}];
-
     return true;
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField {
     [SyrTextField sendEventWithName:@"textAreaClearingText" body:@{@"text":textField.text}];
-
     return true;
 }
 
