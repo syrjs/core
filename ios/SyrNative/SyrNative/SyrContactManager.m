@@ -65,7 +65,7 @@ SYR_EXPORT_METHOD(fetchAllContacts) {
     if (error == nil) {
         [SyrContactManager sendEventWithName:@"contactResults" body:@{@"result":contactsJSON}];
     } else {
-        [SyrContactManager sendEventWithName:@"contactResults" body:@{@"result":error}];
+        [SyrContactManager sendEventWithName:@"contactResults" body:@{@"result":error.localizedFailureReason}];
     }
 }
 @end
