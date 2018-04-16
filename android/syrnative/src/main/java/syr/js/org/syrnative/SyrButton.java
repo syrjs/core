@@ -59,9 +59,9 @@ public class SyrButton implements SyrBaseModule {
             }
 
             // set button styles
-            if (component.has("attributes") && component.getJSONObject("attributes").has("style")){
+            if (jsonInstance.has("style")){
 
-                style = component.getJSONObject("attributes").getJSONObject("style");
+                style = jsonInstance.getJSONObject("style");
                 button.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(button, style);
 
