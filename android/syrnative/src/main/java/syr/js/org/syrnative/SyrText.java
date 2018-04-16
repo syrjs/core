@@ -37,10 +37,10 @@ public class SyrText implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject attributes = component.getJSONObject("attributes");
+            JSONObject jsonProps = jsonInstance.getJSONObject("props");
 
-            if(attributes.has("style")) {
-                style = attributes.getJSONObject("style");
+            if(jsonInstance.has("style")) {
+                style = jsonInstance.getJSONObject("style");
 
                 if(style.has("left")) {
                     left = style.getInt("left");

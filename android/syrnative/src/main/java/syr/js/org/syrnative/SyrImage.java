@@ -23,6 +23,7 @@ public class SyrImage implements SyrBaseModule {
         } else {
             imageView = new ImageView(context);
         }
+        imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         String value = "";
         JSONObject style = null;
         JSONObject source = null;
@@ -30,11 +31,11 @@ public class SyrImage implements SyrBaseModule {
         Integer top = 0;
 
         try {
-            //JSONObject instance = component.getJSONObject("instance");
-            JSONObject attributes = component.getJSONObject("attributes");
+            JSONObject jsonInstance = component.getJSONObject("instance");
+            JSONObject jsonProps = jsonInstance.getJSONObject("props");
 
-            if (attributes.has("style")) {
-                style = attributes.getJSONObject("style");
+            if (jsonInstance.has("style")) {
+                style = jsonInstance.getJSONObject("style");
                 imageView.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(imageView, style);
 
@@ -49,9 +50,9 @@ public class SyrImage implements SyrBaseModule {
 
             }
 
-            if (attributes.has("source")) {
+            if (jsonProps.has("source")) {
                 // grabs the source url if present
-                source = attributes.getJSONObject("source");
+                source = jsonProps.getJSONObject("source");
                 String path = source.getString("uri");
 
                 // check if image exists in Resources

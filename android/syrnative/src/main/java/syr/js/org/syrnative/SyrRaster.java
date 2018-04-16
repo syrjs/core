@@ -116,9 +116,13 @@ public class SyrRaster {
             public void run() {
                 try {
                     final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-                    if(jsonObject.has("update")) {
-                        Boolean isUpdate = jsonObject.getBoolean("update");
-                        if(!isUpdate) {
+                    Boolean Update = ast.has("update");
+//                    Log.i("update", isUpdate.toString());
+                    if(ast.has("update")) {
+                        Boolean isUpdate = ast.getBoolean("update");
+                        if(isUpdate) {
+                           update(ast);
+                        } else {
                             buildInstanceTree(ast);
                         }
                     } else {
@@ -131,10 +135,19 @@ public class SyrRaster {
         }
         });
     }
+    public void update(JSONObject ast) {
+        syncState(ast, null);
+    }
+
+    public void syncState(JSONObject component, final ViewGroup viewParent) {
+        Log.i("Updating", component.toString());
+    }
     /** parse the AST sent from the Syr Bridge */
-    public void buildInstanceTree(JSONObject jsonObject) {
+    public void buildInstanceTree(final JSONObject jsonObject) {
         try {
             final View component = createComponent(jsonObject);
+            final JSONObject js = jsonObject;
+//            Log.i("JSONObjec BNuildTree", js.toString());
             //@TODO move this code out to syncState.
 //            if(!isUpdate) {
 //                component = (View)mModuleInstances.get(jsonObject.getString("uuid"));
