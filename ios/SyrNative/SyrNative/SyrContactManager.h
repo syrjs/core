@@ -6,7 +6,8 @@
 //  Copyright © 2018 Anderson,Derek. All rights reserved.
 //
 
-#import <SyrNative/SyrNative.h>
+#import "SyrComponent.h"
+#import <Contacts/Contacts.h>
 
 @interface SyrContactManager : SyrComponent
 +(instancetype)sharedInstance;
