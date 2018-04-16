@@ -10,6 +10,9 @@
 #import "SyrEventHandler.h"
 
 @implementation SyrTextField
+
+SYR_EXPORT_MODULE(TextArea)
+
 +(instancetype)sharedInstance {
     static SyrTextField *sharedInstance = nil;
     static dispatch_once_t onceToken;
