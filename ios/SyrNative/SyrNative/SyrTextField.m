@@ -53,6 +53,7 @@ SYR_EXPORT_MODULE(TextArea)
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [SyrTextField sendEventWithName:@"textAreaProcessingReturn" body:@{@"text":textField.text}];
+    [textField resignFirstResponder];
     return true;
 }
 
