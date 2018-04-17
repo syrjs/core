@@ -32,7 +32,7 @@ SYR_EXPORT_MODULE(TextArea)
     
     textField.textColor = [SyrStyler colorFromHash:[style objectForKey:@"color"]];
     
-    textField.placeholder = [[component objectForKey:@"props"] objectForKey:@"placeholder"];
+    textField.placeholder = [[component objectForKey:@"attributes"] objectForKey:@"placeholder"];
     
     return [SyrStyler styleView:textField withStyle:style];
 }
