@@ -85,15 +85,15 @@
   
   [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
 
-//#if DEBUG
-//  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
-//#else
+#if DEBUG
+  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
+#else
   NSBundle* mainBundle = [NSBundle mainBundle];
   NSString* pyplBundlePath = [mainBundle pathForResource:@"PYPLCheckout" ofType:@"bundle"];
   NSBundle* pyplBundle = [NSBundle bundleWithPath:pyplBundlePath];
   NSString* filePath = [pyplBundle pathForResource:@"syrBundle" ofType:@"html"];
   NSURL* syrBridgeUrl = [NSURL fileURLWithPath:filePath];
-//#endif
+#endif
 
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
   NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
