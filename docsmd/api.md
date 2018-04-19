@@ -496,10 +496,10 @@ SyrInstance.getInstance(this).sendEvent("FooParty", "party at my desk")
 JavaScript can subscribe to the events that are being passed down from the native layer.
 
 ```javascript
-import { NativeEventEmitter } from 'syr';
+import { EventEmitter } from 'syr';
 
 
-const subscription = NativeEventEmitter.addListener(
+const subscription = EventEmitter.addListener(
   'FooParty',
   (event) => console.log(event.name)
 );
