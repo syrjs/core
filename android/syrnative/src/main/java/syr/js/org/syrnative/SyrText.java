@@ -60,6 +60,8 @@ public class SyrText implements SyrBaseModule {
 
                 if(style.has("color")) {
                     textView.setTextColor(Color.parseColor(style.getString("color")));
+                } else {
+                    textView.setTextColor(Color.BLACK);
                 }
 
                 if(style.has("fontSize")) {

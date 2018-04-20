@@ -44,6 +44,10 @@ public class SyrView implements SyrBaseModule {
                     layout.setY(style.getInt("top"));
                 }
 
+                if(style.has("opacity")) {
+                    layout.setAlpha(style.getInt("opacity"));
+                }
+
                 SyrStyler.styleView(layout, style);
 
                 if(style.has("overflow")) {
