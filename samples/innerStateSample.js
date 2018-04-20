@@ -11,7 +11,7 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
-  NativeModules,
+  NativeModules,SyrNavigator
 } from '../index';
 
 // currently required to pull images in to web.
@@ -122,10 +122,11 @@ class MyComponent extends Component {
     );
   }
   onPress() {
-    this.num += 1;
-    this.setState({
-      buttonMessage: 'Pressed: ' + this.num,
-    });
+    SyrNavigator.dispatch({});
+    // this.num += 1;
+    // this.setState({
+    //   buttonMessage: 'Pressed: ' + this.num,
+    // });
   }
   spinPiggy() {
     this.spin += 1;
@@ -144,4 +145,6 @@ class MyComponent extends Component {
   }
 }
 
-Render(MyComponent);
+// Render(MyComponent);
+
+export { MyComponent };

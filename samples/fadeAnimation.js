@@ -50,4 +50,5 @@ class MyComponent extends Component {
   }
 }
 
-Render(MyComponent);
+// Render(MyComponent);
+export { MyComponent };

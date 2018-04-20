@@ -22,7 +22,7 @@ public class SyrTouchableOpacity implements SyrBaseModule {
 
         layout.setClipChildren(false);
         try {
-            final String guid  = component.getString("guid");
+            final String uuid  = component.getString("uuid");
             style = component.getJSONObject("instance").getJSONObject("style");
 
 
@@ -39,7 +39,7 @@ public class SyrTouchableOpacity implements SyrBaseModule {
                 @Override public void onClick(View v) {
                     HashMap<String, String> eventMap = new HashMap<String, String>();
                     eventMap.put("type", "onPress");
-                    eventMap.put("guid", guid);
+                    eventMap.put("guid", uuid);
                     SyrEventHandler.getInstance().sendEvent(eventMap);
                 }
             });

@@ -94,6 +94,10 @@ public class SyrStyler{
                         GradientDrawable.Orientation.TOP_BOTTOM,
                         new int[] {getColor(backgroundColor), getColor(backgroundColor)});
 
+                Drawable[] layers = {gd};
+
+                LayerDrawable layerDrawable = new LayerDrawable(layers);
+
                 if(style.has("borderRadius")) {
                     Integer borderRadius = style.getInt("borderRadius");
                     gd.setCornerRadius(borderRadius);
@@ -109,11 +113,8 @@ public class SyrStyler{
                 }
 
                 if(style.has("borderRightWidth") || style.has("borderLeftWidth")) {
-                    Drawable[] layers = {gd};
 
-                    LayerDrawable layerDrawable = new LayerDrawable(layers);
-
-                    layerDrawable.setLayerInset(0, 2, -3, -3, -3);
+                    layerDrawable.setLayerInset(0, 6, -3, -3, -3);
 
                     component.setBackground(layerDrawable);
                 } else {
