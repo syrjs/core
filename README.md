@@ -1,4 +1,4 @@
-# 1.3.4-alpha release
+# 1.4.6-alpha release
 
 <div align="center">
   <img src="https://github.com/dmikey/syr/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
@@ -8,7 +8,7 @@
 </div>
 
 [![Build Status](https://travis-ci.org/dmikey/syr.svg?branch=master)](https://travis-ci.org/dmikey/syr)
-[![NPM Version](https://img.shields.io/npm/v/syr.svg)](https://npmjs.org/package/syr)
+[![NPM Version](https://img.shields.io/npm/v/@syr/core.svg)](https://www.npmjs.com/package/@syr/core)
 [![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dmikey)
 [![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://dmikey.github.io/syr)
@@ -23,7 +23,15 @@ Syr uses a React like API with a custom JS API bridge, that allows an SDK develo
 
 ### Read the Docs
 
-https://dmikey.github.io/syr/api
+https://syr.js.org
+
+### Getting Started
+
+Install
+
+```bash
+npm i @syr/core
+```
 
 ### Roadmap
 
@@ -48,7 +56,7 @@ Patch
 * Corrects undesired consistent behavior.
 * Adds new features without collision
 
-https://github.com/dmikey/syr/milestones
+https://github.com/syrjs/syr/milestones
 
 ### Development Example
 
