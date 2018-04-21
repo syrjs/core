@@ -1,8 +1,9 @@
 {
-  "name": "syr",
+  "name": "@syr/core",
   "version": "1.4.5",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
+  "public": true,
   "scripts": {
     "test": "nyc mocha --compilers js:babel-core/register test/*test.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
