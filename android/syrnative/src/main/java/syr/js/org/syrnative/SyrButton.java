@@ -33,7 +33,7 @@ public class SyrButton implements SyrBaseModule {
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject jsonProps =  jsonInstance.getJSONObject("props");
-            final String guid  = component.getString("guid");
+            final String uuid  = component.getString("uuid");
 
             // if enabled prop is passed set it, else default to true
             Boolean isEnabled;
@@ -52,7 +52,7 @@ public class SyrButton implements SyrBaseModule {
                     public void onClick(View v) {
                         HashMap<String, String> eventMap = new HashMap<String, String>();
                         eventMap.put("type", "onPress");
-                        eventMap.put("guid", guid);
+                        eventMap.put("guid", uuid);
                         SyrEventHandler.getInstance().sendEvent(eventMap);
                     }
                 });
