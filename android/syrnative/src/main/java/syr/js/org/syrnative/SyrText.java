@@ -3,6 +3,7 @@ package syr.js.org.syrnative;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -108,6 +109,9 @@ public class SyrText implements SyrBaseModule {
 
             textView.setLayoutParams(lp);
         }
+        //truncating the textView, so the it does not break the content
+        textView.setEllipsize(TextUtils.TruncateAt.END);
+        textView.setSingleLine(true);
 
         return textView;
     }
