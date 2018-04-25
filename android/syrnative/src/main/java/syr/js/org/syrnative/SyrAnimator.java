@@ -74,9 +74,9 @@ public class SyrAnimator {
                 public void run() {
 
                     AnimatorSet mover = null;
-                    
-//                    Integer fromX = null;
-//                    Integer fromY  = null;
+
+                    Integer fromX = null;
+                    Integer fromY  = null;
                     Integer toX = null;
                     Integer toY = null;
                     Integer duration = null;
@@ -162,7 +162,7 @@ public class SyrAnimator {
                     @Override
                     public void run() {
                         ObjectAnimator anim;
-                        if(animationCache.containsKey(component)) {
+                        if(animationCache.containsKey(component) && !finalPropertyName.contains("alpha")) {
                             anim = animationCache.get(component);
                         } else {
                             anim = ObjectAnimator.ofFloat(component, finalPropertyName, fromValue, toValue); // rotationX, rotationY
