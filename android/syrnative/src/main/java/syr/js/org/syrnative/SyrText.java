@@ -38,7 +38,7 @@ public class SyrText implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject jsonProps = jsonInstance.getJSONObject("props");
+            JSONObject props = jsonInstance.getJSONObject("props");
 
             if(jsonInstance.has("style")) {
                 style = jsonInstance.getJSONObject("style");
@@ -90,6 +90,13 @@ public class SyrText implements SyrBaseModule {
             }
 
             value = jsonInstance.getString("value");
+            if(props.has("maxLines")) {
+                textView.setMaxLines(props.getInt("maxLines"));
+            } else {
+                //truncating the textView, so the it does not break the content
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+                textView.setSingleLine(true);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -109,9 +116,8 @@ public class SyrText implements SyrBaseModule {
 
             textView.setLayoutParams(lp);
         }
-        //truncating the textView, so the it does not break the content
-        textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setSingleLine(true);
+
+
 
         return textView;
     }
