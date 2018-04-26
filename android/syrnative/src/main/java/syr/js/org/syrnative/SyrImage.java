@@ -23,7 +23,6 @@ public class SyrImage implements SyrBaseModule {
         } else {
             imageView = new ImageView(context);
         }
-        imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         String value = "";
         JSONObject style = null;
         JSONObject source = null;
