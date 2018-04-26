@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -139,8 +140,25 @@ public class SyrRaster {
         syncState(ast, null);
     }
 
-    public void syncState(JSONObject component, final ViewGroup viewParent) {
-        Log.i("Updating", component.toString());
+    public void syncState(final JSONObject component, final ViewGroup viewParent) {
+//        try {
+//            Log.i("Updating", component.getString("uuid"));
+//            final String uuid = component.getString("uuid");
+//            Object componentInstance = mModuleInstances.get(uuid);
+//            String className = registeredModules.get(component.getString("elementName"));
+//
+//            Boolean unmount = component.getBoolean("unmount");
+//            if(unmount == true) {
+//                if(componentInstance != null) {
+//                    RelativeLayout instance = (RelativeLayout) componentInstance;
+//                    mModuleInstances.remove(uuid);
+//
+//                }
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
     /** parse the AST sent from the Syr Bridge */
     public void buildInstanceTree(final JSONObject jsonObject) {

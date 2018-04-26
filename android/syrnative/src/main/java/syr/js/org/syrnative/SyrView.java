@@ -25,9 +25,7 @@ public class SyrView implements SyrBaseModule {
             layout = new RelativeLayout(context);
         }
 
-        // word on the street is this should only be used for animations?
-        // these are not free
-        layout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
 
         JSONObject style = null;
         try {

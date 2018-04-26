@@ -89,14 +89,16 @@ public class SyrText implements SyrBaseModule {
                 }
             }
 
-            value = jsonInstance.getString("value");
-            if(props.has("maxLines")) {
-                textView.setMaxLines(props.getInt("maxLines"));
+            if(style.has("maxLines")) {
+                textView.setLines(props.getInt("maxLines"));
             } else {
                 //truncating the textView, so the it does not break the content
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setSingleLine(true);
             }
+
+            value = jsonInstance.getString("value");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
