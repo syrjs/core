@@ -31,7 +31,7 @@ SYR_EXPORT_MODULE(LinearGradient)
     gradientLayer.frame = view.layer.bounds;
     
     NSMutableArray* colors = [[NSMutableArray alloc] init];
-    NSArray* gradientColors = [[component objectForKey:@"props"] objectForKey:@"colors"];
+    NSArray* gradientColors = [[[component objectForKey:@"instance"] objectForKey:@"props"] objectForKey:@"colors"];
     NSString* direction = [[component valueForKey:@"attributes"]objectForKey:@"direction"];
     
     if ([direction  isEqual: rightToleft]) {

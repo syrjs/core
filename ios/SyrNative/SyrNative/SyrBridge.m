@@ -83,6 +83,8 @@
   NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
   NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
   
+  [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
+
 #if DEBUG
   NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
 #else
@@ -134,6 +136,31 @@
   components.queryItems = queryItems;
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
+  
+  [NSTimer scheduledTimerWithTimeInterval:2.0
+                                   target:self
+                                 selector:@selector(heartBeat)
+                                 userInfo:nil
+                                  repeats:YES];
+}
+
+
+- (void) heartBeat {
+  NSString* js = [NSString stringWithFormat:@""];
+  
+  // dispatching on the bridge to wkwebview needs to be done on the main thread
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+      if (error == nil)
+      {
+        // do something with JS returns here
+      }
+      else
+      {
+        NSLog(@"evaluateJavaScript error : %@", error.localizedDescription);
+      }
+    }];
+  });
 }
 
 /**

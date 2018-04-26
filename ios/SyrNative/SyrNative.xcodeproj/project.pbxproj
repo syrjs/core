@@ -41,7 +41,7 @@
 		D266C4A81F9B275E00BB0A90 /* SyrAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D266C4A61F9B275E00BB0A90 /* SyrAnimatedView.m */; };
 		D271B2A91FFED873004603B4 /* SyrInfoBox.h in Headers */ = {isa = PBXBuildFile; fileRef = D271B2A71FFED873004603B4 /* SyrInfoBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D271B2AA1FFED873004603B4 /* SyrInfoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = D271B2A81FFED873004603B4 /* SyrInfoBox.m */; };
-		D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = D2968144202AC64F005EE04C /* SyrNetworking.h */; };
+		D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = D2968144202AC64F005EE04C /* SyrNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2968147202AC64F005EE04C /* SyrNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D2968145202AC64F005EE04C /* SyrNetworking.m */; };
 		D29AD66D1FA176DD00DE7CF0 /* SyrNative.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29AD66C1FA176DD00DE7CF0 /* SyrNative.bundle */; };
 		D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = D29AD69F1FA536D500DE7CF0 /* SyrScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -317,7 +317,6 @@
 				D229B7081FD12C99004D651B /* SyrRotationAnimation.h in Headers */,
 				D229B6FC1FD12C3D004D651B /* SyrOpacityAnimation.h in Headers */,
 				D266C4961F9AB65200BB0A90 /* SyrImage.h in Headers */,
-				D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */,
 				D266C47B1F9AAD0700BB0A90 /* SyrComponent.h in Headers */,
 				D266C49E1F9ABE4E00BB0A90 /* SyrAnimator.h in Headers */,
 				D2CE4DFF200E8365002B7B40 /* SyrAnimatedText.h in Headers */,
@@ -327,6 +326,7 @@
 				D266C47F1F9AAD2000BB0A90 /* SyrText.h in Headers */,
 				D2D3122A1F9520AF008A9CCC /* SyrEventHandler.h in Headers */,
 				D2DE8FFB1FC0E46B00EEF358 /* SyrStackView.h in Headers */,
+				D2968146202AC64F005EE04C /* SyrNetworking.h in Headers */,
 				D29AD6A11FA536D500DE7CF0 /* SyrScrollView.h in Headers */,
 				D2D7E0351F0F672D0039C3A9 /* SyrNative.h in Headers */,
 				D24A90651F86C841003DAD64 /* SyrRootView.h in Headers */,
