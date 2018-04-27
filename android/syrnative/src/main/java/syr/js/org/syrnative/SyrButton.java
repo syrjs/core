@@ -32,13 +32,13 @@ public class SyrButton implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject jsonAttributes =  jsonInstance.getJSONObject("attributes");
-            final String guid  = component.getString("guid");
+            JSONObject jsonProps =  jsonInstance.getJSONObject("props");
+            final String uuid  = component.getString("uuid");
 
             // if enabled prop is passed set it, else default to true
             Boolean isEnabled;
-            if (jsonAttributes.has("enabled")) {
-                isEnabled = jsonAttributes.getBoolean("enabled");
+            if (jsonProps.has("enabled")) {
+                isEnabled = jsonProps.getBoolean("enabled");
             } else {
                 isEnabled = true;
             }
@@ -52,16 +52,16 @@ public class SyrButton implements SyrBaseModule {
                     public void onClick(View v) {
                         HashMap<String, String> eventMap = new HashMap<String, String>();
                         eventMap.put("type", "onPress");
-                        eventMap.put("guid", guid);
+                        eventMap.put("guid", uuid);
                         SyrEventHandler.getInstance().sendEvent(eventMap);
                     }
                 });
             }
 
             // set button styles
-            if (component.has("attributes") && component.getJSONObject("attributes").has("style")){
+            if (jsonInstance.has("style")){
 
-                style = component.getJSONObject("attributes").getJSONObject("style");
+                style = jsonInstance.getJSONObject("style");
                 button.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(button, style);
 
@@ -85,7 +85,6 @@ public class SyrButton implements SyrBaseModule {
 
 
             }
-
              // set button label/text
             button.setText(jsonInstance.getString("value"));
 

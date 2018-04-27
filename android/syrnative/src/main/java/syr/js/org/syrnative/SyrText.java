@@ -3,6 +3,7 @@ package syr.js.org.syrnative;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -37,10 +38,10 @@ public class SyrText implements SyrBaseModule {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject attributes = component.getJSONObject("attributes");
+            JSONObject props = jsonInstance.getJSONObject("props");
 
-            if(attributes.has("style")) {
-                style = attributes.getJSONObject("style");
+            if(jsonInstance.has("style")) {
+                style = jsonInstance.getJSONObject("style");
 
                 if(style.has("left")) {
                     left = style.getInt("left");
@@ -60,6 +61,8 @@ public class SyrText implements SyrBaseModule {
 
                 if(style.has("color")) {
                     textView.setTextColor(Color.parseColor(style.getString("color")));
+                } else {
+                    textView.setTextColor(Color.BLACK);
                 }
 
                 if(style.has("fontSize")) {
@@ -86,7 +89,16 @@ public class SyrText implements SyrBaseModule {
                 }
             }
 
+            if(style.has("maxLines")) {
+                textView.setLines(props.getInt("maxLines"));
+            } else {
+                //truncating the textView, so the it does not break the content
+                textView.setEllipsize(TextUtils.TruncateAt.END);
+                textView.setSingleLine(true);
+            }
+
             value = jsonInstance.getString("value");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -106,6 +118,8 @@ public class SyrText implements SyrBaseModule {
 
             textView.setLayoutParams(lp);
         }
+
+
 
         return textView;
     }

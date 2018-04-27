@@ -53,8 +53,9 @@ public class SyrStackview implements SyrBaseModule {
             } else {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
-
-            linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
+            if(jsonInstance.has("children")) {
+                linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
+            }
 
             //@TODO recalculate the height based on the child elements. THen also pass the new height to the scrollView
 
