@@ -1,6 +1,6 @@
 {
   "name": "@syr/core",
-  "version": "1.5.0",
+  "version": "1.5.2",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "public": true,

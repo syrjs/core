@@ -1,4 +1,4 @@
-# 1.5.0 release
+# 1.5.2 release
 
 <div align="center">
   <img src="https://github.com/dmikey/syr/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
