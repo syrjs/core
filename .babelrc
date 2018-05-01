@@ -7,5 +7,5 @@
       }
     }]
   ],
-  "plugins": [["./libs/jsx.js", { "useVariables": true }]]
+  "plugins": [["@syr/jsx", { "useVariables": true }]]
 }

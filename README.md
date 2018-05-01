@@ -1,4 +1,4 @@
-# 1.4.6-alpha release
+# 1.5.0 release
 
 <div align="center">
   <img src="https://github.com/dmikey/syr/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
@@ -20,6 +20,10 @@ The goal to provide, Native SDK developers the benefits of the React Native API,
 Easily package Syr with your Native SDKs and Apps and drive dynamic updatable experiences with JavaScript.
 
 Syr uses a React like API with a custom JS API bridge, that allows an SDK developer to bundle an updatable experience through Apple's iTunes terms.
+
+### breaking change
+
+`syr` moved to scoped packages. Please move to `@syr/core`.
 
 ### Read the Docs
 
