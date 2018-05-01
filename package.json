@@ -1,6 +1,6 @@
 {
   "name": "@syr/core",
-  "version": "1.4.6",
+  "version": "1.5.0",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "public": true,
@@ -45,5 +45,7 @@
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.11"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@syr/jsx": "^1.0.0"
+  }
 }
