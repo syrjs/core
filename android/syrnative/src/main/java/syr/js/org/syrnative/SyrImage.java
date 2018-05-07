@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * Created by dereanderson on 1/10/18.
  */
 
-public class SyrImage implements SyrBaseModule {
+public class SyrImage implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {

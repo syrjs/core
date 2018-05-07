@@ -3,6 +3,8 @@ package syr.js.org.syrnative;
 import android.os.Handler;
 import android.os.Looper;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -26,7 +28,7 @@ public class SyrEventHandler {
         return sSyrEventHandler;
     }
 
-    public void sendEvent(final HashMap<String, String> event) {
+    public void sendEvent(final JSONObject event) {
 
         mBridge.sendEvent(event);
 

@@ -237,10 +237,15 @@ public class SyrRaster {
     public void emitComponentDidMount(String guid) {
 
         // send event for componentDidMount
-        HashMap<String, String> eventMap = new HashMap<>();
-        eventMap.put("type", "componentDidMount");
-        eventMap.put("guid", guid);
-        mBridge.sendEvent(eventMap);
+        try {
+            JSONObject eventMap = new JSONObject();
+            eventMap.put("type", "componentDidMount");
+            eventMap.put("guid", guid);
+            SyrEventHandler.getInstance().sendEvent(eventMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void buildChildren(JSONArray children, final ViewGroup viewParent) {
@@ -306,7 +311,7 @@ public class SyrRaster {
             try {
                 uuid = child.getString("uuid");
                 className = child.getString("elementName");
-                final SyrBaseModule componentModule = (SyrBaseModule) mModuleMap.get(className);
+                final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
 
                 if (componentModule == null) {
                     return null;

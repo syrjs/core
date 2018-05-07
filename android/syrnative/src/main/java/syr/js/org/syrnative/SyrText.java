@@ -17,7 +17,7 @@ import org.json.JSONObject;
  * Created by dereanderson on 1/9/18.
  */
 
-public class SyrText implements SyrBaseModule {
+public class SyrText implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {
