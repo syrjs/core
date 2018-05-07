@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Created by dereanderson on 1/10/18.
  */
 
-public class SyrTouchableOpacity implements SyrBaseModule {
+public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {
@@ -37,10 +37,14 @@ public class SyrTouchableOpacity implements SyrBaseModule {
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    HashMap<String, String> eventMap = new HashMap<String, String>();
-                    eventMap.put("type", "onPress");
-                    eventMap.put("guid", uuid);
-                    SyrEventHandler.getInstance().sendEvent(eventMap);
+                    try {
+                        JSONObject eventMap = new JSONObject();
+                        eventMap.put("type", "onPress");
+                        eventMap.put("guid", uuid);
+                        SyrEventHandler.getInstance().sendEvent(eventMap);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } catch (JSONException e) {

@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * Created by dereanderson on 1/10/18.
  */
 
-public class SyrScrollview implements SyrBaseModule {
+public class SyrScrollview implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {

@@ -13,7 +13,7 @@ import org.json.JSONObject;
  * https://syr.js.org
  * Created by Derek Anderson on 1/8/18.
  */
-public class SyrView implements SyrBaseModule {
+public class SyrView implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {

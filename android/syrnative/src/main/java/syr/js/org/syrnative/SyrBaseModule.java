@@ -11,5 +11,4 @@ import org.json.JSONObject;
 
 public interface SyrBaseModule {
     String getName();
-    View render(JSONObject component, Context context, View instance);
 }

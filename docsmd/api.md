@@ -707,7 +707,16 @@ protected void onCreate(Bundle savedInstanceState) {
 // MyNativeModule.java
 //
 
-public class SyrView implements SyrBaseModule {
+// There are two interfaces that a NativeModule could implement.
+
+// SyrComponent - Interface for a renderable NativeModule.
+// SyrBaseModule - Interface for any NativeModule that needs to be available
+// on the Javascript Environment.
+
+// So if your class is a renderable NativeModule like a View
+// it needs to implement both SyrBaseModule and SyrComponent.
+
+public class SyrView implements SyrBaseModule, SyrComponent {
   // this module provide a render stub
   @Override
   public View render(JSONObject component, Context context) {
@@ -727,6 +736,17 @@ public class SyrView implements SyrBaseModule {
 
   }
 }
+
+// If your class does not need to render it only needs to implement SyrBaseModule
+
+public class MyNativeLog implements SyrBaseModule {
+  @SyrMethod
+  public void Log(String message) {
+    Log.i("JSMessage", message);
+  }
+}
+
+
 ```
 
 Accessing the native modules from javascript.
