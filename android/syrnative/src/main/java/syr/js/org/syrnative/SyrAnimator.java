@@ -53,7 +53,7 @@ public class SyrAnimator {
                     eventMap.put("type", "animationComplete");
                     eventMap.put("animation", jsonAnimation.toString());
                     eventMap.put("guid", guid);
-                    SyrEventHandler.getInstance().sendEvent(eventMap);
+                    bridge.sendEvent(eventMap);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -222,7 +222,7 @@ public class SyrAnimator {
                                     eventMap.put("type", "animationComplete");
                                     eventMap.put("animation", jsonAnimation.toString());
                                     eventMap.put("guid", guid);
-                                    SyrEventHandler.getInstance().sendEvent(eventMap);
+                                    bridge.sendEvent(eventMap);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -272,7 +272,7 @@ public class SyrAnimator {
                                     eventMap.put("type", "animationComplete");
                                     eventMap.put("animation", jsonAnimation.toString());
                                     eventMap.put("guid", guid);
-                                    SyrEventHandler.getInstance().sendEvent(eventMap);
+                                    bridge.sendEvent(eventMap);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

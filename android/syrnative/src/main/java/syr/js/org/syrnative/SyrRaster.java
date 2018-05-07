@@ -241,7 +241,7 @@ public class SyrRaster {
             JSONObject eventMap = new JSONObject();
             eventMap.put("type", "componentDidMount");
             eventMap.put("guid", guid);
-            SyrEventHandler.getInstance().sendEvent(eventMap);
+            mBridge.sendEvent(eventMap);
         } catch (JSONException e) {
             e.printStackTrace();
         }
