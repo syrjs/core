@@ -42,7 +42,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
                 return null;
             }
 
-            connection.setRequestProperty("Content-Length", "" +
+            connection.setRequestProperty("Content-Length",
                     Integer.toString(requestObject.getString("body").getBytes().length));
 
             if(requestObject.has("headers")) {
