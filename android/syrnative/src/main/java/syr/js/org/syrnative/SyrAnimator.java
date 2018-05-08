@@ -178,7 +178,6 @@ public class SyrAnimator {
                         // we don't want easing at the ends by default.
                         // otherwise callbacks will be delayed through final frames
                         anim.setInterpolator(new LinearInterpolator());
-                        component.requestLayout();
                         anim.start();
                     }
                 });
@@ -231,7 +230,6 @@ public class SyrAnimator {
                         });
                     }
                 });
-                component.requestLayout();
                 valueAnimator.start();
             }
 
@@ -281,9 +279,6 @@ public class SyrAnimator {
                         });
                     }
                 });
-
-                component.requestLayout();
-
                 valueAnimator.start();
             }
         }
