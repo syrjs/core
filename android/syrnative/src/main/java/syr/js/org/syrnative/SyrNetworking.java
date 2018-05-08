@@ -96,7 +96,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
         try {
             body.put("data", response);
             body.put("guid", guid);
-            body.put("responseCode", responseCode.toString());
+            body.put("responseCode", responseCode);
             body.put("platformError", platformErrors);
             eventMap.put("type", "event");
             eventMap.put("name", "NetworkingCallback");
