@@ -31,7 +31,7 @@ public class SyrLinearGradient implements SyrBaseModule, SyrComponent {
             GradientDrawable gd = new GradientDrawable(
                     GradientDrawable.Orientation.TOP_BOTTOM,
                     new int[] {Color.parseColor(colors.getString(0)),
-                               Color.parseColor(colors.getString(1))});
+                            Color.parseColor(colors.getString(1))});
 
             if(style.has("borderColor") && style.has("borderWidth")) {
                 // borders on views

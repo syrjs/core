@@ -90,7 +90,7 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
 
 
             }
-             // set button label/text
+            // set button label/text
             button.setText(jsonInstance.getString("value"));
 
         } catch (JSONException e) {
