@@ -5,6 +5,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import org.json.JSONObject;
+
+import java.util.Map;
+
 /**
  * Syr Project
  * https://syr.js.org
@@ -20,6 +24,7 @@ public class SyrRootView extends FrameLayout {
     private Boolean mLoaded = false;
     private int mHeight;
     private int mWidth;
+    private JSONObject mProps = null;
 
     public SyrRootView(Context context) {
         super(context);
@@ -37,12 +42,17 @@ public class SyrRootView extends FrameLayout {
         mContext = context;
     }
 
-    public SyrRootView startSyrApplication(SyrInstance instance, SyrBundle bundle) {
+    public SyrRootView startSyrApplication(SyrInstance instance, SyrBundle bundle, JSONObject appProps) {
         mBridge = new SyrBridge(mContext);
         mRaster = new SyrRaster(mContext);
+        mProps = appProps;
         mRaster.setRootview(this);
         mInstance = instance;
         return this;
+    }
+
+    public JSONObject getAppProperties() {
+        return mProps;
     }
 
     public void destroy() {
@@ -61,6 +71,7 @@ public class SyrRootView extends FrameLayout {
             mLoaded = true;
             mBridge.bootParams.put("height", Integer.toString(mHeight));
             mBridge.bootParams.put("width", Integer.toString(mWidth));
+            mBridge.bootParams.put("initial_props", mProps.toString());
             mInstance.setBridge(mBridge).setRaster(mRaster).loadBundle();
         }
     }
