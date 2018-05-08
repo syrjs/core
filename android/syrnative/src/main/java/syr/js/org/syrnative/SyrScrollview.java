@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 public class SyrScrollview implements SyrBaseModule, SyrComponent {
 
-    @Override
     public View render(JSONObject component, Context context, View instance) {
         ScrollView scrollview = new ScrollView(context);
         JSONObject style = null;
