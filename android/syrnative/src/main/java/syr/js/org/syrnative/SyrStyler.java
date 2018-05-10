@@ -64,7 +64,7 @@ public class SyrStyler{
             }
 
             if(style.has("height")) {
-                
+
                 params.height = style.getInt("height");
             }
 
@@ -126,9 +126,9 @@ public class SyrStyler{
             }
         }
     }
-//
+    //
     static LayerDrawable getBorders(int bgColor, int borderColor,
-                                       int left, int top, int right, int bottom){
+                                    int left, int top, int right, int bottom){
         // Initialize new color drawables
         ColorDrawable borderColorDrawable = new ColorDrawable(borderColor);
         ColorDrawable backgroundColorDrawable = new ColorDrawable(bgColor);

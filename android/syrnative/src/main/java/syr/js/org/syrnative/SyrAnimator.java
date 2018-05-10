@@ -230,7 +230,6 @@ public class SyrAnimator {
                         });
                     }
                 });
-
                 valueAnimator.start();
             }
 
@@ -276,12 +275,10 @@ public class SyrAnimator {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                        }
+                            }
                         });
                     }
                 });
-
-
                 valueAnimator.start();
             }
         }

@@ -23,7 +23,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
     private static SyrNetworking single_instance = null;
     private String guid;
     private Integer responseCode = null;
-    private JSONObject platformErrors = null;
+    private JSONObject platformErrors = new JSONObject();
 
     protected String doInBackground(JSONObject... request) {
         URL url;
@@ -96,8 +96,8 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
         try {
             body.put("data", response);
             body.put("guid", guid);
-            body.put("responseCode", responseCode.toString());
-            body.put("platformErrors", platformErrors);
+            body.put("responseCode", responseCode);
+            body.put("platformError", platformErrors);
             eventMap.put("type", "event");
             eventMap.put("name", "NetworkingCallback");
             eventMap.put("body", body);

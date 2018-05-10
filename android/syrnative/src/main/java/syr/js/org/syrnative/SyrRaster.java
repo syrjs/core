@@ -122,7 +122,7 @@ public class SyrRaster {
                     if(ast.has("update")) {
                         Boolean isUpdate = ast.getBoolean("update");
                         if(isUpdate) {
-                           update(ast);
+                            update(ast);
                         } else {
                             buildInstanceTree(ast);
                         }
@@ -130,10 +130,10 @@ public class SyrRaster {
                         buildInstanceTree(ast);
                     }
 
-                  } catch (JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }
         });
     }
     public void update(JSONObject ast) {
@@ -181,13 +181,13 @@ public class SyrRaster {
                     buildChildren(children, (ViewGroup) component);
                 }
 
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRootview.addView(component);
-                            emitComponentDidMount(uuid);
-                        }
-                    });
+                uiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRootview.addView(component);
+                        emitComponentDidMount(uuid);
+                    }
+                });
             } else {
 
                 JSONArray childComponents = jsonObject.getJSONArray("children");
@@ -249,58 +249,58 @@ public class SyrRaster {
     }
 
     private void buildChildren(JSONArray children, final ViewGroup viewParent) {
-            try {
-                for (int i = 0; i < children.length(); i++) {
-                    JSONObject child = children.getJSONObject(i);
-                    final View component = createComponent(child);
-                    JSONArray childChildren = child.getJSONArray("children");
-                    final String uuid = child.getString("uuid");
+        try {
+            for (int i = 0; i < children.length(); i++) {
+                JSONObject child = children.getJSONObject(i);
+                final View component = createComponent(child);
+                JSONArray childChildren = child.getJSONArray("children");
+                final String uuid = child.getString("uuid");
 
 
-                    if(component == null) {
-                        buildChildren(childChildren, (ViewGroup) viewParent);
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                emitComponentDidMount(uuid);
+                if(component == null) {
+                    buildChildren(childChildren, (ViewGroup) viewParent);
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            emitComponentDidMount(uuid);
+                        }
+                    });
+                } else {
+                    if (childChildren != null && childChildren.length() > 0) {
+                        buildChildren(childChildren, (ViewGroup) component);
+                    }
+                    //@TODO add component to a cache
+                    // sending did mount event to the JS layer.
+                    emitComponentDidMount(uuid);
+
+                    //checking to see if the parent is a stackView a.k.a LinearLayout
+                    //@TODO if possible do something similar to respondsToSelector on Obj c
+                    if (viewParent instanceof LinearLayout) {
+                        //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
+                        component.setLayoutParams(params);
+                    }
+                    //@TODO need better handling
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (component.getParent() != null) {
+                                ViewGroup parent = (ViewGroup) component.getParent();
+                                parent.removeView(component);
                             }
-                        });
-                    } else {
-                        if (childChildren != null && childChildren.length() > 0) {
-                            buildChildren(childChildren, (ViewGroup) component);
-                        }
-                        //@TODO add component to a cache
-                        // sending did mount event to the JS layer.
-                        emitComponentDidMount(uuid);
 
-                        //checking to see if the parent is a stackView a.k.a LinearLayout
-                        //@TODO if possible do something similar to respondsToSelector on Obj c
-                        if (viewParent instanceof LinearLayout) {
-                            //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
-                            component.setLayoutParams(params);
+                            viewParent.addView(component);
+                            emitComponentDidMount(uuid);
                         }
-                            //@TODO need better handling
-                            uiHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (component.getParent() != null) {
-                                        ViewGroup parent = (ViewGroup) component.getParent();
-                                        parent.removeView(component);
-                                    }
+                    });
 
-                                    viewParent.addView(component);
-                                    emitComponentDidMount(uuid);
-                                }
-                            });
-
-                        if (component instanceof ViewGroup) {
-                            buildChildren(childChildren, (ViewGroup) component);
-                        }
+                    if (component instanceof ViewGroup) {
+                        buildChildren(childChildren, (ViewGroup) component);
                     }
-                    }
-            } catch (JSONException e) {
-                e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private View createComponent(final JSONObject child)  {
