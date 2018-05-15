@@ -136,40 +136,166 @@ public class SyrRaster {
             }
         });
     }
+
     public void update(JSONObject ast) {
         syncState(ast, null);
     }
 
-    public void syncState(final JSONObject component, final ViewGroup viewParent) {
-//        try {
-//            Log.i("Updating", component.getString("uuid"));
-//            final String uuid = component.getString("uuid");
-//            Object componentInstance = mModuleInstances.get(uuid);
-//            String className = registeredModules.get(component.getString("elementName"));
-//
-//            Boolean unmount = component.getBoolean("unmount");
-//            if(unmount == true) {
-//                if(componentInstance != null) {
-//                    RelativeLayout instance = (RelativeLayout) componentInstance;
-//                    mModuleInstances.remove(uuid);
-//
-//                }
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+    public void syncState(final JSONObject component, ViewGroup viewParent) {
+        try {
+            Log.i("Updating", component.toString());
+
+            final String uuid = component.getString("uuid");
+            final View componentInstance = (View) mModuleInstances.get(uuid);
+            String className = null;
+            if(component.has("elementName")) {
+                className = component.getString("elementName");
+            } else {
+                syncChildren(component, viewParent);
+//                syncState(component.getJSONArray("children").getJSONObject(0), viewParent);
+            }
+
+
+            final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
+
+
+            Boolean unmount = null;
+            if(component.has("unmount")) {
+                unmount = component.getBoolean("unmount");
+            }
+
+            if(unmount != null && unmount == true) {
+                if(componentInstance != null) {
+                    final View instance = (View) componentInstance;
+                    mModuleInstances.remove(uuid);
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (instance.getParent() != null) {
+                                ViewGroup parent = (ViewGroup) instance.getParent();
+                                parent.removeView(instance);
+                                emitComponentDidMount(uuid);
+                            }
+                        }
+                    });
+
+                } else {
+                    JSONArray children = component.getJSONArray("children");
+                    if(children != null) {
+                        for (int i = 0; i < children.length(); i++) {
+                            JSONObject child = children.getJSONObject(i);
+                            final String childuuid = child.getJSONObject("instance").getString("uuid");
+                            final View childInstance = (View) mModuleInstances.get(childuuid);
+                            Boolean unmountChildInstance = component.getBoolean("unmount");
+                            if(unmountChildInstance == true) {
+                                mModuleInstances.remove(childuuid);
+                                //checking if the parent is a stackView
+                                if (viewParent instanceof LinearLayout) {
+                                    //stackView stuff
+                                    Log.i("StackView", "StackView Removal/Update");
+                                } else {
+                                    uiHandler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (childInstance.getParent() != null) {
+                                                ViewGroup parent = (ViewGroup) childInstance.getParent();
+                                                parent.removeView(childInstance);
+                                            }
+                                        }
+                                    });
+                                }
+                                emitComponentDidMount(uuid);
+                            }
+
+                        }
+                    }
+                }
+            } else {
+                if (componentInstance != null && componentModule != null) {
+//                    final View view = (View) componentInstance;
+//                    viewParent = (ViewGroup) componentInstance;
+                    final View builtComponent = createComponent(component);
+                    JSONArray children = component.getJSONArray("children");
+                    if(children != null && children.length() > 0) {
+                        viewParent = (ViewGroup) builtComponent;
+                    }
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ViewGroup parent = (ViewGroup) builtComponent.getParent();
+                            if (parent != null) {
+                                parent.removeView(builtComponent);
+                            }
+
+                            parent.addView(builtComponent);
+                            emitComponentDidMount(uuid);
+                        }
+                    });
+
+
+                } else if(componentInstance == null && componentModule != null) {
+                    final View newComponent = createComponent(component);
+                    if (viewParent instanceof LinearLayout) {
+                        //@TODO handling for stackView: check if this solution works.
+                        newComponent.setLayoutParams(params);
+                    }
+                    final ViewGroup vParent = viewParent;
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ViewGroup parent = (ViewGroup) newComponent.getParent();
+                            if (parent != null) {
+                                parent.removeView(newComponent);
+                            }
+
+                            vParent.addView(newComponent);
+                            emitComponentDidMount(uuid);
+                        }
+                    });
+//                    viewParent = (ViewGroup) newComponent;
+                }
+
+                syncChildren(component, viewParent);
+
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void  syncChildren(final JSONObject component, final ViewGroup viewParent) {
+
+        try {
+            JSONArray children = component.getJSONArray("children");
+            if(children != null && children.length() > 0) {
+                String key = null;
+                if(component.has("attributes")) {
+                    JSONObject attributes = component.getJSONObject("attributes");
+                    if(attributes.has("key")) {
+                        key = attributes.getString("key");
+                    }
+                }
+
+                for (int i = 0; i < children.length(); i++) {
+                    JSONObject child = children.getJSONObject(i);
+                    if(key != null) {
+                        child.put("key", key);
+                    }
+                    syncState(child, viewParent);
+                }
+            } else {
+                return;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     /** parse the AST sent from the Syr Bridge */
     public void buildInstanceTree(final JSONObject jsonObject) {
         try {
             final View component = createComponent(jsonObject);
             final JSONObject js = jsonObject;
-//            Log.i("JSONObjec BNuildTree", js.toString());
-            //@TODO move this code out to syncState.
-//            if(!isUpdate) {
-//                component = (View)mModuleInstances.get(jsonObject.getString("uuid"));
-//            }
 
             if(component != null) {
                 final String uuid = jsonObject.getString("uuid");
