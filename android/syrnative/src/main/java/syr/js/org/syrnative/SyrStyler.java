@@ -54,8 +54,6 @@ public class SyrStyler{
     static public ViewGroup.LayoutParams styleLayout(JSONObject style) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,0);
         try {
-            Integer left = 0;
-            Integer top = 0;
 
             if(style.has("width")) {
 
@@ -67,16 +65,6 @@ public class SyrStyler{
 
                 params.height = style.getInt("height");
             }
-
-            if(style.has("left")) {
-                left = style.getInt("left");
-            }
-
-            if(style.has("top")) {
-                top = style.getInt("top");
-            }
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();

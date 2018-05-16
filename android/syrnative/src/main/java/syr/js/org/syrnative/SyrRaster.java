@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +39,8 @@ public class SyrRaster {
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
     public ArrayList<String> exportedMethods = new ArrayList<String>();
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
             1.0f); //equal spacing layoutParams for stackView
 
     /** Instantiate the interface and set the context */
@@ -405,6 +406,7 @@ public class SyrRaster {
                         //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
                         component.setLayoutParams(params);
                     }
+
                     //@TODO need better handling
                     uiHandler.post(new Runnable() {
                         @Override

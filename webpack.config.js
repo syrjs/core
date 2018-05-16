@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/index.js'],
+    app: ['./samples/stackview.js'],
   },
 
   output: {
@@ -44,8 +44,7 @@ module.exports = {
                 "uglify": true
               }
             }]
-          ],
-          plugins: [[path.resolve('./libs/jsx.js'), { useVariables: true }]],
+          ]
         }
       },
       {

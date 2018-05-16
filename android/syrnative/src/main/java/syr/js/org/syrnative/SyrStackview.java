@@ -43,7 +43,37 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                 if(style.has("top")) {
                     linearLayout.setY(style.getInt("top"));
                 }
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
+                try {
+                    Integer left = 0;
+                    Integer top = 0;
 
+                    if(style.has("width")) {
+
+                        params.width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        params.height = style.getInt("height");
+                    }
+
+                    if(style.has("left")) {
+                        left = style.getInt("left");
+                    }
+
+                    if(style.has("top")) {
+                        top = style.getInt("top");
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                linearLayout.setLayoutParams(params);
                 SyrStyler.styleView(linearLayout, style);
 
             }
