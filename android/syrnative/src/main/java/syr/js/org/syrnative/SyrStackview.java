@@ -44,7 +44,6 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                     linearLayout.setY(style.getInt("top"));
                 }
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
-                try {
                     Integer left = 0;
                     Integer top = 0;
 
@@ -67,12 +66,6 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                         top = style.getInt("top");
                     }
 
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
                 linearLayout.setLayoutParams(params);
                 SyrStyler.styleView(linearLayout, style);
 
@@ -83,6 +76,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
             } else {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
+
             if(jsonInstance.has("children")) {
                 linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
             }

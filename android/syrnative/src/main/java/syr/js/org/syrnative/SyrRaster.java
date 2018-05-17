@@ -41,8 +41,7 @@ public class SyrRaster {
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT,
-            1.0f); //equal spacing layoutParams for stackView
-
+            1.0f);
     /** Instantiate the interface and set the context */
     SyrRaster(Context c) {
         mContext = c;
@@ -119,7 +118,6 @@ public class SyrRaster {
                 try {
                     final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
                     Boolean Update = ast.has("update");
-//                    Log.i("update", isUpdate.toString());
                     if(ast.has("update")) {
                         Boolean isUpdate = ast.getBoolean("update");
                         if(isUpdate) {
@@ -305,7 +303,7 @@ public class SyrRaster {
                 JSONArray children = jsonObject.getJSONArray("children");
 
                 if(children.length() > 0) {
-                    buildChildren(children, (ViewGroup) component);
+                    buildChildren(children, (ViewGroup) component, jsonObject);
                 }
 
                 uiHandler.post(new Runnable() {
@@ -375,17 +373,17 @@ public class SyrRaster {
 
     }
 
-    private void buildChildren(JSONArray children, final ViewGroup viewParent) {
+    private void buildChildren(JSONArray children, final ViewGroup viewParent, JSONObject parent) {
         try {
+
             for (int i = 0; i < children.length(); i++) {
                 JSONObject child = children.getJSONObject(i);
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
                 final String uuid = child.getString("uuid");
 
-
                 if(component == null) {
-                    buildChildren(childChildren, (ViewGroup) viewParent);
+                    buildChildren(childChildren, (ViewGroup) viewParent, parent);
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -393,18 +391,35 @@ public class SyrRaster {
                         }
                     });
                 } else {
-                    if (childChildren != null && childChildren.length() > 0) {
-                        buildChildren(childChildren, (ViewGroup) component);
-                    }
-                    //@TODO add component to a cache
+//                    if (childChildren != null && childChildren.length() > 0) {
+//                        buildChildren(childChildren, (ViewGroup) component, child);
+//                    }
+//                    //@TODO add component to a cache
                     // sending did mount event to the JS layer.
                     emitComponentDidMount(uuid);
 
                     //checking to see if the parent is a stackView a.k.a LinearLayout
                     //@TODO if possible do something similar to respondsToSelector on Obj c
                     if (viewParent instanceof LinearLayout) {
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                1.0f); //equal spacing layoutParams for stackView
+                        JSONObject parentInstance = parent.getJSONObject("instance");
+                        JSONObject parentProps = parentInstance.getJSONObject("props");
+                        if(parentProps.has("spacing") && parent.has("renderedChildren")) {
+                                params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
+                        }
                         //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
                         component.setLayoutParams(params);
+                        if(parent.has("renderedChildren")) {
+                            parent.getJSONArray("renderedChildren").put(component);
+                        } else {
+                            JSONArray renderedChildren = new JSONArray();
+                            renderedChildren.put(component);
+                            parent.put("renderedChildren", renderedChildren);
+                        }
+
                     }
 
                     //@TODO need better handling
@@ -422,7 +437,7 @@ public class SyrRaster {
                     });
 
                     if (component instanceof ViewGroup) {
-                        buildChildren(childChildren, (ViewGroup) component);
+                        buildChildren(childChildren, (ViewGroup) component, child);
                     }
                 }
             }
