@@ -302,6 +302,21 @@ public class SyrRaster {
 
                 JSONArray children = jsonObject.getJSONArray("children");
 
+                if(component instanceof ScrollView && children.length() > 1) {
+                    JSONObject firstChild = new JSONObject();
+                    JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
+                    firstChild.put("elementName", "StackView");
+                    firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
+                    firstChild.put("children",children);
+                    //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
+                    firstChild.put("guid", "1");
+                    firstChild.put("uuid", "1");
+                    firstChildInstance.put("guid", "1");
+                    firstChildInstance.put("uuid", "1");
+                    firstChild.put("instance", firstChildInstance);
+                    children = new JSONArray().put(firstChild);
+                }
+
                 if(children.length() > 0) {
                     buildChildren(children, (ViewGroup) component, jsonObject);
                 }
@@ -382,8 +397,23 @@ public class SyrRaster {
                 JSONArray childChildren = child.getJSONArray("children");
                 final String uuid = child.getString("uuid");
 
+                if(component instanceof ScrollView && children.length() > 1) {
+                    JSONObject firstChild = new JSONObject();
+                    JSONObject firstChildInstance = child.getJSONObject("instance");
+                    firstChild.put("elementName", "StackView");
+                    firstChild.put("attributes", child.getJSONObject("attributes"));
+                    firstChild.put("children",childChildren);
+                    //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
+                    firstChild.put("guid", "1");
+                    firstChild.put("uuid", "1");
+                    firstChildInstance.put("guid", "1");
+                    firstChildInstance.put("uuid", "1");
+                    firstChild.put("instance", firstChildInstance);
+                    childChildren = new JSONArray().put(firstChild);
+                }
+
                 if(component == null) {
-                    buildChildren(childChildren, (ViewGroup) viewParent, parent);
+                    buildChildren(childChildren, viewParent, parent);
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
