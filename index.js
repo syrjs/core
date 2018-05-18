@@ -26,6 +26,7 @@ import { TouchableOpacity } from './lib/touchable';
 import { ScrollView } from './lib/scrollview';
 import { Alert } from './lib/alertDialogue';
 import { Switch } from './lib/switch';
+import { TextArea } from './lib/textarea';
 
 // syr environment
 import { NativeModules } from './lib/nativemodules';
@@ -77,5 +78,6 @@ export {
   Platform,
   Alert,
   SyrStore,
-  Switch
+  Switch,
+  TextArea
 };

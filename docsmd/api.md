@@ -205,7 +205,7 @@ render() {
 
 A native Switch for boolean input control
 
-This is a controlled component that takes an `onValueChange` callback. It is recommended to map the result of the `onValueChange` callback to the `value` prop (although it is no necessary).
+This is a controlled component that takes an `onValueChange` callback. It is recommended to map the result of the `onValueChange` callback to the `value` prop (although it is not necessary).
 
 Props (type, default) include: value (bool, false), tintColor (string, null), onTintColor (string, null), isDisabled (bool, false), style (syr styling object, null), and onValueChange (func, null). Value is the on/off state of the control, tintColor is the off color, onTintColor is the on color. isDisabled is whether the control is entirely disabled, style only accepts positioning {top, left, right, bottom} at the moment as control size will statically follow iOS/Android convention of 51 x 31 for now, onValueChange is the callback to be fired when the control is toggled.
 
@@ -216,6 +216,28 @@ render() {
             onValueChange={() => console.log('hey I am changing!')}
             value={true} // it is suggested to map this to your component state
             tintColor={'#1e90ff'}
+          />
+}
+```
+
+### TextArea
+
+A native TextArea for user text input.
+
+For props a placeholder, which will act as the placeholder text. In the style it takes a color field which sets the textColor and of course the regular frame information.
+
+There are also 4 events related to textArea those being:
+textAreaDidFinishEditing which will be sent whenever a user is finished editing. It will contain a "text" and "reason" field in the response, the value of text being the text in the textArea and the reason being 1 of 2 things "committed" or "cancelled". Indicating what the user has done.
+textAreaBeganEditing, which will be sent whenever the user taps and begins "editing" doesn't have any form of a response.
+textAreaProcessingReturn which will be sent whenever a user presses the return key on the keyboard will have a response of "text" that has the text at that time of the textField
+textAreaClearingText, which will be sent whenever the user is clearing the text. This returns a body "text" that has the text before it's cleared.
+
+```JavaScript
+import { TextArea } from 'syr';
+render() {
+  return <TextArea
+            style={{height = 100, width = 100, color = '#FFFFFF'}}
+            placeholder = 'Lorum Ipsum'
           />
 }
 ```
