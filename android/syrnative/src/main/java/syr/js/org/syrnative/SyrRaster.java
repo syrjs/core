@@ -37,6 +37,7 @@ public class SyrRaster {
     public HashMap<String,String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
+    private JSONObject mModuleCache = new JSONObject();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -142,9 +143,12 @@ public class SyrRaster {
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
         try {
-            Log.i("Updating", component.toString());
+//            Log.i("Updating", component.toString());
+
 
             final String uuid = component.getString("uuid");
+            final JSONObject componentCache = (JSONObject) mModuleCache.get(uuid);
+
             final View componentInstance = (View) mModuleInstances.get(uuid);
             String className = null;
             if(component.has("elementName")) {
@@ -211,8 +215,7 @@ public class SyrRaster {
                 }
             } else {
                 if (componentInstance != null && componentModule != null) {
-//                    final View view = (View) componentInstance;
-//                    viewParent = (ViewGroup) componentInstance;
+
                     final View builtComponent = createComponent(component);
                     JSONArray children = component.getJSONArray("children");
                     if(children != null && children.length() > 0) {
@@ -225,9 +228,30 @@ public class SyrRaster {
                             if (parent != null) {
                                 parent.removeView(builtComponent);
                             }
+                            if(parent instanceof LinearLayout) {
+                                try{
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                                            1.0f); //equal spacing layoutParams for stackView
+                                    JSONObject renderedParent =  componentCache.getJSONObject("renderedParent");
+                                    JSONObject parentInstance = renderedParent.getJSONObject("instance");
+                                    JSONObject parentProps = parentInstance.getJSONObject("props");
+                                    int index = componentCache.getInt("childPosition");
+                                    if(parentProps.has("spacing") && index > 0) {
+                                        params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
+                                    }
+                                    builtComponent.setLayoutParams(params);
+                                   parent.addView(builtComponent, index);
+                                }catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                            parent.addView(builtComponent);
-                            emitComponentDidMount(uuid);
+                            } else {
+                                parent.addView(builtComponent);
+                            }
+
+//                            emitComponentDidMount(uuid);
                         }
                     });
 
@@ -318,7 +342,7 @@ public class SyrRaster {
                 }
 
                 if(children.length() > 0) {
-                    buildChildren(children, (ViewGroup) component, jsonObject);
+                    buildChildren(children, (ViewGroup) component, jsonObject, jsonObject);
                 }
 
                 uiHandler.post(new Runnable() {
@@ -388,7 +412,7 @@ public class SyrRaster {
 
     }
 
-    private void buildChildren(JSONArray children, final ViewGroup viewParent, JSONObject parent) {
+    private void buildChildren(JSONArray children, final ViewGroup viewParent, JSONObject renderedParent, JSONObject immediateParent) {
         try {
 
             for (int i = 0; i < children.length(); i++) {
@@ -396,6 +420,14 @@ public class SyrRaster {
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
                 final String uuid = child.getString("uuid");
+                JSONObject cache = new JSONObject();
+                cache.put("name","renderedParent");
+                cache.put("value", renderedParent);
+                appendToCache(uuid, cache);
+                cache = new JSONObject();
+                cache.put("name","immediateParent");
+                cache.put("value", immediateParent);
+                appendToCache(uuid, cache);
 
                 if(component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
@@ -413,7 +445,7 @@ public class SyrRaster {
                 }
 
                 if(component == null) {
-                    buildChildren(childChildren, viewParent, parent);
+                    buildChildren(childChildren, viewParent, renderedParent, child);
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -421,6 +453,7 @@ public class SyrRaster {
                         }
                     });
                 } else {
+
 //                    if (childChildren != null && childChildren.length() > 0) {
 //                        buildChildren(childChildren, (ViewGroup) component, child);
 //                    }
@@ -435,19 +468,27 @@ public class SyrRaster {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 1.0f); //equal spacing layoutParams for stackView
-                        JSONObject parentInstance = parent.getJSONObject("instance");
+                        JSONObject parentInstance = renderedParent.getJSONObject("instance");
                         JSONObject parentProps = parentInstance.getJSONObject("props");
-                        if(parentProps.has("spacing") && parent.has("renderedChildren")) {
+                        if(parentProps.has("spacing") && renderedParent.has("renderedChildren")) {
                                 params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
                         }
                         //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
                         component.setLayoutParams(params);
-                        if(parent.has("renderedChildren")) {
-                            parent.getJSONArray("renderedChildren").put(component);
+                        if(renderedParent.has("renderedChildren")) {
+                            renderedParent.getJSONArray("renderedChildren").put(component);
+                            cache = new JSONObject();
+                            cache.put("name","childPosition");
+                            cache.put("value", renderedParent.getJSONArray("renderedChildren").length() - 1);
+                            appendToCache(uuid, cache);
                         } else {
                             JSONArray renderedChildren = new JSONArray();
                             renderedChildren.put(component);
-                            parent.put("renderedChildren", renderedChildren);
+                            renderedParent.put("renderedChildren", renderedChildren);
+                            cache = new JSONObject();
+                            cache.put("name","childPosition");
+                            cache.put("value", 0);
+                            appendToCache(uuid, cache);
                         }
 
                     }
@@ -467,7 +508,7 @@ public class SyrRaster {
                     });
 
                     if (component instanceof ViewGroup) {
-                        buildChildren(childChildren, (ViewGroup) component, child);
+                        buildChildren(childChildren, (ViewGroup) component, child, child);
                     }
                 }
             }
@@ -481,9 +522,15 @@ public class SyrRaster {
         View returnView = null;
         String uuid = null;
         if(child.has("elementName")) {
+
             try {
+
                 uuid = child.getString("uuid");
                 className = child.getString("elementName");
+                JSONObject cache = new JSONObject();
+                cache.put("name","elementName");
+                cache.put("value", className);
+                appendToCache(uuid, cache);
                 final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
 
                 if (componentModule == null) {
@@ -513,6 +560,37 @@ public class SyrRaster {
         } else {
             return null;
         }
+
+    }
+
+    private void appendToCache(String uuid, JSONObject property) {
+        try{
+            JSONObject current = null;
+            if(mModuleCache.has(uuid)) {
+               current = mModuleCache.getJSONObject(uuid);
+            } else {
+                current = new JSONObject();
+            }
+            switch (property.getString("name")) {
+                case "elementName": {
+                    current.put(property.getString("name"), property.getString("value"));
+                    break;
+                }
+                case "childPosition": {
+                    current.put(property.getString("name"), property.getInt("value"));
+                    break;
+                }
+                default: {
+                    current.put(property.getString("name"), property.getJSONObject("value"));
+                    break;
+                }
+            }
+
+            mModuleCache.put(uuid, current);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
