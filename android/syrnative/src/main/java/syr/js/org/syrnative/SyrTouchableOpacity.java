@@ -17,7 +17,13 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {
-        RelativeLayout layout = new RelativeLayout(context);
+
+        RelativeLayout layout;
+        if(instance != null) {
+            layout = (RelativeLayout) instance;
+        } else {
+            layout = new RelativeLayout(context);
+        }
         JSONObject style = null;
 
         layout.setClipChildren(false);
