@@ -90,7 +90,7 @@ public class SyrText implements SyrBaseModule, SyrComponent {
             }
 
             if(style.has("maxLines")) {
-                textView.setLines(props.getInt("maxLines"));
+                textView.setLines(style.getInt("maxLines"));
             } else {
                 //truncating the textView, so the it does not break the content
                 textView.setEllipsize(TextUtils.TruncateAt.END);

@@ -144,10 +144,13 @@ public class SyrRaster {
     public void syncState(final JSONObject component, ViewGroup viewParent) {
         try {
 //            Log.i("Updating", component.toString());
-
-
             final String uuid = component.getString("uuid");
-            final JSONObject componentCache = (JSONObject) mModuleCache.get(uuid);
+            JSONObject temp = null;
+            if(mModuleCache.has(uuid)) {
+                temp = (JSONObject) mModuleCache.get(uuid);
+            }
+            final JSONObject componentCache = temp;
+
 
             final View componentInstance = (View) mModuleInstances.get(uuid);
             String className = null;
@@ -234,13 +237,17 @@ public class SyrRaster {
                                             LinearLayout.LayoutParams.WRAP_CONTENT,
                                             LinearLayout.LayoutParams.WRAP_CONTENT,
                                             1.0f); //equal spacing layoutParams for stackView
-                                    JSONObject renderedParent =  componentCache.getJSONObject("renderedParent");
-                                    JSONObject parentInstance = renderedParent.getJSONObject("instance");
-                                    JSONObject parentProps = parentInstance.getJSONObject("props");
-                                    int index = componentCache.getInt("childPosition");
-                                    if(parentProps.has("spacing") && index > 0) {
-                                        params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
+                                    int index = 0;
+                                    if(componentCache != null) {
+                                        JSONObject renderedParent =  componentCache.getJSONObject("renderedParent");
+                                        JSONObject parentInstance = renderedParent.getJSONObject("instance");
+                                        JSONObject parentProps = parentInstance.getJSONObject("props");
+                                        index = componentCache.getInt("childPosition");
+                                        if(parentProps.has("spacing") && index > 0) {
+                                            params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
+                                        }
                                     }
+
                                     builtComponent.setLayoutParams(params);
                                    parent.addView(builtComponent, index);
                                 }catch (JSONException e) {
@@ -419,7 +426,13 @@ public class SyrRaster {
                 JSONObject child = children.getJSONObject(i);
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
-                final String uuid = child.getString("uuid");
+                String tempUid = child.getString("uuid");;
+                if(child.has("attributes")) {
+                    if(child.getJSONObject("attributes").has("key")) {
+                        tempUid = tempUid.concat(child.getJSONObject("attributes").getString("key"));
+                    }
+                }
+                final String uuid = tempUid;
                 JSONObject cache = new JSONObject();
                 cache.put("name","renderedParent");
                 cache.put("value", renderedParent);
@@ -431,15 +444,20 @@ public class SyrRaster {
 
                 if(component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
+                    JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = child.getJSONObject("instance");
                     firstChild.put("elementName", "StackView");
                     firstChild.put("attributes", child.getJSONObject("attributes"));
                     firstChild.put("children",childChildren);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
-                    firstChild.put("guid", "1");
-                    firstChild.put("uuid", "1");
-                    firstChildInstance.put("guid", "1");
-                    firstChildInstance.put("uuid", "1");
+                    firstChild.put("guid", child.getString("guid").concat("-1"));
+                    firstChild.put("uuid", uuid.concat("-1"));
+                    firstChildInstance.put("guid", child.getString("guid").concat("-1"));
+                    firstChildInstance.put("uuid", uuid.concat("-1"));
+
+                    style.put("height",firstChildInstance.getJSONObject("style").getInt("height"));
+                    style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
+                    firstChildInstance.put("style", style);
                     firstChild.put("instance", firstChildInstance);
                     childChildren = new JSONArray().put(firstChild);
                 }
@@ -454,13 +472,6 @@ public class SyrRaster {
                     });
                 } else {
 
-//                    if (childChildren != null && childChildren.length() > 0) {
-//                        buildChildren(childChildren, (ViewGroup) component, child);
-//                    }
-//                    //@TODO add component to a cache
-                    // sending did mount event to the JS layer.
-                    emitComponentDidMount(uuid);
-
                     //checking to see if the parent is a stackView a.k.a LinearLayout
                     //@TODO if possible do something similar to respondsToSelector on Obj c
                     if (viewParent instanceof LinearLayout) {
@@ -468,6 +479,7 @@ public class SyrRaster {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 1.0f); //equal spacing layoutParams for stackView
+
                         JSONObject parentInstance = renderedParent.getJSONObject("instance");
                         JSONObject parentProps = parentInstance.getJSONObject("props");
                         if(parentProps.has("spacing") && renderedParent.has("renderedChildren")) {
@@ -526,6 +538,11 @@ public class SyrRaster {
             try {
 
                 uuid = child.getString("uuid");
+                if(child.has("attributes")) {
+                    if(child.getJSONObject("attributes").has("key")) {
+                        uuid = uuid.concat(child.getJSONObject("attributes").getString("key"));
+                    }
+                }
                 className = child.getString("elementName");
                 JSONObject cache = new JSONObject();
                 cache.put("name","elementName");
@@ -537,7 +554,7 @@ public class SyrRaster {
                     return null;
                 }
 
-                if (mModuleInstances.containsKey(child.getString("uuid"))) {
+                if (mModuleInstances.containsKey(uuid)) {
 
                     final View view = (View) mModuleInstances.get(child.getString("uuid"));
                     uiHandler.post(new Runnable() {
@@ -549,7 +566,7 @@ public class SyrRaster {
 
                 } else {
                     returnView = componentModule.render(child, mContext, null);
-                    mModuleInstances.put(child.getString("uuid"), returnView);
+                    mModuleInstances.put(uuid, returnView);
                 }
 
             } catch (JSONException e) {

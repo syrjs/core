@@ -1,7 +1,6 @@
 package syr.js.org.syrnative;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,8 +12,6 @@ import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 
 /**
  * Created by dereanderson on 1/9/18.
