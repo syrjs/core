@@ -142,9 +142,25 @@ public class SyrRaster {
     }
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
-        try {
-//            Log.i("Updating", component.toString());
-            final String uuid = component.getString("uuid");
+        try{
+//            final String uuid = component.getString("uuid");
+
+            //getting uuid of the component
+            String tempUid = component.getString("uuid");
+
+            //checking to see if it has a key (component inisde an array), if it does changing it to match the key set we have in the cache
+
+            if(component.has("attributes")) {
+                if(component.getJSONObject("attributes").has("key")) {
+                    tempUid = tempUid.concat(component.getJSONObject("attributes").getString("key"));
+                }
+            }
+            final String uuid = tempUid;
+
+            //getting the children of the components
+            JSONArray children = component.getJSONArray("children");
+
+            //Checking for cache availability and assigning caches
             JSONObject temp = null;
             if(mModuleCache.has(uuid)) {
                 temp = (JSONObject) mModuleCache.get(uuid);
@@ -153,142 +169,84 @@ public class SyrRaster {
 
 
             final View componentInstance = (View) mModuleInstances.get(uuid);
-            String className = null;
-            if(component.has("elementName")) {
-                className = component.getString("elementName");
-            } else {
-                syncChildren(component, viewParent);
-//                syncState(component.getJSONArray("children").getJSONObject(0), viewParent);
+
+            if(componentInstance instanceof ViewGroup) {
+                viewParent = (ViewGroup) componentInstance;
             }
 
+            //unmount code
 
-            final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
-
-
+            //checking for umount on the component --- only components to be umounted have this on them.
             Boolean unmount = null;
             if(component.has("unmount")) {
                 unmount = component.getBoolean("unmount");
             }
 
-            if(unmount != null && unmount == true) {
+            //remove the component from its parent if it has unmount on it
+            if(unmount != null &&  unmount){
+                //BEST CASE scenario, the component to unmount is a single component which is a renderable
+                //if we have an instance of it in the cache
                 if(componentInstance != null) {
-                    final View instance = (View) componentInstance;
-                    mModuleInstances.remove(uuid);
+                    final View instanceToRemove = componentInstance;
+                    mModuleInstances.remove(uuid); //remove the element from the cache to avoid unecessary collisions
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (instance.getParent() != null) {
-                                ViewGroup parent = (ViewGroup) instance.getParent();
-                                parent.removeView(instance);
-                                emitComponentDidMount(uuid);
+                            final ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
+                            if (instanceToRemove.getParent() != null) {
+                                parent.removeView(instanceToRemove);
+                                emitComponentDidUnMount(uuid);
                             }
+                            //@TODO need to assign a new viewParent Here since we took out the current one
+//                            viewParent = parent;
                         }
                     });
-
-                } else {
-                    JSONArray children = component.getJSONArray("children");
-                    if(children != null) {
-                        for (int i = 0; i < children.length(); i++) {
-                            JSONObject child = children.getJSONObject(i);
-                            final String childuuid = child.getJSONObject("instance").getString("uuid");
-                            final View childInstance = (View) mModuleInstances.get(childuuid);
-                            Boolean unmountChildInstance = component.getBoolean("unmount");
-                            if(unmountChildInstance == true) {
-                                mModuleInstances.remove(childuuid);
-                                //checking if the parent is a stackView
-                                if (viewParent instanceof LinearLayout) {
-                                    //stackView stuff
-                                    Log.i("StackView", "StackView Removal/Update");
-                                } else {
-                                    uiHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (childInstance.getParent() != null) {
-                                                ViewGroup parent = (ViewGroup) childInstance.getParent();
-                                                parent.removeView(childInstance);
-                                            }
-                                        }
-                                    });
-                                }
-                                emitComponentDidMount(uuid);
-                            }
-
-                        }
+                } else { //this is the use case where the or the component to unmount is a non-renderable so we need to unmount all its children
+                    if (children != null) {
+                        //looping through all the children and unmounting them
+                      unmountChildren(component);
                     }
                 }
             } else {
-                if (componentInstance != null && componentModule != null) {
-
-                    final View builtComponent = createComponent(component);
-                    JSONArray children = component.getJSONArray("children");
-                    if(children != null && children.length() > 0) {
-                        viewParent = (ViewGroup) builtComponent;
-                    }
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ViewGroup parent = (ViewGroup) builtComponent.getParent();
-                            if (parent != null) {
-                                parent.removeView(builtComponent);
-                            }
-                            if(parent instanceof LinearLayout) {
-                                try{
-                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                                            1.0f); //equal spacing layoutParams for stackView
-                                    int index = 0;
-                                    if(componentCache != null) {
-                                        JSONObject renderedParent =  componentCache.getJSONObject("renderedParent");
-                                        JSONObject parentInstance = renderedParent.getJSONObject("instance");
-                                        JSONObject parentProps = parentInstance.getJSONObject("props");
-                                        index = componentCache.getInt("childPosition");
-                                        if(parentProps.has("spacing") && index > 0) {
-                                            params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
-                                        }
-                                    }
-
-                                    builtComponent.setLayoutParams(params);
-                                   parent.addView(builtComponent, index);
-                                }catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            } else {
-                                parent.addView(builtComponent);
-                            }
-
-//                            emitComponentDidMount(uuid);
-                        }
-                    });
-
-
-                } else if(componentInstance == null && componentModule != null) {
-                    final View newComponent = createComponent(component);
-                    if (viewParent instanceof LinearLayout) {
-                        //@TODO handling for stackView: check if this solution works.
-                        newComponent.setLayoutParams(params);
-                    }
-                    final ViewGroup vParent = viewParent;
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ViewGroup parent = (ViewGroup) newComponent.getParent();
-                            if (parent != null) {
-                                parent.removeView(newComponent);
-                            }
-
-                            vParent.addView(newComponent);
-                            emitComponentDidMount(uuid);
-                        }
-                    });
-//                    viewParent = (ViewGroup) newComponent;
-                }
-
-                syncChildren(component, viewParent);
 
             }
 
+            syncChildren(component, viewParent);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+    }
+
+    public void unmountChildren(final JSONObject component) {
+        try {
+            JSONArray children = component.getJSONArray("children");
+            for (int i = 0; i < children.length(); i++) {
+                JSONObject child = children.getJSONObject(i);
+                String childuuid = child.getJSONObject("instance").getString("uuid");
+                View childInstance = (View) mModuleInstances.get(childuuid);
+                if(childInstance == null && child.has("children")) {
+                    child = child.getJSONArray("children").getJSONObject(0);
+                    childuuid = child.getJSONObject("instance").getString("uuid");
+                    childInstance = (View) mModuleInstances.get(childuuid);
+                }
+                final String uuidToRemove = childuuid;
+                final View instanceToRemove = childInstance;
+                Boolean unmountChildInstance = component.getBoolean("unmount");
+                if (unmountChildInstance == true) {
+                        mModuleInstances.remove(childuuid);
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (instanceToRemove.getParent() != null) {
+                                    ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
+                                    parent.removeView(instanceToRemove);
+                                    emitComponentDidUnMount(uuidToRemove);
+                                }
+                            }
+                        });
+                    }
+                }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -387,8 +345,6 @@ public class SyrRaster {
             } else {
                 Log.i("here", "there");
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -411,6 +367,20 @@ public class SyrRaster {
         try {
             JSONObject eventMap = new JSONObject();
             eventMap.put("type", "componentDidMount");
+            eventMap.put("guid", guid);
+            mBridge.sendEvent(eventMap);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void emitComponentDidUnMount(String guid) {
+
+        // send event for componentDidMount
+        try {
+            JSONObject eventMap = new JSONObject();
+            eventMap.put("type", "componentDidUnMount");
             eventMap.put("guid", guid);
             mBridge.sendEvent(eventMap);
         } catch (JSONException e) {
