@@ -203,7 +203,7 @@ public class SyrRaster {
                     });
                 } else { //this is the use case where the or the component to unmount is a non-renderable so we need to unmount all its children
                     if (children != null) {
-                        //looping through all the children and unmounting them
+                        //unmount the children if the parent is a non-renderable
                       unmountChildren(component);
                     }
                 }
@@ -220,11 +220,13 @@ public class SyrRaster {
 
     public void unmountChildren(final JSONObject component) {
         try {
+            //get the children of the component
             JSONArray children = component.getJSONArray("children");
             for (int i = 0; i < children.length(); i++) {
                 JSONObject child = children.getJSONObject(i);
                 String childuuid = child.getJSONObject("instance").getString("uuid");
                 View childInstance = (View) mModuleInstances.get(childuuid);
+                //if the child is a non-renderable, get the first child (since we follow the pattern of returning a singe view), to unmount
                 if(childInstance == null && child.has("children")) {
                     child = child.getJSONArray("children").getJSONObject(0);
                     childuuid = child.getJSONObject("instance").getString("uuid");
@@ -232,6 +234,7 @@ public class SyrRaster {
                 }
                 final String uuidToRemove = childuuid;
                 final View instanceToRemove = childInstance;
+                //just double checking, this will always hold true. Not sure why I dont trust my own code.
                 Boolean unmountChildInstance = component.getBoolean("unmount");
                 if (unmountChildInstance == true) {
                         mModuleInstances.remove(childuuid);
