@@ -148,7 +148,7 @@ public class SyrRaster {
             //getting uuid of the component
             String tempUid = component.getString("uuid");
 
-            //checking to see if it has a key (component inisde an array), if it does changing it to match the key set we have in the cache
+            //checking to see if it has a key (component inside an array), if it does changing it to match the key set we have in the cache
 
             if(component.has("attributes")) {
                 if(component.getJSONObject("attributes").has("key")) {
@@ -167,14 +167,23 @@ public class SyrRaster {
             }
             final JSONObject componentCache = temp;
 
-
+            //checking if the component has been rendered before
             final View componentInstance = (View) mModuleInstances.get(uuid);
 
             if(componentInstance instanceof ViewGroup) {
                 viewParent = (ViewGroup) componentInstance;
             }
 
-            //unmount code
+            //getting the className of the element
+            String className = null;
+            if(component.has("elementName")) {
+                className = component.getString("elementName");
+            }
+
+            //getting a componentModule if one is available with a className
+            final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
+
+            //UNMOUNT CODE
 
             //checking for umount on the component --- only components to be umounted have this on them.
             Boolean unmount = null;
@@ -207,10 +216,16 @@ public class SyrRaster {
                       unmountChildren(component);
                     }
                 }
-            } else {
-
+            } else { //no unmount on the component
+                if(componentInstance != null && componentModule != null) {
+                    //this will update an existing component, does not create or attach a new component.
+                    View updatedComponent = createComponent(component);
+                    //if the updated compo
+                    if(updatedComponent instanceof ViewGroup) {
+                        viewParent = (ViewGroup) updatedComponent;
+                    }
+                }
             }
-
             syncChildren(component, viewParent);
 
             } catch (JSONException e) {

@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -31,6 +30,24 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             final String uuid  = component.getString("uuid");
             style = component.getJSONObject("instance").getJSONObject("style");
 
+            if(instance == null) {
+                layout.setLayoutParams(SyrStyler.styleLayout(style));
+            } else {
+
+                if(style.has("width")) {
+
+                    layout.getLayoutParams().width = style.getInt("width");
+
+                }
+
+                if(style.has("height")) {
+
+                    layout.getLayoutParams().height = style.getInt("height");
+                }
+                layout.setLayoutParams(layout.getLayoutParams());
+
+            }
+
 
             if(style.has("left")) {
                 layout.setX(style.getInt("left"));
@@ -40,6 +57,11 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                 layout.setY(style.getInt("top"));
             }
 
+            if(style.has("opacity")) {
+                layout.setAlpha(style.getInt("opacity"));
+            }
+
+            SyrStyler.styleView(layout, style);
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
@@ -57,11 +79,9 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             e.printStackTrace();
         }
 
-        layout.setLayoutParams(SyrStyler.styleLayout(style));
-        SyrStyler.styleView(layout, style);
-
         return layout;
     }
+
 
     @Override
     public String getName() {

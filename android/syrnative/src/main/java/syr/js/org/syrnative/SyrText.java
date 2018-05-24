@@ -31,10 +31,6 @@ public class SyrText implements SyrBaseModule, SyrComponent {
 
         String value = "";
         JSONObject style = null;
-        Integer left = 0;
-        Integer top = 0;
-        Integer height = 0;
-        Integer width = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
@@ -44,19 +40,29 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
 
                 if(style.has("left")) {
-                    left = style.getInt("left");
+                    textView.setX(style.getInt("left"));
                 }
 
                 if(style.has("top")) {
-                    top = style.getInt("top");
+                    textView.setY(style.getInt("top"));
                 }
 
-                if(style.has("height")) {
-                    height = style.getInt("height");
-                }
+                if(instance == null) {
+                    textView.setLayoutParams(SyrStyler.styleLayout(style));
+                } else {
 
-                if(style.has("width")) {
-                    width = style.getInt("width");
+                    if(style.has("width")) {
+
+                        textView.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        textView.getLayoutParams().height = style.getInt("height");
+                    }
+                    textView.setLayoutParams(textView.getLayoutParams());
+
                 }
 
                 if(style.has("color")) {
@@ -98,26 +104,12 @@ public class SyrText implements SyrBaseModule, SyrComponent {
             }
 
             value = jsonInstance.getString("value");
+            textView.setText(value);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        textView.setText(value);
-
-        if(style != null) {
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(width, height);
-
-            if(style.has("left")) {
-                textView.setX(left);
-            }
-
-            if(style.has("top")) {
-                textView.setY(top);
-            }
-
-            textView.setLayoutParams(lp);
-        }
         //truncating the textView, so the it does not break the content
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setSingleLine(true);

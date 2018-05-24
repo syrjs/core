@@ -32,7 +32,23 @@ public class SyrView implements SyrBaseModule, SyrComponent {
             JSONObject componentInstance = component.getJSONObject("instance");
             if(componentInstance.has("style")){
                 style = componentInstance.getJSONObject("style");
-                layout.setLayoutParams(SyrStyler.styleLayout(style));
+                if(instance == null) {
+                    layout.setLayoutParams(SyrStyler.styleLayout(style));
+                } else {
+
+                    if(style.has("width")) {
+
+                        layout.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        layout.getLayoutParams().height = style.getInt("height");
+                    }
+                    layout.setLayoutParams(layout.getLayoutParams());
+
+                }
 
                 if(style.has("left")) {
                     layout.setX(style.getInt("left"));

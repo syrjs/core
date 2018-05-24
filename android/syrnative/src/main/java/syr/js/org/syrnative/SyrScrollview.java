@@ -28,7 +28,22 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
             // set linearLayout styles
             if (jsonInstance.has("style")){
                 style = jsonInstance.getJSONObject("style");
-                scrollview.setLayoutParams(SyrStyler.styleLayout(style));
+                if(instance == null) {
+                    scrollview.setLayoutParams(SyrStyler.styleLayout(style));
+                } else {
+                    if(style.has("width")) {
+
+                        scrollview.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        scrollview.getLayoutParams().height = style.getInt("height");
+                    }
+                    scrollview.setLayoutParams(scrollview.getLayoutParams());
+                }
+
                 SyrStyler.styleView(scrollview, style);
 
                 if(style.has("left")) {

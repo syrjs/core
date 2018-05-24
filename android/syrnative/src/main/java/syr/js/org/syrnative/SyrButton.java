@@ -67,7 +67,21 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
             if (jsonInstance.has("style")){
 
                 style = jsonInstance.getJSONObject("style");
-                button.setLayoutParams(SyrStyler.styleLayout(style));
+                if(instance == null) {
+                    button.setLayoutParams(SyrStyler.styleLayout(style));
+                } else {
+                    if(style.has("width")) {
+
+                        button.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        button.getLayoutParams().height = style.getInt("height");
+                    }
+                    button.setLayoutParams(button.getLayoutParams());
+                }
                 SyrStyler.styleView(button, style);
 
                 if (style.has("color")) {

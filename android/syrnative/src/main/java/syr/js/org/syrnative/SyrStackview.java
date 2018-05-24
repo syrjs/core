@@ -33,7 +33,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
             if (jsonInstance.has("style")){
 
                 style = jsonInstance.getJSONObject("style");
-                linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
+//                linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(linearLayout, style);
 
                 if(style.has("left")) {
@@ -43,7 +43,9 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                 if(style.has("top")) {
                     linearLayout.setY(style.getInt("top"));
                 }
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
+
+                if(instance == null) {
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
                     Integer left = 0;
                     Integer top = 0;
 
@@ -66,7 +68,21 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                         top = style.getInt("top");
                     }
 
-                linearLayout.setLayoutParams(params);
+                    linearLayout.setLayoutParams(params);
+                } else {
+                    if(style.has("width")) {
+
+                        linearLayout.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        linearLayout.getLayoutParams().height = style.getInt("height");
+                    }
+                    linearLayout.setLayoutParams(linearLayout.getLayoutParams());
+                }
+
                 SyrStyler.styleView(linearLayout, style);
 
             }
