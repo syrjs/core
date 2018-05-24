@@ -2,6 +2,7 @@ package syr.js.org.syrnative;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ public class SyrRaster {
     private SyrRootView mRootview;
     private SyrBridge mBridge;
     public Handler uiHandler;
+    public Handler animationHandler;
     private List<SyrBaseModule> mModules;
     public HashMap<String,String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
@@ -50,7 +52,6 @@ public class SyrRaster {
 
     public void setRootview(SyrRootView rootview) {
         mRootview = rootview;
-
         // main thread looper for UI updates
         uiHandler = new Handler(Looper.getMainLooper());
     }
@@ -142,6 +143,7 @@ public class SyrRaster {
     }
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
+
         try{
 //            final String uuid = component.getString("uuid");
 
@@ -224,7 +226,22 @@ public class SyrRaster {
                     if(updatedComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) updatedComponent;
                     }
-                }
+                } else if(componentInstance == null && componentModule !=null) { //if it is a new renderable element that has not been rendered yet.
+                    final View newComponent = createComponent(component);
+                    final ViewGroup vParent = viewParent; //reference to the current viewParent
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            //add component to the viewParent
+                            vParent.addView(newComponent);
+                            emitComponentDidMount(uuid);
+                        }
+                    });
+                    if(newComponent instanceof ViewGroup) {
+                        viewParent = (ViewGroup) newComponent;
+                    }
+
+                    }
             }
             syncChildren(component, viewParent);
 
@@ -311,15 +328,20 @@ public class SyrRaster {
 
                 if(component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
+                    JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
                     firstChild.put("elementName", "StackView");
                     firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
                     firstChild.put("children",children);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
-                    firstChild.put("guid", "1");
-                    firstChild.put("uuid", "1");
-                    firstChildInstance.put("guid", "1");
-                    firstChildInstance.put("uuid", "1");
+                    firstChild.put("guid", jsonObject.getString("guid").concat("-1"));
+                    firstChild.put("uuid", uuid.concat("-1"));
+                    firstChildInstance.put("guid", jsonObject.getString("guid").concat("-1"));
+                    firstChildInstance.put("uuid", uuid.concat("-1"));
+
+                    style.put("height",firstChildInstance.getJSONObject("style").getInt("height"));
+                    style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
+                    firstChildInstance.put("style", style);
                     firstChild.put("instance", firstChildInstance);
                     children = new JSONArray().put(firstChild);
                 }

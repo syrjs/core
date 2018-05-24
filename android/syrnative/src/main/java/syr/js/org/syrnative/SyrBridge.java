@@ -111,7 +111,7 @@ public class SyrBridge {
                 }
 
                 String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-                String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props",
+                String loadURL = String.format("http://192.168.2.4:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props",
                         bootParams.get("height"),
                         bootParams.get("width"),
                         screenDensity,

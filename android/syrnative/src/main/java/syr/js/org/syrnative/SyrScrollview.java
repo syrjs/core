@@ -28,18 +28,20 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
             // set linearLayout styles
             if (jsonInstance.has("style")){
                 style = jsonInstance.getJSONObject("style");
-                if(instance == null) {
+                if(instance == null || scrollview.getLayoutParams() == null) {
                     scrollview.setLayoutParams(SyrStyler.styleLayout(style));
                 } else {
                     if(style.has("width")) {
-
-                        scrollview.getLayoutParams().width = style.getInt("width");
+                        if(scrollview.getLayoutParams() != null) {
+                            scrollview.getLayoutParams().width = style.getInt("width");
+                        }
 
                     }
 
                     if(style.has("height")) {
-
-                        scrollview.getLayoutParams().height = style.getInt("height");
+                        if(scrollview.getLayoutParams() != null) {
+                            scrollview.getLayoutParams().height = style.getInt("height");
+                        }
                     }
                     scrollview.setLayoutParams(scrollview.getLayoutParams());
                 }

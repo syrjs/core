@@ -242,7 +242,7 @@ public class SyrAnimator {
                     @Override
                     public void onAnimationUpdate(final ValueAnimator animation) {
 
-                        bridge.mRaster.uiHandler.postDelayed(new Runnable() {
+                        bridge.mRaster.uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 // get the value the interpolator is at
@@ -253,7 +253,7 @@ public class SyrAnimator {
                                 // this layouts height change
                                 component.requestLayout();
                             }
-                        }, 120);
+                        });
 
                     }
                 });
