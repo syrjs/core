@@ -220,7 +220,7 @@ public class SyrRaster {
                 if(componentInstance != null && componentModule != null) {
                     //this will update an existing component, does not create or attach a new component.
                     View updatedComponent = createComponent(component);
-                    //if the updated compo
+                    //if the updated component is a view group and has children
                     if(updatedComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) updatedComponent;
                     }
