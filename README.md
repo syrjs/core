@@ -21,6 +21,12 @@ Easily package Syr with your Native SDKs and Apps and drive dynamic updatable ex
 
 Syr uses a React like API with a custom JS API bridge, that allows an SDK developer to bundle an updatable experience through Apple's iTunes terms.
 
+### help
+
+gitter: https://gitter.im/syrjs/general
+
+otherwise open an issue.
+
 ### breaking change
 
 `syr` moved to scoped packages. Please move to `@syr/core`.

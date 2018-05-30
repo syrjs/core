@@ -11,7 +11,8 @@ import {
   LinearGradient,
   PixelRatio,
   Platform,
-  NativeModules,SyrNavigator
+  NativeModules,
+  SyrNavigator,
 } from '../index';
 
 // currently required to pull images in to web.

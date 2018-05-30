@@ -5,12 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/example.js'],
+    app: ['./samples/index.js']
   },
 
   output: {
     path: path.resolve('dist'),
-    filename: 'assets/[name].min.js',
+    filename: 'assets/[name].min.js'
   },
 
   devServer: {
@@ -23,14 +23,14 @@ module.exports = {
   // command dir is the project path
   resolve: {
     extensions: ['.js', '.css'],
-    modules: ['./node_modules'],
+    modules: ['./node_modules']
   },
   devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.json$/,
-        loader: 'json-loader',
+        loader: 'json-loader'
       },
       {
         test: /.js?$/,
@@ -38,21 +38,23 @@ module.exports = {
         exclude: /node_modules/,
         query: {
           presets: [
-            ["env", {
-              "targets": {
-                "browsers": ["Android >= 4", "safari >= 7"],
-                "uglify": true
+            [
+              'env',
+              {
+                targets: {
+                  browsers: ['Android >= 4', 'safari >= 7'],
+                  uglify: true
+                }
               }
-            }]
+            ]
           ]
         }
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: "file-loader?name=images/[name].[ext]"
+        loader: 'file-loader?name=images/[name].[ext]'
       }
-
-    ],
+    ]
   },
 
   plugins: [
@@ -61,11 +63,12 @@ module.exports = {
       title: 'Test Fixture',
       mobile: true,
       template: require('html-webpack-template'),
-      bodyHtmlSnippet: '<div id="root"></div><style>body{margin:0;font-family:arial;}</style>',
+      bodyHtmlSnippet:
+        '<div id="root"></div><style>body{margin:0;font-family:arial;}</style>',
       scripts: [
         'https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js'
       ],
       links: []
     })
-  ],
+  ]
 };

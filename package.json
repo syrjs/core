@@ -20,6 +20,9 @@
       "threshold": 0
     }
   },
+  "prettier": {
+    "singleQuote": true
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
