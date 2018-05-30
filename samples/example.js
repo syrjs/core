@@ -146,12 +146,13 @@ class MyComponent extends Component {
     this.spin += 1;
     Animated.timing(this.spinPiggyAnimation, {
       toValue: 360,
-      duration: 2000,
+      duration: 1000,
     }).start(() => {
+
+      this.spinPiggy();
       this.setState({
         message: 'Spinning Image: ' + this.spin,
       });
-      this.spinPiggy();
     });
   }
   componentDidMount() {
