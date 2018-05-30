@@ -1,7 +1,6 @@
 package syr.js.org.syrnative;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,8 +12,6 @@ import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 
 /**
  * Created by dereanderson on 1/9/18.
@@ -54,8 +51,6 @@ public class SyrStyler{
     static public ViewGroup.LayoutParams styleLayout(JSONObject style) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,0);
         try {
-            Integer left = 0;
-            Integer top = 0;
 
             if(style.has("width")) {
 
@@ -67,16 +62,6 @@ public class SyrStyler{
 
                 params.height = style.getInt("height");
             }
-
-            if(style.has("left")) {
-                left = style.getInt("left");
-            }
-
-            if(style.has("top")) {
-                top = style.getInt("top");
-            }
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();

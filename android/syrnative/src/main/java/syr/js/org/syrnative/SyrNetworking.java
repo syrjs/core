@@ -20,7 +20,6 @@ import java.util.Iterator;
 
 public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implements SyrBaseModule{
 
-    private static SyrNetworking single_instance = null;
     private String guid;
     private Integer responseCode = null;
     private JSONObject platformErrors = new JSONObject();
@@ -102,6 +101,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
             eventMap.put("name", "NetworkingCallback");
             eventMap.put("body", body);
             SyrEventHandler.getInstance().sendEvent(eventMap);
+            this.cancel(true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -110,14 +110,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
 
     @SyrMethod
     public static void request(JSONObject requestObject) {
-        getInstance().execute(requestObject);
-    }
-
-    public static SyrNetworking getInstance() {
-        if (single_instance == null) {
-            single_instance = new SyrNetworking();
-        }
-        return single_instance;
+        new SyrNetworking().execute(requestObject);
     }
 
     private String streamConverter(InputStream is) {

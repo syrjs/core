@@ -35,9 +35,25 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
 
             if (jsonInstance.has("style")) {
                 style = jsonInstance.getJSONObject("style");
-                imageView.setLayoutParams(SyrStyler.styleLayout(style));
-                SyrStyler.styleView(imageView, style);
+                if(instance == null) {
+                    imageView.setLayoutParams(SyrStyler.styleLayout(style));
+                } else {
+                    if(style.has("width")) {
 
+                        imageView.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        imageView.getLayoutParams().height = style.getInt("height");
+                    }
+                    imageView.setLayoutParams(imageView.getLayoutParams());
+                }
+            }
+
+            if (style != null) {
+                SyrStyler.styleView(imageView, style);
 
                 if(style.has("left")) {
                     imageView.setX(style.getInt("left"));
@@ -46,7 +62,6 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 if(style.has("top")) {
                     imageView.setY(style.getInt("top"));
                 }
-
             }
 
             if (jsonProps.has("source")) {
@@ -76,9 +91,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
             e.printStackTrace();
         }
 
-        if (style != null) {
 
-        }
 
         return imageView;
     }

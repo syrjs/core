@@ -7,7 +7,6 @@ import android.widget.RelativeLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -17,7 +16,13 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
     @Override
     public View render(JSONObject component, Context context, View instance) {
-        RelativeLayout layout = new RelativeLayout(context);
+
+        RelativeLayout layout;
+        if(instance != null) {
+            layout = (RelativeLayout) instance;
+        } else {
+            layout = new RelativeLayout(context);
+        }
         JSONObject style = null;
 
         layout.setClipChildren(false);
@@ -25,6 +30,24 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             final String uuid  = component.getString("uuid");
             style = component.getJSONObject("instance").getJSONObject("style");
 
+            if(instance == null) {
+                layout.setLayoutParams(SyrStyler.styleLayout(style));
+
+            } else {
+
+                if(style.has("width")) {
+
+                    layout.getLayoutParams().width = style.getInt("width");
+
+                }
+
+                if(style.has("height")) {
+
+                    layout.getLayoutParams().height = style.getInt("height");
+                }
+                layout.setLayoutParams(layout.getLayoutParams());
+
+            }
 
             if(style.has("left")) {
                 layout.setX(style.getInt("left"));
@@ -33,6 +56,12 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             if(style.has("top")) {
                 layout.setY(style.getInt("top"));
             }
+
+            if(style.has("opacity")) {
+                layout.setAlpha(style.getInt("opacity"));
+            }
+
+            SyrStyler.styleView(layout, style);
 
 
             layout.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +80,9 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             e.printStackTrace();
         }
 
-        layout.setLayoutParams(SyrStyler.styleLayout(style));
-        SyrStyler.styleView(layout, style);
-
         return layout;
     }
+
 
     @Override
     public String getName() {

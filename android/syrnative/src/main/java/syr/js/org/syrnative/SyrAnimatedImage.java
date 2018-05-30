@@ -1,11 +1,8 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
-import android.widget.ImageView;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -19,6 +16,7 @@ public class SyrAnimatedImage extends SyrImage {
         View animatedImage = super.render(component, context, instance);
         animatedImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         return animatedImage;
+
     }
     @Override
     public String getName() {

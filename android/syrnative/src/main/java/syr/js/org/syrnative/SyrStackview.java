@@ -33,7 +33,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
             if (jsonInstance.has("style")){
 
                 style = jsonInstance.getJSONObject("style");
-                linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
+//                linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(linearLayout, style);
 
                 if(style.has("left")) {
@@ -42,6 +42,45 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
 
                 if(style.has("top")) {
                     linearLayout.setY(style.getInt("top"));
+                }
+
+                if(instance == null) {
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
+                    Integer left = 0;
+                    Integer top = 0;
+
+                    if(style.has("width")) {
+
+                        params.width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        params.height = style.getInt("height");
+                    }
+
+                    if(style.has("left")) {
+                        left = style.getInt("left");
+                    }
+
+                    if(style.has("top")) {
+                        top = style.getInt("top");
+                    }
+
+                    linearLayout.setLayoutParams(params);
+                } else {
+                    if(style.has("width")) {
+
+                        linearLayout.getLayoutParams().width = style.getInt("width");
+
+                    }
+
+                    if(style.has("height")) {
+
+                        linearLayout.getLayoutParams().height = style.getInt("height");
+                    }
+                    linearLayout.setLayoutParams(linearLayout.getLayoutParams());
                 }
 
                 SyrStyler.styleView(linearLayout, style);
@@ -53,6 +92,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
             } else {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
+
             if(jsonInstance.has("children")) {
                 linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
             }
