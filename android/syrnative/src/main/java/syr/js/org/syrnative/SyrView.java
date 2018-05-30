@@ -34,18 +34,6 @@ public class SyrView implements SyrBaseModule, SyrComponent {
                 style = componentInstance.getJSONObject("style");
                 if(instance == null) {
                     layout.setLayoutParams(SyrStyler.styleLayout(style));
-                    if(style.has("left")) {
-                        layout.setX(style.getInt("left"));
-                    }
-
-                    if(style.has("top")) {
-                        layout.setY(style.getInt("top"));
-                    }
-
-                    if(style.has("opacity")) {
-                        layout.setAlpha(style.getInt("opacity"));
-                    }
-                    SyrStyler.styleView(layout, style);
 
                 } else {
 
@@ -62,6 +50,18 @@ public class SyrView implements SyrBaseModule, SyrComponent {
                     layout.setLayoutParams(layout.getLayoutParams());
 
                 }
+                if(style.has("left")) {
+                    layout.setX(style.getInt("left"));
+                }
+
+                if(style.has("top")) {
+                    layout.setY(style.getInt("top"));
+                }
+
+                if(style.has("opacity")) {
+                    layout.setAlpha(style.getInt("opacity"));
+                }
+                SyrStyler.styleView(layout, style);
 
 
                 if(style.has("overflow")) {

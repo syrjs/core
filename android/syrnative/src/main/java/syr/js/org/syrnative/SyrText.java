@@ -111,8 +111,8 @@ public class SyrText implements SyrBaseModule, SyrComponent {
         }
 
         //truncating the textView, so the it does not break the content
-        textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setSingleLine(true);
+//        textView.setEllipsize(TextUtils.TruncateAt.END);
+//        textView.setSingleLine(true);
 
 
 

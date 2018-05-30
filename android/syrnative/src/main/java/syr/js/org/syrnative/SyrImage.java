@@ -50,8 +50,10 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     }
                     imageView.setLayoutParams(imageView.getLayoutParams());
                 }
-                SyrStyler.styleView(imageView, style);
+            }
 
+            if (style != null) {
+                SyrStyler.styleView(imageView, style);
 
                 if(style.has("left")) {
                     imageView.setX(style.getInt("left"));
@@ -60,7 +62,6 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 if(style.has("top")) {
                     imageView.setY(style.getInt("top"));
                 }
-
             }
 
             if (jsonProps.has("source")) {
@@ -90,9 +91,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
             e.printStackTrace();
         }
 
-        if (style != null) {
 
-        }
 
         return imageView;
     }

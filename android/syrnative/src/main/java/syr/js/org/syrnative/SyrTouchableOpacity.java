@@ -33,20 +33,6 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             if(instance == null) {
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
 
-                if(style.has("left")) {
-                    layout.setX(style.getInt("left"));
-                }
-
-                if(style.has("top")) {
-                    layout.setY(style.getInt("top"));
-                }
-
-                if(style.has("opacity")) {
-                    layout.setAlpha(style.getInt("opacity"));
-                }
-
-                SyrStyler.styleView(layout, style);
-
             } else {
 
                 if(style.has("width")) {
@@ -62,6 +48,20 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                 layout.setLayoutParams(layout.getLayoutParams());
 
             }
+
+            if(style.has("left")) {
+                layout.setX(style.getInt("left"));
+            }
+
+            if(style.has("top")) {
+                layout.setY(style.getInt("top"));
+            }
+
+            if(style.has("opacity")) {
+                layout.setAlpha(style.getInt("opacity"));
+            }
+
+            SyrStyler.styleView(layout, style);
 
 
             layout.setOnClickListener(new View.OnClickListener() {
