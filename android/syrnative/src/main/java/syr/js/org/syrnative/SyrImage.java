@@ -3,7 +3,13 @@ package syr.js.org.syrnative;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
@@ -81,12 +87,9 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     // if exist set image
                     imageView.setImageResource(pathExists);
                 } else {
-                    // throw yellow box that image is not found in res/drawable
-                    // revert to a friendly image for now
-                    new DownloadImageTask(imageView).execute(path);
-//                    imageView.setBackgroundColor(Color.parseColor("#ff00ff"));
+                    //Assume that its a url for now and try to fetch it in a background task
+                    new DownloadImageTask(imageView, style).execute(path);
                 }
-
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 
             } else {
@@ -109,8 +112,10 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
-        public DownloadImageTask(ImageView bmImage) {
+        JSONObject style;
+        public DownloadImageTask(ImageView bmImage, JSONObject style) {
             this.bmImage = bmImage;
+            this.style = style;
         }
 
         protected Bitmap doInBackground(String... urls) {
@@ -125,8 +130,32 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
             return mIcon11;
         }
 
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
+        protected void onPostExecute(Bitmap bitmap) {
+            try {
+                if(bitmap != null) {
+                    Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                            .getHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(output);
+
+                    final int color = 0xff424242;
+                    final Paint paint = new Paint();
+                    final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                    final RectF rectF = new RectF(rect);
+                    final float roundPx = style.getInt("borderRadius");
+
+                    paint.setAntiAlias(true);
+                    canvas.drawARGB(0, 0, 0, 0);
+                    paint.setColor(color);
+                    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+                    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+                    canvas.drawBitmap(bitmap, rect, rect, paint);
+                    bmImage.setImageBitmap(output);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
