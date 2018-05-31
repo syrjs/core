@@ -1,12 +1,17 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.InputStream;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -78,7 +83,8 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 } else {
                     // throw yellow box that image is not found in res/drawable
                     // revert to a friendly image for now
-                    imageView.setBackgroundColor(Color.parseColor("#ff00ff"));
+                    new DownloadImageTask(imageView).execute(path);
+//                    imageView.setBackgroundColor(Color.parseColor("#ff00ff"));
                 }
 
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -99,5 +105,28 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
     @Override
     public String getName() {
         return "Image";
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }
