@@ -11,9 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -291,13 +288,10 @@ public class SyrRaster {
 
     public void  syncChildren(final JSONObject component, final ViewGroup viewParent) {
 
-        Gson gson = new Gson();
-        Component classComponent = gson.fromJson(component.toString(), Component.class);
 
         try {
             JSONArray children = component.getJSONArray("children");
-            Component[] classChildren = classComponent.getChildren();
-            if(classChildren != null && classChildren.length > 0) {
+            if(children != null && children.length() > 0) {
                 String key = null;
                 if(component.has("attributes")) {
                     JSONObject attributes = component.getJSONObject("attributes");
@@ -305,14 +299,11 @@ public class SyrRaster {
                         key = attributes.getString("key");
                     }
                 }
-                for (int i = 0; i < classChildren.length; i++) {
+                for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
-                    Component classChild = classChildren[i];
                     if(key != null) {
                         child.put("key", key);
-                        classChild.setKey(key);
                     }
-                    JSONObject newChild = new JSONObject(gson.toJson(classChild));
                     syncState(child, viewParent);
                 }
             } else {
