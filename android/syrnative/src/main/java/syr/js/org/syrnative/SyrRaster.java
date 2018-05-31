@@ -224,7 +224,14 @@ public class SyrRaster {
                 } else if(componentInstance == null && componentModule !=null) { //if it is a new renderable element that has not been rendered yet.
                     final View newComponent = createComponent(component);
                     final ViewGroup vParent = viewParent; //reference to the current viewParent
-                    uiHandler.post(new Runnable() {
+                    if (viewParent instanceof LinearLayout) {
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                1.0f);
+                        newComponent.setLayoutParams(params);
+                    }
+                        uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             //add component to the viewParent
@@ -480,7 +487,8 @@ public class SyrRaster {
                     if (viewParent instanceof LinearLayout) {
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT); //equal spacing layoutParams for stackView
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                1.0f); //equal spacing layoutParams for stackView
 
                         JSONObject parentInstance = renderedParent.getJSONObject("instance");
                         JSONObject parentProps = parentInstance.getJSONObject("props");
