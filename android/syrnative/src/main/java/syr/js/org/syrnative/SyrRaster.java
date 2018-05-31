@@ -39,7 +39,6 @@ public class SyrRaster {
     public HashMap<String,String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
-//    private JSONObject mModuleCache = new JSONObject();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -161,13 +160,6 @@ public class SyrRaster {
 
             //getting the children of the components
             JSONArray children = component.getJSONArray("children");
-
-            //Checking for cache availability and assigning caches
-//            JSONObject temp = null;
-//            if(mModuleCache.has(uuid)) {
-//                temp = (JSONObject) mModuleCache.get(uuid);
-//            }
-//            final JSONObject componentCache = temp;
 
             //checking if the component has been rendered before
             final View componentInstance = (View) mModuleInstances.get(uuid);
@@ -443,14 +435,6 @@ public class SyrRaster {
                     }
                 }
                 final String uuid = tempUid;
-//                JSONObject cache = new JSONObject();
-//                cache.put("name","renderedParent");
-//                cache.put("value", renderedParent);
-//                appendToCache(uuid, cache);
-//                cache = new JSONObject();
-//                cache.put("name","immediateParent");
-//                cache.put("value", immediateParent);
-//                appendToCache(uuid, cache);
 
                 if(component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
@@ -499,18 +483,10 @@ public class SyrRaster {
                         component.setLayoutParams(params);
                         if(renderedParent.has("renderedChildren")) {
                             renderedParent.getJSONArray("renderedChildren").put(component);
-//                            cache = new JSONObject();
-//                            cache.put("name","childPosition");
-//                            cache.put("value", renderedParent.getJSONArray("renderedChildren").length() - 1);
-//                            appendToCache(uuid, cache);
                         } else {
                             JSONArray renderedChildren = new JSONArray();
                             renderedChildren.put(component);
                             renderedParent.put("renderedChildren", renderedChildren);
-//                            cache = new JSONObject();
-//                            cache.put("name","childPosition");
-//                            cache.put("value", 0);
-//                            appendToCache(uuid, cache);
                         }
 
                     }
@@ -554,10 +530,6 @@ public class SyrRaster {
                     }
                 }
                 className = child.getString("elementName");
-//                JSONObject cache = new JSONObject();
-//                cache.put("name","elementName");
-//                cache.put("value", className);
-//                appendToCache(uuid, cache);
                 final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
 
                 if (componentModule == null) {
@@ -589,35 +561,4 @@ public class SyrRaster {
         }
 
     }
-
-//    private void appendToCache(String uuid, JSONObject property) {
-//        try{
-//            JSONObject current = null;
-//            if(mModuleCache.has(uuid)) {
-//               current = mModuleCache.getJSONObject(uuid);
-//            } else {
-//                current = new JSONObject();
-//            }
-//            switch (property.getString("name")) {
-//                case "elementName": {
-//                    current.put(property.getString("name"), property.getString("value"));
-//                    break;
-//                }
-//                case "childPosition": {
-//                    current.put(property.getString("name"), property.getInt("value"));
-//                    break;
-//                }
-//                default: {
-//                    current.put(property.getString("name"), property.getJSONObject("value"));
-//                    break;
-//                }
-//            }
-//
-//            mModuleCache.put(uuid, current);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
 }
