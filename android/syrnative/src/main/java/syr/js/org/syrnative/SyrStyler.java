@@ -52,6 +52,7 @@ public class SyrStyler{
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,0);
         try {
 
+
             if(style.has("width")) {
 
                 params.width = style.getInt("width");
@@ -71,20 +72,23 @@ public class SyrStyler{
 
     static public void styleView(View component, JSONObject style) {
 
-        if(style.has("backgroundColor")) {
-            try {
-                String backgroundColor = style.getString("backgroundColor");
 
-                GradientDrawable gd = new GradientDrawable(
-                        GradientDrawable.Orientation.TOP_BOTTOM,
-                        new int[] {getColor(backgroundColor), getColor(backgroundColor)});
+            try {
+
+                GradientDrawable gd = new GradientDrawable();
 
                 Drawable[] layers = {gd};
 
                 LayerDrawable layerDrawable = new LayerDrawable(layers);
+                if(style.has("backgroundColor")) {
+                    String backgroundColor = style.getString("backgroundColor");
+                    gd = new GradientDrawable(
+                            GradientDrawable.Orientation.TOP_BOTTOM,
+                            new int[] {getColor(backgroundColor), getColor(backgroundColor)});
+                }
 
                 if(style.has("borderRadius")) {
-                    Integer borderRadius = style.getInt("borderRadius");
+                    float borderRadius = style.getInt("borderRadius");
                     gd.setCornerRadius(borderRadius);
                 }
 
@@ -109,7 +113,7 @@ public class SyrStyler{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+
     }
     //
     static LayerDrawable getBorders(int bgColor, int borderColor,
