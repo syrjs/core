@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dmikey/syr.git"
+    "url": "git@github.com:syrjs/core.git"
   },
   "config": {
     "travis-cov": {

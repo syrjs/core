@@ -1,17 +1,16 @@
 # 1.5.2 release
 
 <div align="center">
-  <img src="https://github.com/syrjs/syr/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
+  <img src="https://github.com/syrjs/core/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
   <h3> <a href="https://syr.js.org/">syr</a> </h3>
   <small>minimally obtrusive reactisque view engine, aimed at native developers</small>
   <hr/>
 </div>
 
-[![Build Status](https://travis-ci.org/syrjs/syr.svg?branch=master)](https://travis-ci.org/syrjs/syr)
+[![Build Status](https://travis-ci.org/syrjs/core.svg?branch=master)](https://travis-ci.org/syrjs/syr)
 [![NPM Version](https://img.shields.io/npm/v/@syr/core.svg)](https://www.npmjs.com/package/@syr/core)
-[![Coverage Status](https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/dmikey)
-[![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://dmikey.github.io/syr)
+[![Coverage Status](https://coveralls.io/repos/github/syrjs/core/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
+[![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://syr.js.org)
 
 Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries!
 
