@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class SyrAnimator {
     // todo: width and height
     // do we need two of these? borrow this from the raster?
-    static private Handler uiHandler = new Handler(Looper.getMainLooper());
+    static private Handler animationHandler = new Handler(Looper.getMainLooper());
     static private HashMap<View, ObjectAnimator> animationCache = new HashMap<>();
 
     static private String determineAnimationType(JSONObject animationDict) {
@@ -73,7 +73,7 @@ public class SyrAnimator {
         if(animationType == "animateComponentXY") {
 
 
-            bridge.mRaster.uiHandler.post(new Runnable() {
+            animationHandler.post(new Runnable() {
                 @Override
                 public void run() {
 
@@ -162,7 +162,7 @@ public class SyrAnimator {
                 }
 
                 final String finalPropertyName = propertyName;
-                bridge.mRaster.uiHandler.post(new Runnable() {
+                animationHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         ObjectAnimator anim;
@@ -193,7 +193,7 @@ public class SyrAnimator {
                     @Override
                     public void onAnimationUpdate(final ValueAnimator animation) {
 
-                        bridge.mRaster.uiHandler.post(new Runnable() {
+                        animationHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 // get the value the interpolator is at
@@ -214,7 +214,7 @@ public class SyrAnimator {
                     @Override
                     public void onAnimationEnd(Animator animation)
                     {
-                        bridge.mRaster.uiHandler.post(new Runnable() {
+                        animationHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 try {
@@ -242,7 +242,7 @@ public class SyrAnimator {
                     @Override
                     public void onAnimationUpdate(final ValueAnimator animation) {
 
-                        bridge.mRaster.uiHandler.post(new Runnable() {
+                        animationHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 // get the value the interpolator is at
@@ -263,7 +263,7 @@ public class SyrAnimator {
                     @Override
                     public void onAnimationEnd(Animator animation)
                     {
-                        bridge.mRaster.uiHandler.post(new Runnable() {
+                        animationHandler.post(new Runnable() {
                             @Override
                             public void run() {
                                 try {

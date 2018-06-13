@@ -1,11 +1,16 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import android.os.Vibrator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 
 /**
@@ -18,8 +23,10 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         RelativeLayout layout;
+        final Vibrator myVib = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
         if(instance != null) {
             layout = (RelativeLayout) instance;
+
         } else {
             layout = new RelativeLayout(context);
         }
@@ -67,6 +74,7 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     try {
+                        myVib.vibrate(50);
                         JSONObject eventMap = new JSONObject();
                         eventMap.put("type", "onPress");
                         eventMap.put("guid", uuid);
@@ -74,6 +82,22 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+
+            final RelativeLayout l = layout;
+            layout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch(event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            l.setAlpha((float) 0.3);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            l.setAlpha(1);
+                            break;
+                    }
+                    return false;
                 }
             });
         } catch (JSONException e) {

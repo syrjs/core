@@ -48,7 +48,6 @@ public class SyrAlertDialogue implements SyrBaseModule {
                                 }
                             }
                         })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -40,6 +40,7 @@ import { NoDOM } from './lib/rasters/nodom';
 
 // central SyrStore (flux Store)
 import { SyrStore } from './lib/store';
+import { Resolver } from './lib/resolver';
 
 // detecting rendering bridge
 if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
@@ -77,5 +78,6 @@ export {
   Platform,
   Alert,
   SyrStore,
-  Switch
+  Switch,
+  Resolver
 };

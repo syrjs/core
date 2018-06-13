@@ -39,6 +39,7 @@ public class SyrRaster {
     public HashMap<String,String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
+    private HashMap<String, String> mModuleCache = new HashMap<String, String>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -133,7 +134,7 @@ public class SyrRaster {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
+                 }
         });
     }
 
@@ -149,6 +150,7 @@ public class SyrRaster {
             //getting uuid of the component
             String tempUid = component.getString("uuid");
 
+            final String reUpdate;
             //checking to see if it has a key (component inside an array), if it does changing it to match the key set we have in the cache
 
             if(component.has("attributes")) {
@@ -156,6 +158,7 @@ public class SyrRaster {
                     tempUid = tempUid.concat(component.getJSONObject("attributes").getString("key"));
                 }
             }
+
             final String uuid = tempUid;
 
             //getting the children of the components
@@ -269,16 +272,16 @@ public class SyrRaster {
                 Boolean unmountChildInstance = component.getBoolean("unmount");
                 if (unmountChildInstance == true) {
                         mModuleInstances.remove(childuuid);
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
+//                        uiHandler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
                                 if (instanceToRemove.getParent() != null) {
                                     ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                                     parent.removeView(instanceToRemove);
                                     emitComponentDidUnMount(uuidToRemove);
                                 }
-                            }
-                        });
+//                            }
+//                        });
                     }
                 }
         } catch (JSONException e) {
@@ -329,7 +332,7 @@ public class SyrRaster {
                     JSONObject firstChild = new JSONObject();
                     JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
-                    firstChild.put("elementName", "StackView");
+                    firstChild.put("elementName", "View");
                     firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
                     firstChild.put("children",children);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
@@ -447,7 +450,7 @@ public class SyrRaster {
                     JSONObject firstChild = new JSONObject();
                     JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = child.getJSONObject("instance");
-                    firstChild.put("elementName", "StackView");
+                    firstChild.put("elementName", "View");
                     firstChild.put("attributes", child.getJSONObject("attributes"));
                     firstChild.put("children",childChildren);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
@@ -545,13 +548,11 @@ public class SyrRaster {
 
                 if (mModuleInstances.containsKey(uuid)) {
 
-                    final View view = (View) mModuleInstances.get(child.getString("uuid"));
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            componentModule.render(child, mContext, view);
-                        }
-                    });
+                        final View view = (View) mModuleInstances.get(child.getString("uuid"));
+              
+
+                                componentModule.render(child, mContext, view);
+
 
                 } else {
                     returnView = componentModule.render(child, mContext, null);

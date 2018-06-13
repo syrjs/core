@@ -45,7 +45,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                 }
 
                 if(instance == null) {
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,LinearLayout.LayoutParams.WRAP_CONTENT);
                     Integer left = 0;
                     Integer top = 0;
 
@@ -56,8 +56,10 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                     }
 
                     if(style.has("height")) {
-
-                        params.height = style.getInt("height");
+                            Object height = style.get("height");
+                            if(height instanceof Integer) {
+                                params.height = (Integer) height;
+                            }
                     }
 
                     if(style.has("left")) {
@@ -77,8 +79,10 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                     }
 
                     if(style.has("height")) {
-
-                        linearLayout.getLayoutParams().height = style.getInt("height");
+                        Object height = style.get("height");
+                        if(height instanceof Integer) {
+                            linearLayout.getLayoutParams().height = (Integer) height;
+                        }
                     }
                     linearLayout.setLayoutParams(linearLayout.getLayoutParams());
                 }

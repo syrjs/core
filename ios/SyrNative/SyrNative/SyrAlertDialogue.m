@@ -12,7 +12,7 @@
 
 @implementation SyrAlertDialogue
 
-SYR_EXPORT_MODULE(AlertDialogue)
+SYR_EXPORT_MODULE(SyrAlertDialogue)
 
 SYR_EXPORT_METHOD(alert:(NSString*)title message:(NSString*)message actions:(NSArray*)actions){
     UIAlertController* alert;

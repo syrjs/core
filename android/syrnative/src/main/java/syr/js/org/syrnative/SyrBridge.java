@@ -50,6 +50,10 @@ public class SyrBridge {
         mRaster = raster;
     }
 
+    public SyrBridge getBridge() {
+        return this;
+    }
+
     /** Recieve message from the SyrBridge */
     @JavascriptInterface
     public void message(String message) {
@@ -87,7 +91,7 @@ public class SyrBridge {
                 // android 19 loadUrl("javascript:;");
                 mBridgedBrowser.setWebViewClient(new WebViewClient(){
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        Log.i("bridgebrowser", "navigating");
+//                        Log.i("bridgebrowser", "navigating");
                         mRaster.clearRootView();
                         return false;
                     }
@@ -113,7 +117,7 @@ public class SyrBridge {
                 ///random comment
 
                 String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-                String loadURL = String.format("http://192.168.2.4:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props",
+                String loadURL = String.format("http://10.0.0.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props=%s",
                         bootParams.get("height"),
                         bootParams.get("width"),
                         screenDensity,
@@ -155,6 +159,7 @@ public class SyrBridge {
                 argsList.add(argsObj.get(key));
             }
 
+
             JSONArray paramsTypes = commandObj.getJSONArray("paramTypes");
 
 
@@ -170,6 +175,13 @@ public class SyrBridge {
                     paramsList.add(Class.forName(paramType));
                 }
             }
+
+            Log.i("Class name", c.toString());
+            if(c.toString().contains("SyrAlertDialogue")) {
+//                paramsList.add(Context.class);
+                argsList.add(mContext);
+            }
+
 
             Class params[] = paramsList.toArray(new Class[paramsList.size()]);
             Object args[] = argsList.toArray(new Object[argsList.size()]);
