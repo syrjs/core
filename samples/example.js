@@ -64,11 +64,11 @@ const styles = {
     height: PixelRatio.getPixelSizeForLayoutSize(299),
     top:
       Dimensions.get('window').height / 2 -
-      PixelRatio.getPixelSizeForLayoutSize(299)/2,
+      PixelRatio.getPixelSizeForLayoutSize(299) / 2,
     left:
       Dimensions.get('window').width / 2 -
-      PixelRatio.getPixelSizeForLayoutSize(241)/2,
-  }
+      PixelRatio.getPixelSizeForLayoutSize(241) / 2,
+  },
 };
 
 class MyComponent extends Component {
@@ -89,7 +89,6 @@ class MyComponent extends Component {
     styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
 
-
   render() {
     return (
       <Animated.View style={styles.stage}>
@@ -104,7 +103,6 @@ class MyComponent extends Component {
         >
           {this.state.buttonMessage}
         </Button>
-
       </Animated.View>
     );
   }

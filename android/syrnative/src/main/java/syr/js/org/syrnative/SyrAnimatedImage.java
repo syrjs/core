@@ -18,6 +18,7 @@ public class SyrAnimatedImage extends SyrImage {
         return animatedImage;
 
     }
+
     @Override
     public String getName() {
         return "AnimatedImage";

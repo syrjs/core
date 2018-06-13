@@ -24,7 +24,7 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
         RelativeLayout layout;
         final Vibrator myVib = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
-        if(instance != null) {
+        if (instance != null) {
             layout = (RelativeLayout) instance;
 
         } else {
@@ -34,21 +34,21 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
         layout.setClipChildren(false);
         try {
-            final String uuid  = component.getString("uuid");
+            final String uuid = component.getString("uuid");
             style = component.getJSONObject("instance").getJSONObject("style");
 
-            if(instance == null) {
+            if (instance == null) {
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
 
             } else {
 
-                if(style.has("width")) {
+                if (style.has("width")) {
 
                     layout.getLayoutParams().width = style.getInt("width");
 
                 }
 
-                if(style.has("height")) {
+                if (style.has("height")) {
 
                     layout.getLayoutParams().height = style.getInt("height");
                 }
@@ -56,15 +56,15 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
             }
 
-            if(style.has("left")) {
+            if (style.has("left")) {
                 layout.setX(style.getInt("left"));
             }
 
-            if(style.has("top")) {
+            if (style.has("top")) {
                 layout.setY(style.getInt("top"));
             }
 
-            if(style.has("opacity")) {
+            if (style.has("opacity")) {
                 layout.setAlpha(style.getInt("opacity"));
             }
 
@@ -72,7 +72,8 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
 
             layout.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     try {
                         myVib.vibrate(50);
                         JSONObject eventMap = new JSONObject();
@@ -89,7 +90,7 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             layout.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
-                    switch(event.getAction()) {
+                    switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
                             l.setAlpha((float) 0.3);
                             break;

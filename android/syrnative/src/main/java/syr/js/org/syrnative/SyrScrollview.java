@@ -26,20 +26,20 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
             JSONObject props = jsonInstance.getJSONObject("props");
 
             // set linearLayout styles
-            if (jsonInstance.has("style")){
+            if (jsonInstance.has("style")) {
                 style = jsonInstance.getJSONObject("style");
-                if(instance == null || scrollview.getLayoutParams() == null) {
+                if (instance == null || scrollview.getLayoutParams() == null) {
                     scrollview.setLayoutParams(SyrStyler.styleLayout(style));
                 } else {
-                    if(style.has("width")) {
-                        if(scrollview.getLayoutParams() != null) {
+                    if (style.has("width")) {
+                        if (scrollview.getLayoutParams() != null) {
                             scrollview.getLayoutParams().width = style.getInt("width");
                         }
 
                     }
 
-                    if(style.has("height")) {
-                        if(scrollview.getLayoutParams() != null) {
+                    if (style.has("height")) {
+                        if (scrollview.getLayoutParams() != null) {
                             scrollview.getLayoutParams().height = style.getInt("height");
                         }
                     }
@@ -48,11 +48,11 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
 
                 SyrStyler.styleView(scrollview, style);
 
-                if(style.has("left")) {
+                if (style.has("left")) {
                     scrollview.setX(style.getInt("left"));
                 }
 
-                if(style.has("top")) {
+                if (style.has("top")) {
                     scrollview.setY(style.getInt("top"));
                 }
 

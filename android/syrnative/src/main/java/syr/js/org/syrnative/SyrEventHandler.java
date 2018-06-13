@@ -19,10 +19,11 @@ public class SyrEventHandler {
 
     private static SyrEventHandler sSyrEventHandler;
 
-    private SyrEventHandler(){}  //private constructor.
+    private SyrEventHandler() {
+    }  //private constructor.
 
-    public static SyrEventHandler getInstance(){
-        if (sSyrEventHandler == null){ //if there is no instance available... create new one
+    public static SyrEventHandler getInstance() {
+        if (sSyrEventHandler == null) { //if there is no instance available... create new one
             sSyrEventHandler = new SyrEventHandler();
         }
         return sSyrEventHandler;

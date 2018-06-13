@@ -38,14 +38,14 @@ public class Component {
     }
 
     public void setKey(String key) {
-       this.key = key;
+        this.key = key;
     }
 
     public Component[] getChildren() {
         return children;
     }
 
-    public JSONObject getAttributes(){
+    public JSONObject getAttributes() {
         return attributes;
     }
 

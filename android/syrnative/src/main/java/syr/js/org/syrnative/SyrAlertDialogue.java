@@ -15,43 +15,43 @@ import org.json.JSONObject;
 public class SyrAlertDialogue implements SyrBaseModule {
 
     @SyrMethod
-    public static void alert(String title, String message, final JSONArray actions, Context c){
+    public static void alert(String title, String message, final JSONArray actions, Context c) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(c);
-            try {
-                builder.setTitle(title)
-                        .setMessage(message)
-                        .setPositiveButton(actions.getJSONObject(0).getString("title"), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // continue with delete
-                                try {
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        try {
+            builder.setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(actions.getJSONObject(0).getString("title"), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                            try {
 
-                                    JSONObject eventMap = new JSONObject();
-                                    eventMap.put("type", "alertDialogue");
-                                    eventMap.put("body", actions.getJSONObject(0).getString("title"));
-                                    SyrEventHandler.getInstance().sendEvent(eventMap);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                JSONObject eventMap = new JSONObject();
+                                eventMap.put("type", "alertDialogue");
+                                eventMap.put("body", actions.getJSONObject(0).getString("title"));
+                                SyrEventHandler.getInstance().sendEvent(eventMap);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        })
-                        .setNegativeButton(actions.getJSONObject(1).getString("title"), new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                try {
+                        }
+                    })
+                    .setNegativeButton(actions.getJSONObject(1).getString("title"), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
 
-                                    JSONObject eventMap = new JSONObject();
-                                    eventMap.put("type", "alertDialogue");
-                                    eventMap.put("body", actions.getJSONObject(1).getString("title"));
-                                    SyrEventHandler.getInstance().sendEvent(eventMap);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                JSONObject eventMap = new JSONObject();
+                                eventMap.put("type", "alertDialogue");
+                                eventMap.put("body", actions.getJSONObject(1).getString("title"));
+                                SyrEventHandler.getInstance().sendEvent(eventMap);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        })
-                        .show();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                        }
+                    })
+                    .show();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -36,7 +36,7 @@ public class SyrRaster {
     public Handler uiHandler;
     public Handler animationHandler;
     private List<SyrBaseModule> mModules;
-    public HashMap<String,String> registeredModules = new HashMap<>();
+    public HashMap<String, String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
     private HashMap<String, String> mModuleCache = new HashMap<String, String>();
@@ -45,7 +45,10 @@ public class SyrRaster {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT,
             1.0f);
-    /** Instantiate the interface and set the context */
+
+    /**
+     * Instantiate the interface and set the context
+     */
     SyrRaster(Context c) {
         mContext = c;
     }
@@ -56,7 +59,9 @@ public class SyrRaster {
         uiHandler = new Handler(Looper.getMainLooper());
     }
 
-    /** Sets the native modules that will be used in this Context */
+    /**
+     * Sets the native modules that will be used in this Context
+     */
     public void setModules(List<SyrBaseModule> modules) {
         mModules = modules;
 
@@ -69,7 +74,7 @@ public class SyrRaster {
             // register the modules that are being passed
             // if name is available, then register
             // otherwise throw a warn, and skip registration
-            if(mModuleMap.containsKey(module)) {
+            if (mModuleMap.containsKey(module)) {
                 String loadURL = String.format("Module name already taken %s", className);
                 Log.w("SyrRaster", "Module name already taken");
             } else {
@@ -82,7 +87,9 @@ public class SyrRaster {
         }
     }
 
-    /** Get all Exported Bridged Methods */
+    /**
+     * Get all Exported Bridged Methods
+     */
     public void getExportedMethods(Class clazz) {
         String originalClazzName = clazz.getName();
         while (clazz != null) {
@@ -90,13 +97,13 @@ public class SyrRaster {
                 int modifiers = method.getModifiers();
                 String methodName = method.getName();
                 Annotation[] annos = method.getAnnotations();
-                for(Annotation anno:annos){
-                    if(anno.toString().contains("SyrMethod")) {
+                for (Annotation anno : annos) {
+                    if (anno.toString().contains("SyrMethod")) {
                         // this is a native method to export over the bridge
                         if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
-                            String paramType= "";
-                            Class<?> [] parameters = method.getParameterTypes();
-                            for(Class _clazz:parameters){
+                            String paramType = "";
+                            Class<?>[] parameters = method.getParameterTypes();
+                            for (Class _clazz : parameters) {
                                 paramType = paramType + _clazz.getName() + "_";
                             }
                             String moduleMethodName = String.format("%s_%s_%s", originalClazzName, methodName, paramType);
@@ -120,9 +127,9 @@ public class SyrRaster {
                 try {
                     final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
                     Boolean Update = ast.has("update");
-                    if(ast.has("update")) {
+                    if (ast.has("update")) {
                         Boolean isUpdate = ast.getBoolean("update");
-                        if(isUpdate) {
+                        if (isUpdate) {
                             update(ast);
                         } else {
                             buildInstanceTree(ast);
@@ -134,7 +141,7 @@ public class SyrRaster {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                 }
+            }
         });
     }
 
@@ -144,7 +151,7 @@ public class SyrRaster {
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
 
-        try{
+        try {
 //            final String uuid = component.getString("uuid");
 
             //getting uuid of the component
@@ -153,8 +160,8 @@ public class SyrRaster {
             final String reUpdate;
             //checking to see if it has a key (component inside an array), if it does changing it to match the key set we have in the cache
 
-            if(component.has("attributes")) {
-                if(component.getJSONObject("attributes").has("key")) {
+            if (component.has("attributes")) {
+                if (component.getJSONObject("attributes").has("key")) {
                     tempUid = tempUid.concat(component.getJSONObject("attributes").getString("key"));
                 }
             }
@@ -167,13 +174,13 @@ public class SyrRaster {
             //checking if the component has been rendered before
             final View componentInstance = (View) mModuleInstances.get(uuid);
 
-            if(componentInstance instanceof ViewGroup) {
+            if (componentInstance instanceof ViewGroup) {
                 viewParent = (ViewGroup) componentInstance;
             }
 
             //getting the className of the element
             String className = null;
-            if(component.has("elementName")) {
+            if (component.has("elementName")) {
                 className = component.getString("elementName");
             }
 
@@ -184,15 +191,15 @@ public class SyrRaster {
 
             //checking for umount on the component --- only components to be umounted have this on them.
             Boolean unmount = null;
-            if(component.has("unmount")) {
+            if (component.has("unmount")) {
                 unmount = component.getBoolean("unmount");
             }
 
             //remove the component from its parent if it has unmount on it
-            if(unmount != null &&  unmount){
+            if (unmount != null && unmount) {
                 //BEST CASE scenario, the component to unmount is a single component which is a renderable
                 //if we have an instance of it in the cache
-                if(componentInstance != null) {
+                if (componentInstance != null) {
                     final View instanceToRemove = componentInstance;
                     mModuleInstances.remove(uuid); //remove the element from the cache to avoid unecessary collisions
                     uiHandler.post(new Runnable() {
@@ -210,18 +217,18 @@ public class SyrRaster {
                 } else { //this is the use case where the or the component to unmount is a non-renderable so we need to unmount all its children
                     if (children != null) {
                         //unmount the children if the parent is a non-renderable
-                      unmountChildren(component);
+                        unmountChildren(component);
                     }
                 }
             } else { //no unmount on the component
-                if(componentInstance != null && componentModule != null) {
+                if (componentInstance != null && componentModule != null) {
                     //this will update an existing component, does not create or attach a new component.
                     View updatedComponent = createComponent(component);
                     //if the updated component is a view group and has children
-                    if(updatedComponent instanceof ViewGroup) {
+                    if (updatedComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) updatedComponent;
                     }
-                } else if(componentInstance == null && componentModule !=null) { //if it is a new renderable element that has not been rendered yet.
+                } else if (componentInstance == null && componentModule != null) { //if it is a new renderable element that has not been rendered yet.
                     final View newComponent = createComponent(component);
                     final ViewGroup vParent = viewParent; //reference to the current viewParent
                     if (viewParent instanceof LinearLayout) {
@@ -231,7 +238,7 @@ public class SyrRaster {
                                 1.0f);
                         newComponent.setLayoutParams(params);
                     }
-                        uiHandler.post(new Runnable() {
+                    uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             //add component to the viewParent
@@ -239,17 +246,17 @@ public class SyrRaster {
                             emitComponentDidMount(uuid);
                         }
                     });
-                    if(newComponent instanceof ViewGroup) {
+                    if (newComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) newComponent;
                     }
 
-                    }
+                }
             }
             syncChildren(component, viewParent);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void unmountChildren(final JSONObject component) {
@@ -261,7 +268,7 @@ public class SyrRaster {
                 String childuuid = child.getJSONObject("instance").getString("uuid");
                 View childInstance = (View) mModuleInstances.get(childuuid);
                 //if the child is a non-renderable, get the first child (since we follow the pattern of returning a singe view), to unmount
-                if(childInstance == null && child.has("children")) {
+                if (childInstance == null && child.has("children")) {
                     child = child.getJSONArray("children").getJSONObject(0);
                     childuuid = child.getJSONObject("instance").getString("uuid");
                     childInstance = (View) mModuleInstances.get(childuuid);
@@ -271,40 +278,40 @@ public class SyrRaster {
                 //just double checking, this will always hold true. Not sure why I dont trust my own code.
                 Boolean unmountChildInstance = component.getBoolean("unmount");
                 if (unmountChildInstance == true) {
-                        mModuleInstances.remove(childuuid);
+                    mModuleInstances.remove(childuuid);
 //                        uiHandler.post(new Runnable() {
 //                            @Override
 //                            public void run() {
-                                if (instanceToRemove.getParent() != null) {
-                                    ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
-                                    parent.removeView(instanceToRemove);
-                                    emitComponentDidUnMount(uuidToRemove);
-                                }
+                    if (instanceToRemove.getParent() != null) {
+                        ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
+                        parent.removeView(instanceToRemove);
+                        emitComponentDidUnMount(uuidToRemove);
+                    }
 //                            }
 //                        });
-                    }
                 }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void  syncChildren(final JSONObject component, final ViewGroup viewParent) {
+    public void syncChildren(final JSONObject component, final ViewGroup viewParent) {
 
 
         try {
             JSONArray children = component.getJSONArray("children");
-            if(children != null && children.length() > 0) {
+            if (children != null && children.length() > 0) {
                 String key = null;
-                if(component.has("attributes")) {
+                if (component.has("attributes")) {
                     JSONObject attributes = component.getJSONObject("attributes");
-                    if(attributes.has("key")) {
+                    if (attributes.has("key")) {
                         key = attributes.getString("key");
                     }
                 }
                 for (int i = 0; i < children.length(); i++) {
                     JSONObject child = children.getJSONObject(i);
-                    if(key != null) {
+                    if (key != null) {
                         child.put("key", key);
                     }
                     syncState(child, viewParent);
@@ -316,39 +323,42 @@ public class SyrRaster {
             e.printStackTrace();
         }
     }
-    /** parse the AST sent from the Syr Bridge */
+
+    /**
+     * parse the AST sent from the Syr Bridge
+     */
     public void buildInstanceTree(final JSONObject jsonObject) {
         try {
             final View component = createComponent(jsonObject);
             final JSONObject js = jsonObject;
 
-            if(component != null) {
+            if (component != null) {
                 final String uuid = jsonObject.getString("uuid");
                 Log.d("uuid", uuid);
 
                 JSONArray children = jsonObject.getJSONArray("children");
 
-                if(component instanceof ScrollView && children.length() > 1) {
+                if (component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
                     JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
                     firstChild.put("elementName", "View");
                     firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
-                    firstChild.put("children",children);
+                    firstChild.put("children", children);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
                     firstChild.put("guid", jsonObject.getString("guid").concat("-1"));
                     firstChild.put("uuid", uuid.concat("-1"));
                     firstChildInstance.put("guid", jsonObject.getString("guid").concat("-1"));
                     firstChildInstance.put("uuid", uuid.concat("-1"));
 
-                    style.put("height",firstChildInstance.getJSONObject("style").getInt("height"));
+                    style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
                     style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
                     firstChildInstance.put("style", style);
                     firstChild.put("instance", firstChildInstance);
                     children = new JSONArray().put(firstChild);
                 }
 
-                if(children.length() > 0) {
+                if (children.length() > 0) {
                     buildChildren(children, (ViewGroup) component, jsonObject, jsonObject);
                 }
 
@@ -378,10 +388,10 @@ public class SyrRaster {
             String animationStringify = astDict.getString("ast");
             JSONObject animation = new JSONObject(animationStringify);
 
-            if(animation.has("guid")) {
+            if (animation.has("guid")) {
                 String animatedTarget = animation.getString("guid");
                 View animationTarget = (View) mModuleInstances.get(animatedTarget);
-                if(animationTarget != null) {
+                if (animationTarget != null) {
                     SyrAnimator.animate(animationTarget, animation, mBridge);
                 }
             } else {
@@ -392,7 +402,9 @@ public class SyrRaster {
         }
     }
 
-    /** removes all sub view from the root */
+    /**
+     * removes all sub view from the root
+     */
     public void clearRootView() {
         mModuleInstances.clear();
         uiHandler.post(new Runnable() {
@@ -438,35 +450,36 @@ public class SyrRaster {
                 JSONObject child = children.getJSONObject(i);
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
-                String tempUid = child.getString("uuid");;
-                if(child.has("attributes")) {
-                    if(child.getJSONObject("attributes").has("key")) {
+                String tempUid = child.getString("uuid");
+                ;
+                if (child.has("attributes")) {
+                    if (child.getJSONObject("attributes").has("key")) {
                         tempUid = tempUid.concat(child.getJSONObject("attributes").getString("key"));
                     }
                 }
                 final String uuid = tempUid;
 
-                if(component instanceof ScrollView && children.length() > 1) {
+                if (component instanceof ScrollView && children.length() > 1) {
                     JSONObject firstChild = new JSONObject();
                     JSONObject style = new JSONObject();
                     JSONObject firstChildInstance = child.getJSONObject("instance");
                     firstChild.put("elementName", "View");
                     firstChild.put("attributes", child.getJSONObject("attributes"));
-                    firstChild.put("children",childChildren);
+                    firstChild.put("children", childChildren);
                     //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
                     firstChild.put("guid", child.getString("guid").concat("-1"));
                     firstChild.put("uuid", uuid.concat("-1"));
                     firstChildInstance.put("guid", child.getString("guid").concat("-1"));
                     firstChildInstance.put("uuid", uuid.concat("-1"));
 
-                    style.put("height",firstChildInstance.getJSONObject("style").getInt("height"));
+                    style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
                     style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
                     firstChildInstance.put("style", style);
                     firstChild.put("instance", firstChildInstance);
                     childChildren = new JSONArray().put(firstChild);
                 }
 
-                if(component == null) {
+                if (component == null) {
                     buildChildren(childChildren, viewParent, renderedParent, child);
                     uiHandler.post(new Runnable() {
                         @Override
@@ -486,12 +499,12 @@ public class SyrRaster {
 
                         JSONObject parentInstance = renderedParent.getJSONObject("instance");
                         JSONObject parentProps = parentInstance.getJSONObject("props");
-                        if(parentProps.has("spacing") && renderedParent.has("renderedChildren")) {
-                                params.setMargins(0,parentProps.getInt("spacing"), 0, 0);
+                        if (parentProps.has("spacing") && renderedParent.has("renderedChildren")) {
+                            params.setMargins(0, parentProps.getInt("spacing"), 0, 0);
                         }
                         //@TODO defaulting to equal spacing between components. Need to change it and add spacing and distribution concept.
                         component.setLayoutParams(params);
-                        if(renderedParent.has("renderedChildren")) {
+                        if (renderedParent.has("renderedChildren")) {
                             renderedParent.getJSONArray("renderedChildren").put(component);
                         } else {
                             JSONArray renderedChildren = new JSONArray();
@@ -525,17 +538,17 @@ public class SyrRaster {
         }
     }
 
-    private View createComponent(final JSONObject child)  {
+    private View createComponent(final JSONObject child) {
         String className = null;
         View returnView = null;
         String uuid = null;
-        if(child.has("elementName")) {
+        if (child.has("elementName")) {
 
             try {
 
                 uuid = child.getString("uuid");
-                if(child.has("attributes")) {
-                    if(child.getJSONObject("attributes").has("key")) {
+                if (child.has("attributes")) {
+                    if (child.getJSONObject("attributes").has("key")) {
                         uuid = uuid.concat(child.getJSONObject("attributes").getString("key"));
                     }
                 }
@@ -548,10 +561,10 @@ public class SyrRaster {
 
                 if (mModuleInstances.containsKey(uuid)) {
 
-                        final View view = (View) mModuleInstances.get(child.getString("uuid"));
-              
+                    final View view = (View) mModuleInstances.get(child.getString("uuid"));
 
-                                componentModule.render(child, mContext, view);
+
+                    componentModule.render(child, mContext, view);
 
 
                 } else {
