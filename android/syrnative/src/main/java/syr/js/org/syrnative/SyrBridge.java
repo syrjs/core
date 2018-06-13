@@ -182,7 +182,8 @@ public class SyrBridge {
                 }
             }
 
-            Log.i("Class name", c.toString());
+//             Log.i("Class name", c.toString());
+            //@TODO: Make passing of context generic
             if (c.toString().contains("SyrAlertDialogue")) {
 //                paramsList.add(Context.class);
                 argsList.add(mContext);
