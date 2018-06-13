@@ -75,7 +75,8 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                 @Override
                 public void onClick(View v) {
                     try {
-                        myVib.vibrate(50);
+                        //@TODO: Make predefined vibrations like iOS and connect this to a prop
+//                         myVib.vibrate(50);
                         JSONObject eventMap = new JSONObject();
                         eventMap.put("type", "onPress");
                         eventMap.put("guid", uuid);
