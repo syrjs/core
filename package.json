@@ -1,6 +1,6 @@
 {
   "name": "@syr/core",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "minimal react api, that leans toward native SDK developers",
   "main": "index.js",
   "public": true,
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dmikey/syr.git"
+    "url": "git@github.com:syrjs/core.git"
   },
   "config": {
     "travis-cov": {
