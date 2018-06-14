@@ -29,7 +29,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         ImageView imageView;
-        if(instance != null) {
+        if (instance != null) {
             imageView = (ImageView) instance;
         } else {
             imageView = new ImageView(context);
@@ -46,16 +46,16 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
 
             if (jsonInstance.has("style")) {
                 style = jsonInstance.getJSONObject("style");
-                if(instance == null) {
+                if (instance == null) {
                     imageView.setLayoutParams(SyrStyler.styleLayout(style));
                 } else {
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         imageView.getLayoutParams().width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
+                    if (style.has("height")) {
 
                         imageView.getLayoutParams().height = style.getInt("height");
                     }
@@ -66,11 +66,11 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
             if (style != null) {
                 SyrStyler.styleView(imageView, style);
 
-                if(style.has("left")) {
+                if (style.has("left")) {
                     imageView.setX(style.getInt("left"));
                 }
 
-                if(style.has("top")) {
+                if (style.has("top")) {
                     imageView.setY(style.getInt("top"));
                 }
             }
@@ -101,7 +101,6 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
         }
 
 
-
         return imageView;
     }
 
@@ -113,6 +112,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
         JSONObject style;
+
         public DownloadImageTask(ImageView bmImage, JSONObject style) {
             this.bmImage = bmImage;
             this.style = style;
@@ -132,7 +132,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
 
         protected void onPostExecute(Bitmap bitmap) {
             try {
-                if(bitmap != null) {
+                if (bitmap != null) {
                     Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                             .getHeight(), Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(output);

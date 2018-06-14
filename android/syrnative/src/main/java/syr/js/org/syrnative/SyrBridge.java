@@ -34,7 +34,7 @@ import java.util.Iterator;
 public class SyrBridge {
 
     public SyrRaster mRaster;
-    public HashMap<String, String> bootParams = new HashMap<String,String>();
+    public HashMap<String, String> bootParams = new HashMap<String, String>();
 
     static private Handler uiHandler = new Handler(Looper.getMainLooper());
     private Context mContext;
@@ -43,25 +43,35 @@ public class SyrBridge {
     private HandlerThread thread = new HandlerThread("SyrWebViewThread");
     private Handler webViewHandler;
 
-    /** Instantiate the interface and set the context */
-    SyrBridge(Context c) { mContext = c; }
+    /**
+     * Instantiate the interface and set the context
+     */
+    SyrBridge(Context c) {
+        mContext = c;
+    }
 
     public void setRaster(SyrRaster raster) {
         mRaster = raster;
     }
 
-    /** Recieve message from the SyrBridge */
+    public SyrBridge getBridge() {
+        return this;
+    }
+
+    /**
+     * Recieve message from the SyrBridge
+     */
     @JavascriptInterface
     public void message(String message) {
         try {
             JSONObject jsonObject = new JSONObject(message);
             String messageType = jsonObject.getString("type");
 
-            if(messageType.equals("gui")) {
+            if (messageType.equals("gui")) {
                 mRaster.parseAST(jsonObject);
-            } else if(messageType.equals("animation")) {
+            } else if (messageType.equals("animation")) {
                 mRaster.setupAnimation(jsonObject);
-            } else if(messageType.equals("cmd")) {
+            } else if (messageType.equals("cmd")) {
                 String commandString = jsonObject.getString("ast");
                 runCMD(commandString);
             }
@@ -85,9 +95,9 @@ public class SyrBridge {
 
                 // if the url is changes from it's initial loadURL then cancel
                 // android 19 loadUrl("javascript:;");
-                mBridgedBrowser.setWebViewClient(new WebViewClient(){
+                mBridgedBrowser.setWebViewClient(new WebViewClient() {
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        Log.i("bridgebrowser", "navigating");
+//                        Log.i("bridgebrowser", "navigating");
                         mRaster.clearRootView();
                         return false;
                     }
@@ -113,7 +123,7 @@ public class SyrBridge {
                 ///random comment
 
                 String screenDensity = Float.toString(mContext.getResources().getDisplayMetrics().density);
-                String loadURL = String.format("http://192.168.2.4:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props",
+                String loadURL = String.format("http://10.0.2.2:8080?window_height=%s&window_width=%s&screen_density=%s&platform=android&platform_version=%s&exported_methods=%s&initial_props=%s",
                         bootParams.get("height"),
                         bootParams.get("width"),
                         screenDensity,
@@ -133,7 +143,7 @@ public class SyrBridge {
 
         // ensure that the calls are only going to a registered module
         // and not an exposed system method
-        if(mRaster.registeredModules.containsKey(clazz)) {
+        if (mRaster.registeredModules.containsKey(clazz)) {
 
             HashMap<String, Class> primativeClasses = new HashMap<>();
             primativeClasses.put("boolean", boolean.class);
@@ -155,6 +165,7 @@ public class SyrBridge {
                 argsList.add(argsObj.get(key));
             }
 
+
             JSONArray paramsTypes = commandObj.getJSONArray("paramTypes");
 
 
@@ -171,6 +182,14 @@ public class SyrBridge {
                 }
             }
 
+//             Log.i("Class name", c.toString());
+            //@TODO: Make passing of context generic
+            if (c.toString().contains("SyrAlertDialogue")) {
+//                paramsList.add(Context.class);
+                argsList.add(mContext);
+            }
+
+
             Class params[] = paramsList.toArray(new Class[paramsList.size()]);
             Object args[] = argsList.toArray(new Object[argsList.size()]);
 
@@ -184,6 +203,7 @@ public class SyrBridge {
         }
 
     }
+
     public void sendEvent(JSONObject message) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             sendImmediate(message);

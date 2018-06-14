@@ -1,11 +1,16 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import android.os.Vibrator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 
 /**
@@ -18,8 +23,10 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         RelativeLayout layout;
-        if(instance != null) {
+        final Vibrator myVib = (Vibrator) context.getSystemService(VIBRATOR_SERVICE);
+        if (instance != null) {
             layout = (RelativeLayout) instance;
+
         } else {
             layout = new RelativeLayout(context);
         }
@@ -27,21 +34,21 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
         layout.setClipChildren(false);
         try {
-            final String uuid  = component.getString("uuid");
+            final String uuid = component.getString("uuid");
             style = component.getJSONObject("instance").getJSONObject("style");
 
-            if(instance == null) {
+            if (instance == null) {
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
 
             } else {
 
-                if(style.has("width")) {
+                if (style.has("width")) {
 
                     layout.getLayoutParams().width = style.getInt("width");
 
                 }
 
-                if(style.has("height")) {
+                if (style.has("height")) {
 
                     layout.getLayoutParams().height = style.getInt("height");
                 }
@@ -49,15 +56,15 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
             }
 
-            if(style.has("left")) {
+            if (style.has("left")) {
                 layout.setX(style.getInt("left"));
             }
 
-            if(style.has("top")) {
+            if (style.has("top")) {
                 layout.setY(style.getInt("top"));
             }
 
-            if(style.has("opacity")) {
+            if (style.has("opacity")) {
                 layout.setAlpha(style.getInt("opacity"));
             }
 
@@ -65,8 +72,11 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
 
             layout.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
                     try {
+                        //@TODO: Make predefined vibrations like iOS and connect this to a prop
+//                         myVib.vibrate(50);
                         JSONObject eventMap = new JSONObject();
                         eventMap.put("type", "onPress");
                         eventMap.put("guid", uuid);
@@ -74,6 +84,22 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            });
+
+            final RelativeLayout l = layout;
+            layout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            l.setAlpha((float) 0.3);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            l.setAlpha(1);
+                            break;
+                    }
+                    return false;
                 }
             });
         } catch (JSONException e) {

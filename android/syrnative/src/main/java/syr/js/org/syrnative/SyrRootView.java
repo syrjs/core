@@ -59,6 +59,7 @@ public class SyrRootView extends FrameLayout {
         mContext = null;
         mBridge = null;
         mRaster = null;
+        mProps = null;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class SyrRootView extends FrameLayout {
         mWidth = this.getWidth();
         mHeight = this.getHeight();
 
-        if(mHeight > 0 && mWidth > 0 && !mLoaded) {
+        if (mHeight > 0 && mWidth > 0 && !mLoaded) {
             mLoaded = true;
             mBridge.bootParams.put("height", Integer.toString(mHeight));
             mBridge.bootParams.put("width", Integer.toString(mWidth));

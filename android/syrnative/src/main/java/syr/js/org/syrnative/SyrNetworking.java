@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Created by simalkireddy on 5/3/18.
  */
 
-public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implements SyrBaseModule{
+public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implements SyrBaseModule {
 
     private String guid;
     private Integer responseCode = null;
@@ -34,7 +34,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
             url = new URL(requestObject.getString("url"));
             guid = requestObject.getString("guid");
             connection = (HttpURLConnection) url.openConnection();
-            if(requestObject.has("method")) {
+            if (requestObject.has("method")) {
                 connection.setRequestMethod(requestObject.getString("method"));
             } else {
                 platformErrors.put("message", "No method found on fetch");
@@ -44,11 +44,11 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
             connection.setRequestProperty("Content-Length",
                     Integer.toString(requestObject.getString("body").getBytes().length));
 
-            if(requestObject.has("headers")) {
+            if (requestObject.has("headers")) {
                 JSONObject headers = new JSONObject(requestObject.getString("headers"));
                 Iterator<?> keys = headers.keys();
-                while( keys.hasNext() ) {
-                    String key = (String)keys.next();
+                while (keys.hasNext()) {
+                    String key = (String) keys.next();
                     connection.setRequestProperty(key, headers.getString(key));
                 }
             }
@@ -68,7 +68,7 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
 
             // Get Response
             InputStream responseStream = connection.getErrorStream();
-            if(responseStream == null) {
+            if (responseStream == null) {
                 responseStream = connection.getInputStream();
                 response = streamConverter(responseStream);
             } else {

@@ -23,7 +23,7 @@ public class SyrText implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         TextView textView;
-        if(instance != null) {
+        if (instance != null) {
             textView = (TextView) instance;
         } else {
             textView = new TextView(context);
@@ -36,28 +36,28 @@ public class SyrText implements SyrBaseModule, SyrComponent {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject props = jsonInstance.getJSONObject("props");
 
-            if(jsonInstance.has("style")) {
+            if (jsonInstance.has("style")) {
                 style = jsonInstance.getJSONObject("style");
 
-                if(style.has("left")) {
+                if (style.has("left")) {
                     textView.setX(style.getInt("left"));
                 }
 
-                if(style.has("top")) {
+                if (style.has("top")) {
                     textView.setY(style.getInt("top"));
                 }
 
-                if(instance == null) {
+                if (instance == null) {
                     textView.setLayoutParams(SyrStyler.styleLayout(style));
                 } else {
 
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         textView.getLayoutParams().width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
+                    if (style.has("height")) {
 
                         textView.getLayoutParams().height = style.getInt("height");
                     }
@@ -65,27 +65,27 @@ public class SyrText implements SyrBaseModule, SyrComponent {
 
                 }
 
-                if(style.has("color")) {
+                if (style.has("color")) {
                     textView.setTextColor(Color.parseColor(style.getString("color")));
                 } else {
                     textView.setTextColor(Color.BLACK);
                 }
 
-                if(style.has("fontSize")) {
-                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,style.getInt("fontSize"));
+                if (style.has("fontSize")) {
+                    textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, style.getInt("fontSize"));
                 }
 
-                if(style.has("fontWeight")) {
-                    if(style.getString("fontWeight").contains("bold")){
+                if (style.has("fontWeight")) {
+                    if (style.getString("fontWeight").contains("bold")) {
                         textView.setTypeface(null, Typeface.BOLD);
                     }
                 }
 
-                if(style.has("textAlign")) {
-                    if(style.getString("textAlign").contains("center")) {
+                if (style.has("textAlign")) {
+                    if (style.getString("textAlign").contains("center")) {
                         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                         textView.setGravity(Gravity.CENTER_HORIZONTAL);
-                    } else if(style.getString("textAlign").contains("right")) {
+                    } else if (style.getString("textAlign").contains("right")) {
                         textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
                         textView.setGravity(Gravity.END);
                     } else {
@@ -95,7 +95,7 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                 }
             }
 
-            if(style.has("maxLines")) {
+            if (style.has("maxLines")) {
                 textView.setLines(style.getInt("maxLines"));
             } else {
                 //truncating the textView, so the it does not break the content
@@ -113,7 +113,6 @@ public class SyrText implements SyrBaseModule, SyrComponent {
         //truncating the textView, so the it does not break the content
 //        textView.setEllipsize(TextUtils.TruncateAt.END);
 //        textView.setSingleLine(true);
-
 
 
         return textView;

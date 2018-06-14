@@ -21,10 +21,10 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
         Button button;
 
-        if(instance != null) {
+        if (instance != null) {
             button = (Button) instance;
         } else {
-            button =  new Button(context);
+            button = new Button(context);
         }
 
         button.setAllCaps(false);
@@ -32,8 +32,8 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
-            JSONObject jsonProps =  jsonInstance.getJSONObject("props");
-            final String uuid  = component.getString("uuid");
+            JSONObject jsonProps = jsonInstance.getJSONObject("props");
+            final String uuid = component.getString("uuid");
 
             // if enabled prop is passed set it, else default to true
             Boolean isEnabled;
@@ -64,19 +64,19 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
             }
 
             // set button styles
-            if (jsonInstance.has("style")){
+            if (jsonInstance.has("style")) {
 
                 style = jsonInstance.getJSONObject("style");
-                if(instance == null) {
+                if (instance == null) {
                     button.setLayoutParams(SyrStyler.styleLayout(style));
                 } else {
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         button.getLayoutParams().width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
+                    if (style.has("height")) {
 
                         button.getLayoutParams().height = style.getInt("height");
                     }
@@ -89,16 +89,16 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
                 }
 
                 if (style.has("fontWeight")) {
-                    if (style.getString("fontWeight").contains("bold")){
+                    if (style.getString("fontWeight").contains("bold")) {
                         button.setTypeface(null, Typeface.BOLD);
                     }
                 }
 
-                if(style.has("left")) {
+                if (style.has("left")) {
                     button.setX(style.getInt("left"));
                 }
 
-                if(style.has("top")) {
+                if (style.has("top")) {
                     button.setY(style.getInt("top"));
                 }
 

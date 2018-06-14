@@ -12,7 +12,6 @@ import {
   PixelRatio,
   Platform,
   NativeModules,
-  StackView,
 } from '../index';
 
 // currently required to pull images in to web.
@@ -72,32 +71,6 @@ const styles = {
   },
 };
 
-class InnerComponent extends Component {
-  constructor() {
-    super();
-    this.state.color = '#ff0000';
-  }
-  render() {
-    return (
-      <View
-        style={{
-          height: PixelRatio.getPixelSizeForLayoutSize(300),
-          width: PixelRatio.getPixelSizeForLayoutSize(300),
-          backgroundColor: this.state.color,
-        }}
-      />
-    );
-  }
-  componentDidMount() {
-    console.log('setting state inner component');
-    setTimeout(() => {
-      this.setState({
-        color: '#00ff00',
-      });
-    }, 500);
-  }
-}
-
 class MyComponent extends Component {
   constructor() {
     // platform specific styling
@@ -110,17 +83,19 @@ class MyComponent extends Component {
     this.state = {
       buttonEnabled: true,
       buttonMessage: 'Pressed: ' + this.num,
-      message: 'Spinning Image: ' + this.spin,
+      message: 'Spinning Image Count: ' + this.spin,
     };
     this.spinPiggyAnimation = new Animated.Value(0);
     styles.image.transform = [{ rotatey: this.spinPiggyAnimation }];
   }
+
   render() {
     return (
       <Animated.View style={styles.stage}>
         <Text style={styles.text}>{this.state.message}</Text>
         {/* <InnerComponent/> */}
         <Animated.Image source={{ uri: 'piggy' }} style={styles.image} />
+
         <Button
           enabled={this.state.buttonEnabled}
           onPress={() => this.onPress()}
@@ -137,10 +112,6 @@ class MyComponent extends Component {
     this.setState({
       buttonMessage: 'Pressed: ' + this.num,
     });
-
-    if (!Platform.isWeb) {
-      NativeModules.SyrView.testExportMethod('Super', 42);
-    }
   }
   spinPiggy() {
     this.spin += 1;
@@ -148,7 +119,6 @@ class MyComponent extends Component {
       toValue: 360,
       duration: 1000,
     }).start(() => {
-
       this.spinPiggy();
       this.setState({
         message: 'Spinning Image: ' + this.spin,

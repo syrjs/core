@@ -17,7 +17,7 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
     @Override
     public View render(JSONObject component, Context context, View instance) {
         LinearLayout linearLayout;
-        if(instance !=null) {
+        if (instance != null) {
             linearLayout = (LinearLayout) instance;
         } else {
             linearLayout = new LinearLayout(context);
@@ -30,55 +30,59 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
             JSONObject props = jsonInstance.getJSONObject("props");
 
             // set linearLayout styles
-            if (jsonInstance.has("style")){
+            if (jsonInstance.has("style")) {
 
                 style = jsonInstance.getJSONObject("style");
 //                linearLayout.setLayoutParams(SyrStyler.styleLayout(style));
                 SyrStyler.styleView(linearLayout, style);
 
-                if(style.has("left")) {
+                if (style.has("left")) {
                     linearLayout.setX(style.getInt("left"));
                 }
 
-                if(style.has("top")) {
+                if (style.has("top")) {
                     linearLayout.setY(style.getInt("top"));
                 }
 
-                if(instance == null) {
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,0);
+                if (instance == null) {
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
                     Integer left = 0;
                     Integer top = 0;
 
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         params.width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
-
-                        params.height = style.getInt("height");
+                    if (style.has("height")) {
+                        Object height = style.get("height");
+                        if (height instanceof Integer) {
+                            params.height = (Integer) height;
+                        }
                     }
 
-                    if(style.has("left")) {
+                    if (style.has("left")) {
                         left = style.getInt("left");
                     }
 
-                    if(style.has("top")) {
+                    if (style.has("top")) {
                         top = style.getInt("top");
                     }
 
                     linearLayout.setLayoutParams(params);
                 } else {
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         linearLayout.getLayoutParams().width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
-
-                        linearLayout.getLayoutParams().height = style.getInt("height");
+                    if (style.has("height")) {
+                        Object height = style.get("height");
+                        if (height instanceof Integer) {
+                            linearLayout.getLayoutParams().height = (Integer) height;
+                        }
                     }
                     linearLayout.setLayoutParams(linearLayout.getLayoutParams());
                 }
@@ -87,13 +91,13 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
 
             }
 
-            if(props.has("axis") && props.getString("axis").contains("vertical")) {
+            if (props.has("axis") && props.getString("axis").contains("vertical")) {
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
             } else {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             }
 
-            if(jsonInstance.has("children")) {
+            if (jsonInstance.has("children")) {
                 linearLayout.setWeightSum(jsonInstance.getJSONArray("children").length());
             }
 

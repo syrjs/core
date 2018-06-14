@@ -20,7 +20,7 @@ public class SyrAnimatedView extends SyrView {
 //        return animatedView;
 
         RelativeLayout layout;
-        if(instance != null) {
+        if (instance != null) {
             layout = (RelativeLayout) instance;
         } else {
             layout = new RelativeLayout(context);
@@ -29,32 +29,32 @@ public class SyrAnimatedView extends SyrView {
         JSONObject style = null;
         try {
             JSONObject componentInstance = component.getJSONObject("instance");
-            if(componentInstance.has("style")){
+            if (componentInstance.has("style")) {
                 style = componentInstance.getJSONObject("style");
-                if(instance == null) {
+                if (instance == null) {
                     layout.setLayoutParams(SyrStyler.styleLayout(style));
-                    if(style.has("left")) {
+                    if (style.has("left")) {
                         layout.setX(style.getInt("left"));
                     }
 
-                    if(style.has("top")) {
+                    if (style.has("top")) {
                         layout.setY(style.getInt("top"));
                     }
 
-                    if(style.has("opacity")) {
+                    if (style.has("opacity")) {
                         layout.setAlpha(style.getInt("opacity"));
                     }
                     SyrStyler.styleView(layout, style);
 
                 } else {
 
-                    if(style.has("width")) {
+                    if (style.has("width")) {
 
                         layout.getLayoutParams().width = style.getInt("width");
 
                     }
 
-                    if(style.has("height")) {
+                    if (style.has("height")) {
 
                         layout.getLayoutParams().height = style.getInt("height");
                     }
@@ -63,9 +63,9 @@ public class SyrAnimatedView extends SyrView {
                 }
 
 
-                if(style.has("overflow")) {
+                if (style.has("overflow")) {
                     String overflow = style.getString("overflow");
-                    if(overflow.contains("hidden")) {
+                    if (overflow.contains("hidden")) {
                         layout.setClipChildren(true);
                     } else {
                         layout.setClipChildren(false);
@@ -84,6 +84,7 @@ public class SyrAnimatedView extends SyrView {
         return layout;
 
     }
+
     @Override
     public String getName() {
         return "AnimatedView";

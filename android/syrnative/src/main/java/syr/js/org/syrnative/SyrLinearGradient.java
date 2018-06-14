@@ -30,20 +30,20 @@ public class SyrLinearGradient implements SyrBaseModule, SyrComponent {
 
             GradientDrawable gd = new GradientDrawable(
                     GradientDrawable.Orientation.TOP_BOTTOM,
-                    new int[] {Color.parseColor(colors.getString(0)),
+                    new int[]{Color.parseColor(colors.getString(0)),
                             Color.parseColor(colors.getString(1))});
 
-            if(style.has("borderColor") && style.has("borderWidth")) {
+            if (style.has("borderColor") && style.has("borderWidth")) {
                 // borders on views
                 gd.setStroke(style.getInt("borderWidth"), Color.parseColor(style.getString("borderColor")));
 
-            } else  if(style.has("borderColor")) {
+            } else if (style.has("borderColor")) {
 
                 gd.setStroke(3, Color.parseColor(style.getString("borderColor")));
             }
 
             // corner radius
-            if(style.has("borderRadius")) {
+            if (style.has("borderRadius")) {
                 gd.setCornerRadius(style.getInt("borderRadius"));
             } else {
                 gd.setCornerRadius(0);
@@ -57,7 +57,6 @@ public class SyrLinearGradient implements SyrBaseModule, SyrComponent {
 
         view.setLayoutParams(SyrStyler.styleLayout(style));
         //SyrStyler.styleView(view, style);
-
 
 
         return view;
