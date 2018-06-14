@@ -1,0 +1,840 @@
+/* ==========================================================================
+   RESPONSIVE STYLES
+ ========================================================================== */ 
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 1199px) {
+
+    /*------------------------------------------*/
+    /*    General Fixes
+    /*------------------------------------------*/
+    .btn{
+        margin-bottom: 10px;
+    }
+
+    /*------------------------------------------*/
+    /*    Overlay
+    /*------------------------------------------*/
+    .header .overlay{
+        height: 650px;
+    }
+
+    /*------------------------------------------*/
+    /*   Showcase Video Button
+    /*------------------------------------------*/
+    .showcase .video-player{
+        left: 53%;
+    }
+
+    /*------------------------------------------*/
+    /*   Charts
+    /*------------------------------------------*/
+    #canvas-holder{
+        left:18%;
+    }
+
+    #canvas2-holder{
+        display:none;
+    }
+
+    .signup-handwritten {
+        right: -30px;
+    }
+
+    .doughnut-box {
+        margin-bottom: 146px;
+    }
+
+    /*------------------------------------------*/
+    /*   Newsletter
+    /*------------------------------------------*/
+    .newsletter .getnewsletter{
+        width: 120px;
+    }
+    
+    /*------------------------------------------*/
+    /*   Footer
+    /*------------------------------------------*/
+    .footer-cta .btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header App
+    /*------------------------------------------*/
+    .hero-app .hero-section{
+        padding-top: 10%;
+    }
+
+    
+	
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (min-width: 992px) {
+
+    /*-------------------------------------------------------------*/
+    /*    Set Container Width at 970 also for Large Devices Desktop
+    /*-------------------------------------------------------------*/
+    .container .grid-md{
+        margin:0 auto;
+        width: 970px;
+    }
+
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 991px) {
+
+    /*-----------------------------------------------------------*/
+    /*    Show Navbar Toggle and Hide Navbar Menu, Bootstrap Fixes
+    /*-----------------------------------------------------------*/
+    .navbar-fixed-top {
+        background: #323a45;
+        background: rgba(50,58,69,0.95);
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: none;
+    }
+    
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+
+    .navbar-collapse.collapse.in {  
+        display: block!important; 
+    }
+
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+
+    .navbar-nav>li {
+        float: none;
+    }
+
+    .navbar-nav>li>a {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display:inline-block;
+    }
+
+    .navbar-nav>li>a.btn-nav {
+        margin: 3px 0 5px 15px;
+        padding: 5px;
+    }
+
+    /*------------------------------------------*/
+    /*    Header Overlay and Hero Section
+    /*------------------------------------------*/
+    .header .overlay{
+        height: 580px;
+    }
+
+    /*------------------------------------------*/
+    /*   Image with Action
+    /*------------------------------------------*/
+    .img-with-action{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /*------------------------------------------*/
+    /*   Features Tab
+    /*------------------------------------------*/
+    .tab-features .large{
+        margin-bottom: 50px;
+    }
+
+    .tab-features .etabs {
+        float: none;
+        overflow: hidden;
+        margin: 0 auto;
+        height: auto;
+        display: block;
+        text-align: left;
+    }
+
+    .tab-features .etabs .tab {
+        display: table;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border-bottom: 1px solid #ffffff;
+        padding: 1% 0;
+        border-right: 0;
+        opacity: 1;
+    }
+
+    .tab-features .etabs .tab:first-child {
+        border-top: 1px solid #ffffff;
+    }
+
+    .tab-features .etabs .large {
+        margin-bottom: 50px;
+    }
+
+    .tab-features .etabs .icon-sm {
+        padding-left: 15px;
+    }
+
+    .tab-features .etabs .tab.active {
+        background-color: #ffffff;
+    }
+
+    .tab-features .etabs .tab.active h5, .tab-features .etabs .tab.active .icon-sm i{
+        color: #3e3e3e;
+    }
+
+    .tab-features .etabs .tab.active:before {
+        display: none;
+    }
+
+    .tab-features .etabs h5{
+        display: inline-block;
+    }
+
+    .tab-icon .large{
+        margin-bottom: 10px;
+    }
+
+    /*------------------------------------------*/
+    /*   Testimonials
+    /*------------------------------------------*/
+    .testimonial-press .etabs{
+        display:none;
+    }
+    
+    /*------------------------------------------*/
+    /*   Newsletter
+    /*------------------------------------------*/
+    .newsletter .table{
+        margin-top: 25px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .newsletter .table:last-child{
+        margin-bottom: 10px;
+    }
+
+    .newsletter .table-row{
+        display:block;
+    }
+
+    .newsletter .table-cell{
+        width: 100%;
+        display:block;
+        padding-bottom: 10px;
+    }
+
+    .newsletter .social-list>li{
+        display: inline-block;
+        float: none;
+    }
+
+    .newsletter .input-group{
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    /*------------------------------------------*/
+    /*   Charts
+    /*------------------------------------------*/
+    #canvas-holder{
+        display:none;
+    }
+
+    .line-canvas{
+        margin:0 auto;
+        width:70%;
+    }
+
+    .charts p.large{
+        margin-bottom: 50px;
+    }
+
+    .doughnut-box {
+        margin-bottom: 70px;
+    }
+
+    /*------------------------------------------*/
+    /*    Sign-Up Divider
+    /*------------------------------------------*/
+    .signup-handwritten {
+        right: 9px;
+        bottom: -200px;
+        -moz-transform: rotate(-5deg);
+        -o-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        -webkit-transform: rotate(-5deg);
+        transform: rotate(-5deg);
+    }
+
+    .signup-handwritten:before{
+        left: 75px;
+        top: -48px;
+        -moz-transform: rotate(105deg);
+        -o-transform: rotate(105deg);
+        -ms-transform: rotate(105deg);
+        -webkit-transform: rotate(105deg);
+        transform: rotate(105deg);
+    }
+
+    .signup-divider .form-group{
+        width: 30%;
+    }
+
+    /*------------------------------------------*/
+    /*    Pricing
+    /*------------------------------------------*/
+    .pricing-tab {
+        padding: 50px 27px 30px;
+    }
+
+    .pricing-tab h4 {
+        margin: 0 0 30px;
+    }
+
+    /*------------------------------------------*/
+    /*    Team
+    /*------------------------------------------*/
+    .team-img .img-icons span i{
+        text-align: center;
+        font-size: 35px;
+        width: 35px;
+        height: 35px;
+        padding: 20% 5%;
+    }
+    
+    /*------------------------------------------*/
+    /*    Mobile-Download
+    /*------------------------------------------*/
+    .mobile-download .right-features {
+        margin-top: 70px;
+    }
+
+    /*------------------------------------------*/
+    /*   Footer
+    /*------------------------------------------*/
+    .footer {
+        text-align: center;
+    }
+
+    .footer .footer-nav li:first-of-type{
+        margin-left:0;
+    }
+
+    .footer-copy{
+        margin-top:20px;
+    }
+
+    .footer-nav{
+        margin-top: 75px;
+    }
+
+    .footer h5 {
+        margin-top: 60px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header App
+    /*------------------------------------------*/
+    .hero-app .hero-section{
+        padding-top: 0;
+    }
+
+    .hero-app .hero-section .btn-box{
+        display: none;
+    }
+
+    /*------------------------------------------*/
+    /*   Header Dashboard
+    /*------------------------------------------*/
+    .dashboard .hero-section{
+        padding-top:20%;
+    }
+
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 767px) {
+    
+    /*----------------------------------------------------------------------*/
+    /*    IMPORTANT!!! DISABLE WOW ANIMATION ON SMALL SCREENS (<768px)
+    /*-----------------------------------------------------------------------*/
+    .wow {
+      visibility: visible !important;
+      -webkit-animation: none !important;
+         -moz-animation: none !important;
+           -o-animation: none !important;
+          -ms-animation: none !important;
+              animation: none !important;
+    }
+
+    /*------------------------------------------*/
+    /*    Typography
+    /*------------------------------------------*/
+    h2 {
+        text-align: left;
+    }
+
+    .large {
+        text-align: left;
+    }
+
+    /*------------------------------------------*/
+    /*   About - Intro Features
+    /*------------------------------------------*/
+    .intro-features{
+        text-align: left;
+    }
+
+    .intro-features .intro-content{
+        margin-bottom: 50px;
+    }
+
+    .intro-features .intro-content:last-child{
+        margin-bottom: 0;
+    }
+
+    .intro-content .icon-lg{
+        display:inline-block;
+        margin-bottom: 20px;
+        width: 90px;
+    }
+
+    .intro-content h4{
+        display: inline-block;
+        position: relative;
+        bottom: 20px;
+    }
+
+    /*------------------------------------------*/
+    /*  Features Tab
+    /*------------------------------------------*/
+    .tab-features .tab-content {
+        height: auto;
+        padding-bottom: 100px;
+    }
+
+    /*------------------------------------------*/
+    /*   Newsletter
+    /*------------------------------------------*/
+    .newsletter .input-group{
+        width: 80%;
+        margin: 0;
+    }
+
+    .newsletter .table {
+        text-align: left;
+    }
+    
+    /*------------------------------------------*/
+    /*   Signup-Divider
+    /*------------------------------------------*/
+    .signup-handwritten {
+        display:none;
+    }
+
+    /*------------------------------------------*/
+    /*    Pricing
+    /*------------------------------------------*/
+    .pricing-tab {
+        max-width: 400px;
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+
+    .pricing .large {
+        margin-bottom: 0;
+    }
+
+    /*------------------------------------------*/
+    /*    Team
+    /*------------------------------------------*/
+    .team .team-box{
+        margin-bottom: 50px;
+    }
+
+    .team h4{
+        margin-bottom: 10px;
+    }
+
+    .team .team-img{
+        width: 30%;
+        float: left;
+        clear:both;
+        margin-top:0;
+        margin-right: 10px;
+    }
+
+    .team .team-bio {
+        border-bottom: 1px solid transparent;
+    }
+
+    .team .team-url{
+        display: none;
+    }
+
+    /*------------------------------------------*/
+    /*    Mobile-Download
+    /*------------------------------------------*/
+    .mobile-download h3 {
+        margin-top: 0;
+    }
+
+    .mobile-download .shot-container{
+        display:none;
+    }
+
+    .mobile-download .right-features {
+        display:none;
+    }
+
+    /*------------------------------------------*/
+    /*    Footer
+    /*------------------------------------------*/
+    .footer{
+        text-align: left;
+    }
+
+    .footer-nav{
+        display:none
+    }
+
+    .footer-copy {
+        margin-top: 35px;
+        text-align: left;
+        padding-left: 15px;
+    }
+
+    .tweet ul {
+        padding-left: 15px;
+    }
+
+    /*------------------------------------------*/
+    /*    Fast-reg Fixes
+    /*------------------------------------------*/
+    .fast-reg .form-group{
+        width: 35%;
+        margin-bottom: 15px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header App
+    /*------------------------------------------*/
+    .hero-app .hero-section .btn-box{
+        display: block;
+    }
+
+    .hero-app .hero-section .btn{
+        margin-top: 5px;
+    }
+    
+
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 599px) {
+
+    /*------------------------------------------*/
+    /*   Typography
+    /*------------------------------------------*/
+    h1{
+        font-size: 42px;
+        line-height: 46px;
+    }
+
+    h2{
+        font-size: 38px;
+        line-height: 42px;
+    }
+
+    h3{
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    /*------------------------------------------*/
+    /*    Sign-Up Divider
+    /*------------------------------------------*/
+    .signup-divider{
+        text-align: left;
+    }
+
+    .signup-divider .form-group{
+        width: 80%;
+        margin-bottom: 15px;
+        margin-right: 0;
+        padding-left: 15px;
+    }
+
+    .signup-divider .btn{
+        width: 78%;
+        margin-left: 15px;
+    }
+
+    /*------------------------------------------*/
+    /*   Showcase Video Button
+    /*------------------------------------------*/
+    .showcase .video-player{
+        left: 51%;
+        top: 36%;
+    }
+
+    /*------------------------------------------*/
+    /*   Testimonial-Press Section
+    /*------------------------------------------*/
+    .testimonial-press .large{
+        margin-bottom: 30px;
+    }
+
+    /*------------------------------------------*/
+    /*    Team
+    /*------------------------------------------*/
+    .team .team-box{
+        margin-bottom: 30px;
+    }
+
+    .team .team-box:last-child{
+        margin-bottom: 0;
+    }
+
+    .team h4{
+        margin-bottom: 5px;
+    }
+
+    /*------------------------------------------*/
+    /*    Fast-reg Fixes
+    /*------------------------------------------*/
+    .header.fast-reg-img .overlay{
+        height: 650px;
+    }
+
+    .fast-reg .form-group{
+        width: 80%;
+        margin-bottom: 10px;
+    }
+
+    .fast-reg .btn{
+        width: 80%;
+    }
+
+    .fast-reg-box{
+        margin-top: 20px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header Slider
+    /*------------------------------------------*/
+    .slider-text{
+        display: inline;
+    }
+
+    .slider h1{
+        font-size: 38px;
+        line-height: 42px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header Dashboard
+    /*------------------------------------------*/
+    .dashboard .hero-section{
+        padding-top: 25%;
+    }
+    
+       	
+}
+
+
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------ */
+@media (max-width: 479px) {
+
+    /*------------------------------------------*/
+    /*   Typography
+    /*------------------------------------------*/
+    h1{
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    h2{
+        font-size: 37px;
+        line-height: 39px;
+    }
+
+    /*------------------------------------------*/
+    /*    Hero-Section
+    /*------------------------------------------*/
+    .hero-section .btn{
+        margin-bottom: 5px;
+    }
+
+    /*------------------------------------------*/
+    /*    Login/Signup Modal
+    /*------------------------------------------*/
+    .login .modal-dialog{
+        width: 80%;
+        margin: 90px auto;
+    }
+
+    /*------------------------------------------*/
+    /*   Showcase 
+    /*------------------------------------------*/
+    .showcase .video-player{
+        left: 50%;
+        top: 32%;
+        font-size: 45px;
+    }
+
+    .showcase .img-box{
+        margin-top: 30px;
+    }
+
+    /*------------------------------------------*/
+    /*    Sign-Up Divider
+    /*------------------------------------------*/
+    .signup-divider .btn{
+        width: 77%;
+    }
+
+    /*------------------------------------------*/
+    /*   Testimonial-Press Section
+    /*------------------------------------------*/
+    .testimonial-press{
+        height: 650px;
+    }
+
+    /*------------------------------------------*/
+    /*   Newsletter
+    /*------------------------------------------*/
+    .newsletter .input-group{
+        width: 100%;
+    }
+
+    /*------------------------------------------*/
+    /*   Charts
+    /*------------------------------------------*/
+    .line-canvas{
+        width:100%;
+    }
+
+    /*------------------------------------------*/
+    /*    Pricing
+    /*------------------------------------------*/
+    .pricing-tab {
+        max-width: 300px;
+    }
+
+    /*------------------------------------------*/
+    /*    Team
+    /*------------------------------------------*/
+    .team .team-img{
+        width:100%;
+        margin-bottom: 10px;
+    }
+
+    .team h4{
+        margin-bottom: 5px;
+    }
+
+    .team-img .img-icons span i{
+        font-size: 60px;
+        width: 60px;
+        height: 60px;
+        padding: 5%;
+    }
+
+    /*------------------------------------------*/
+    /*    Mobile-Download
+    /*------------------------------------------*/
+    .mobile-download .shot-container{
+        display:block;
+        margin-top: 50px;
+    }
+
+    .mobile-download .right-features {
+        display:block;
+    }
+
+    /*------------------------------------------*/
+    /*   Footer
+    /*------------------------------------------*/
+    .footer-cta .btn{
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .footer-nav{
+        margin-top: 50px;
+    }
+
+    /*------------------------------------------*/
+    /*    Fast-reg Fixes
+    /*------------------------------------------*/
+    .fast-reg .large{
+        display: none;
+    }
+
+    /*------------------------------------------*/
+    /*   Header Slider
+    /*------------------------------------------*/
+    .slider h1{
+        font-size: 34px;
+        line-height: 48px;
+    }
+
+    /*------------------------------------------*/
+    /*   Header Dashboard
+    /*------------------------------------------*/
+    .dashboard .hero-section{
+        padding-top: 30%;
+    }
+
+    .image-dashboard {
+        padding-top: 40px;
+    }
+
+}

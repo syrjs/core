@@ -1,0 +1,150 @@
+/* ==========================================================================
+   COLOR: RED #c0392b - #cb6060
+========================================================================== */ 
+a, .text-color {
+ 	color: #c0392b;
+}
+
+.color-bg {
+    background-color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*	 Red Buttons 
+/*------------------------------------------*/
+.btn-color-ghost {
+	background: transparent;
+	color: #c0392b;
+	border-color: #c0392b;
+}
+
+.btn-color, .btn-color-ghost:hover {
+	background: #c0392b;
+	color: #fff;
+	border-color: #c0392b;
+}
+
+.btn-color:hover {
+	background: #ffffff;
+	color: #c0392b;
+	border-color: #c0392b;
+}
+
+.btn-white {
+    color: #c0392b;
+}
+
+.navbar-nav>li>a.btn-signup {
+    background: #c0392b;
+    color: #ffffff;
+    border-color: #c0392b;
+}
+
+.navbar-nav>li>a.btn-signup:hover, .navbar-nav>li>a.btn-signup:focus {
+    background: #ffffff;
+    color: #c0392b;
+    border-color: #ffffff;
+}
+
+/*------------------------------------------*/
+/*   Header Solid Bg
+/*------------------------------------------*/
+.solid-bg{
+    background:none;
+    background-color: #c0392b;
+}
+
+.navbar-nav>li>a.btn-white{
+    color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*   Header App
+/*------------------------------------------*/
+.type .hero-section span{
+    background-color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*	 Form
+/*------------------------------------------*/
+.form-control {
+    border: 2px solid #cb6060;
+}
+
+/*------------------------------------------*/
+/*	 Icons
+/*------------------------------------------*/
+.icon-lg:hover, .icon-lg:focus, .icon-sm:hover, .icon-sm:focus {
+    color:#c0392b;
+}
+
+/*------------------------------------------*/
+/*	 Preloader
+/*------------------------------------------*/
+.preloader{
+	background-color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*   Navbar Links Menu
+/*------------------------------------------*/
+.is-scrolling .navbar-nav>.active>a, .is-scrolling .navbar-nav>.active>a:hover, .is-scrolling .navbar-nav>.active>a:focus {
+    color: #c0392b;
+    background-color: transparent;
+}
+
+/*------------------------------------------*/
+/*   Login/Signup Modal
+/*------------------------------------------*/
+.login .modal-header .modal-title span{
+    font-weight: 400;
+    color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*   Pricing Tab
+/*------------------------------------------*/
+.pricing-tab {
+    border: 3px solid #cb6060;
+}
+
+.pricing-tab h4 {
+    border-bottom: 3px solid #cb6060;
+}
+
+.pricing-tab .ribbon .popular{
+    background-color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*   Team
+/*------------------------------------------*/
+.team-img .img-icons span i:hover{
+    color: #c0392b;
+}
+
+/*------------------------------------------*/
+/*   Signup-Divider & Fast-Reg
+/*------------------------------------------*/
+.signup-divider .form-control:focus{
+    border-color: #c0392b;
+}
+
+.fast-reg .form-control:focus{
+    background-color: #c0392b;
+    border-color: #c0392b;
+    box-shadow: none;
+}
+
+/*------------------------------------------*/
+/*   Footer
+/*------------------------------------------*/
+.footer a:hover{
+    color: #c0392b;
+}
+
+
+
+
+

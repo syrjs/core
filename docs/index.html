@@ -1,298 +1,691 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <link rel="shortcut icon" href="./images/favicon.ico">
 
-    <title>Syr</title>
-    <script src="./js/jquery-1.10.2.min.js"></script>
-    <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="./css/font-awesome-4.4.0.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/hack-2.018.min.css">
-    <link href='./css/googleapi-fonts.css' rel='stylesheet' type='text/css'>
-    <link href='./css/googleapi-fonts-2.css' rel='stylesheet' type='text/css'>
-    <link href="./css/base.css" rel="stylesheet">
-    <link href="./css/cinder.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- TITLE OF SITE -->
+    <title>Syr | Lightweight JavaScript Native UI Framework</title>
+
+    <meta name="description" content="Syr Multiplatform JavaScript Rendering Engine" />
+    <meta name="keywords" content="syr, react, react-native, native, ios, android, web, cross, platform, hybrid" />
+    <meta name="author" content="Syr Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- FAVICON  -->
+    <link rel="icon" href="assets/images/favicon/favicon.ico">
+    
+    <!-- =========================
+       STYLESHEETS 
+    ============================== -->
+    
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
+
+    <!-- FONT ICONS -->
+    <link rel="stylesheet" href="assets/css/icons/icons.min.css">
+     
+    <!-- GOOGLE FONTS -->
+    <link href="http://fonts.googleapis.com/css?family=Raleway:300,400,600,700%7COpen+Sans:300,400,600,700%7CHandlee" rel="stylesheet">
+    
+    <!-- PLUGINS STYLESHEET -->
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css">
+    
+    <!-- CUSTOM STYLESHEET -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- RESPONSIVE FIXES -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- COLORE STYLESHEET -->
+    <!-- Change here the Main Color of the Site: Choose your favorite predefined color from assets/css/colors.css -->
+    <link rel="stylesheet" href="assets/css/colors/orange.css" title="red">
+
+    <style>
 
 
-    <link href="./css/extra.css" rel="stylesheet">
+    </style>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    
     <!--[if lt IE 9]>
-            <script src="./js/html5shiv-3.7.0.js"></script>
-            <script src="./js/respond.min-1.3.0.js"></script>
-        <![endif]-->
+            <script src="assets/js/plugins/html5shiv.min.js"></script>
+            <script src="assets/js/plugins/respond.min.js"></script>
+    <![endif]-->
 
-    <script src="./js/webfont-1.5.18.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
-
-    
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-111449876-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-    
 </head>
 
-<body class="homepage" >
+<body>
+    <div class="main-wrapper">
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+        <!-- =========================
+             PRELOADER
+        ============================== -->
+        <div class="preloader">
+            <div class="loader-container">
+                <div class="text-logo">Syr</div>
+                <div class="signal"></div>
+            </div>
+        </div> 
+        
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
+        <!-- =========================
+             HEADER
+        ============================== -->
+        <header class="header dashboard solid-bg" id="top">
+            <!-- Background Overlay -->
+            <div class="overlay">
 
-            <!-- Main title -->
-            <a class="navbar-brand" style="padding:0" href="."><img src="/images/syr_piggie.png" height=45> Syr</a>
-        </div>
-
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-            
-                <!-- Main navigation -->
-                <ul class="nav navbar-nav">
-                
-                    
-                        
-                            <li class="active">
-                                <a href=".">Home</a>
-                            </li>
-                        
-                    
-                
-                    
-                        
-                            <li >
-                                <a href="release/">1.3.4-alpha</a>
-                            </li>
-                        
-                    
-                
-                    
-                        
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                
+                <!-- =========================================
+                     Navigation
+                ========================================== -->
+                <nav class="navbar navbar-fixed-top" role="navigation">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Navbar-Header -->
+                                <div class="navbar-header">
                                     
-<li >
-    <a href="api/">API</a>
-</li>
+                                    <!-- Mobile Menu -->
+                                    <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                                        <i class="icon icon_menu"></i>
+                                    </button>
 
+                                    <!-- Text-Logo -->
+                                    <a href="#top" class="navbar-brand scrollto" title="SmartMvp">
+                                        <div class="text-logo" style="text-align: center;"><img src="assets/images/syr-logo.png" height=32/>&nbsp;Syr</div>
+                                    </a>
+
+                                    <!-- Image-Logo: Remove this comments and the section above Text-Logo if you want to add an Image-Logo (recommended sizes -> max-height:50, max-width:200)
+
+                                    <a href="#top" class="navbar-brand img-logo scrollto" title="SmartMvp">
+                                        <img src="assets/images/logo.png" alt="Logo">
+                                    </a> 
+                                    -->
+
+                                </div><!-- /End Navbar-Header -->
+
+                                <!-- Navbar-Collapse -->
+                                <div class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <!-- Menu Items -->
+                                        <li><a href="#about" title="About Syr" class="scrollto">About</a></li>
+                                        <li><a href="#features" title="Syr Features" class="scrollto">Features</a></li>
+                                        <li><a href="/api" title="Syr Documentation">Documentation</a></li>
+                                        <li><a href="https://github.com/syrjs/" target="_new" title="Syr Source Code">Source</a></li>
+                                        <li><a href="https://github.com/syrjs/core/releases/tag/1.4.5"  target="_new" title="" class="btn">Unstable 1.4.5</a></li>
+                                    </ul>
+                                </div><!-- /End Navbar-Collapse -->
+                            </div><!-- /End Col -->
+                        </div><!-- /End Row -->
+                    </div><!-- /End Container -->
+                </nav><!-- /End Sticky Navigation -->
+
+
+                <!-- =========================================
+                     Hero-Section
+                ========================================== -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="hero-section text-center">
                                 
-                                    
-<li >
-    <a href="cli/">CLI</a>
-</li>
-
+                                <!-- Welcome - Hero Message -->
+                                <h1 class="text-white">Portable, Powerful and Versatile.</h1>
+                                <p class="text-white">Supercharge your Javascript Applications with native User Interfaces and predictable consistent rendering across platforms.</p>
                                 
-                                    
-<li >
-    <a href="getting_started/">Getting Started</a>
-</li>
+                                <!-- Learn More & Video Buttons -->
+                                <div class="btn-box">
+                                    <a href="#about" class="btn btn-ghost scrollto hidden-xs">Learn More</a>
+                                    <!-- Video Lightbox on Click -->
+                                    <!-- <a href="http://youtu.be/SZEflIVnhH8" data-type="youtube" class="btn btn-white venobox"><i class="icon arrow_triangle-right_alt"></i>Play video</a> -->
+                                </div>
 
-                                
-                                    
-<li >
-    <a href="debugging/">Debugging</a>
-</li>
+                            </div><!-- /End Intro-Section -->
 
-                                
-                                </ul>
-                            </li>
-                        
-                    
-                
-                    
-                        
-                            <li >
-                                <a href="community/">Community</a>
-                            </li>
-                        
-                    
-                
-                    
-                        
-                            <li >
-                                <a href="blog/">Blog</a>
-                            </li>
-                        
-                    
-                
-                </ul>
-            
+                        </div><!-- /End Col -->
+                    </div><!-- /End Row -->
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                
-                
-                    <li>
-                        <a href="https://github.com/dmikey/syr">
-                            
-                                <i class="fa fa-github"></i>
-                            
-                            GitHub
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Dashboard Image -->
+                            <div class="image-dashboard text-center">
+                                <img src="assets/images/dashboard.png" class="wow fadeInUp" data-wow-duration="2s" alt="SmartMvp-Dashboard">
+                            </div>
+                        </div><!-- /End Col -->
+                    </div><!-- /End Row -->
+                </div><!-- /End Container Hero-Section -->
 
-    <div class="container">
+
+            </div><!-- /End Background Overlay -->
+        </header>
+        <!-- =========================
+             /END HEADER
+        ============================== -->
+
         
-        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="first-level active"><a href="#features">Features</a></li>
-        
-    
-        <li class="first-level "><a href="#syr-apps-are-native-apps">Syr Apps are Native Apps!</a></li>
-        
-    
-        <li class="first-level "><a href="#how-does-this-compare">How does this compare</a></li>
-        
-    
-        <li class="first-level "><a href="#playing-catchup">Playing Catchup</a></li>
-        
-    
-    </ul>
-</div></div>
-        <div class="col-md-9" role="main">
-
-<p><a href="https://travis-ci.org/dmikey/syr"><img alt="Build Status" src="https://travis-ci.org/dmikey/syr.svg?branch=master" /></a>
-<a href="https://npmjs.org/package/syr"><img alt="NPM Version" src="https://img.shields.io/npm/v/syr.svg" /></a>
-<a href="https://coveralls.io/github/dmikey/syr?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/dmikey/syr/badge.svg?branch=master" /></a></p>
-<h3 id="features">Features</h3>
-<ul>
-<li>Lightweight (under 300kb! on iOS)</li>
-<li>Cross Platform (iOS, Android, Web)</li>
-<li>Familiar API (React-Native)</li>
-<li>Components (get started right away!)</li>
-<li>JavaScript (no need to write native code!)</li>
-<li>Portable! (Building an SDK? We've got you covered!)</li>
-</ul>
-<h3 id="syr-apps-are-native-apps">Syr Apps are Native Apps!</h3>
-<p>Applications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.</p>
-<pre><code  class="">import { Component, Image, ScrollView, Text } from 'syr';
-
-class myComponent extends Component {
-  render() {
-    return (
-      &lt;ScrollView style={{width: 320, height:200}}&gt;
-        &lt;Image
-          source={{uri: 'https://i.chzbgr.com/full/7345954048/h7E2C65F9/'}}
-          style={{width: 320, height:180}}
-        /&gt;
-        &lt;Text style={{width: 320, height:300}}&gt;
-          On iOS, a Syr ScrollView uses a native UIScrollView.
-          On Android, it uses a native ScrollView.
-
-          On iOS, a Syr Image uses a native UIImageView.
-          On Android, it uses a native ImageView.
-
-          Syr wraps the fundamental native components, giving you
-          the performance of a native app, plus the clean design of JavaScript and a Familiar API.
-        &lt;/Text&gt;
-      &lt;/ScrollView&gt;
-    );
-  }
-}
-</code></pre>
-
-<h3 id="how-does-this-compare">How does this compare</h3>
-<p>Syr renders User Interfaces natively. It runs application logic you have written in JavaScript inside a 'web' environment. When components are ready to be drawn to the screen, Syr draws them using Native UI Elements on each platform. Syr apps, ARE Native Apps!</p>
-<p>We've followed the JavaScript trends, and have distilled a minimal API to accomplish brilliant experiences, with the smallest footprint possible. If you've found other Web to Native Frameworks heavy, give Syr a try!</p>
-<h3 id="playing-catchup">Playing Catchup</h3>
-<p>Syr is still young, we're playing catchup with others that are operating in this space. If you want to help, contributions are always welcome!</p></div>
-        
-    </div>
-
-    <footer class="col-md-12 text-center">
-        <hr>
-        <p>
-        <small>Copyright Derek M. Anderson , Licensed under MIT<br></small>
-        
-        <small>Built with 🍕 in San Jose California.</p></small>
-    </footer>
-
-    <script src="./js/bootstrap-3.0.3.min.js"></script>
-    <script src="./js/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <script>
-    var base_url = '.';
-    </script>
-    <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-    <script src="./js/base.js"></script>
-
-    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        From here you can search these documents. Enter your search terms below.
-                    </p>
-                    <form role="form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+        <!-- =================================
+             SECTION ABOUT - INTRO FEATURES
+        ====================================== -->
+        <section class="intro-features" id="about">
+            <div class="container">
+                <!-- Padding -->
+                <div class="wrapper-lg">
+                    <div class="row">
+                        <!-- Section Header Title -->
+                        <div class="col-xs-12">
+                            <h2>It's a native thing, it's a web thing, it's a multi-platform thing.</h2>
+                            <p class="large">We built Syr to take care of the hard stuff. Consistent rendering across multiple platforms and target devices.</p>
                         </div>
-                    </form>
-                    <div id="mkdocs-search-results"></div>
-                </div>
-                <div class="modal-footer">
+                    </div>
+                    <!-- Three Main Features with Icons -->
+                    <div class="row">
+                        <div class="col-sm-4 intro-content">
+                            <div class="icon-lg">
+                                <i class="icon icon-mobile"></i>
+                            </div>
+                            <h4>Multiple Targets one Bundle</h4>
+                            <p>Built-in density and ratio helpers, translate your app's UI across devices and view-ports with ease.</p>
+                        </div>
+                        <div class="col-sm-4 intro-content">
+                            <div class="icon-lg">
+                                <i class="icon icon-browser"></i>
+                            </div>
+                            <h4>Extendible from the Start</h4>
+                            <p>Syr is built with extensibility in mind. Easily begin using Syr when it makes sense. Use it regularly or as infrequent as demanded.</p>
+                        </div>
+                        <div class="col-sm-4 intro-content">
+                            <div class="icon-lg">
+                                <i class="icon icon-documents"></i>
+                            </div>
+                            <h4>Shared Environments</h4>
+                            <p>Building a library, shared UI component, or multi-tenancy application? Syr is portable, with a collision free motto.</p>
+                        </div>
+                    </div><!-- /End Row -->
+                </div><!-- /End Wrapper -->
+            </div><!-- /End Container -->
+        </section>
+        <!-- =============================
+             /END INTRO FEATURES
+        ============================== -->
+        
+        
+        <!-- ==================================================
+             SECTION 2 COLS - IMAGE RIGHT AND TEXT WITH CALL TO ACTION
+        ======================================================= -->
+        <section class="img-with-action light-bg">
+            <div class="container wrapper-lg">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <!-- Text Col -->
+                        <h3>Syr just feels familiar.</h3>
+                        <p>Rapid appliction development is back! Use Syr to supercharge development, using a familiar JavaScript api you and your team will be creating cross platform experiences in no time!</p>
+                        <!-- Call To Action Buttons -->
+                        <div class="btn-box">
+                            <a href="#features" class="btn btn-grey scrollto">Learn More</a>
+                        </div>
+                        <!-- Div Required for Correct Charts Animation -->
+                        <div class="start-charts"></div>
+                    </div>
+                </div><!-- /End Row-->
+            </div><!-- /End Container-->
+            <!-- Image Col -->
+            <div class="hidden-sm hidden-xs col-md-6 img-col-bg img-right"></div>
+        </section>
+        <!-- =============================
+             /END SECTION 
+        ============================== -->
+        
+
+        <!-- ==================================================
+            CHARTS & SHOWCASE SECTION
+        ======================================================= -->
+        <section class="charts" id="charts">
+            <div class="container">
+                <div class="wrapper-lg">
+                    <div class="row showcase">
+                        <div class="col-md-4">
+                            <h4>Cross platform, cross screen, from the start.</h4>
+                            <p>Syr has built in support, to help your development team target multiple platforms, form factors, screen densities and sizes.</p>
+                        </div>
+                        <div class="col-md-8">
+                            <!-- Devices Image -->
+                            <div class="img-box">
+                                <img src="assets/images/showcase.png" alt="" class="img-responsive">
+                                <a href="https://youtu.be/xXe9EgSf1Ts" data-type="youtube" class="venobox video-player"><i class="icon arrow_triangle-right_alt2 wow fadeIn" data-wow-duration="2s"></i></a>
+                            </div>
+                        </div>
+                    </div><!-- /End Chart-Box -->
+
+                </div><!-- /End Wrapper -->
+            </div><!-- /End Container -->      
+        </section>
+        <!-- =============================
+             /END CHARTS SECTION 
+        ============================== -->
+        
+        
+        <!-- ==================================================
+            FEATURES SECTION
+        ======================================================= -->
+        <section class="tab-features color-bg" id="features">
+            <div class="container">
+                <div class="features-title">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="text-white">Explore Features</h2>
+                            <p class="large text-white">Syr is more than just a platform, it's a new way to develop applications.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    </body>
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Features Tab -->
+                    <div class="tabs features tab-container">
+                        <ul class="etabs">
+                            <!-- Feature Icon -->
+                            <li class="tab">
+                                    <a href="#tab-feature-1">
+                                        <div class="icon-sm">
+                                            <i class="icon icon-layers"></i>
+                                        </div>
+                                        <h5 class="text-white">Modular JavaScript<br> Applications</h5>
+                                    </a>
+                            </li>
+                            <!-- Feature Icon -->
+                            <li class="tab">
+                                    <a href="#tab-feature-2">
+                                        <div class="icon-sm">
+                                            <i class="icon icon-pictures"></i>
+                                        </div>
+                                        <h5 class="text-white">Portable User<br> Interfaces</h5>
+                                    </a>
+                            </li>
+                            <!-- Feature Icon -->
+                            <li class="tab">
+                                    <a href="#tab-feature-3">
+                                        <div class="icon-sm">
+                                            <i class="icon icon-grid"></i>
+                                        </div>
+                                        <h5 class="text-white">Dependency <br> Managment</h5>
+                                    </a>
+                            </li>
+                            <!-- Feature Icon -->
+                            <li class="tab">
+                                    <a href="#tab-feature-4">
+                                        <div class="icon-sm">
+                                            <i class="icon icon-chat"></i>
+                                        </div>
+                                        <h5 class="text-white">Multi Tenant <br> Communications</h5>
+                                    </a>
+                            </li>
+                            <!-- Feature Icon -->
+                            <li class="tab">
+                                    <a href="#tab-feature-5">
+                                        <div class="icon-sm">
+                                            <i class="icon icon-lightbulb"></i>
+                                        </div>
+                                        <h5 class="text-white">Native First<br> Also for Web!</h5>
+                                    </a>
+                            </li>
+                        </ul><!-- /End Etabs -->
+                  
+                        <div class="panel-container">
+                            
+                            <div class="tab-content" id="tab-feature-1">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Feature Description 2cols Text-Left with Buttons -->
+                                        <div class="col-md-5 col-sm-6">
+                                            <h4>Portable, reusable JavaScript for target platforms.</h4>
+                                            <p>Our versatile and portable JavaScript bridge, is designed to allow for a multitiude of serialized flows. Export Native Methods to JavaScript, or call Native Methods from JavaScript with ease.</p>
+                                            <p>The Syr JavaScript bridge, provides command execution, event currying, and generic message handling - usable in a number of ways such as Animations and GUI representation.</p>
+                                            <p>Best of all, Syr works with the Web you know, and the browsers you already love.</p>
+                                            <!-- <div class="btn-box">
+                                                <a href="#testimonials" class="btn btn-grey scrollto">Our Clients</a>
+                                                <a href="#team" class="btn btn-grey scrollto">Meet the Team</a>
+                                            </div> -->
+                                        </div>
+                                        <!-- Image-right -->
+                                        <div class="col-md-7 col-sm-6 hidden-xs wow fadeInRight" data-wow-duration="2s">
+                                            <img src="assets/images/features/feature1.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /End Tab-content -->
 
+                            <div class="tab-content" id="tab-feature-2">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Feature Description 2cols Text-Right with Icons -->
+                                        <div class="col-xs-12 col-sm-6 col-sm-push-6 col-lg-7 col-lg-push-5">
+                                            <h4>High quality solution for those who want a universal rendering across platforms in no time</h4>
+                                            <p>A multi-platform solution for developing high quality interfaces for shared environments.</p>
+                                            <div class="tab-icon">
+                                                <div class="icon-sm">
+                                                    <i class="icon icon-adjustments"></i>
+                                                </div>
+                                                <p class="large">Extensible, component model.</p>
+                                                <p> Using a familiar API, Syr is customizable and extensible. Move as much or as little of your project into JavaScript Native wrappers as you would like!</p>
+                                            </div>
+                                            <div class="tab-icon">
+                                                <div class="icon-sm">
+                                                    <i class="icon icon-target"></i>
+                                                </div>
+                                                <p class="large">Multiple Targets</p>
+                                                <p> iOS, Android and Web. All three platforms are treated as equal citizens. Develop your user interface, using a predictable rendering model. Transport your UI to a world of devices.</p>
+                                                <p><em>Planned: Qt5, JerryScript, Desktop Bindings</em></p>
+                                            </div>
+                                        </div>
+                                        <!-- Image-Left -->
+                                        <div class="col-xs-12 col-sm-6 col-sm-pull-6 col-lg-5 col-lg-pull-7 hidden-xs wow fadeInLeft" data-wow-duration="2s">
+                                            <img src="assets/images/features/feature2.png" class="img-device" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- / End Tab-content -->
+
+                            <div class="tab-content" id="tab-feature-3">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Feature Description 2cols Text-Left -->
+                                        <div class="col-md-5 col-sm-6">
+                                            <h4>Built in tools to ensure your applications is a success.</h4>
+                                            <p>Our tooling is geared to bring a multitude of the best worlds together.</p>
+                                            <p>Install and link Native modules from NPM. With little effort, you can version, tag, and eject builds.</p>
+                                            <p>Upgrade through versions of Syr and relax, while we do the work of verifying versioning and compatibility across modules.</p>
+                                        </div>
+                                        <!-- Image-Right -->
+                                        <div class="col-md-7 col-sm-6 hidden-xs wow fadeInRight" data-wow-duration="2s">
+                                            <img src="assets/images/features/feature3.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /End Tab-content -->
+
+                            <div class="tab-content" id="tab-feature-4">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Feature Description 2col Text-Left with Icons-->
+                                        <div class="col-md-7 col-sm-6">
+                                            <h4>Expand the application sandbox, co-mingle bridge applications with sandboxes.</h4>
+                                            <p>Syr bridge, brings hyper-local communications to client-end applications.</p>
+                                            <div class="tab-icon">
+                                                <div class="icon-sm">
+                                                    <i class="icon icon-profile-male"></i>
+                                                </div>
+                                                <p class="large">Amazingly Simple Use</p>
+                                                <p>Cross commuicate with applications on the same bus simply using Fetch commands. We'll take care of the rest responding with async ajax responses.</p>
+                                            </div>
+                                            <div class="tab-icon">
+                                                <div class="icon-sm">
+                                                    <i class="icon icon-compass"></i>
+                                                </div>
+                                                <p class="large">Multiplexed Rendering</p>
+                                                <p>Render different modules to different targets through a single instance of the SyrVM.</p>
+                                            </div>
+                                        </div>
+                                        <!-- Image Right -->
+                                        <div class="col-md-5 col-sm-6 hidden-xs wow fadeInRight" data-wow-duration="2s">
+                                            <img src="assets/images/features/feature4.png" class="img-device" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- /End Tab-content -->
+
+                            <div class="tab-content" id="tab-feature-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Feature Description 2col Text both -->
+                                        <div class="col-xs-12">
+                                            <div class="col-sm-6">
+                                                <h4>Native First Paradigms.</h4>
+                                                <p>Our first goal, was to create a dynamic UI engine, that Native Developers could rely on. We lean heavily on Native First paradigms, instead of forcing a shift to the web.</p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <h4>But don't forget about Web!</h4>
+                                                <p>Your code shouldn't be stuck to any single platform. With no changes, we ensure that your code will run and render as expected in Web Browsers as well.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Image below -->
+                                        <div class="col-xs-12 hidden-xs wow fadeInUp" data-wow-duration="2s">
+                                            <img src="assets/images/features/feature5.png" class="img-device" alt="">
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div><!-- / End Tab-content -->
+
+                        </div><!-- / End Panel-Container -->
+                    </div><!-- / End Tabs -->
+                </div><!-- /End Col -->
+            </div><!-- /End Row -->
+        </section>
+        <!-- =============================
+             /END FEATURES TAB
+        ============================== -->
+
+
+        <!-- =======================================================
+             TESTIMONIALS WITH PRESS/CLIENTS LOGOS
+        ============================================================ -->
+        <section class="testimonial-press light-bg" id="testimonials">
+            <div class="container vmiddle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>What developers are saying</h2>
+                        <p class="large">Find out why our users keep using Syr</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tabs testimonials tab-container">
+                        <div class="col-md-8">
+                            <div class="panel-container">
+                                <div class="tab-block" id="tab-testimonials-1">
+                                    <blockquote>
+                                        <!-- Testimonial quote -->
+                                        <p>Syr and React Native, are basically the same!</p>
+                                        <!-- Testimonial image -->
+                                        <img src="assets/images/testimonials/testimonial-1.jpg" alt=" ">
+                                        <!-- Testimonial info -->
+                                        <p class="testimonial-name"><span>Allen Tong</span>Engineer @ PayPal</p>
+                                    </blockquote>
+                                </div><!-- /End Tab-block -->
+                            </div><!-- /End Panel-container -->
+                        </div><!-- /End Col -->
+
+                        <ul class="etabs col-md-4 list-unstyled">
+                            <li class="tab col-md-6">
+                                <a href="#tab-testimonials-1">
+                                    <!-- <img src="assets/images/press-logos/press-3.png" alt=""> -->
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div><!-- /End Tabs --> 
+                </div><!-- /End Row -->
+            </div><!-- /End Container -->
+        </section>
+        <!-- =============================
+             /END TESTIMONIALS
+        ============================== -->
+
+        
+        <!-- ==================================================
+            NEWSLETTER AND SOCIAL DIVIDER
+        ======================================================= -->
+        <section class="newsletter color-bg" id="newsletter">
+            <div class="container">
+                <div class="wrapper-sm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- =========================
+                                Social Icons
+                            ============================== -->
+                            <div class="table">
+                                <div class="table-row">
+                                    <div class="table-cell follow">
+                                        <h5 class="table-title">Follow Us</h5>
+                                    </div>
+                                    <div class="table-cell">
+                                        <ul class="social-list">
+                                            <li>
+                                                <a href="https://www.twitter.com/syr_js" target="_new">
+                                                    <i class="icon icon-twitter"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div><!-- /End Table-Cell -->
+                                </div><!-- /End Table-Row -->
+                            </div><!-- /End Table -->
+                        </div><!-- /End Col -->
+
+                        <div class="col-md-6">
+                            <!-- =========================
+                                MAILCHIMP SUBSCRIPTION FORM 
+                            ============================== -->            
+                            <!-- <form class="mailchimp-subscribe" role="form">
+                                <div class="table">
+                                    <div class="table-row">
+                                        <div class="table-cell getnewsletter">
+                                            <h5 class="table-title">Get the Newsletter</h5>
+                                        </div>
+                                        <div class="table-cell">
+                                            <div class="input-group text-white">
+
+                                                <input type="email" id="subscriber-email" name="email" placeholder="Your email address" class="form-control">
+
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-white">Subscribe</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+
+                                    <p class="mc-success"></p>
+                                    <p class="mc-failed"></p>
+                                </div>
+                            </form> -->
+
+                            <!-- =========================
+                                LOCAL SUBSCRIPTION FORM 
+                            ============================== -->
+                            <!-- ALTERNATE USE: SAVE YOUR SUBSCRIBE LIST IN .TXT
+
+                            <form id="subscribe" role="form">
+                                <div class="table">
+                                    <div class="table-row">
+                                        <div class="table-cell getnewsletter">
+                                            <h5 class="table-title">Get the Newsletter</h5>
+                                        </div>
+                                    </div>
+                                    <div class="table-cell">
+                                        <div class="input-group">
+                                            <input type="email" id="s-email" name="email" placeholder="Your email address" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-color">Submit</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+                                    <p class="subscription-success"><i class="icon icon_check_alt2"></i> You are successfully subscribed for our newsletter.</p>
+                                    <p class="subscription-failed"><i class="icon icon_close_alt2"></i> Something went wrong!</p>
+                                </div>
+                            </form>
+                            -->
+
+                        </div><!-- /End Col -->
+                    </div><!-- /End Row -->
+                </div><!-- End Wrapper -->
+            </div><!-- /End Container -->
+        </section>
+        <!-- =============================
+             /END NEWSLETTER SECTION 
+        ============================== -->
+        
+        
+        <!-- ==================================================
+            FOOTER
+        ======================================================= -->
+        <footer class="footer dark-bg" id="footer">
+            <div class="container">
+                <div class="wrapper-lg">
+                    <div class="row">
+                        <!-- Footer Left Col -->
+                        <div class="col-md-5">
+                                <!-- Logo -->
+                                <a href="#top" class="scrollto" title="SmartMvp">
+                                    <span class="text-logo">Syr</span>
+                                </a>
+                                <p class="footer-hero">Syr is a hyper focused JavaScript for Native solution. Applications run JavaScript, while User Interfaces are drawn with Native Elements.<br/><br/>
+                                Join our journey and contribute today! On <a href="https://www.github.com/syrjs/" target="_new">Github</a></p>
+                        </div>
+                        <!-- Footer Contact Col -->
+                        <div class="col-md-3">
+                            <h5 class="text-white">More</h5>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="icon icon_mail"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <a href="https://gitter.im/syrjs/general" target="_new">Gitter</a>
+                                </div>
+                            </div>
+                            <!-- <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="icon icon_pin"></i>
+                                </div>
+                                <div class="contact-content">
+
+                                </div>
+                            </div> -->
+                        </div>
+                        <!-- Footer Right Col: Twitter Feed -->
+                        <div class="col-md-4">
+                                <!-- <h5 class="text-white">Recent Tweets</h5>
+                                <div class="tweet"></div> -->
+                        </div>
+
+                        <!-- Footer Menu and Copy -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- <ul class="footer-nav">
+                                    <li>
+                                        <a href="#">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Help</a>
+                                    </li>
+                                </ul> -->
+                                <p class="footer-copy">&copy; 2018 - Syr.</a></p>
+                            </div>
+                        </div>
+                        
+                    </div><!-- End Row -->
+                </div><!-- /End Wrapper -->
+            </div><!-- /End Container -->
+        </footer>
+    </div><!-- /End Main Wrapper -->
+
+
+    <!-- =========================
+         SCRIPTS 
+    ============================== -->
+    <script src="assets/js/plugins/jquery1.11.0.min.js"></script>
+    <script src="assets/js/plugins/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/jquery.easing.1.3.min.js"></script>
+    <script src="assets/js/plugins/modernizr.custom.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/plugins/twitter/tweetie.min.js"></script>
+    <!-- Custom Script -->
+    <script src="assets/js/custom.js"></script>
+
+</body>
 </html>
-
-<!--
-MkDocs version : 0.16.3
-Build Date UTC : 2018-01-12 19:45:29
--->
