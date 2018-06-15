@@ -86,7 +86,7 @@
   [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
 
 #if DEBUG
-  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://192.168.2.4:8080"];
+  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
 #else
   NSBundle* mainBundle = [NSBundle mainBundle];
   NSString* pyplBundlePath = [mainBundle pathForResource:@"PYPLCheckout" ofType:@"bundle"];

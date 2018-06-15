@@ -10,7 +10,7 @@ import { Component } from './lib/component';
 
 // animations and events
 import { Animated } from './lib/animated';
-import { Events , EventEmitter } from './lib/events';
+import { Events, EventEmitter } from './lib/events';
 
 // fillers for native platforms
 import { Networking } from './lib/networking';
@@ -40,14 +40,17 @@ import { NoDOM } from './lib/rasters/nodom';
 
 // central SyrStore (flux Store)
 import { SyrStore } from './lib/store';
-@TODO: This will be for the new version of syrStore
+// @TODO: This will be for the new version of syrStore
 // import { Resolver } from './lib/resolver';
 
 // detecting rendering bridge
-if (typeof window !== 'undefined' && (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))) {
+if (
+  typeof window !== 'undefined' &&
+  (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))
+) {
   RasterManager.setRaster(WKRaster);
-}  else {
-  if(typeof window == 'undefined') {
+} else {
+  if (typeof window == 'undefined') {
     RasterManager.setRaster(NoDOM);
   } else {
     RasterManager.setRaster(DOMRaster);
@@ -79,6 +82,6 @@ export {
   Platform,
   Alert,
   SyrStore,
-  Switch,
-//   Resolver
+  Switch
+  //   Resolver
 };
