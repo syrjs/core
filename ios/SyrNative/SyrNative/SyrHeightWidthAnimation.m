@@ -34,7 +34,7 @@
         CGRect frame = CGRectMake([currentFrame CGRectValue].origin.x, [currentFrame CGRectValue].origin.y, [width doubleValue], [height doubleValue]);
       	[component setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
     } completion:^(BOOL finished) {
-      [_delegate animationDidStop:nil finished:finished];
+      [self->_delegate animationDidStop:nil finished:finished];
     }];
   }
 }

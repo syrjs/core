@@ -77,11 +77,11 @@
   // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
   
-  // todo: lets abstract this out to the bundle manager
-  NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
-  NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
-  NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
-  NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
+// todo: lets abstract this out to the bundle manager
+// NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
+// NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
+// NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
+// NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
   
   [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
 
@@ -95,7 +95,7 @@
   NSURL* syrBridgeUrl = [NSURL fileURLWithPath:filePath];
 #endif
 
-  NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:syrBridgeUrl];
+  NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:YES];
   NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
   
   // pass native module names and selectors to the javascript side
@@ -150,7 +150,7 @@
   
   // dispatching on the bridge to wkwebview needs to be done on the main thread
   dispatch_async(dispatch_get_main_queue(), ^{
-    [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+    [self->_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
       if (error == nil)
       {
         // do something with JS returns here
@@ -179,7 +179,7 @@
     
     //updating the UI needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-       [_raster parseAST:syrMessage withRootView:_rootView];
+      [self->_raster parseAST:syrMessage withRootView:self->_rootView];
     });
    
   } else if([messageType containsString:@"animation"]) {
@@ -264,7 +264,7 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
     
     // dispatching on the bridge to wkwebview needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-      [_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
+      [self->_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
         if (error == nil)
         {
           // do something with JS returns here

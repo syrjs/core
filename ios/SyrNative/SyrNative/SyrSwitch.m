@@ -30,7 +30,7 @@ SYR_EXPORT_MODULE(Switch)
         iSwitch = (UISwitch*) componentInstance;
     } else {
         iSwitch = [[UISwitch alloc] init];
-        SyrEventHandler* eventHandler = [[SyrEventHandler sharedInstance] assignDelegate:guid];
+        SyrEventDelegate* eventHandler = [[SyrEventHandler sharedInstance] assignDelegate:guid];
         SEL selector = NSSelectorFromString(@"handleValueChange:");
         [iSwitch addTarget:eventHandler action:selector forControlEvents:UIControlEventValueChanged];
     }

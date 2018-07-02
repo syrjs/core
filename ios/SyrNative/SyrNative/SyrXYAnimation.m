@@ -29,7 +29,7 @@
       CGRect frame = CGRectMake([x2 floatValue], [y2 floatValue], [currentFrame CGRectValue].size.width, [currentFrame CGRectValue].size.height);
       [component setValue:[NSValue valueWithCGRect:frame] forKey:@"frame"];
     } completion:^(BOOL finished) {
-      [_delegate animationDidStop:nil finished:finished];
+      [self->_delegate animationDidStop:nil finished:finished];
     }];
   }
 }

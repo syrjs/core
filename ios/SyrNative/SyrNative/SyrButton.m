@@ -39,14 +39,14 @@ SYR_EXPORT_MODULE(Button)
   NSString* guid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
   
   if(componentInstance != nil) {
-    button = componentInstance;
+    button = (SyrButtonView*)componentInstance;
   } else {
     button = [[SyrButtonView alloc] init];
     SEL selector = NSSelectorFromString(@"handleSingleTap:");
     //[button addTarget:[[SyrEventHandler sharedInstance] assignDelegate:guid] action:selector forControlEvents:UIControlEventTouchUpInside];
       
       //@TODO: going the touchable opacity route for now. Will need to come back and look at how to do this on a UIButton without subClassing it.
-    SyrEventHandler* eventHandler = [[SyrEventHandler sharedInstance] assignDelegate:guid];
+    SyrEventDelegate* eventHandler = [[SyrEventHandler sharedInstance] assignDelegate:guid];
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:eventHandler action:selector];
     singleFingerTap.cancelsTouchesInView = NO;
     [button addGestureRecognizer:singleFingerTap];

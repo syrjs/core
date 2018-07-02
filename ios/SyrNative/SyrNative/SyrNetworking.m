@@ -22,7 +22,6 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     NSString* method = [requestDict valueForKey:@"method"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString* body = [requestDict valueForKey:@"body"];
-    NSDictionary* platformError = nil;
     
     id headers = [requestDict objectForKey:@"headers"];
     
@@ -42,32 +41,31 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     [request setURL:[NSURL URLWithString:requestUrl]];
     
     // todo: forward these errors along with the data response
-    NSError *error = nil;
     NSHTTPURLResponse *responseCode = nil;
   
-    
-    // get data
-    NSData *oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&responseCode error:&error];
-    
-    // log error if not success just for info
-    if([responseCode statusCode] != 200){
-      NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[responseCode statusCode]);
-    }
-    
-    if(error != nil) {
-      platformError = @{
-                        @"message": [error localizedDescription]
-                        };
-    } else {
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+      NSDictionary* platformError = nil;
+      
+      // log error if not success just for info
+      if([responseCode statusCode] != 200){
+        NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[responseCode statusCode]);
+      }
+      
+      if(error != nil) {
+        platformError = @{@"message": [error localizedDescription]};
+      } else {
         platformError = @{};
-    }
+      }
+      
+      // get the response
+   		NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      NSNumber* statusCode = [NSNumber numberWithDouble:[responseCode statusCode]];
+      
+      // send the response back
+      [self sendEventWithName:@"NetworkingCallback" body:@{@"data": responseString, @"responseCode": statusCode, @"guid": guid, @"platformError":platformError}];
+      
+    }] resume];
     
-    // get the response
-    NSString* response = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-    NSNumber* statusCode = [NSNumber numberWithDouble:[responseCode statusCode]];
-    
-    // send the response back
-    [self sendEventWithName:@"NetworkingCallback" body:@{@"data": response, @"responseCode": statusCode, @"guid": guid, @"platformError":platformError}];
   });
 }
 
