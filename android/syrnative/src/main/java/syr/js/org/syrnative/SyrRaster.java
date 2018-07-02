@@ -241,7 +241,7 @@ public class SyrRaster {
                     }
                     //@TODO this is the case when the uuid turns out undefined.
                     // The app works fine if we ignore these but we need to figure out a solution for this soon
-                    if(vParent != null) {
+                    if (vParent != null) {
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -338,79 +338,79 @@ public class SyrRaster {
      */
     public void buildInstanceTree(final JSONObject jsonObject) {
 
-                try {
-                    final View component = createComponent(jsonObject);
-                    final JSONObject js = jsonObject;
+        try {
+            final View component = createComponent(jsonObject);
+            final JSONObject js = jsonObject;
 
-                    if (component != null) {
-                        final String uuid = jsonObject.getString("uuid");
+            if (component != null) {
+                final String uuid = jsonObject.getString("uuid");
 
-                        JSONArray children = jsonObject.getJSONArray("children");
+                JSONArray children = jsonObject.getJSONArray("children");
 
-                        if (component instanceof ScrollView && children.length() > 1) {
-                            JSONObject firstChild = new JSONObject();
-                            JSONObject style = new JSONObject();
-                            JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
-                            firstChild.put("elementName", "View");
-                            firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
-                            firstChild.put("children", children);
-                            //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
-                            firstChild.put("guid", jsonObject.getString("guid").concat("-1"));
-                            firstChild.put("uuid", uuid.concat("-1"));
-                            firstChildInstance.put("guid", jsonObject.getString("guid").concat("-1"));
-                            firstChildInstance.put("uuid", uuid.concat("-1"));
+                if (component instanceof ScrollView && children.length() > 1) {
+                    JSONObject firstChild = new JSONObject();
+                    JSONObject style = new JSONObject();
+                    JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
+                    firstChild.put("elementName", "View");
+                    firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
+                    firstChild.put("children", children);
+                    //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
+                    firstChild.put("guid", jsonObject.getString("guid").concat("-1"));
+                    firstChild.put("uuid", uuid.concat("-1"));
+                    firstChildInstance.put("guid", jsonObject.getString("guid").concat("-1"));
+                    firstChildInstance.put("uuid", uuid.concat("-1"));
 
-                            style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
-                            style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
-                            firstChildInstance.put("style", style);
-                            firstChild.put("instance", firstChildInstance);
-                            children = new JSONArray().put(firstChild);
-                        }
-
-                        if (children.length() > 0) {
-                            buildChildren(children, (ViewGroup) component, jsonObject, jsonObject);
-                        }
-
-                        uiHandler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                mRootview.addView(component);
-                                emitComponentDidMount(uuid);
-                            }
-                        });
-                    } else {
-
-                        JSONArray childComponents = jsonObject.getJSONArray("children");
-                        JSONObject childComponent = childComponents.getJSONObject(0);
-                        buildInstanceTree(childComponent);
-                        //@TODO check if instances uuid needs to be passed.
-                        emitComponentDidMount(jsonObject.getString("uuid"));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
+                    style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
+                    firstChildInstance.put("style", style);
+                    firstChild.put("instance", firstChildInstance);
+                    children = new JSONArray().put(firstChild);
                 }
+
+                if (children.length() > 0) {
+                    buildChildren(children, (ViewGroup) component, jsonObject, jsonObject);
+                }
+
+                uiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRootview.addView(component);
+                        emitComponentDidMount(uuid);
+                    }
+                });
+            } else {
+
+                JSONArray childComponents = jsonObject.getJSONArray("children");
+                JSONObject childComponent = childComponents.getJSONObject(0);
+                buildInstanceTree(childComponent);
+                //@TODO check if instances uuid needs to be passed.
+                emitComponentDidMount(jsonObject.getString("uuid"));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
 
     public void setupAnimation(final JSONObject astDict) {
-                try {
-                    String animationStringify = astDict.getString("ast");
-                    JSONObject animation = new JSONObject(animationStringify);
+        try {
+            String animationStringify = astDict.getString("ast");
+            JSONObject animation = new JSONObject(animationStringify);
 
-                    if (animation.has("guid")) {
-                        String animatedTarget = animation.getString("guid");
-                        View animationTarget = (View) mModuleInstances.get(animatedTarget);
-                        if (animationTarget != null) {
-                            SyrAnimator.animate(animationTarget, animation, mBridge);
-                        }
-                    } else {
-                        Log.i("here", "there");
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            if (animation.has("guid")) {
+                String animatedTarget = animation.getString("guid");
+                View animationTarget = (View) mModuleInstances.get(animatedTarget);
+                if (animationTarget != null) {
+                    SyrAnimator.animate(animationTarget, animation, mBridge);
                 }
+            } else {
+                Log.i("here", "there");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

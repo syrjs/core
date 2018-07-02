@@ -28,7 +28,7 @@ public class SyrAnimator {
     static private HashMap<View, ObjectAnimator> animationCache = new HashMap<>();
 
     static private String determineAnimationType(JSONObject animationDict) {
-        if(animationDict.has("animatedProperty")) {
+        if (animationDict.has("animatedProperty")) {
             return "animateInterpolate";
         }
         return "animateComponentXY";
@@ -70,7 +70,7 @@ public class SyrAnimator {
             }
         };
 
-        if(animationType == "animateComponentXY") {
+        if (animationType == "animateComponentXY") {
 
 
             animationHandler.post(new Runnable() {
@@ -80,7 +80,7 @@ public class SyrAnimator {
                     AnimatorSet mover = null;
 
                     Integer fromX = null;
-                    Integer fromY  = null;
+                    Integer fromY = null;
                     Integer toX = null;
                     Integer toY = null;
                     Integer duration = null;
@@ -90,11 +90,11 @@ public class SyrAnimator {
                         ObjectAnimator xAnimation = null;
                         ObjectAnimator yAnimation = null;
 
-                        if(animationDict.has("x2") && animationDict.has("y2")) {
+                        if (animationDict.has("x2") && animationDict.has("y2")) {
                             mover = new AnimatorSet();
                         }
                         //@TODO taking out fromX and fromY for now to get smooth working. Need to figure out a better way to do it
-                        if(animationDict.has("x2")) {
+                        if (animationDict.has("x2")) {
                             fromX = animationDict.getInt("x");
                             toX = animationDict.getInt("x2");
                             xAnimation = ObjectAnimator.ofFloat(component, "x", toX);
@@ -103,7 +103,7 @@ public class SyrAnimator {
                             xAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
                         }
 
-                        if(animationDict.has("y2")) {
+                        if (animationDict.has("y2")) {
                             fromY = animationDict.getInt("y");
                             toY = animationDict.getInt("y2");
                             yAnimation = ObjectAnimator.ofFloat(component, "y", toY);
@@ -112,15 +112,15 @@ public class SyrAnimator {
                             yAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
                         }
 
-                        if(mover != null) {
+                        if (mover != null) {
                             mover.play(xAnimation).with(yAnimation);
                             mover.addListener(listener);
                             mover.start();
                         } else {
-                            if(fromX != null) {
+                            if (fromX != null) {
                                 xAnimation.addListener(listener);
                                 xAnimation.start();
-                            } else if(fromY != null) {
+                            } else if (fromY != null) {
                                 yAnimation.addListener(listener);
                                 yAnimation.start();
                             }
@@ -136,28 +136,28 @@ public class SyrAnimator {
 
         }
 
-        if(animationType == "animateInterpolate") {
+        if (animationType == "animateInterpolate") {
 
             String propertyName = animationDict.getString("animatedProperty").toLowerCase();
             final Integer fromValue = animationDict.getInt("value");
             final Integer toValue = animationDict.getInt("toValue");
             final Integer duration = animationDict.getInt("duration");
 
-            if(propertyName.contains("rotate") || propertyName.contains("opacity")) {
+            if (propertyName.contains("rotate") || propertyName.contains("opacity")) {
 
-                if(propertyName.contains("rotate")) {
-                    if(propertyName.contains("x")) {
+                if (propertyName.contains("rotate")) {
+                    if (propertyName.contains("x")) {
                         propertyName = "rotationX";
                     }
-                    if(propertyName.contains("y")) {
+                    if (propertyName.contains("y")) {
                         propertyName = "rotationY";
                     }
-                    if(propertyName.contains("z")) {
+                    if (propertyName.contains("z")) {
                         propertyName = "rotation";
                     }
                 }
 
-                if(propertyName.contains("opacity")) {
+                if (propertyName.contains("opacity")) {
                     propertyName = "alpha";
                 }
 
@@ -166,7 +166,7 @@ public class SyrAnimator {
                     @Override
                     public void run() {
                         ObjectAnimator anim;
-                        if(animationCache.containsKey(component) && !finalPropertyName.contains("alpha")) {
+                        if (animationCache.containsKey(component) && !finalPropertyName.contains("alpha")) {
                             anim = animationCache.get(component);
                         } else {
                             anim = ObjectAnimator.ofFloat(component, finalPropertyName, fromValue, toValue); // rotationX, rotationY
@@ -184,7 +184,7 @@ public class SyrAnimator {
 
             }
 
-            if(propertyName.contains("height")){
+            if (propertyName.contains("height")) {
                 ValueAnimator valueAnimator = ValueAnimator
                         .ofInt(fromValue, toValue)
                         .setDuration(duration);
@@ -209,11 +209,9 @@ public class SyrAnimator {
                     }
                 });
 
-                valueAnimator.addListener(new AnimatorListenerAdapter()
-                {
+                valueAnimator.addListener(new AnimatorListenerAdapter() {
                     @Override
-                    public void onAnimationEnd(Animator animation)
-                    {
+                    public void onAnimationEnd(Animator animation) {
                         animationHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -233,7 +231,7 @@ public class SyrAnimator {
                 valueAnimator.start();
             }
 
-            if(propertyName.contains("width")){
+            if (propertyName.contains("width")) {
                 ValueAnimator valueAnimator = ValueAnimator
                         .ofInt(fromValue, toValue)
                         .setDuration(duration);
@@ -258,11 +256,9 @@ public class SyrAnimator {
                     }
                 });
 
-                valueAnimator.addListener(new AnimatorListenerAdapter()
-                {
+                valueAnimator.addListener(new AnimatorListenerAdapter() {
                     @Override
-                    public void onAnimationEnd(Animator animation)
-                    {
+                    public void onAnimationEnd(Animator animation) {
                         animationHandler.post(new Runnable() {
                             @Override
                             public void run() {

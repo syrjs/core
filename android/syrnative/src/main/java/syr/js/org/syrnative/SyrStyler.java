@@ -17,12 +17,12 @@ import org.json.JSONObject;
  * Created by dereanderson on 1/9/18.
  */
 
-public class SyrStyler{
+public class SyrStyler {
 
     static public int getColor(String colorString) {
-        if(colorString.contains("rgb")) {
-            if(colorString.contains("rgba")) {
-                colorString = colorString.replace("rgba(","");
+        if (colorString.contains("rgb")) {
+            if (colorString.contains("rgba")) {
+                colorString = colorString.replace("rgba(", "");
             }
             colorString = colorString.replace(("rgb"), "");
             colorString = colorString.replace(")", "");
@@ -34,32 +34,32 @@ public class SyrStyler{
             int green = Integer.parseInt(colors[2]);
 
             double alphaD = 0.00;
-            if(colors[3] != null){
+            if (colors[3] != null) {
                 alphaD = Double.parseDouble(colors[3]);
-                alphaD = 255/alphaD;
+                alphaD = 255 / alphaD;
             }
 
-            int alpha = (int)alphaD;
+            int alpha = (int) alphaD;
 
             return Color.argb(175, red, blue, green);
-        } else if(colorString.contains("#")) {
+        } else if (colorString.contains("#")) {
             return Color.parseColor(colorString);
         }
         return Color.parseColor("#ffffff");
     }
 
     static public ViewGroup.LayoutParams styleLayout(JSONObject style) {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0,0);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0, 0);
         try {
 
 
-            if(style.has("width")) {
+            if (style.has("width")) {
 
                 params.width = style.getInt("width");
 
             }
 
-            if(style.has("height")) {
+            if (style.has("height")) {
 
                 params.height = style.getInt("height");
             }
@@ -73,51 +73,52 @@ public class SyrStyler{
     static public void styleView(View component, JSONObject style) {
 
 
-            try {
+        try {
 
-                GradientDrawable gd = new GradientDrawable();
+            GradientDrawable gd = new GradientDrawable();
 
-                Drawable[] layers = {gd};
+            Drawable[] layers = {gd};
 
-                LayerDrawable layerDrawable = new LayerDrawable(layers);
-                if(style.has("backgroundColor")) {
-                    String backgroundColor = style.getString("backgroundColor");
-                    gd = new GradientDrawable(
-                            GradientDrawable.Orientation.TOP_BOTTOM,
-                            new int[] {getColor(backgroundColor), getColor(backgroundColor)});
-                }
-
-                if(style.has("borderRadius")) {
-                    float borderRadius = style.getInt("borderRadius");
-                    gd.setCornerRadius(borderRadius);
-                }
-
-                if(style.has("borderColor") && style.has("borderWidth")) {
-                    // borders on views
-                    gd.setStroke(style.getInt("borderWidth"), getColor(style.getString("borderColor")));
-
-                } else  if(style.has("borderColor")) {
-
-                    gd.setStroke(3, getColor(style.getString("borderColor")));
-                }
-
-                if(style.has("borderRightWidth") || style.has("borderLeftWidth")) {
-
-                    layerDrawable.setLayerInset(0, 6, -3, -3, -3);
-
-                    component.setBackground(layerDrawable);
-                } else {
-                    component.setBackground(gd);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+            LayerDrawable layerDrawable = new LayerDrawable(layers);
+            if (style.has("backgroundColor")) {
+                String backgroundColor = style.getString("backgroundColor");
+                gd = new GradientDrawable(
+                        GradientDrawable.Orientation.TOP_BOTTOM,
+                        new int[]{getColor(backgroundColor), getColor(backgroundColor)});
             }
 
+            if (style.has("borderRadius")) {
+                float borderRadius = style.getInt("borderRadius");
+                gd.setCornerRadius(borderRadius);
+            }
+
+            if (style.has("borderColor") && style.has("borderWidth")) {
+                // borders on views
+                gd.setStroke(style.getInt("borderWidth"), getColor(style.getString("borderColor")));
+
+            } else if (style.has("borderColor")) {
+
+                gd.setStroke(3, getColor(style.getString("borderColor")));
+            }
+
+            if (style.has("borderRightWidth") || style.has("borderLeftWidth")) {
+
+                layerDrawable.setLayerInset(0, 6, -3, -3, -3);
+
+                component.setBackground(layerDrawable);
+            } else {
+                component.setBackground(gd);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
+
     //
     static LayerDrawable getBorders(int bgColor, int borderColor,
-                                    int left, int top, int right, int bottom){
+                                    int left, int top, int right, int bottom) {
         // Initialize new color drawables
         ColorDrawable borderColorDrawable = new ColorDrawable(borderColor);
         ColorDrawable backgroundColorDrawable = new ColorDrawable(bgColor);
