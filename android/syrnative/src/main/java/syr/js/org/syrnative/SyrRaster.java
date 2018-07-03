@@ -2,13 +2,11 @@ package syr.js.org.syrnative;
 
 import android.content.Context;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import org.json.JSONArray;
@@ -39,7 +37,6 @@ public class SyrRaster {
     public HashMap<String, String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
-    private HashMap<String, String> mModuleCache = new HashMap<String, String>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
     private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -145,8 +142,13 @@ public class SyrRaster {
         });
     }
 
-    public void update(JSONObject ast) {
-        syncState(ast, null);
+    public void update(final JSONObject ast) {
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                syncState(ast, null);
+            }
+        });
     }
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
@@ -157,7 +159,6 @@ public class SyrRaster {
             //getting uuid of the component
             String tempUid = component.getString("uuid");
 
-            final String reUpdate;
             //checking to see if it has a key (component inside an array), if it does changing it to match the key set we have in the cache
 
             if (component.has("attributes")) {
@@ -238,17 +239,25 @@ public class SyrRaster {
                                 1.0f);
                         newComponent.setLayoutParams(params);
                     }
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //add component to the viewParent
-                            vParent.addView(newComponent);
-                            emitComponentDidMount(uuid);
-                        }
-                    });
+                    //@TODO this is the case when the uuid turns out undefined.
+                    // The app works fine if we ignore these but we need to figure out a solution for this soon
+                    if (vParent != null) {
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //add component to the viewParent
+                                vParent.addView(newComponent);
+                                emitComponentDidMount(uuid);
+                            }
+                        });
+                    } else {
+                        Log.i("noooo", "bad stuff happening here");
+                    }
+
                     if (newComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) newComponent;
                     }
+
 
                 }
             }
@@ -328,13 +337,13 @@ public class SyrRaster {
      * parse the AST sent from the Syr Bridge
      */
     public void buildInstanceTree(final JSONObject jsonObject) {
+
         try {
             final View component = createComponent(jsonObject);
             final JSONObject js = jsonObject;
 
             if (component != null) {
                 final String uuid = jsonObject.getString("uuid");
-                Log.d("uuid", uuid);
 
                 JSONArray children = jsonObject.getJSONArray("children");
 
@@ -381,9 +390,11 @@ public class SyrRaster {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
-    public void setupAnimation(JSONObject astDict) {
+    public void setupAnimation(final JSONObject astDict) {
         try {
             String animationStringify = astDict.getString("ast");
             JSONObject animation = new JSONObject(animationStringify);
