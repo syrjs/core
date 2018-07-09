@@ -12,6 +12,7 @@
 @interface SyrRootView()
 @property SyrCore* instance;
 @property NSDictionary* props;
+@property (nonatomic) NSString* resourcePath;
 @end
 
 @implementation SyrRootView
@@ -22,6 +23,10 @@
   if (self!=nil) {
   }
   return self;
+}
+
+-(NSString*) resourceBundlePath{
+  return _resourcePath;
 }
 
 - (NSDictionary*)appProperties {
@@ -44,6 +49,11 @@
     [_instance runApp:bundlePath rootView:self];
   }
   return self;
+}
+
+-(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps withResourceBundlePath: (NSString*) resourceBundlePath {
+  _resourcePath = resourceBundlePath;
+  return [self initWithBundlePath:bundlePath initialProperties:initialProps];
 }
 
 @end
