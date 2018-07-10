@@ -29,8 +29,8 @@ SYR_EXPORT_MODULE(Image)
     image = [UIImage imageNamed:source];
     if(image == nil) {
       NSString* resourceBundlePath = [[[SyrRaster sharedInstance] bridge] resourceBundlePath];
-      NSBundle* pyplbundle = [[NSBundle alloc] initWithPath:resourceBundlePath];
-      image = [UIImage imageNamed:source inBundle:pyplbundle compatibleWithTraitCollection:nil];
+      NSBundle* bundle = [[NSBundle alloc] initWithPath:resourceBundlePath];
+      image = [UIImage imageNamed:source inBundle:bundle compatibleWithTraitCollection:nil];
     }
   }
 
