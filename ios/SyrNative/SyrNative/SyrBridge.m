@@ -77,23 +77,13 @@
   // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
   
-// todo: lets abstract this out to the bundle manager
-// NSBundle* frameworkBundle = [NSBundle bundleForClass:[SyrBridge class]];
-// NSString* syrBundlePath = [frameworkBundle pathForResource:@"SyrNative" ofType:@"bundle"];
-// NSBundle* syrBundle = [NSBundle bundleWithPath:syrBundlePath];
-// NSString* syrBridgePath = [syrBundle pathForResource:@"app" ofType:@"html"];
-  
-  [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
-
-#if DEBUG
-  NSURL* syrBridgeUrl = [NSURL URLWithString:@"http://localhost:8080"];
-#else
-  NSBundle* mainBundle = [NSBundle mainBundle];
-  NSString* pyplBundlePath = [mainBundle pathForResource:@"PYPLCheckout" ofType:@"bundle"];
-  NSBundle* pyplBundle = [NSBundle bundleWithPath:pyplBundlePath];
-  NSString* filePath = [pyplBundle pathForResource:@"syrBundle" ofType:@"html"];
-  NSURL* syrBridgeUrl = [NSURL fileURLWithPath:filePath];
-#endif
+  NSURL* syrBridgeUrl;
+  if([withBundlePath containsString:@"http"]) {
+    syrBridgeUrl = [NSURL URLWithString:withBundlePath];
+  } else {
+    [_bridgedBrowser.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
+    syrBridgeUrl = [NSURL fileURLWithPath:withBundlePath];
+  }
 
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:YES];
   NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
@@ -144,6 +134,9 @@
                                   repeats:YES];
 }
 
+-(NSString*) resourceBundlePath{
+  return _rootView.resourceBundlePath;
+}
 
 - (void) heartBeat {
   NSString* js = [NSString stringWithFormat:@""];

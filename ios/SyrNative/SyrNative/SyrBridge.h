@@ -11,7 +11,9 @@
 #import "SyrRootView.h"
 
 @interface SyrBridge : NSObject <WKScriptMessageHandler, WKNavigationDelegate>
+@property (nonatomic)  NSString* resourceBundlePath;
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView;
+- (void) loadBundle:(NSString*)withBundlePath withRootView: (SyrRootView*)rootView withResourceBundlePath: (NSString*) resourceBundlePath;
 - (void) rasterRenderedComponent: (NSString*) withComponentId;
 - (void) rasterRemovedComponent: (NSString*) withComponentId;
 - (void) sendEvent: (NSDictionary*) message;
