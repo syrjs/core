@@ -190,52 +190,52 @@ public class SyrAnimator {
                 animationHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                ValueAnimator valueAnimator = ValueAnimator
-                        .ofInt(fromValue, toValue)
-                        .setDuration(duration);
+                        ValueAnimator valueAnimator = ValueAnimator
+                                .ofInt(fromValue, toValue)
+                                .setDuration(duration);
 
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(final ValueAnimator animation) {
-
-                        animationHandler.post(new Runnable() {
+                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
-                            public void run() {
-                                // get the value the interpolator is at
-                                Integer value = (Integer) animation.getAnimatedValue();
-                                // I'm going to set the layout's height 1:1 to the tick
-                                component.getLayoutParams().height = value.intValue();
-                                // force all layouts to see which ones are affected by
-                                // this layouts height change
-                                component.requestLayout();
+                            public void onAnimationUpdate(final ValueAnimator animation) {
+
+                                animationHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // get the value the interpolator is at
+                                        Integer value = (Integer) animation.getAnimatedValue();
+                                        // I'm going to set the layout's height 1:1 to the tick
+                                        component.getLayoutParams().height = value.intValue();
+                                        // force all layouts to see which ones are affected by
+                                        // this layouts height change
+                                        component.requestLayout();
+                                    }
+                                });
+
                             }
                         });
 
-                    }
-                });
-
-                valueAnimator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        animationHandler.post(new Runnable() {
+                        valueAnimator.addListener(new AnimatorListenerAdapter() {
                             @Override
-                            public void run() {
-                                try {
-                                    JSONObject eventMap = new JSONObject();
-                                    eventMap.put("type", "animationComplete");
-                                    eventMap.put("animation", jsonAnimation.toString());
-                                    eventMap.put("guid", guid);
-                                    bridge.sendEvent(eventMap);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                            public void onAnimationEnd(Animator animation) {
+                                animationHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            JSONObject eventMap = new JSONObject();
+                                            eventMap.put("type", "animationComplete");
+                                            eventMap.put("animation", jsonAnimation.toString());
+                                            eventMap.put("guid", guid);
+                                            bridge.sendEvent(eventMap);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                             }
                         });
-                    }
-                });
 
-                valueAnimator.start();
-                }
+                        valueAnimator.start();
+                    }
                 });
             }
 
