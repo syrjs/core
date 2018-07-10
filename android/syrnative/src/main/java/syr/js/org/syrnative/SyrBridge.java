@@ -40,9 +40,6 @@ public class SyrBridge {
     private Context mContext;
     private WebView mBridgedBrowser;
 
-    private HandlerThread thread = new HandlerThread("SyrWebViewThread");
-    private Handler webViewHandler;
-
     /**
      * Instantiate the interface and set the context
      */
@@ -82,8 +79,6 @@ public class SyrBridge {
     }
 
     public void loadBundle() {
-        thread.start();
-        webViewHandler = new Handler(thread.getLooper());
 
         final SyrBridge self = this;
         uiHandler.post(new Runnable() {

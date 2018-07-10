@@ -27,7 +27,8 @@ public class SyrAlertDialogue implements SyrBaseModule {
                             try {
 
                                 JSONObject eventMap = new JSONObject();
-                                eventMap.put("type", "alertDialogue");
+                                eventMap.put("type", "event");
+                                eventMap.put("name", "alertDialogue");
                                 eventMap.put("body", actions.getJSONObject(0).getString("title"));
                                 SyrEventHandler.getInstance().sendEvent(eventMap);
                             } catch (JSONException e) {
@@ -40,7 +41,8 @@ public class SyrAlertDialogue implements SyrBaseModule {
                             try {
 
                                 JSONObject eventMap = new JSONObject();
-                                eventMap.put("type", "alertDialogue");
+                                eventMap.put("type", "event");
+                                eventMap.put("name", "alertDialogue");
                                 eventMap.put("body", actions.getJSONObject(1).getString("title"));
                                 SyrEventHandler.getInstance().sendEvent(eventMap);
                             } catch (JSONException e) {

@@ -21,6 +21,8 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
         ScrollView scrollview = new ScrollView(context);
         JSONObject style = null;
 
+        //@TODO implement a horizontal scrollView
+
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
             JSONObject props = jsonInstance.getJSONObject("props");
@@ -35,7 +37,6 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
                         if (scrollview.getLayoutParams() != null) {
                             scrollview.getLayoutParams().width = style.getInt("width");
                         }
-
                     }
 
                     if (style.has("height")) {

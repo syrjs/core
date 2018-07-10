@@ -60,6 +60,8 @@ public class SyrRootView extends FrameLayout {
         mBridge = null;
         mRaster = null;
         mProps = null;
+        mInstance = null;
+        mLoaded = false;
     }
 
     @Override

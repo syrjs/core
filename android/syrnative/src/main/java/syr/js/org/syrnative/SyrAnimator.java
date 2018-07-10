@@ -5,8 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -185,50 +187,56 @@ public class SyrAnimator {
             }
 
             if (propertyName.contains("height")) {
-                ValueAnimator valueAnimator = ValueAnimator
-                        .ofInt(fromValue, toValue)
-                        .setDuration(duration);
-
-                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                animationHandler.post(new Runnable() {
                     @Override
-                    public void onAnimationUpdate(final ValueAnimator animation) {
+                    public void run() {
+                        ValueAnimator valueAnimator = ValueAnimator
+                                .ofInt(fromValue, toValue)
+                                .setDuration(duration);
 
-                        animationHandler.post(new Runnable() {
+                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
-                            public void run() {
-                                // get the value the interpolator is at
-                                Integer value = (Integer) animation.getAnimatedValue();
-                                // I'm going to set the layout's height 1:1 to the tick
-                                component.getLayoutParams().height = value.intValue();
-                                // force all layouts to see which ones are affected by
-                                // this layouts height change
-                                component.requestLayout();
+                            public void onAnimationUpdate(final ValueAnimator animation) {
+
+                                animationHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // get the value the interpolator is at
+                                        Integer value = (Integer) animation.getAnimatedValue();
+                                        // I'm going to set the layout's height 1:1 to the tick
+                                        component.getLayoutParams().height = value.intValue();
+                                        // force all layouts to see which ones are affected by
+                                        // this layouts height change
+                                        component.requestLayout();
+                                    }
+                                });
+
                             }
                         });
 
-                    }
-                });
-
-                valueAnimator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        animationHandler.post(new Runnable() {
+                        valueAnimator.addListener(new AnimatorListenerAdapter() {
                             @Override
-                            public void run() {
-                                try {
-                                    JSONObject eventMap = new JSONObject();
-                                    eventMap.put("type", "animationComplete");
-                                    eventMap.put("animation", jsonAnimation.toString());
-                                    eventMap.put("guid", guid);
-                                    bridge.sendEvent(eventMap);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                            public void onAnimationEnd(Animator animation) {
+                                animationHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            JSONObject eventMap = new JSONObject();
+                                            eventMap.put("type", "animationComplete");
+                                            eventMap.put("animation", jsonAnimation.toString());
+                                            eventMap.put("guid", guid);
+                                            bridge.sendEvent(eventMap);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                             }
                         });
+
+                        valueAnimator.start();
                     }
                 });
-                valueAnimator.start();
             }
 
             if (propertyName.contains("width")) {
@@ -279,4 +287,5 @@ public class SyrAnimator {
             }
         }
     }
+
 }

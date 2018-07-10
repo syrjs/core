@@ -14,7 +14,6 @@ import java.util.HashMap;
  */
 public class SyrEventHandler {
 
-    static private Handler uiHandler = new Handler(Looper.getMainLooper());
     public SyrBridge mBridge;
 
     private static SyrEventHandler sSyrEventHandler;

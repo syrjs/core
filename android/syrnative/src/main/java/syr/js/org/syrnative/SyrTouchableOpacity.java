@@ -98,6 +98,9 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                         case MotionEvent.ACTION_UP:
                             l.setAlpha(1);
                             break;
+                        case MotionEvent.ACTION_CANCEL:
+                            l.setAlpha(1);
+                            break;
                     }
                     return false;
                 }

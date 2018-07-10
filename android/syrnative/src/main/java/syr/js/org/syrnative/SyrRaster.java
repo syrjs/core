@@ -32,7 +32,6 @@ public class SyrRaster {
     private SyrRootView mRootview;
     private SyrBridge mBridge;
     public Handler uiHandler;
-    public Handler animationHandler;
     private List<SyrBaseModule> mModules;
     public HashMap<String, String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
@@ -154,7 +153,6 @@ public class SyrRaster {
     public void syncState(final JSONObject component, ViewGroup viewParent) {
 
         try {
-//            final String uuid = component.getString("uuid");
 
             //getting uuid of the component
             String tempUid = component.getString("uuid");
@@ -288,16 +286,16 @@ public class SyrRaster {
                 Boolean unmountChildInstance = component.getBoolean("unmount");
                 if (unmountChildInstance == true) {
                     mModuleInstances.remove(childuuid);
-//                        uiHandler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-                    if (instanceToRemove.getParent() != null) {
-                        ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
-                        parent.removeView(instanceToRemove);
-                        emitComponentDidUnMount(uuidToRemove);
-                    }
-//                            }
-//                        });
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (instanceToRemove.getParent() != null) {
+                                ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
+                                parent.removeView(instanceToRemove);
+                                emitComponentDidUnMount(uuidToRemove);
+                            }
+                        }
+                    });
                 }
             }
         } catch (JSONException e) {
@@ -306,8 +304,6 @@ public class SyrRaster {
     }
 
     public void syncChildren(final JSONObject component, final ViewGroup viewParent) {
-
-
         try {
             JSONArray children = component.getJSONArray("children");
             if (children != null && children.length() > 0) {
@@ -337,6 +333,7 @@ public class SyrRaster {
      * parse the AST sent from the Syr Bridge
      */
     public void buildInstanceTree(final JSONObject jsonObject) {
+
 
         try {
             final View component = createComponent(jsonObject);
@@ -455,6 +452,7 @@ public class SyrRaster {
     }
 
     private void buildChildren(JSONArray children, final ViewGroup viewParent, JSONObject renderedParent, JSONObject immediateParent) {
+
         try {
 
             for (int i = 0; i < children.length(); i++) {
@@ -492,12 +490,8 @@ public class SyrRaster {
 
                 if (component == null) {
                     buildChildren(childChildren, viewParent, renderedParent, child);
-                    uiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            emitComponentDidMount(uuid);
-                        }
-                    });
+                    emitComponentDidMount(uuid);
+
                 } else {
 
                     //checking to see if the parent is a stackView a.k.a LinearLayout
@@ -550,6 +544,7 @@ public class SyrRaster {
     }
 
     private View createComponent(final JSONObject child) {
+
         String className = null;
         View returnView = null;
         String uuid = null;
@@ -574,13 +569,14 @@ public class SyrRaster {
 
                     final View view = (View) mModuleInstances.get(child.getString("uuid"));
 
-
                     componentModule.render(child, mContext, view);
 
 
                 } else {
+
                     returnView = componentModule.render(child, mContext, null);
                     mModuleInstances.put(uuid, returnView);
+
                 }
 
             } catch (JSONException e) {
@@ -591,6 +587,7 @@ public class SyrRaster {
         } else {
             return null;
         }
+
 
     }
 }
