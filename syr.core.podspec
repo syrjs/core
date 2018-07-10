@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'Syr'
-  s.version          = '1.3.4-alpha'
+  s.name             = 'syr.core'
+  s.version          = '1.5.4'
   s.summary          = 'minimally obtrusive reactisque view engine, aimed at native developers'
 
 # This description is used to generate tags and improve search results.
@@ -19,22 +19,12 @@ Pod::Spec.new do |s|
 
   s.description      = 'Build dynamic UIs for Native Platforms, with less than 200kb of extra libraries! The goal of this library is provide Native SDK developers with the benefits of the React Native Eco System, with a much smaller footprint and reduced complexity.'
 
-  s.homepage         = 'https://dmikey.github.io/syr/'
+  s.homepage         = 'https://syr.js.org/'
   s.screenshots     = 'https://user-images.githubusercontent.com/328000/33408997-0ceecb7e-d52e-11e7-8f63-ca2f984751f7.gif'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Derek Anderson' => 'dereanderson@paypal.com' }
-  s.source           = { :git => 'https://github.com/dmikey/syr.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/SyrSDK'
-
-  s.ios.deployment_target = '8.0'
-
+  s.author           = { 'Derek Anderson' => 'toxigenicpoem@gmail.com' }
+  s.source           = { :git => 'https://github.com/syrjs/core.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/Syr_JS'
+  s.ios.deployment_target = '9.0'
   s.source_files = 'ios/SyrNative/SyrNative/**/*'
-
-  # s.resource_bundles = {
-  #   'Syr' => ['Syr/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

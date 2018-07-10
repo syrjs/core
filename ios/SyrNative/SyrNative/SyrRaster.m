@@ -75,9 +75,9 @@
 
   NSObject* componentInstance = [_components objectForKey:uuid];
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
-  NSObject* class = NSClassFromString(className);
+  Class class = NSClassFromString(className);
   
-  BOOL unmount = [component valueForKey:@"unmount"];
+  BOOL unmount = (BOOL)[component valueForKey:@"unmount"];
   if(unmount == YES) {
     // if the component is flagged for unmounting remove
     if(componentInstance != nil) {
@@ -88,11 +88,11 @@
     } else {
     
       NSArray* children = [component objectForKey:@"children"];
-      if(children != [NSNull null]) {
+      if(children != nil) {
         for(id child in children) {
             NSString* childuuid = [[child objectForKey:@"instance"] valueForKey:@"uuid"];
             UIView* childInstance = [_components objectForKey:childuuid];
-          	BOOL unmountChildInstance = [component valueForKey:@"unmount"];
+          	BOOL unmountChildInstance = (BOOL)[component valueForKey:@"unmount"];
             if(unmountChildInstance == YES) {
               [_components removeObjectForKey:childuuid];
               
@@ -113,7 +113,7 @@
   		// attempt to update instance
       if(componentInstance != nil && class != nil) {
           // we have an instance and a class, lets update this component
-          viewParent = componentInstance;
+          viewParent = (UIView*)componentInstance;
           SEL selector = NSSelectorFromString(@"render:withInstance:");
           if ([class respondsToSelector:selector]) {
             // invoke render method, pass component
@@ -128,7 +128,7 @@
       } else if(componentInstance == nil && class != nil) {
         // we don't have an instance, but a class exists
         // lets create this instance
-        UIView* newComponent = [self createComponent:component];
+        UIView* newComponent = (UIView*) [self createComponent:component];
         [_components setObject:newComponent forKey:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
         
         // todo: move this out of the raster cause it's also duplicated, and ewwwwww clean this class up Derek shame on me.
@@ -159,7 +159,7 @@
       }
     
       NSArray* children = [component objectForKey:@"children"];
-      if(children != [NSNull null]) {
+      if(children != nil) {
         NSString* key = nil;
         if ([component objectForKey:@"attributes"]) {
           NSDictionary* attributes = [component objectForKey:@"attributes"];

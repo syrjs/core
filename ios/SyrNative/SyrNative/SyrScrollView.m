@@ -56,7 +56,7 @@ SYR_EXPORT_MODULE(ScrollView)
   	}
   };
   
-  BOOL allowTouches = [props valueForKey:@"allowTouches"];
+  BOOL allowTouches = (BOOL)[props valueForKey:@"allowTouches"];
   if(allowTouches == YES) {
   	scrollView.panGestureRecognizer.cancelsTouchesInView = false;
   }

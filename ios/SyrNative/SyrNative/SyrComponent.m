@@ -11,11 +11,11 @@
 @implementation SyrComponent
 
 +(void) sendEventWithName:(NSString*)name body:(NSDictionary*) body {
-  
-  // EventEmitter.subscribe('foo', cb);
-  
-  // [self sendEventWithName:@"foo" body: @{@"foo":@"bar"};
   [[[SyrRaster sharedInstance] bridge] sendEvent:@{@"type":@"event", @"name": name, @"body": body}];
+}
+
++(NSObject*) render: (NSDictionary*) component withInstance: (NSObject*) componentInstance {
+  return [[UIView alloc] init];
 }
 
 @end
