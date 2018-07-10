@@ -5,8 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -185,6 +187,9 @@ public class SyrAnimator {
             }
 
             if (propertyName.contains("height")) {
+                animationHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
                 ValueAnimator valueAnimator = ValueAnimator
                         .ofInt(fromValue, toValue)
                         .setDuration(duration);
@@ -228,7 +233,10 @@ public class SyrAnimator {
                         });
                     }
                 });
+
                 valueAnimator.start();
+                }
+                });
             }
 
             if (propertyName.contains("width")) {
@@ -279,4 +287,5 @@ public class SyrAnimator {
             }
         }
     }
+
 }
