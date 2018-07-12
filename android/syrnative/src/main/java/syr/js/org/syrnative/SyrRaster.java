@@ -505,8 +505,6 @@ public class SyrRaster {
 
                 if (component instanceof ScrollView && children.length() > 1) {
                     final RelativeLayout relativeChild = new RelativeLayout(mContext);
-                    Log.i("calc", Integer.toString(getHeight(child)));
-                    Log.i("calc", child.toString());
                     RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,getHeight(child));
                     relativeChild.setLayoutParams(params);
                     uiHandler.post(new Runnable() {
