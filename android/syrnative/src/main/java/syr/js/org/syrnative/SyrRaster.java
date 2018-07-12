@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import org.json.JSONArray;
@@ -226,6 +227,11 @@ public class SyrRaster {
                     //if the updated component is a view group and has children
                     if (updatedComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) updatedComponent;
+                        if(viewParent instanceof  ScrollView) {
+                            if(viewParent.getChildAt(0).getLayoutParams() != null) {
+                                viewParent.getChildAt(0).getLayoutParams().height = getHeight(component);
+                            }
+                        }
                     }
                 } else if (componentInstance == null && componentModule != null) { //if it is a new renderable element that has not been rendered yet.
                     final View newComponent = createComponent(component);
@@ -235,6 +241,7 @@ public class SyrRaster {
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT,
                                 1.0f);
+
                         newComponent.setLayoutParams(params);
                     }
                     //@TODO this is the case when the uuid turns out undefined.
@@ -244,7 +251,12 @@ public class SyrRaster {
                             @Override
                             public void run() {
                                 //add component to the viewParent
-                                vParent.addView(newComponent);
+                                if(vParent instanceof ScrollView) {
+                                    ViewGroup firstChild = (ViewGroup) vParent.getChildAt(0);
+                                    firstChild.addView(newComponent);
+                                } else {
+                                    vParent.addView(newComponent);
+                                }
                                 emitComponentDidMount(uuid);
                             }
                         });
@@ -303,8 +315,9 @@ public class SyrRaster {
         }
     }
 
-    public void syncChildren(final JSONObject component, final ViewGroup viewParent) {
+    public void syncChildren(final JSONObject component, ViewGroup viewParent) {
         try {
+
             JSONArray children = component.getJSONArray("children");
             if (children != null && children.length() > 0) {
                 String key = null;
@@ -345,23 +358,16 @@ public class SyrRaster {
                 JSONArray children = jsonObject.getJSONArray("children");
 
                 if (component instanceof ScrollView && children.length() > 1) {
-                    JSONObject firstChild = new JSONObject();
-                    JSONObject style = new JSONObject();
-                    JSONObject firstChildInstance = jsonObject.getJSONObject("instance");
-                    firstChild.put("elementName", "View");
-                    firstChild.put("attributes", jsonObject.getJSONObject("attributes"));
-                    firstChild.put("children", children);
-                    //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
-                    firstChild.put("guid", jsonObject.getString("guid").concat("-1"));
-                    firstChild.put("uuid", uuid.concat("-1"));
-                    firstChildInstance.put("guid", jsonObject.getString("guid").concat("-1"));
-                    firstChildInstance.put("uuid", uuid.concat("-1"));
-
-                    style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
-                    style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
-                    firstChildInstance.put("style", style);
-                    firstChild.put("instance", firstChildInstance);
-                    children = new JSONArray().put(firstChild);
+                    final RelativeLayout relativeChild = new RelativeLayout(mContext);
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,getHeight(jsonObject));
+                    relativeChild.setLayoutParams(params);
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ViewGroup scroll = (ViewGroup) component;
+                            scroll.addView(relativeChild);
+                        }
+                    });
                 }
 
                 if (children.length() > 0) {
@@ -451,6 +457,35 @@ public class SyrRaster {
 
     }
 
+    public int getHeight(JSONObject component) {
+        int height = 0;
+        try{
+            JSONArray children = component.getJSONArray("children");
+            JSONObject style = null;
+            for(int i=0; i< children.length(); i++) {
+                JSONObject child = children.getJSONObject(i);
+                JSONObject jsonInstance = child.getJSONObject("instance");
+                if (jsonInstance.has("style")) {
+                    style = jsonInstance.getJSONObject("style");
+                    if (style.has("height")) {
+                        Object childHeight = style.get("height");
+                        if (childHeight instanceof Integer) {
+                            height = height + (Integer) childHeight;
+                        }else {
+                            height = height + getHeight(child);
+                        }
+                    }
+                } else {
+                    height = height + getHeight(child);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return height;
+    }
+
+
     private void buildChildren(JSONArray children, final ViewGroup viewParent, JSONObject renderedParent, JSONObject immediateParent) {
 
         try {
@@ -469,23 +504,18 @@ public class SyrRaster {
                 final String uuid = tempUid;
 
                 if (component instanceof ScrollView && children.length() > 1) {
-                    JSONObject firstChild = new JSONObject();
-                    JSONObject style = new JSONObject();
-                    JSONObject firstChildInstance = child.getJSONObject("instance");
-                    firstChild.put("elementName", "View");
-                    firstChild.put("attributes", child.getJSONObject("attributes"));
-                    firstChild.put("children", childChildren);
-                    //this will emit an unecessary event to the JS layer, which will not be listened. Will get rid of this as soon as we finish everything. Pinky Promise!!!
-                    firstChild.put("guid", child.getString("guid").concat("-1"));
-                    firstChild.put("uuid", uuid.concat("-1"));
-                    firstChildInstance.put("guid", child.getString("guid").concat("-1"));
-                    firstChildInstance.put("uuid", uuid.concat("-1"));
-
-                    style.put("height", firstChildInstance.getJSONObject("style").getInt("height"));
-                    style.put("width", firstChildInstance.getJSONObject("style").getInt("width"));
-                    firstChildInstance.put("style", style);
-                    firstChild.put("instance", firstChildInstance);
-                    childChildren = new JSONArray().put(firstChild);
+                    final RelativeLayout relativeChild = new RelativeLayout(mContext);
+                    Log.i("calc", Integer.toString(getHeight(child)));
+                    Log.i("calc", child.toString());
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,getHeight(child));
+                    relativeChild.setLayoutParams(params);
+                    uiHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                           ViewGroup scroll = (ViewGroup) component;
+                            scroll.addView(relativeChild);
+                        }
+                    });
                 }
 
                 if (component == null) {
@@ -519,6 +549,7 @@ public class SyrRaster {
 
                     }
 
+
                     //@TODO need better handling
                     uiHandler.post(new Runnable() {
                         @Override
@@ -527,8 +558,12 @@ public class SyrRaster {
                                 ViewGroup parent = (ViewGroup) component.getParent();
                                 parent.removeView(component);
                             }
-
-                            viewParent.addView(component);
+                            if(viewParent instanceof ScrollView) {
+                                ViewGroup firstChild = (ViewGroup) viewParent.getChildAt(0);
+                                firstChild.addView(component);
+                            } else {
+                                viewParent.addView(component);
+                            }
                             emitComponentDidMount(uuid);
                         }
                     });
