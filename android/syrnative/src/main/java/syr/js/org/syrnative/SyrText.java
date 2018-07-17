@@ -95,6 +95,10 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                 }
             }
 
+            //@TODO check with this. Looks like a default behaviour in iOS
+
+            textView.setGravity(Gravity.CENTER_VERTICAL);
+
             if (style.has("maxLines")) {
                 textView.setLines(style.getInt("maxLines"));
             } else {

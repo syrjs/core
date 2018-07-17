@@ -2,8 +2,6 @@ package syr.js.org.syrnative;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import org.json.JSONException;
@@ -18,7 +16,13 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
     @Override
     public View render(JSONObject component, Context context, View instance) {
 
-        ScrollView scrollview = new ScrollView(context);
+        ScrollView scrollview;
+        if(instance != null) {
+            scrollview = (ScrollView) instance;
+        } else {
+            scrollview = new ScrollView(context);
+
+        }
         JSONObject style = null;
 
         //@TODO implement a horizontal scrollView
@@ -62,6 +66,8 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
             e.printStackTrace();
         }
 
+        scrollview.setFillViewport(true);
+        scrollview.setSmoothScrollingEnabled(true);
         return scrollview;
     }
 
