@@ -14,7 +14,7 @@ public class SyrAnimatedImage extends SyrImage {
     public View render(JSONObject component, Context context, View instance) {
 
         View animatedImage = super.render(component, context, instance);
-        animatedImage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        animatedImage.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         return animatedImage;
 
     }
