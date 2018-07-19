@@ -39,6 +39,7 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
             if (instance == null) {
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
+                layout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
             } else {
 
@@ -108,7 +109,6 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return layout;
     }
 

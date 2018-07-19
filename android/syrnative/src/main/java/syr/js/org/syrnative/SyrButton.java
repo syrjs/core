@@ -3,6 +3,7 @@ package syr.js.org.syrnative;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -69,6 +70,8 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     button.setLayoutParams(SyrStyler.styleLayout(style));
+                    button.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
                 } else {
                     if (style.has("width")) {
 
@@ -101,16 +104,40 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
                 if (style.has("top")) {
                     button.setY(style.getInt("top"));
                 }
-
-
             }
+
             // set button label/text
             button.setText(jsonInstance.getString("value"));
+
+            //touchableOPacity effect for button since we are setting the state list animator to null. Need to couple this with the optional
+            //for using the default android button behaviour
+            final Button b = button;
+            button.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            b.setAlpha((float) 0.3);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            b.setAlpha(1);
+                            break;
+                        case MotionEvent.ACTION_CANCEL:
+                            b.setAlpha(1);
+                            break;
+                    }
+                    return false;
+                }
+            });
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        //TODO: Depending on a prop we need add the drop shadow/default android button behaviour
+
+        //no default drop shadow
+        button.setStateListAnimator(null);
         return button;
     }
 

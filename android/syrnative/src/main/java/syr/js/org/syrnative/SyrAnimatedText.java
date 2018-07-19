@@ -14,7 +14,6 @@ public class SyrAnimatedText extends SyrText {
     @Override
     public View render(JSONObject component, Context context, View instance) {
         View animatedText = super.render(component, context, instance);
-        animatedText.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         return animatedText;
     }
 

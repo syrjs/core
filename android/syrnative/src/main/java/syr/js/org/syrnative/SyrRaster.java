@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -38,10 +39,6 @@ public class SyrRaster {
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
     public ArrayList<String> exportedMethods = new ArrayList<String>();
-    private LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            1.0f);
 
     /**
      * Instantiate the interface and set the context
@@ -118,37 +115,28 @@ public class SyrRaster {
     }
 
     public void parseAST(final JSONObject jsonObject) {
-        uiHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-                    Boolean Update = ast.has("update");
-                    if (ast.has("update")) {
-                        Boolean isUpdate = ast.getBoolean("update");
-                        if (isUpdate) {
-                            update(ast);
-                        } else {
-                            buildInstanceTree(ast);
-                        }
-                    } else {
-                        buildInstanceTree(ast);
-                    }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        try {
+            final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
+            if (ast.has("update")) {
+                Boolean isUpdate = ast.getBoolean("update");
+                if (isUpdate) {
+                    update(ast);
+                } else {
+                    buildInstanceTree(ast);
                 }
+            } else {
+                buildInstanceTree(ast);
             }
-        });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void update(final JSONObject ast) {
-        uiHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                syncState(ast, null);
-            }
-        });
+        syncState(ast, null);
+
     }
 
     public void syncState(final JSONObject component, ViewGroup viewParent) {
@@ -227,8 +215,8 @@ public class SyrRaster {
                     //if the updated component is a view group and has children
                     if (updatedComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) updatedComponent;
-                        if(viewParent instanceof  ScrollView) {
-                            if(viewParent.getChildAt(0).getLayoutParams() != null) {
+                        if (viewParent instanceof ScrollView) {
+                            if (viewParent.getChildAt(0).getLayoutParams() != null) {
                                 viewParent.getChildAt(0).getLayoutParams().height = getHeight(component);
                             }
                         }
@@ -251,7 +239,7 @@ public class SyrRaster {
                             @Override
                             public void run() {
                                 //add component to the viewParent
-                                if(vParent instanceof ScrollView) {
+                                if (vParent instanceof ScrollView) {
                                     ViewGroup firstChild = (ViewGroup) vParent.getChildAt(0);
                                     firstChild.addView(newComponent);
                                 } else {
@@ -359,7 +347,7 @@ public class SyrRaster {
 
                 if (component instanceof ScrollView && children.length() > 1) {
                     final RelativeLayout relativeChild = new RelativeLayout(mContext);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,getHeight(jsonObject));
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, getHeight(jsonObject));
                     relativeChild.setLayoutParams(params);
                     uiHandler.post(new Runnable() {
                         @Override
@@ -393,8 +381,6 @@ public class SyrRaster {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void setupAnimation(final JSONObject astDict) {
@@ -406,7 +392,7 @@ public class SyrRaster {
                 String animatedTarget = animation.getString("guid");
                 View animationTarget = (View) mModuleInstances.get(animatedTarget);
                 if (animationTarget != null) {
-                    SyrAnimator.animate(animationTarget, animation, mBridge);
+                    SyrAnimator.animate(animationTarget, animation, mBridge, uiHandler);
                 }
             } else {
                 Log.i("here", "there");
@@ -459,10 +445,10 @@ public class SyrRaster {
 
     public int getHeight(JSONObject component) {
         int height = 0;
-        try{
+        try {
             JSONArray children = component.getJSONArray("children");
             JSONObject style = null;
-            for(int i=0; i< children.length(); i++) {
+            for (int i = 0; i < children.length(); i++) {
                 JSONObject child = children.getJSONObject(i);
                 JSONObject jsonInstance = child.getJSONObject("instance");
                 if (jsonInstance.has("style")) {
@@ -471,7 +457,7 @@ public class SyrRaster {
                         Object childHeight = style.get("height");
                         if (childHeight instanceof Integer) {
                             height = height + (Integer) childHeight;
-                        }else {
+                        } else {
                             height = height + getHeight(child);
                         }
                     }
@@ -505,12 +491,12 @@ public class SyrRaster {
 
                 if (component instanceof ScrollView && children.length() > 1) {
                     final RelativeLayout relativeChild = new RelativeLayout(mContext);
-                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,getHeight(child));
+                    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, getHeight(child));
                     relativeChild.setLayoutParams(params);
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                           ViewGroup scroll = (ViewGroup) component;
+                            ViewGroup scroll = (ViewGroup) component;
                             scroll.addView(relativeChild);
                         }
                     });
@@ -556,7 +542,7 @@ public class SyrRaster {
                                 ViewGroup parent = (ViewGroup) component.getParent();
                                 parent.removeView(component);
                             }
-                            if(viewParent instanceof ScrollView) {
+                            if (viewParent instanceof ScrollView) {
                                 ViewGroup firstChild = (ViewGroup) viewParent.getChildAt(0);
                                 firstChild.addView(component);
                             } else {
@@ -602,7 +588,12 @@ public class SyrRaster {
 
                     final View view = (View) mModuleInstances.get(child.getString("uuid"));
 
-                    componentModule.render(child, mContext, view);
+                    uiHandler.postAtFrontOfQueue(new Runnable() {
+                        @Override
+                        public void run() {
+                            componentModule.render(child, mContext, view);
+                        }
+                    });
 
 
                 } else {

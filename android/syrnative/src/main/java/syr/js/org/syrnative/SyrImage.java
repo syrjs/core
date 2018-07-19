@@ -11,6 +11,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -48,6 +50,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     imageView.setLayoutParams(SyrStyler.styleLayout(style));
+                    imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 } else {
                     if (style.has("width")) {
 
@@ -74,18 +77,33 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     imageView.setY(style.getInt("top"));
                 }
             }
-
             if (jsonProps.has("source")) {
+
                 // grabs the source url if present
                 source = jsonProps.getJSONObject("source");
                 String path = source.getString("uri");
 
                 // check if image exists in Resources
-                int pathExists = context.getResources().getIdentifier(path, "drawable", context.getPackageName());
-
+                final int pathExists = context.getResources().getIdentifier(path, "drawable", context.getPackageName());
+//
                 if (pathExists != 0) {
-                    // if exist set image
-                    imageView.setImageResource(pathExists);
+                    final ImageView iv = imageView;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // if exist set image
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    iv.setImageResource(pathExists);
+
+                                }
+
+                            });
+                        }
+                    }).start();
+//                    imageView.setImageResource(pathExists);
+
                 } else {
                     //Assume that its a url for now and try to fetch it in a background task
                     new DownloadImageTask(imageView, style).execute(path);
@@ -96,10 +114,10 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 // throw red box because missing source prop entirely
             }
 
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         return imageView;
     }
@@ -141,8 +159,11 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     final Paint paint = new Paint();
                     final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
                     final RectF rectF = new RectF(rect);
-                    final float roundPx = style.getInt("borderRadius");
+                    float roundPx = 0;
+                    if (style.has("borderRadius")) {
+                        roundPx = style.getInt("borderRadius");
 
+                    }
                     paint.setAntiAlias(true);
                     canvas.drawARGB(0, 0, 0, 0);
                     paint.setColor(color);
