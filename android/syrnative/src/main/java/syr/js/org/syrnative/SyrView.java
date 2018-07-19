@@ -33,6 +33,8 @@ public class SyrView implements SyrBaseModule, SyrComponent {
                 style = componentInstance.getJSONObject("style");
                 if (instance == null) {
                     layout.setLayoutParams(SyrStyler.styleLayout(style));
+                    layout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
 
                 } else {
 
@@ -77,7 +79,6 @@ public class SyrView implements SyrBaseModule, SyrComponent {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return layout;
     }
 
@@ -86,13 +87,4 @@ public class SyrView implements SyrBaseModule, SyrComponent {
         return "View";
     }
 
-    @SyrMethod
-    // java.lang.String , int
-
-    // {NativeModules} from 'syr'
-    // NativeModules.SyrView.testExportMethod('foo', 100);
-    public void testExportMethod(String message, int duration) {
-        message = message + "  " + this.getClass().getName();
-        Log.i(message, message);
-    }
 }
