@@ -286,7 +286,7 @@ public class SyrRaster {
                 Boolean unmountChildInstance = component.getBoolean("unmount");
                 if (unmountChildInstance == true) {
                     mModuleInstances.remove(childuuid);
-                    uiHandler.postDelayed(new Runnable() {
+                    uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             if (instanceToRemove.getParent() != null) {
@@ -295,7 +295,7 @@ public class SyrRaster {
                                 emitComponentDidUnMount(uuidToRemove);
                             }
                         }
-                    }, 0);
+                    });
                 }
             }
         } catch (JSONException e) {
