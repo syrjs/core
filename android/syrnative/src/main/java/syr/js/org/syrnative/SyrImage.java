@@ -160,7 +160,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
                     final RectF rectF = new RectF(rect);
                     float roundPx = 0;
-                    if(style.has("borderRadius")) {
+                    if (style.has("borderRadius")) {
                         roundPx = style.getInt("borderRadius");
 
                     }
