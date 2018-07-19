@@ -49,6 +49,8 @@ public class SyrText implements SyrBaseModule, SyrComponent {
 
                 if (instance == null) {
                     textView.setLayoutParams(SyrStyler.styleLayout(style));
+                    textView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
                 } else {
 
                     if (style.has("width")) {
@@ -108,15 +110,13 @@ public class SyrText implements SyrBaseModule, SyrComponent {
             }
 
             value = jsonInstance.getString("value");
-            textView.setText(value);
+            if (textView.getText().toString() != value) {
+                textView.setText(value);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        //truncating the textView, so the it does not break the content
-//        textView.setEllipsize(TextUtils.TruncateAt.END);
-//        textView.setSingleLine(true);
 
 
         return textView;
