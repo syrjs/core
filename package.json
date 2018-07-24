@@ -50,5 +50,10 @@
   },
   "dependencies": {
     "@syr/jsx": "^1.0.0"
+  },
+  "syr": {
+    "ios": {
+      "project" : "ios/SyrNative/SyrNative.xcodeproj"
+    }
   }
 }
