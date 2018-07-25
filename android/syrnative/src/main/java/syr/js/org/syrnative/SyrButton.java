@@ -10,8 +10,6 @@ import android.widget.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-
 /**
  * Created by dereanderson on 1/9/18.
  */

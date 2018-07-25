@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -13,7 +12,6 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,11 +36,8 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
         } else {
             imageView = new ImageView(context);
         }
-        String value = "";
         JSONObject style = null;
         JSONObject source = null;
-        Integer left = 0;
-        Integer top = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
@@ -167,7 +162,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     paint.setAntiAlias(true);
                     canvas.drawARGB(0, 0, 0, 0);
                     paint.setColor(color);
-                    canvas.drawRoundRect(rectF, bitmap.getWidth()/2, bitmap.getHeight()/2, paint);
+                    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
 
                     paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
                     canvas.drawBitmap(bitmap, rect, rect, paint);

@@ -1,7 +1,6 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 

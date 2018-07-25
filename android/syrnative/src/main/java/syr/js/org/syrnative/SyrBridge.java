@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
