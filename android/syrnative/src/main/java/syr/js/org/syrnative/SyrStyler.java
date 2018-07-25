@@ -91,7 +91,6 @@ public class SyrStyler {
 
             if (style.has("borderRadius")) {
                 float borderRadius = BigDecimal.valueOf(style.getDouble("borderRadius")).floatValue();
-                ;
                 gd.setCornerRadius(borderRadius);
             }
 
