@@ -118,7 +118,7 @@ public class SyrRaster {
 
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            if (ast.has("update")) {
+            if (ast.has("update") ) {
                 Boolean isUpdate = ast.getBoolean("update");
                 if (isUpdate) {
                     update(ast);
@@ -145,14 +145,18 @@ public class SyrRaster {
 
             //getting uuid of the component
             String tempUid = component.getString("uuid");
+            Boolean functionalComponent = false;
 
-            //checking to see if it has a key (component inside an array), if it does changing it to match the key set we have in the cache
+            //checking to see if it has a key (component inside an array), if it does....changing it to match the key set we have in the cache
 
             if (component.has("attributes")) {
                 if (component.getJSONObject("attributes").has("key")) {
+                    functionalComponent = true;
                     tempUid = tempUid.concat(component.getJSONObject("attributes").getString("key"));
                 }
             }
+
+            final Boolean sendComponentDidMount = !functionalComponent;
 
             final String uuid = tempUid;
 
@@ -196,7 +200,9 @@ public class SyrRaster {
                             final ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                             if (instanceToRemove.getParent() != null) {
                                 parent.removeView(instanceToRemove);
-                                emitComponentDidUnMount(uuid);
+                                if(sendComponentDidMount) {
+                                    emitComponentDidUnMount(uuid);
+                                }
                             }
                             //@TODO need to assign a new viewParent Here since we took out the current one
 //                            viewParent = parent;
@@ -217,6 +223,8 @@ public class SyrRaster {
                         viewParent = (ViewGroup) updatedComponent;
                         if (viewParent instanceof ScrollView) {
                             if (viewParent.getChildAt(0).getLayoutParams() != null) {
+                                Log.i("firstCHild", viewParent.getChildAt(0).toString());
+                                Log.i("height", Integer.toString(getHeight(component)));
                                 viewParent.getChildAt(0).getLayoutParams().height = getHeight(component);
                             }
                         }
@@ -305,7 +313,6 @@ public class SyrRaster {
 
     public void syncChildren(final JSONObject component, ViewGroup viewParent) {
         try {
-
             JSONArray children = component.getJSONArray("children");
             if (children != null && children.length() > 0) {
                 String key = null;
@@ -481,12 +488,16 @@ public class SyrRaster {
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
                 String tempUid = child.getString("uuid");
-                ;
+                Boolean functionalComponent = false;
+
                 if (child.has("attributes")) {
                     if (child.getJSONObject("attributes").has("key")) {
+                        functionalComponent = true;
                         tempUid = tempUid.concat(child.getJSONObject("attributes").getString("key"));
                     }
                 }
+
+                final Boolean sendComponentDidMount = !functionalComponent;
                 final String uuid = tempUid;
 
                 if (component instanceof ScrollView && children.length() > 1) {
@@ -504,8 +515,6 @@ public class SyrRaster {
 
                 if (component == null) {
                     buildChildren(childChildren, viewParent, renderedParent, child);
-                    emitComponentDidMount(uuid);
-
                 } else {
 
                     //checking to see if the parent is a stackView a.k.a LinearLayout
@@ -533,7 +542,6 @@ public class SyrRaster {
 
                     }
 
-
                     //@TODO need better handling
                     uiHandler.post(new Runnable() {
                         @Override
@@ -548,13 +556,16 @@ public class SyrRaster {
                             } else {
                                 viewParent.addView(component);
                             }
-                            emitComponentDidMount(uuid);
+
                         }
                     });
 
                     if (component instanceof ViewGroup) {
                         buildChildren(childChildren, (ViewGroup) component, child, child);
                     }
+                }
+                if(sendComponentDidMount) {
+                    emitComponentDidMount(uuid);
                 }
             }
         } catch (JSONException e) {
@@ -588,7 +599,7 @@ public class SyrRaster {
 
                     final View view = (View) mModuleInstances.get(child.getString("uuid"));
 
-                    uiHandler.postAtFrontOfQueue(new Runnable() {
+                    uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             componentModule.render(child, mContext, view);
