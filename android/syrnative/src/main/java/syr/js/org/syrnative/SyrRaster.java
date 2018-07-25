@@ -222,8 +222,6 @@ public class SyrRaster {
                         viewParent = (ViewGroup) updatedComponent;
                         if (viewParent instanceof ScrollView) {
                             if (viewParent.getChildAt(0).getLayoutParams() != null) {
-                                Log.i("firstCHild", viewParent.getChildAt(0).toString());
-                                Log.i("height", Integer.toString(getHeight(component)));
                                 viewParent.getChildAt(0).getLayoutParams().height = getHeight(component);
                             }
                         }
