@@ -10,6 +10,8 @@ import android.os.Vibrator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 import static android.content.Context.VIBRATOR_SERVICE;
 
 
@@ -39,7 +41,6 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
 
             if (instance == null) {
                 layout.setLayoutParams(SyrStyler.styleLayout(style));
-                layout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
             } else {
 
@@ -58,11 +59,11 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
             }
 
             if (style.has("left")) {
-                layout.setX(style.getInt("left"));
+                layout.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
             }
 
             if (style.has("top")) {
-                layout.setY(style.getInt("top"));
+                layout.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
             }
 
             if (style.has("opacity")) {
@@ -77,7 +78,7 @@ public class SyrTouchableOpacity implements SyrBaseModule, SyrComponent {
                 public void onClick(View v) {
                     try {
                         //@TODO: Make predefined vibrations like iOS and connect this to a prop
-//                         myVib.vibrate(50);
+//                         myVib.vibrate(1);
                         JSONObject eventMap = new JSONObject();
                         eventMap.put("type", "onPress");
                         eventMap.put("guid", uuid);

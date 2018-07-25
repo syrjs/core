@@ -70,7 +70,6 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     button.setLayoutParams(SyrStyler.styleLayout(style));
-                    button.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
                 } else {
                     if (style.has("width")) {

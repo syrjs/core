@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -50,7 +52,6 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     imageView.setLayoutParams(SyrStyler.styleLayout(style));
-                    imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 } else {
                     if (style.has("width")) {
 
@@ -70,11 +71,11 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 SyrStyler.styleView(imageView, style);
 
                 if (style.has("left")) {
-                    imageView.setX(style.getInt("left"));
+                    imageView.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                 }
 
                 if (style.has("top")) {
-                    imageView.setY(style.getInt("top"));
+                    imageView.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                 }
             }
             if (jsonProps.has("source")) {
@@ -161,13 +162,12 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     final RectF rectF = new RectF(rect);
                     float roundPx = 0;
                     if (style.has("borderRadius")) {
-                        roundPx = style.getInt("borderRadius");
-
+                        roundPx = BigDecimal.valueOf(style.getDouble("borderRadius")).floatValue();
                     }
                     paint.setAntiAlias(true);
                     canvas.drawARGB(0, 0, 0, 0);
                     paint.setColor(color);
-                    canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+                    canvas.drawRoundRect(rectF, bitmap.getWidth()/2, bitmap.getHeight()/2, paint);
 
                     paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
                     canvas.drawBitmap(bitmap, rect, rect, paint);
