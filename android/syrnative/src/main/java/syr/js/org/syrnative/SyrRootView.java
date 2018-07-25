@@ -7,8 +7,6 @@ import android.widget.FrameLayout;
 
 import org.json.JSONObject;
 
-import java.util.Map;
-
 /**
  * Syr Project
  * https://syr.js.org

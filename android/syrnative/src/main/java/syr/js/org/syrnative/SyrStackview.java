@@ -7,6 +7,8 @@ import android.widget.LinearLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -63,11 +65,11 @@ public class SyrStackview implements SyrBaseModule, SyrComponent {
                     }
 
                     if (style.has("left")) {
-                        left = style.getInt("left");
+                        linearLayout.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                     }
 
                     if (style.has("top")) {
-                        top = style.getInt("top");
+                        linearLayout.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                     }
 
                     linearLayout.setLayoutParams(params);

@@ -7,11 +7,12 @@ import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.BigDecimal;
 
 /**
  * Created by dereanderson on 1/9/18.
@@ -40,16 +41,15 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
 
                 if (style.has("left")) {
-                    textView.setX(style.getInt("left"));
+                    textView.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                 }
 
                 if (style.has("top")) {
-                    textView.setY(style.getInt("top"));
+                    textView.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                 }
 
                 if (instance == null) {
                     textView.setLayoutParams(SyrStyler.styleLayout(style));
-                    textView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
                 } else {
 

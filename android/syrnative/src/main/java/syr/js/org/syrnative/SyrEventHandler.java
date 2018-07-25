@@ -1,11 +1,7 @@
 package syr.js.org.syrnative;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import org.json.JSONObject;
 
-import java.util.HashMap;
 
 /**
  * Syr Project

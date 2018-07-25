@@ -7,11 +7,12 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.BigDecimal;
 
 /**
  * Created by dereanderson on 1/9/18.
@@ -57,6 +58,7 @@ public class SyrStyler {
 
                 params.width = style.getInt("width");
 
+
             }
 
             if (style.has("height")) {
@@ -88,7 +90,7 @@ public class SyrStyler {
             }
 
             if (style.has("borderRadius")) {
-                float borderRadius = style.getInt("borderRadius");
+                float borderRadius = BigDecimal.valueOf(style.getDouble("borderRadius")).floatValue();
                 gd.setCornerRadius(borderRadius);
             }
 

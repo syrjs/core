@@ -7,6 +7,8 @@ import android.widget.ScrollView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+
 /**
  * Created by dereanderson on 1/10/18.
  */
@@ -17,7 +19,7 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         ScrollView scrollview;
-        if(instance != null) {
+        if (instance != null) {
             scrollview = (ScrollView) instance;
         } else {
             scrollview = new ScrollView(context);
@@ -54,11 +56,11 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
                 SyrStyler.styleView(scrollview, style);
 
                 if (style.has("left")) {
-                    scrollview.setX(style.getInt("left"));
+                    scrollview.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                 }
 
                 if (style.has("top")) {
-                    scrollview.setY(style.getInt("top"));
+                    scrollview.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                 }
 
             }

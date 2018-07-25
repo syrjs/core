@@ -10,8 +10,6 @@ import android.widget.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-
 /**
  * Created by dereanderson on 1/9/18.
  */
@@ -70,7 +68,6 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     button.setLayoutParams(SyrStyler.styleLayout(style));
-                    button.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
                 } else {
                     if (style.has("width")) {

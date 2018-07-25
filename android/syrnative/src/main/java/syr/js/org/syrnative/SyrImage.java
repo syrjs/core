@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -20,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 
 /**
  * Created by dereanderson on 1/10/18.
@@ -36,11 +36,8 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
         } else {
             imageView = new ImageView(context);
         }
-        String value = "";
         JSONObject style = null;
         JSONObject source = null;
-        Integer left = 0;
-        Integer top = 0;
 
         try {
             JSONObject jsonInstance = component.getJSONObject("instance");
@@ -50,7 +47,6 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 style = jsonInstance.getJSONObject("style");
                 if (instance == null) {
                     imageView.setLayoutParams(SyrStyler.styleLayout(style));
-                    imageView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 } else {
                     if (style.has("width")) {
 
@@ -70,11 +66,11 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                 SyrStyler.styleView(imageView, style);
 
                 if (style.has("left")) {
-                    imageView.setX(style.getInt("left"));
+                    imageView.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                 }
 
                 if (style.has("top")) {
-                    imageView.setY(style.getInt("top"));
+                    imageView.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                 }
             }
             if (jsonProps.has("source")) {
@@ -161,8 +157,7 @@ public class SyrImage implements SyrBaseModule, SyrComponent {
                     final RectF rectF = new RectF(rect);
                     float roundPx = 0;
                     if (style.has("borderRadius")) {
-                        roundPx = style.getInt("borderRadius");
-
+                        roundPx = BigDecimal.valueOf(style.getDouble("borderRadius")).floatValue();
                     }
                     paint.setAntiAlias(true);
                     canvas.drawARGB(0, 0, 0, 0);

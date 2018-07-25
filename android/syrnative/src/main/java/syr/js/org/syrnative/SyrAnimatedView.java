@@ -2,9 +2,7 @@ package syr.js.org.syrnative;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.RelativeLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**

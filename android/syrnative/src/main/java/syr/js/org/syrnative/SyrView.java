@@ -1,12 +1,13 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.math.BigDecimal;
 
 /**
  * Syr Project
@@ -33,9 +34,6 @@ public class SyrView implements SyrBaseModule, SyrComponent {
                 style = componentInstance.getJSONObject("style");
                 if (instance == null) {
                     layout.setLayoutParams(SyrStyler.styleLayout(style));
-                    layout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
-
                 } else {
 
                     if (style.has("width")) {
@@ -52,16 +50,17 @@ public class SyrView implements SyrBaseModule, SyrComponent {
 
                 }
                 if (style.has("left")) {
-                    layout.setX(style.getInt("left"));
+                    layout.setX(BigDecimal.valueOf(style.getDouble("left")).floatValue());
                 }
 
                 if (style.has("top")) {
-                    layout.setY(style.getInt("top"));
+                    layout.setY(BigDecimal.valueOf(style.getDouble("top")).floatValue());
                 }
 
                 if (style.has("opacity")) {
-                    layout.setAlpha(style.getInt("opacity"));
+                    layout.setAlpha(BigDecimal.valueOf(style.getDouble("opacity")).floatValue());
                 }
+
                 SyrStyler.styleView(layout, style);
 
 
