@@ -19,7 +19,7 @@ public class SyrScrollview implements SyrBaseModule, SyrComponent {
     public View render(JSONObject component, Context context, View instance) {
 
         ScrollView scrollview;
-        if(instance != null) {
+        if (instance != null) {
             scrollview = (ScrollView) instance;
         } else {
             scrollview = new ScrollView(context);

@@ -118,7 +118,7 @@ public class SyrRaster {
 
         try {
             final JSONObject ast = new JSONObject(jsonObject.getString("ast"));
-            if (ast.has("update") ) {
+            if (ast.has("update")) {
                 Boolean isUpdate = ast.getBoolean("update");
                 if (isUpdate) {
                     update(ast);
@@ -200,7 +200,7 @@ public class SyrRaster {
                             final ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                             if (instanceToRemove.getParent() != null) {
                                 parent.removeView(instanceToRemove);
-                                if(sendComponentDidMount) {
+                                if (sendComponentDidMount) {
                                     emitComponentDidUnMount(uuid);
                                 }
                             }
@@ -564,7 +564,7 @@ public class SyrRaster {
                         buildChildren(childChildren, (ViewGroup) component, child, child);
                     }
                 }
-                if(sendComponentDidMount) {
+                if (sendComponentDidMount) {
                     emitComponentDidMount(uuid);
                 }
             }
