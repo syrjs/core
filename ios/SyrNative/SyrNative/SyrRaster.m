@@ -372,6 +372,11 @@
   free(methods);
 }
 
+-(void) reset {
+  _components = [[NSMutableDictionary alloc] init];
+  _animations = [[NSMutableDictionary alloc] init];
+}
+
 -(void) showInfoMessage: (NSDictionary*) message withRootView:(SyrRootView*) rootView {
   UIView* view = [[UIView alloc] init];
   NSError *jsonError;
