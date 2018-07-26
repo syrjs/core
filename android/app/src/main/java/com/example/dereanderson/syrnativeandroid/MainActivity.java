@@ -3,12 +3,14 @@ package com.example.dereanderson.syrnativeandroid;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.RelativeLayout;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import syr.js.org.syrnative.SyrAlertDialogue;
 import syr.js.org.syrnative.SyrAnimatedImage;
 import syr.js.org.syrnative.SyrAnimatedText;
 import syr.js.org.syrnative.SyrAnimatedView;
@@ -20,6 +22,7 @@ import syr.js.org.syrnative.SyrImage;
 import syr.js.org.syrnative.SyrInstance;
 import syr.js.org.syrnative.SyrInstanceManager;
 import syr.js.org.syrnative.SyrLinearGradient;
+import syr.js.org.syrnative.SyrNetworking;
 import syr.js.org.syrnative.SyrRootView;
 import syr.js.org.syrnative.SyrScrollview;
 import syr.js.org.syrnative.SyrStackview;
@@ -37,12 +40,6 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout layout = new RelativeLayout(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         layout.setLayoutParams(layoutParams);
-
-        WebView w = new WebView(this);
-        w.loadUrl("https://taco-cat-sticker-store.myshopify.com");
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        w.setLayoutParams(params);
-        layout.addView(w);
 
         // hide action bar aka title bar
         try
@@ -66,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         modules.add(new SyrAnimatedImage());
         modules.add(new SyrAnimatedView());
         modules.add(new SyrAnimatedText());
+        modules.add(new SyrNetworking());
+        modules.add(new SyrAlertDialogue());
 
         // get the javascript bundle
         SyrBundle bundle = new SyrBundleManager().setBundleAssetName("").build();
@@ -79,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
         // create a new Rootview
         SyrRootView rootview = new SyrRootView(this);
 
-        // start the Syr Application
-        rootview.startSyrApplication(instance, bundle);
+        JSONObject appProps = new JSONObject();
 
-        rootview.setLayoutParams(params);
+        // start the Syr Application
+        rootview.startSyrApplication(instance, bundle, appProps);
+
+        rootview.setLayoutParams(layoutParams);
         layout.addView(rootview);
 
         // set the content of the to the Rootview
