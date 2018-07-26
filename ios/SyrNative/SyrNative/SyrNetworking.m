@@ -41,14 +41,13 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
     [request setURL:[NSURL URLWithString:requestUrl]];
     
     // todo: forward these errors along with the data response
-    NSHTTPURLResponse *responseCode = nil;
-  
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
       NSDictionary* platformError = nil;
+      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
       
       // log error if not success just for info
-      if([responseCode statusCode] != 200){
-        NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[responseCode statusCode]);
+      if([httpResponse statusCode]!= 200){
+        NSLog(@"Error getting %@, HTTP status code %li", requestUrl, (long)[httpResponse statusCode]);
       }
       
       if(error != nil) {
@@ -59,7 +58,7 @@ SYR_EXPORT_METHOD(request: (NSDictionary*) requestDict) {
       
       // get the response
    		NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-      NSNumber* statusCode = [NSNumber numberWithDouble:[responseCode statusCode]];
+      NSNumber* statusCode = [NSNumber numberWithDouble:[httpResponse statusCode]];
       
       // send the response back
       [self sendEventWithName:@"NetworkingCallback" body:@{@"data": responseString, @"responseCode": statusCode, @"guid": guid, @"platformError":platformError}];
