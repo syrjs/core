@@ -1,4 +1,4 @@
-import { Component, Render, View, StackView } from '../index';
+import { Component, Render, View, StackViewl, Dimensions, Button } from '../index';
 
 class MyView extends Component {
   render() {
@@ -29,25 +29,36 @@ function getItems(n) {
 class example extends Component {
   constructor(props) {
     super(props);
+    this.state.componentCount = 1;
     this.state.components = getItems(1);
   }
   render() {
     console.log('uuid', this.uuid);
     return (
-      <StackView
-        axis="vertical"
-        style={{ width: 100, height: 300, backgroundColor: '#ff00ff' }}
-      >
+      <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, backgroundColor:'#09aea4'}}>
+        <Button onPress={()=>this.handleOnAdd()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:100, left: 100}}>Add Item</Button>
+        <Button onPress={()=>this.handleOnRemove()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:165, left: 100}}>Remove Item</Button>
+
         {this.state.components}
-      </StackView>
+      </View>
     );
   }
-  componentDidMount() {
-    console.log('setting state');
-
+  handleOnRemove() {
+    console.log('remove item');
+    this.state.componentCount = this.state.componentCount - 1;
     this.setState({
-      components: getItems(5),
-    });
+      components: getItems(this.state.componentCount)
+    })
+  }
+  handleOnAdd() {
+    console.log('add item');
+    this.state.componentCount = this.state.componentCount + 1;
+    this.setState({
+      components: getItems(this.state.componentCount)
+    })
+  }
+  componentDidMount() {
+    console.log('component did mount');
   }
 }
 

@@ -21,6 +21,7 @@ alpha:   1.]
 @interface SyrRaster : NSObject
 @property SyrBridge* bridge;
 + (id) sharedInstance;
+-(void) reset;
 -(void) parseAST: (NSDictionary*) astString withRootView:(SyrRootView*) rootView;
 -(void) registerComponent: (NSString*) component withName:(NSString*) name;
 -(void) setupAnimation: (NSDictionary*) animationDict;
