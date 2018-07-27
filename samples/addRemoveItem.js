@@ -14,10 +14,10 @@ class MyView extends Component {
     );
   }
   componentDidMount() {
-    // console.log(this.props.key, " -- mounted");
+    console.log(this.props.key, " -- mounted");
   }
-  componentDidUnmount() {
-    // console.log(this.props.key, " -- unmounted")
+  componentWillUnmount() {
+    console.log(this.props.key, " -- unmounted")
   }
 }
 
