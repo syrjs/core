@@ -1,4 +1,12 @@
-import { Component, Render, View, StackViewl, Dimensions, Button, StackView } from '../index';
+import {
+  Component,
+  Render,
+  View,
+  StackViewl,
+  Dimensions,
+  Button,
+  StackView,
+} from '../index';
 
 class MyView extends Component {
   render() {
@@ -38,26 +46,52 @@ class example extends Component {
   render() {
     // console.log('uuid', this.uuid);
     return (
-      <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, backgroundColor:'#09aea4'}}>
-        <View style={{height:700, width:100}}>
-          {this.state.components}
-        </View>
-        <Button onPress={()=>this.handleOnAdd()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:100, left: 100}}>Add Item</Button>
-        <Button onPress={()=>this.handleOnRemove()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:165, left: 100}}>Remove Item</Button>
+      <View
+        style={{
+          width: Dimensions.get('window').width,
+          height: Dimensions.get('window').height,
+          backgroundColor: '#09aea4',
+        }}
+      >
+        <View style={{ height: 700, width: 100 }}>{this.state.components}</View>
+        <Button
+          onPress={() => this.handleOnAdd()}
+          style={{
+            width: 200,
+            height: 50,
+            backgroundColor: '#0f0f0f',
+            top: 100,
+            left: 100,
+          }}
+        >
+          Add Item
+        </Button>
+        <Button
+          onPress={() => this.handleOnRemove()}
+          style={{
+            width: 200,
+            height: 50,
+            backgroundColor: '#0f0f0f',
+            top: 165,
+            left: 100,
+          }}
+        >
+          Remove Item
+        </Button>
       </View>
     );
   }
   handleOnRemove() {
     this.componentCount = this.componentCount - 1;
     this.setState({
-      components: getItems(this.componentCount)
-    })
+      components: getItems(this.componentCount),
+    });
   }
   handleOnAdd() {
     this.componentCount = this.componentCount + 1;
     this.setState({
-      components: getItems(this.componentCount)
-    })
+      components: getItems(this.componentCount),
+    });
   }
   componentDidMount() {
     console.log('component did mount');

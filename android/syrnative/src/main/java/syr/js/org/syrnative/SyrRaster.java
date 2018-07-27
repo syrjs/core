@@ -211,6 +211,7 @@ public class SyrRaster {
                     if (children != null) {
                         //unmount the children if the parent is a non-renderable
                         unmountChildren(component);
+                        return;
                     }
                 }
             } else { //no unmount on the component
@@ -254,7 +255,15 @@ public class SyrRaster {
                             }
                         });
                     } else {
-                        Log.i("noooo", "bad stuff happening here");
+                        //@TODO test this with null renders
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //no parent for the new component so add it to rootView?
+                                mRootview.addView(newComponent);
+                                emitComponentDidMount(uuid);
+                            }
+                        });
                     }
 
                     if (newComponent instanceof ViewGroup) {
