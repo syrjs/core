@@ -255,11 +255,11 @@ public class SyrRaster {
                             }
                         });
                     } else {
-                        Log.i("noooo", "bad stuff happening here");
+                        //@TODO test this with null renders
                         uiHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                //np parent for the new component so add it to rootView
+                                //no parent for the new component so add it to rootView?
                                 mRootview.addView(newComponent);
                                 emitComponentDidMount(uuid);
                             }
