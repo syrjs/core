@@ -256,6 +256,14 @@ public class SyrRaster {
                         });
                     } else {
                         Log.i("noooo", "bad stuff happening here");
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //np parent for the new component so add it to rootView
+                                mRootview.addView(newComponent);
+                                emitComponentDidMount(uuid);
+                            }
+                        });
                     }
 
                     if (newComponent instanceof ViewGroup) {
