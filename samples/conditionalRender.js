@@ -9,7 +9,7 @@ class DisText extends Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        showing: true
+        showing: true,
       });
     }, 1000);
   }
@@ -21,15 +21,14 @@ class DisText extends Component {
       width: PixelRatio.getPixelSizeForLayoutSize(300),
       height: PixelRatio.getPixelSizeForLayoutSize(40),
       fontSize: PixelRatio.getPixelSizeForLayoutSize(20),
-      color: '#000000'
+      color: '#000000',
     };
     if (!this.state.showing) {
       return <Text style={style}>showing</Text>;
     } else {
       return <Text style={style}>not showing</Text>;
     }
-
   }
 }
 
-Render(DisText)
+Render(DisText);
