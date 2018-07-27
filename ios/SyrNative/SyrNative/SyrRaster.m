@@ -17,6 +17,7 @@
 @property UIView* rootView;
 @property NSMutableDictionary* components;
 @property NSMutableDictionary* animations;
+@property NSMutableDictionary* nonRenderables;
 @end
 
 @implementation SyrRaster
@@ -38,6 +39,7 @@
     _components = [[NSMutableDictionary alloc] init];
     _animations = [[NSMutableDictionary alloc] init];
     _nativemodules = [[NSMutableDictionary alloc] init];
+    _nonRenderables = [[NSMutableDictionary alloc] init];
     _registeredClasses = [[NSMutableDictionary alloc] init];;
   }
   return self;
@@ -72,12 +74,19 @@
 
 -(void) syncState: (NSDictionary*) component withViewParent: (UIView*) viewParent {
   NSString* uuid = [[component objectForKey:@"instance"] valueForKey:@"uuid"];
+  
+  // check to see if the uuid is on the ast def and not an instance
+  if(uuid == nil) {
+    uuid = [component valueForKey:@"uuid"];
+  }
 
   NSObject* componentInstance = [_components objectForKey:uuid];
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   Class class = NSClassFromString(className);
   
   BOOL unmount = (BOOL)[component valueForKey:@"unmount"];
+  NSObject* attributes = [component objectForKey:@"attributes"];
+  
   if(unmount == YES) {
     // if the component is flagged for unmounting remove
     if(componentInstance != nil) {
@@ -103,10 +112,13 @@
                 [childInstance removeFromSuperview];
               }
               
-              [_bridge rasterRemovedComponent:uuid];
+              [_bridge rasterRemovedComponent:childuuid];
+              
             }
         }
       }
+      [_bridge rasterRemovedComponent:uuid];
+      [_nonRenderables removeObjectForKey:uuid];
     }
     NSLog(@"unmount");
   } else {
@@ -156,6 +168,11 @@
         [_bridge rasterRenderedComponent:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
         viewParent = newComponent;
         NSLog(@"create a new component %@", className);
+      } else {
+        if([_nonRenderables objectForKey:uuid] == nil) {
+          [_bridge rasterRenderedComponent:uuid];
+        	[_nonRenderables setValue:@"" forKey:uuid];
+        }
       }
     
       NSArray* children = [component objectForKey:@"children"];
@@ -193,9 +210,9 @@
     NSArray* childComponents = [astDict objectForKey:@"children"];
     NSDictionary* childComponent = [childComponents objectAtIndex:0];
     [self build:childComponent];
+    [_nonRenderables setValue:@"" forKey:[astDict valueForKey:@"uuid"]];
     [_bridge rasterRenderedComponent:[astDict valueForKey:@"uuid"]];
   }
-  
 }
 
 // build children in the tree
