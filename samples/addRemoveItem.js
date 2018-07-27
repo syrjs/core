@@ -1,4 +1,4 @@
-import { Component, Render, View, StackViewl, Dimensions, Button } from '../index';
+import { Component, Render, View, StackViewl, Dimensions, Button, StackView } from '../index';
 
 class MyView extends Component {
   render() {
@@ -14,7 +14,10 @@ class MyView extends Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.key);
+    // console.log(this.props.key, " -- mounted");
+  }
+  componentDidUnmount() {
+    // console.log(this.props.key, " -- unmounted")
   }
 }
 
@@ -29,32 +32,31 @@ function getItems(n) {
 class example extends Component {
   constructor(props) {
     super(props);
-    this.state.componentCount = 1;
-    this.state.components = getItems(1);
+    this.componentCount = 0;
+    this.state.components = getItems(0);
   }
   render() {
-    console.log('uuid', this.uuid);
+    // console.log('uuid', this.uuid);
     return (
       <View style={{width:Dimensions.get('window').width, height:Dimensions.get('window').height, backgroundColor:'#09aea4'}}>
+        <View style={{height:700, width:100}}>
+          {this.state.components}
+        </View>
         <Button onPress={()=>this.handleOnAdd()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:100, left: 100}}>Add Item</Button>
         <Button onPress={()=>this.handleOnRemove()} style={{width:200, height: 50, backgroundColor:'#0f0f0f', top:165, left: 100}}>Remove Item</Button>
-
-        {this.state.components}
       </View>
     );
   }
   handleOnRemove() {
-    console.log('remove item');
-    this.state.componentCount = this.state.componentCount - 1;
+    this.componentCount = this.componentCount - 1;
     this.setState({
-      components: getItems(this.state.componentCount)
+      components: getItems(this.componentCount)
     })
   }
   handleOnAdd() {
-    console.log('add item');
-    this.state.componentCount = this.state.componentCount + 1;
+    this.componentCount = this.componentCount + 1;
     this.setState({
-      components: getItems(this.state.componentCount)
+      components: getItems(this.componentCount)
     })
   }
   componentDidMount() {
