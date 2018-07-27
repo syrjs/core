@@ -211,6 +211,7 @@ public class SyrRaster {
                     if (children != null) {
                         //unmount the children if the parent is a non-renderable
                         unmountChildren(component);
+                        return;
                     }
                 }
             } else { //no unmount on the component
