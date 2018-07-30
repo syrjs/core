@@ -4,8 +4,33 @@ import {
   View,
   StackView,
   Dimensions,
-  Button
+  Button,
+  PixelRatio,
+  Text
 } from '../index';
+
+class DisText extends Component {
+  constructor(props) {
+    super(props);
+    this.state.showing = false;
+  }
+
+  render() {
+    const style = {
+      left: Dimensions.get('window').width / 2,
+      top: PixelRatio.getPixelSizeForLayoutSize(20),
+      width: PixelRatio.getPixelSizeForLayoutSize(300),
+      height: PixelRatio.getPixelSizeForLayoutSize(40),
+      fontSize: PixelRatio.getPixelSizeForLayoutSize(20),
+      color: '#000000',
+    };
+    if (!this.props.showing) {
+      return <Text style={style}>showing</Text>;
+    } else {
+      return <Text style={style}>not showing</Text>;
+    }
+  }
+}
 
 class MyView extends Component {
   render() {
@@ -41,8 +66,10 @@ class example extends Component {
     super(props);
     this.componentCount = 0;
     this.state.components = getItems(0);
+    this.state.showing = false;
   }
   render() {
+    // console.log('uuid', this.uuid);
     return (
       <View
         style={{
@@ -76,19 +103,22 @@ class example extends Component {
         >
           Remove Item
         </Button>
+        <DisText showing={this.state.showing} />
       </View>
     );
   }
   handleOnRemove() {
     this.componentCount = this.componentCount - 1;
     this.setState({
-      components: getItems(this.componentCount)
+      components: getItems(this.componentCount),
+      showing: false
     });
   }
   handleOnAdd() {
     this.componentCount = this.componentCount + 1;
     this.setState({
-      components: getItems(this.componentCount)
+      components: getItems(this.componentCount),
+      showing: true
     });
   }
   componentDidMount() {
