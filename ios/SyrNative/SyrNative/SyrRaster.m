@@ -209,8 +209,12 @@
   } else {
     NSArray* childComponents = [astDict objectForKey:@"children"];
     NSDictionary* childComponent = [childComponents objectAtIndex:0];
-    [self build:childComponent];
-    [_nonRenderables setValue:@"" forKey:[astDict valueForKey:@"uuid"]];
+    
+    if(childComponent != nil) {
+      [self build:childComponent];
+    }
+    
+		[_nonRenderables setValue:@"" forKey:[astDict valueForKey:@"uuid"]];
     [_bridge rasterRenderedComponent:[astDict valueForKey:@"uuid"]];
   }
 }
