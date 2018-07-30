@@ -4,7 +4,7 @@ import {
   View,
   StackView,
   Dimensions,
-  Button
+  Button,
 } from '../index';
 
 class MyView extends Component {
@@ -21,10 +21,10 @@ class MyView extends Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.key, " -- mounted");
+    console.log(this.props.key, ' -- mounted');
   }
   componentWillUnmount() {
-    console.log(this.props.key, " -- unmounted")
+    console.log(this.props.key, ' -- unmounted');
   }
 }
 
@@ -82,13 +82,13 @@ class example extends Component {
   handleOnRemove() {
     this.componentCount = this.componentCount - 1;
     this.setState({
-      components: getItems(this.componentCount)
+      components: getItems(this.componentCount),
     });
   }
   handleOnAdd() {
     this.componentCount = this.componentCount + 1;
     this.setState({
-      components: getItems(this.componentCount)
+      components: getItems(this.componentCount),
     });
   }
   componentDidMount() {
