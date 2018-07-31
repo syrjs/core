@@ -19,7 +19,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Syr Project
@@ -37,6 +39,7 @@ public class SyrRaster {
     public HashMap<String, String> registeredModules = new HashMap<>();
     private HashMap<String, Object> mModuleMap = new HashMap<String, Object>(); // getName()-> SyrClass Instance
     private HashMap<String, Object> mModuleInstances = new HashMap<String, Object>(); // guid -> Object Instance
+    private Set<String> mNonRenderables = new HashSet<String>();
     public ArrayList<String> exportedMethods = new ArrayList<String>();
 
     /**
@@ -144,18 +147,20 @@ public class SyrRaster {
 
             //getting uuid of the component
             String tempUid = component.getString("uuid");
-            Boolean functionalComponent = false;
 
             //checking to see if it has a key (component inside an array), if it does....changing it to match the key set we have in the cache
 
             if (component.has("attributes")) {
                 if (component.getJSONObject("attributes").has("key")) {
-                    functionalComponent = true;
-                    tempUid = tempUid.concat(component.getJSONObject("attributes").getString("key"));
+                    if (component.getJSONObject("attributes").getInt("key") != 0) {
+                        tempUid = tempUid.concat("-").concat(component.getJSONObject("attributes").getString("key"));
+                    }
+                }
+            } else if (component.has("key")) {
+                if (component.getInt("key") != 0) {
+                    tempUid = tempUid.concat("-").concat(component.getString("key"));
                 }
             }
-
-            final Boolean sendComponentDidMount = !functionalComponent;
 
             final String uuid = tempUid;
 
@@ -199,15 +204,17 @@ public class SyrRaster {
                             final ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                             if (instanceToRemove.getParent() != null) {
                                 parent.removeView(instanceToRemove);
-                                if (sendComponentDidMount) {
-                                    emitComponentDidUnMount(uuid);
-                                }
+                                emitComponentWillUnMount(uuid);
                             }
-                            //@TODO need to assign a new viewParent Here since we took out the current one
+                            //@TODO need to assign a new viewParent Here since we took out the current one?
 //                            viewParent = parent;
                         }
                     });
                 } else { //this is the use case where the or the component to unmount is a non-renderable so we need to unmount all its children
+                    if (mNonRenderables.contains(uuid)) {
+                        mNonRenderables.remove(uuid);
+                        emitComponentWillUnMount(uuid);
+                    }
                     if (children != null) {
                         //unmount the children if the parent is a non-renderable
                         unmountChildren(component);
@@ -251,7 +258,6 @@ public class SyrRaster {
                                 } else {
                                     vParent.addView(newComponent);
                                 }
-                                emitComponentDidMount(uuid);
                             }
                         });
                     } else {
@@ -261,16 +267,22 @@ public class SyrRaster {
                             public void run() {
                                 //no parent for the new component so add it to rootView?
                                 mRootview.addView(newComponent);
-                                emitComponentDidMount(uuid);
                             }
                         });
                     }
+                    emitComponentDidMount(uuid);
 
                     if (newComponent instanceof ViewGroup) {
                         viewParent = (ViewGroup) newComponent;
                     }
 
 
+                } else { //component is a non renderable
+                    if (!mNonRenderables.contains(uuid)) {
+                        //mount the component if it has not been mounted yet
+                        mNonRenderables.add(uuid);
+                        emitComponentDidMount(uuid);
+                    }
                 }
             }
             syncChildren(component, viewParent);
@@ -306,7 +318,7 @@ public class SyrRaster {
                             if (instanceToRemove.getParent() != null) {
                                 ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                                 parent.removeView(instanceToRemove);
-                                emitComponentDidUnMount(uuidToRemove);
+                                emitComponentWillUnMount(uuidToRemove);
                             }
                         }
                     });
@@ -442,12 +454,12 @@ public class SyrRaster {
 
     }
 
-    public void emitComponentDidUnMount(String guid) {
+    public void emitComponentWillUnMount(String guid) {
 
         // send event for componentDidMount
         try {
             JSONObject eventMap = new JSONObject();
-            eventMap.put("type", "componentDidUnMount");
+            eventMap.put("type", "componentWillUnmount");
             eventMap.put("guid", guid);
             mBridge.sendEvent(eventMap);
         } catch (JSONException e) {
@@ -494,16 +506,15 @@ public class SyrRaster {
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
                 String tempUid = child.getString("uuid");
-                Boolean functionalComponent = false;
 
                 if (child.has("attributes")) {
                     if (child.getJSONObject("attributes").has("key")) {
-                        functionalComponent = true;
-                        tempUid = tempUid.concat(child.getJSONObject("attributes").getString("key"));
+                        if (child.getJSONObject("attributes").getInt("key") != 0) {
+                            tempUid = tempUid.concat("-").concat(child.getJSONObject("attributes").getString("key"));
+                        }
                     }
                 }
 
-                final Boolean sendComponentDidMount = !functionalComponent;
                 final String uuid = tempUid;
 
                 if (component instanceof ScrollView && children.length() > 1) {
@@ -570,9 +581,7 @@ public class SyrRaster {
                         buildChildren(childChildren, (ViewGroup) component, child, child);
                     }
                 }
-                if (sendComponentDidMount) {
-                    emitComponentDidMount(uuid);
-                }
+                emitComponentDidMount(uuid);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -598,6 +607,7 @@ public class SyrRaster {
                 final SyrComponent componentModule = (SyrComponent) mModuleMap.get(className);
 
                 if (componentModule == null) {
+                    mNonRenderables.add(uuid);
                     return null;
                 }
 
