@@ -147,23 +147,20 @@ public class SyrRaster {
 
             //getting uuid of the component
             String tempUid = component.getString("uuid");
-            Boolean functionalComponent = false;
 
             //checking to see if it has a key (component inside an array), if it does....changing it to match the key set we have in the cache
 
             if (component.has("attributes")) {
                 if (component.getJSONObject("attributes").has("key")) {
-                    if(component.getJSONObject("attributes").getInt("key") != 0) {
+                    if (component.getJSONObject("attributes").getInt("key") != 0) {
                         tempUid = tempUid.concat("-").concat(component.getJSONObject("attributes").getString("key"));
                     }
                 }
-            } else if(component.has("key")) {
-                if(component.getInt("key") != 0) {
+            } else if (component.has("key")) {
+                if (component.getInt("key") != 0) {
                     tempUid = tempUid.concat("-").concat(component.getString("key"));
                 }
             }
-
-            final Boolean sendComponentDidMount = !functionalComponent;
 
             final String uuid = tempUid;
 
@@ -207,16 +204,14 @@ public class SyrRaster {
                             final ViewGroup parent = (ViewGroup) instanceToRemove.getParent();
                             if (instanceToRemove.getParent() != null) {
                                 parent.removeView(instanceToRemove);
-//                                if (sendComponentDidMount) {
-                                    emitComponentWillUnMount(uuid);
-//                                }
+                                emitComponentWillUnMount(uuid);
                             }
                             //@TODO need to assign a new viewParent Here since we took out the current one?
 //                            viewParent = parent;
                         }
                     });
                 } else { //this is the use case where the or the component to unmount is a non-renderable so we need to unmount all its children
-                    if(mNonRenderables.contains(uuid)) {
+                    if (mNonRenderables.contains(uuid)) {
                         mNonRenderables.remove(uuid);
                         emitComponentWillUnMount(uuid);
                     }
@@ -283,7 +278,7 @@ public class SyrRaster {
 
 
                 } else { //component is a non renderable
-                    if(!mNonRenderables.contains(uuid)) {
+                    if (!mNonRenderables.contains(uuid)) {
                         //mount the component if it has not been mounted yet
                         mNonRenderables.add(uuid);
                         emitComponentDidMount(uuid);
@@ -511,16 +506,15 @@ public class SyrRaster {
                 final View component = createComponent(child);
                 JSONArray childChildren = child.getJSONArray("children");
                 String tempUid = child.getString("uuid");
-                Boolean functionalComponent = false;
 
                 if (child.has("attributes")) {
                     if (child.getJSONObject("attributes").has("key")) {
-                        functionalComponent = true;
-                        tempUid = tempUid.concat(child.getJSONObject("attributes").getString("key"));
+                        if (child.getJSONObject("attributes").getInt("key") != 0) {
+                            tempUid = tempUid.concat("-").concat(child.getJSONObject("attributes").getString("key"));
+                        }
                     }
                 }
 
-                final Boolean sendComponentDidMount = !functionalComponent;
                 final String uuid = tempUid;
 
                 if (component instanceof ScrollView && children.length() > 1) {
@@ -587,9 +581,7 @@ public class SyrRaster {
                         buildChildren(childChildren, (ViewGroup) component, child, child);
                     }
                 }
-//                if (sendComponentDidMount) {
-                    emitComponentDidMount(uuid);
-//                }
+                emitComponentDidMount(uuid);
             }
         } catch (JSONException e) {
             e.printStackTrace();
