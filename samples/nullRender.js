@@ -1,10 +1,4 @@
-import {
-  Component,
-  Render,
-  View,
-  Button,
-  PixelRatio
-} from '../index';
+import { Component, Render, View, Button, PixelRatio } from '../index';
 
 class example extends Component {
   constructor(props) {
@@ -19,12 +13,12 @@ class example extends Component {
   }
   handleOnRemove() {
     this.setState({
-      doRender: false
+      doRender: false,
     });
   }
   handleOnAdd() {
     this.setState({
-      doRender: true
+      doRender: true,
     });
   }
 }

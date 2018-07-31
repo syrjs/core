@@ -6,7 +6,7 @@ import {
   Dimensions,
   Button,
   PixelRatio,
-  Text
+  Text,
 } from '../index';
 
 class DisText extends Component {
@@ -46,10 +46,10 @@ class MyView extends Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.key, " -- mounted");
+    console.log(this.props.key, ' -- mounted');
   }
   componentWillUnmount() {
-    console.log(this.props.key, " -- unmounted")
+    console.log(this.props.key, ' -- unmounted');
   }
 }
 
@@ -113,14 +113,14 @@ class example extends Component {
     this.componentCount = this.componentCount - 1;
     this.setState({
       components: getItems(this.componentCount),
-      showing: false
+      showing: false,
     });
   }
   handleOnAdd() {
     this.componentCount = this.componentCount + 1;
     this.setState({
       components: getItems(this.componentCount),
-      showing: true
+      showing: true,
     });
   }
   componentDidMount() {
