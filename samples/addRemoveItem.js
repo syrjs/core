@@ -51,7 +51,7 @@ class example extends Component {
           backgroundColor: '#09aea4',
         }}
       >
-        <View style={{ height: 700, width: 100 }}>{this.state.components}</View>
+       {this.state.components}
         <Button
           onPress={() => this.handleOnAdd()}
           style={{
