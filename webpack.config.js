@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // for now we set one entry for the main package.json entry
   entry: {
-    app: ['./samples/example.js']
+    app: ['./samples/addRemoveItem.js']
   },
 
   output: {
