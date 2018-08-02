@@ -24,8 +24,8 @@ class MyView extends Component {
     console.log('should updaste');
     return true;
   }
-  componentDidUpdate(poo) {
-    console.log('did update', poo);
+  componentDidUpdate(foo) {
+    console.log('did update', foo);
   }
   componentDidMount() {
     console.log(this.props.key, ' -- mounted');
