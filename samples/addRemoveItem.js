@@ -20,6 +20,13 @@ class MyView extends Component {
       />
     );
   }
+  shouldComponentUpdate() {
+    console.log('should updaste');
+    return true;
+  }
+  componentDidUpdate(poo) {
+    console.log('did update', poo);
+  }
   componentDidMount() {
     console.log(this.props.key, ' -- mounted');
   }
