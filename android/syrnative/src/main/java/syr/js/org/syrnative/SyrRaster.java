@@ -310,7 +310,7 @@ public class SyrRaster {
                 final View instanceToRemove = childInstance;
                 //just double checking, this will always hold true. Not sure why I dont trust my own code.
                 Boolean unmountChildInstance = component.getBoolean("unmount");
-                if (unmountChildInstance == true) {
+                if (unmountChildInstance == true && instanceToRemove != null) {
                     mModuleInstances.remove(childuuid);
                     uiHandler.post(new Runnable() {
                         @Override
