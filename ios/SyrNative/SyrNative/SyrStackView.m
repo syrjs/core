@@ -58,9 +58,15 @@ SYR_EXPORT_MODULE(StackView)
   if(height != nil && [height isKindOfClass:[NSString class]] && [height containsString:@"auto"]) {
       NSNumber* totalHeight = [NSNumber numberWithInt:0];
       for(id child in [component objectForKey:@"children"]){
-        NSDictionary* childStyle = [SyrStackView determineChildStyle:child];;
-        NSNumber* height = [childStyle objectForKey:@"height"];;
-        totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
+        NSDictionary* childStyle = [SyrStackView determineChildStyle:child];
+        
+        // don't count children moving into unmount into the calculation
+        BOOL unmount = (BOOL)[child valueForKey:@"unmount"];
+        if(!unmount) {
+          NSNumber* height = [childStyle objectForKey:@"height"];
+          totalHeight = [NSNumber numberWithDouble:[totalHeight doubleValue]+[height doubleValue]+[spacing doubleValue]];
+        }
+
       }
     	CGRect frame = stackView.frame;
     	frame.size.height = [totalHeight doubleValue];
