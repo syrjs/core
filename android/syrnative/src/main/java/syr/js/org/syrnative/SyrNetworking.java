@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implements SyrBaseModule {
 
-    private String guid;
+    private String guid = null;
     private Integer responseCode = null;
     private JSONObject platformErrors = new JSONObject();
 
@@ -32,7 +32,9 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
         try {
             // Create connection
             url = new URL(requestObject.getString("url"));
-            guid = requestObject.getString("guid");
+            if (requestObject.has("guid")) {
+                guid = requestObject.getString("guid");
+            }
             connection = (HttpURLConnection) url.openConnection();
             if (requestObject.has("method")) {
                 connection.setRequestMethod(requestObject.getString("method"));
@@ -93,14 +95,16 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
         JSONObject eventMap = new JSONObject();
         JSONObject body = new JSONObject();
         try {
-            body.put("data", response);
-            body.put("guid", guid);
-            body.put("responseCode", responseCode);
-            body.put("platformError", platformErrors);
-            eventMap.put("type", "event");
-            eventMap.put("name", "NetworkingCallback");
-            eventMap.put("body", body);
-            SyrEventHandler.getInstance().sendEvent(eventMap);
+            if (guid != null) {
+                body.put("data", response);
+                body.put("guid", guid);
+                body.put("responseCode", responseCode);
+                body.put("platformError", platformErrors);
+                eventMap.put("type", "event");
+                eventMap.put("name", "NetworkingCallback");
+                eventMap.put("body", body);
+                SyrEventHandler.getInstance().sendEvent(eventMap);
+            }
             this.cancel(true);
         } catch (JSONException e) {
             e.printStackTrace();
