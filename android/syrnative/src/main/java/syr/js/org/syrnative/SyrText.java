@@ -108,8 +108,11 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                 textView.setEllipsize(TextUtils.TruncateAt.END);
                 textView.setSingleLine(true);
             }
-
-            value = jsonInstance.getString("value");
+            if(jsonInstance.has("value")) {
+                value = jsonInstance.getString("value");
+            } else {
+                value = "";
+            }
             if (textView.getText().toString() != value) {
                 textView.setText(value);
             }
