@@ -7,7 +7,13 @@ package syr.js.org.syrnative;
  */
 
 public class SyrBundle {
-    public SyrBundle(SyrBundleManager manager) {
+    private SyrBundleManager mManager;
 
+    public SyrBundle(SyrBundleManager manager) {
+        mManager = manager;
+    }
+
+    public String getBundleUrl() {
+        return mManager.uri;
     }
 }

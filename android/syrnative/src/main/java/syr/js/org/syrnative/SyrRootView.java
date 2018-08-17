@@ -41,7 +41,7 @@ public class SyrRootView extends FrameLayout {
     }
 
     public SyrRootView startSyrApplication(SyrInstance instance, SyrBundle bundle, JSONObject appProps) {
-        mBridge = new SyrBridge(mContext);
+        mBridge = new SyrBridge(mContext, bundle);
         mRaster = new SyrRaster(mContext);
         mProps = appProps;
         mRaster.setRootview(this);

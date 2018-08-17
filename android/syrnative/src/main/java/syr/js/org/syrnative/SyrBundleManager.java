@@ -7,7 +7,7 @@ package syr.js.org.syrnative;
  */
 
 public class SyrBundleManager {
-    private String uri;
+    protected String uri;
 
     public SyrBundleManager() {
         // does this need the (additional) config param?
