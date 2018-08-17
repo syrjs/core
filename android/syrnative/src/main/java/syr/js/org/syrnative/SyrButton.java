@@ -104,7 +104,12 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
             }
 
             // set button label/text
-            button.setText(jsonInstance.getString("value"));
+            if(jsonInstance.has("value")) {
+                button.setText(jsonInstance.getString("value"));
+            } else {
+                button.setText("");
+
+            }
 
             //touchableOPacity effect for button since we are setting the state list animator to null. Need to couple this with the optional
             //for using the default android button behaviour
