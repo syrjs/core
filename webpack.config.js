@@ -23,7 +23,10 @@ module.exports = {
   // command dir is the project path
   resolve: {
     extensions: ['.js', '.css'],
-    modules: ['./node_modules']
+    modules: ['./node_modules'],
+    alias: {
+      '@syr/core': '../index.js'
+    }
   },
   devtool: 'source-map',
   module: {
