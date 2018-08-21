@@ -1,4 +1,4 @@
-# 1.5.2 release
+# syr js - development version
 
 <div align="center">
   <img src="https://github.com/syrjs/core/blob/master/logos/syr-logo.png" alt="syr" title="syr" width=128>
