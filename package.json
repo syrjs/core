@@ -53,7 +53,7 @@
   },
   "syr": {
     "ios": {
-      "project" : "ios/SyrNative/SyrNative.xcodeproj"
+      "project": "ios/SyrNative/SyrNative.xcodeproj"
     }
   }
 }
