@@ -85,7 +85,6 @@
   Class class = NSClassFromString(className);
   
   BOOL unmount = (BOOL)[component valueForKey:@"unmount"];
-  NSObject* attributes = [component objectForKey:@"attributes"];
   
   if(unmount == YES) {
     // if the component is flagged for unmounting remove
@@ -97,7 +96,7 @@
     } else {
     
       NSArray* children = [component objectForKey:@"children"];
-      if(children != nil && children != [NSNull null]) {
+      if(children != nil || [children count] != 0) {
         for(id child in children) {
            if(child != nil && child != [NSNull null]) {
            
@@ -132,7 +131,7 @@
           	NSLog(@"visible");
         	else
             // reattach to view parent
-            [viewParent addSubview:componentInstance];
+            [viewParent addSubview:(UIView*)componentInstance];
           	NSLog(@"not visible");
         
           viewParent = (UIView*)componentInstance;
