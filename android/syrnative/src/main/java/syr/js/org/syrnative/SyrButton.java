@@ -3,6 +3,7 @@ package syr.js.org.syrnative;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -138,8 +139,15 @@ public class SyrButton implements SyrBaseModule, SyrComponent {
 
         //TODO: Depending on a prop we need add the drop shadow/default android button behaviour
 
-        //no default drop shadow
-        button.setStateListAnimator(null);
+        // no default drop shadow
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                button.setStateListAnimator(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         return button;
     }
 
