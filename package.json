@@ -6,6 +6,8 @@
   "public": true,
   "scripts": {
     "test": "nyc mocha --compilers js:babel-core/register test/*test.js",
+    "test:jsx": "mocha --compilers js:babel-core/register test/jsxtest.js",
+    "test:nodom": "mocha --compilers js:babel-core/register test/nodomtest.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
