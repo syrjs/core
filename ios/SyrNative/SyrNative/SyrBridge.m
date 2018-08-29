@@ -71,8 +71,8 @@
  we pass as query the native modules available
  and envrionment info
  */
-- (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView{
-  
+- (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView
+{
   // load a bundle with the root view we were handed
   // todo multiplex bridge : multiple apps, one instance
    _rootView = rootView;
@@ -134,7 +134,8 @@
                                   repeats:YES];
 }
 
--(NSString*) resourceBundlePath{
+-(NSString*) resourceBundlePath
+{
   return _rootView.resourceBundlePath;
 }
 
@@ -188,8 +189,8 @@
  Invoke a class method from the signature we are given.
  assume the data types, and use NSObject to pass them through
  */
-- (void)invokeMethodWithMessage: (NSDictionary*) syrMessage {
-  
+- (void)invokeMethodWithMessage: (NSDictionary*) syrMessage
+{
   NSData *objectData = [[syrMessage valueForKey:@"ast"] dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *astDict = [NSJSONSerialization JSONObjectWithData:objectData
                                                           options:NSJSONReadingMutableContainers
@@ -235,8 +236,9 @@
  todo - ensure this isn't leaking
  */
 - (void)webView:(WKWebView *)webView
-didStartProvisionalNavigation:(WKNavigation *)navigation {
-  NSLog(@"Loading Bundle");
+        didStartProvisionalNavigation:(WKNavigation *)navigation
+{
+  NSLog(@"Reloading Bundle");
   // bundle reloaded, remove all subviews from root view
   [_raster reset];
   [_rootView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -273,8 +275,9 @@ didStartProvisionalNavigation:(WKNavigation *)navigation {
 }
 
 - (void)webView:(WKWebView *)webView
-didFailProvisionalNavigation:(WKNavigation *)navigation
-      withError:(NSError *)error {
+        didFailProvisionalNavigation:(WKNavigation *)navigation
+        withError:(NSError *)error
+{
   NSLog(@"error");
 }
 
