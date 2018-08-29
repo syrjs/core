@@ -25,20 +25,25 @@
 - (id) init
 {
   self = [super init];
+
   if (self!=nil) {
-    // setup a 0,0,0,0 wkwebview to use the jsbridge
-    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
+    // js bridge configuration
     WKUserContentController *controller = [[WKUserContentController alloc] init];
-    // create a js bridge
     [controller addScriptMessageHandler:self name:@"SyrNative"];
+    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     configuration.userContentController = controller;
+
+    // setup a 0,0,0,0 wkwebview to use the js bridge
     _bridgedBrowser = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) configuration:configuration];
     _bridgedBrowser.navigationDelegate = self;
+
+    // connect the bridge to other components
     _eventHandler = [SyrEventHandler sharedInstance];
     _eventHandler.bridge = self;
     _raster = [SyrRaster sharedInstance];
     _raster.bridge = self;
   }
+
   return self;
 }
 
