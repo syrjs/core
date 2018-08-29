@@ -42,8 +42,6 @@
     "nyc": "^11.1.0",
     "object.observe": "^0.2.6",
     "prettier": "^1.5.3",
-    "styled-jsx": "^1.0.10",
-    "travis-cov": "^0.2.5",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.11"
