@@ -36,7 +36,7 @@
     "html-webpack-template": "^6.1.0",
     "jsdom": "^11.5.1",
     "json-loader": "^0.5.4",
-    "mocha": "^3.4.2",
+    "mocha": "^5.2.0",
     "mocha-coveralls-reporter": "0.0.5",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.1.0",
