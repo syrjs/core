@@ -26,7 +26,6 @@
 {
   self = [super init];
   if (self!=nil) {
-    _bridgedBrowser = [[WKWebView alloc] init];
     // setup a 0,0,0,0 wkwebview to use the jsbridge
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *controller = [[WKUserContentController alloc] init];
