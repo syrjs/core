@@ -68,7 +68,7 @@
 - (void) loadBundle: (NSString*) withBundlePath withRootView: (SyrRootView*) rootView
 {
   // load a bundle with the root view we were handed
-  // todo multiplex bridge : multiple apps, one instance
+  // @TODO multiplex bridge : multiple apps, one instance
    _rootView = rootView;
   
   NSURL* syrBridgeUrl;
@@ -141,7 +141,7 @@
     [self->_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
       if (error == nil)
       {
-        // do something with JS returns here
+        // @TODO do something with JS returns here
       }
       else
       {
@@ -227,7 +227,7 @@
 
 /**
  if the page is refreshed, we need to thrash the render
- todo - ensure this isn't leaking
+ @TODO - ensure this isn't leaking
  */
 - (void)webView:(WKWebView *)webView
         didStartProvisionalNavigation:(WKNavigation *)navigation
@@ -240,7 +240,7 @@
 
 /**
  send an event to through the bridge to the javascript side.
- todo - handle errors
+ @TODO - handle errors
  */
 - (void) sendEvent: (NSDictionary*) message {
   // send events on an async queue
