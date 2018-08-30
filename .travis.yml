@@ -17,8 +17,8 @@ matrix:
         - npm run build
       env:
         - CXX=g++-4.8
-      after_success:
-        - npm run coverage
+      # after_success:
+      #   - npm run coverage
     - language: objective-c
       os: osx
       osx_image: xcode9.2
