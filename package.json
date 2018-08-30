@@ -8,7 +8,6 @@
     "test": "nyc mocha --compilers js:babel-core/register test/*test.js",
     "test:jsx": "mocha --compilers js:babel-core/register test/jsxtest.js",
     "test:nodom": "mocha --compilers js:babel-core/register test/nodomtest.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "npm run pretty; webpack",
     "pretty": "prettier --single-quote --trailing-comma es5 --write \"lib/**/*.js\" \"samples/**/*.js\" \"test/**/*.js\";",
     "serve": "webpack-dev-server --config webpack.config.js --content-base build/"
@@ -16,11 +15,6 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:syrjs/core.git"
-  },
-  "config": {
-    "travis-cov": {
-      "threshold": 0
-    }
   },
   "prettier": {
     "singleQuote": true
@@ -31,14 +25,12 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "coveralls": "^2.13.1",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.29.0",
     "html-webpack-template": "^6.1.0",
     "jsdom": "^11.5.1",
     "json-loader": "^0.5.4",
     "mocha": "^5.2.0",
-    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.1.0",
     "prettier": "^1.5.3",
     "uglifyjs-webpack-plugin": "^0.4.6",
