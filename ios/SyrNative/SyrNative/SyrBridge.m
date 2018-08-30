@@ -119,7 +119,8 @@
   
   components.queryItems = queryItems;
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
-  [_bridgedBrowser loadRequest:req]; //[_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
+  // [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
+  [_bridgedBrowser loadRequest:req];
   
   [NSTimer scheduledTimerWithTimeInterval:2.0
                                    target:self
@@ -152,7 +153,7 @@
 }
 
 /**
-	the bridge sending a message for us to act on
+ the bridge sending a message for us to act on
  */
 - (void)userContentController:(WKUserContentController *)userContentController
       didReceiveScriptMessage:(WKScriptMessage *)message {
@@ -165,7 +166,7 @@
     [self invokeMethodWithMessage:syrMessage];
   } else if([messageType containsString:@"gui"]) {
     
-    //updating the UI needs to be done on the main thread
+    // updating the UI needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self->_raster parseAST:syrMessage withRootView:self->_rootView];
     });
@@ -199,7 +200,7 @@
     [_instances setObject:class forKey:className];
   }
   
-  //get render method
+  // get render method
   NSString* selectorString = [NSString stringWithFormat:@"__syr_export__%@", [astDict valueForKey:@"method"]];
   SEL methodSelector = NSSelectorFromString(selectorString);
   if ([class respondsToSelector:methodSelector]) {
@@ -213,7 +214,8 @@
     
     NSData *argsData = [[astDict valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
-    //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+    // Note that JSONObjectWithData will return either an NSDictionary or an NSArray,
+    // depending whether your JSON string represents an a dictionary or an array.
     id argsObject = [NSJSONSerialization JSONObjectWithData:argsData options:0 error:&error];
     int argsIndex = 2; // start at 2
     for(id arg in argsObject) {
