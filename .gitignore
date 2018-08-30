@@ -11,3 +11,5 @@ ios/SyrNative/SyrNative.xcodeproj/project.xcworkspace/xcuserdata/
 ios/SyrNative/SyrNative.xcodeproj/xcuserdata/
 
 .nyc_output/
+
+.*.swp
