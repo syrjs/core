@@ -47,16 +47,6 @@
   return self;
 }
 
-- (id) initWithRootView: (SyrRootView*) rootView {
-  self = [super init];
-  if (self)
-  {
-    self.rootView = rootView;
-    [self addView];
-  }
-  return self;
-}
-
 - (void)buttonPressed:(UIButton *)button  {
   NSNumber* tagNumber = [NSNumber numberWithDouble:button.tag];
   NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
