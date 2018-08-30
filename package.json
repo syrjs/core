@@ -32,7 +32,6 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "coveralls": "^2.13.1",
-    "css-js": "^1.0.6",
     "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.29.0",
     "html-webpack-template": "^6.1.0",
@@ -44,8 +43,6 @@
     "nyc": "^11.1.0",
     "object.observe": "^0.2.6",
     "prettier": "^1.5.3",
-    "styled-jsx": "^1.0.10",
-    "travis-cov": "^0.2.5",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.11"
