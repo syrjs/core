@@ -61,7 +61,7 @@
 /**
  load the javascript bundle.
  we use an html fixture to aid in loading
- 
+
  we pass as query the native modules available
  and envrionment info
  */
@@ -70,7 +70,7 @@
   // load a bundle with the root view we were handed
   // @TODO multiplex bridge : multiple apps, one instance
    _rootView = rootView;
-  
+
   NSURL* syrBridgeUrl;
   if([withBundlePath containsString:@"http"]) {
     syrBridgeUrl = [NSURL URLWithString:withBundlePath];
@@ -81,19 +81,19 @@
 
   NSURLComponents *components = [NSURLComponents componentsWithURL:syrBridgeUrl resolvingAgainstBaseURL:YES];
   NSMutableArray* exportedMethods = [[NSMutableArray alloc] init];
-  
+
   // pass native module names and selectors to the javascript side
   NSMutableArray *queryItems = [NSMutableArray array];
   for (NSString *key in _raster.nativemodules) {
     NSString *new = [key stringByReplacingOccurrencesOfString: @"__syr_export__" withString:@"_"];
     [exportedMethods addObject:new];
   }
-  
+
   // setup some environment stuff for the interpreter
   NSNumber* width = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.width];
   NSNumber* height = [NSNumber numberWithDouble:[UIScreen mainScreen].bounds.size.height];
   NSDictionary* bootupProps = [rootView appProperties];
-  
+
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:bootupProps
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
@@ -101,13 +101,13 @@
   NSData *jsonExportedMethodsData = [NSJSONSerialization dataWithJSONObject:exportedMethods
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
-  
+
   NSString* uriStringExportedMethods = [[NSString alloc] initWithData:jsonExportedMethodsData encoding:NSUTF8StringEncoding];
   NSString* uriStringBootupProps = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  
+
   CGFloat screenScale = [[UIScreen mainScreen] scale];
   NSNumber* screenScaleNS = [NSNumber numberWithFloat:screenScale];
-  
+
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"initial_props" value:uriStringBootupProps]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_width" value:[width stringValue]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"window_height" value:[height stringValue]]];
@@ -116,12 +116,12 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:[self deviceName]]];
-  
+
   components.queryItems = queryItems;
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
   // [_bridgedBrowser loadFileURL:components.URL allowingReadAccessToURL:components.URL];
   [_bridgedBrowser loadRequest:req];
-  
+
   [NSTimer scheduledTimerWithTimeInterval:2.0
                                    target:self
                                  selector:@selector(heartBeat)
@@ -136,7 +136,7 @@
 
 - (void) heartBeat {
   NSString* js = [NSString stringWithFormat:@""];
-  
+
   // dispatching on the bridge to wkwebview needs to be done on the main thread
   dispatch_async(dispatch_get_main_queue(), ^{
     [self->_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
@@ -157,22 +157,22 @@
  */
 - (void)userContentController:(WKUserContentController *)userContentController
       didReceiveScriptMessage:(WKScriptMessage *)message {
-  
+
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
   if([messageType containsString:@"cmd"]) {
-    
+
     // keep messaging on the async queue
     [self invokeMethodWithMessage:syrMessage];
   } else if([messageType containsString:@"gui"]) {
-    
+
     // updating the UI needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self->_raster parseAST:syrMessage withRootView:self->_rootView];
     });
-   
+
   } else if([messageType containsString:@"animation"]) {
-    
+
     // animations define the thread they are on
     [_raster setupAnimation:syrMessage];
   } else if([messageType containsString:@"error"]) {
@@ -190,28 +190,28 @@
   NSDictionary *astDict = [NSJSONSerialization JSONObjectWithData:objectData
                                                           options:NSJSONReadingMutableContainers
                                                             error:nil];
-  
+
   // get the class
   NSString* className = [_raster.registeredClasses valueForKey:[astDict valueForKey:@"clazz"]];
   Class class = NSClassFromString(className);
-  
+
   // create an instance of the object
   if(class != nil){
     [_instances setObject:class forKey:className];
   }
-  
+
   // get render method
   NSString* selectorString = [NSString stringWithFormat:@"__syr_export__%@", [astDict valueForKey:@"method"]];
   SEL methodSelector = NSSelectorFromString(selectorString);
   if ([class respondsToSelector:methodSelector]) {
-    
+
     NSMethodSignature *methodSignature = [NSClassFromString(className) methodSignatureForSelector:methodSelector];
     //invoke render method, pass component
     NSInvocation *inv = [NSInvocation invocationWithMethodSignature:methodSignature];
-    
+
     [inv setSelector:methodSelector];
     [inv setTarget:class];
-    
+
     NSData *argsData = [[astDict valueForKey:@"args"] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
     // Note that JSONObjectWithData will return either an NSDictionary or an NSArray,
@@ -253,7 +253,7 @@
                                                             error:nil];
     NSString *messageString = [[NSString alloc] initWithData:messageData encoding:NSUTF8StringEncoding];
     NSString* js = [NSString stringWithFormat:@"SyrEvents.emit(%@)", messageString];
-    
+
     // dispatching on the bridge to wkwebview needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
       [self->_bridgedBrowser evaluateJavaScript:js completionHandler:^(id result, NSError *error) {
@@ -294,7 +294,7 @@
 {
     struct utsname systemInfo;
     uname(&systemInfo);
-    
+
     return [NSString stringWithCString:systemInfo.machine
                               encoding:NSUTF8StringEncoding];
 }
