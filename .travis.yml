@@ -12,8 +12,7 @@ matrix:
       install:
         - npm install
       script:
-        - npm run test:jsx
-        - npm run test:nodom
+        - npm run test
         - npm run build
       env:
         - CXX=g++-4.8

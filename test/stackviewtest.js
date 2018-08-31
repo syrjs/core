@@ -21,13 +21,13 @@ describe('StackView', function() {
 
   it('should have predefined styles', function() {
     assert.equal(element.style['display'], 'flex');
-    assert.equal(element.style['flex-direction'], 'horizontal');
+    assert.equal(element.style['flex-direction'], 'row');
     assert.equal(element.style['align-items'], 'center');
     assert.equal(element.style['justify-content'], 'space-around');
   });
 
   it('should have user-defined orientation (vertical/horizontal)', function() {
-    assert.equal(element.style['flex-direction'], 'horizontal');
+    assert.equal(element.style['flex-direction'], 'row');
   });
 
   it('should have user-defined styles (height & width)', function() {

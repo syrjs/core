@@ -49,7 +49,7 @@ if (
 ) {
   RasterManager.setRaster(WKRaster);
 } else {
-  if (typeof window == 'undefined') {
+  if (typeof window == 'undefined' && !global.document) {
     RasterManager.setRaster(NoDOM);
   } else {
     RasterManager.setRaster(DOMRaster);
