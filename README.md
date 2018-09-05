@@ -89,6 +89,20 @@ To run on Android emulator, using Gradle:
 * `cd android && ./gradlew installDebug`
 * run the app on the Android emulator
 
+To run the calculator sample (partially working), make the following change to `webpack.config.js` before `npm run serve`:
+
+```diff
+diff --git a/webpack.config.js b/webpack.config.js
+index 7361b24..33b9561 100644
+--- a/webpack.config.js
++++ b/webpack.config.js
+@@ -7,3 +7,3 @@ module.exports = {
+   entry: {
+-    app: ['./samples/example.js']
++    app: ['./samples/calculator.js']
+   },
+```
+
 ## Contributors
 <div align="center">
 
