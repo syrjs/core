@@ -26,6 +26,7 @@ const Styles = {
       height: height,
       width: width,
       backgroundColor: '#eeeeee',
+      color: '#000000',
       left: left,
       top: top,
     };
