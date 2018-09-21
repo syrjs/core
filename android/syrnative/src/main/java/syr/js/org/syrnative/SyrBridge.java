@@ -105,6 +105,7 @@ public class SyrBridge {
 
                 WebSettings webSettings = mBridgedBrowser.getSettings();
                 webSettings.setJavaScriptEnabled(true);
+                webSettings.setAllowFileAccessFromFileURLs(true);
 
                 JSONArray jsArray = new JSONArray(mRaster.exportedMethods);
                 String exportedMethods = jsArray.toString();
