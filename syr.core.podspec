@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'syr.core'
-  s.version          = '1.5.6'
+  s.version          = '1.6.0'
   s.summary          = 'minimally obtrusive reactisque view engine, aimed at native developers'
 
 # This description is used to generate tags and improve search results.
@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/syrjs/core.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/Syr_JS'
   s.ios.deployment_target = '9.0'
-  s.source_files = 'ios/SyrNative/SyrNative/**/*'
+  s.source_files = 'ios/SyrNative/SyrNative/**/*.{h,m}'
 end
