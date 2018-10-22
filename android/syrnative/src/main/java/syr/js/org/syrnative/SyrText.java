@@ -95,19 +95,20 @@ public class SyrText implements SyrBaseModule, SyrComponent {
                         textView.setGravity(Gravity.START);
                     }
                 }
+                if (style.has("maxLines")) {
+                    textView.setSingleLine(false);
+                    textView.setLines(style.getInt("maxLines"));
+                } else {
+                    textView.setSingleLine(true);
+                }
+                //truncating the textView, so the it does not break the content
+                textView.setEllipsize(TextUtils.TruncateAt.END);
             }
 
             //@TODO check with this. Looks like a default behaviour in iOS
 
             textView.setGravity(Gravity.CENTER_VERTICAL);
 
-            if (style.has("maxLines")) {
-                textView.setLines(style.getInt("maxLines"));
-            } else {
-                //truncating the textView, so the it does not break the content
-                textView.setEllipsize(TextUtils.TruncateAt.END);
-                textView.setSingleLine(true);
-            }
             if(jsonInstance.has("value")) {
                 value = jsonInstance.getString("value");
             } else {
