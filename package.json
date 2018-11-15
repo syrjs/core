@@ -46,7 +46,7 @@
     "webpack-dev-server": "^2.11"
   },
   "dependencies": {
-    "@syr/jsx": "^1.0.0"
+    "@syr/jsx": "^1.2.0"
   },
   "syr": {
     "ios": {
