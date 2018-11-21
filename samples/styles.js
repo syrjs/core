@@ -1,8 +1,4 @@
-import {
-  Dimensions,
-  PixelRatio
-} from '../index';
-
+import { Dimensions, PixelRatio } from '../index';
 
 const styles = {
   view: {

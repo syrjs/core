@@ -58,7 +58,7 @@ class example extends Component {
           backgroundColor: '#09aea4',
         }}
       >
-       {this.state.components}
+        {this.state.components}
         <Button
           onPress={() => this.handleOnAdd()}
           style={{
