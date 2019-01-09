@@ -188,8 +188,6 @@ public class SyrBundleManager {
 
             try {
 
-                // TODO: Hash Comparision is not working good, need to check this too
-
             if(checkHash(result.getString("file"), result.getString("fileHash"))) {
                 FileOutputStream outputStream = context.openFileOutput(result.getString("fileName"), Context.MODE_PRIVATE);
                 outputStream.write(result.getString("file").getBytes());
