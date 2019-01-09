@@ -1,6 +1,7 @@
 package syr.js.org.syrnative;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -29,12 +30,17 @@ import java.security.NoSuchAlgorithmException;
 public class SyrBundleManager {
     protected String uri;
     protected Context context;
-    protected String manifestHash = null;
+    protected SharedPreferences sharedPreferences;
+    protected SharedPreferences.Editor editor;
+    private String MANIFEST_DETAILS = "manifestDetails";
+    private String MANIFEST_HASH = "manifestHash";
 
     public SyrBundleManager(Context mContext) {
         // does this need the (additional) config param?
         // if not do we need this constructor?
         context = mContext;
+        sharedPreferences = context.getSharedPreferences(MANIFEST_DETAILS, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
     }
 
     public SyrBundleManager setBundleAssetName(String uri) {
@@ -109,15 +115,21 @@ public class SyrBundleManager {
         @Override
         protected void onPostExecute(String result) {
 
+
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 JSONObject manifestObject = jsonObject.getJSONObject("app");
                 String newManifestHash = manifestObject.getString("hash");
                 JSONArray arrJson = manifestObject.getJSONArray("files");
 
+                // TODO: This will be used to store the whole manifest in the future.
+                String manifestHash = sharedPreferences.getString(MANIFEST_HASH,"");
 
-                if(manifestHash == null || manifestHash.equals(newManifestHash)) {
-                    manifestHash = newManifestHash;
+                if(!manifestHash.equals(newManifestHash)) {
+
+                    editor.putString(MANIFEST_HASH, newManifestHash);
+                    editor.apply();
                     for(int i = 0; i < arrJson.length(); i++) {
                         JSONObject fileObject = arrJson.getJSONObject(i);
                         String fileType = fileObject.getString("type");
@@ -176,12 +188,11 @@ public class SyrBundleManager {
 
             try {
 
-                // TODO: Hash Comparision is not working good, need to check this too
-//            if(checkHash(result.getString("file"), result.getString("fileHash"))) {
+            if(checkHash(result.getString("file"), result.getString("fileHash"))) {
                 FileOutputStream outputStream = context.openFileOutput(result.getString("fileName"), Context.MODE_PRIVATE);
                 outputStream.write(result.getString("file").getBytes());
                 outputStream.close();
-//            }
+            }
 
             } catch ( JSONException | IOException e) {
                 e.printStackTrace();
@@ -249,7 +260,7 @@ public class SyrBundleManager {
                     hexString.append(h);
                 }
 
-                return hexString.toString() == baseHash;
+                return hexString.toString().equals(baseHash);
 
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
