@@ -123,9 +123,10 @@ public class SyrBundleManager {
                 String newManifestHash = manifestObject.getString("hash");
                 JSONArray arrJson = manifestObject.getJSONArray("files");
 
+                // TODO: This will be used to store the whole manifest in the future.
                 String manifestHash = sharedPreferences.getString(MANIFEST_HASH,"");
 
-                if(manifestHash == null || !manifestHash.equals(newManifestHash)) {
+                if(!manifestHash.equals(newManifestHash)) {
 
                     editor.putString(MANIFEST_HASH, newManifestHash);
                     editor.apply();
