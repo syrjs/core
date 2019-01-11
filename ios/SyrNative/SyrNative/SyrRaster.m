@@ -14,7 +14,7 @@
 
 @interface SyrRaster()
 
-@property UIView* rootView;
+//@property UIView* rootView;
 @property NSMutableDictionary* components;
 @property NSMutableDictionary* animations;
 @property NSMutableDictionary* nonRenderables;
@@ -56,14 +56,15 @@
                                                        options:NSJSONReadingMutableContainers
                                                          error:&jsonError];
   
+  NSString* messageSender = [astString valueForKey:@"sender"];
+  
   // javascript is letting us know we have an update
   // to ui, so lets update it
   if([astDict objectForKey:@"update"]) {
     [self update: astDict];
   } else {
     // otherwise lets build it
-    _rootView = rootView;
-    [self build: astDict];
+    [self build: astDict rootView:rootView];
   }
 }
 
@@ -127,13 +128,14 @@
   		// attempt to update instance
       if(componentInstance != nil && class != nil) {
           // we have an instance and a class, lets update this component
-        	if([(UIView*)componentInstance superview]!=nil)
-          	NSLog(@"visible");
-        	else
+        	if([(UIView*)componentInstance superview]!=nil) {
+
+          }
+        	else {
             // reattach to view parent
             [viewParent addSubview:(UIView*)componentInstance];
-          	NSLog(@"not visible");
-        
+          }
+
           viewParent = (UIView*)componentInstance;
           SEL selector = NSSelectorFromString(@"render:withInstance:");
           if ([class respondsToSelector:selector]) {
@@ -211,12 +213,12 @@
 }
 
 // build the component tree
--(void) build: (NSDictionary*) astDict {
+-(void) build: (NSDictionary*) astDict rootView:(SyrRootView*) rootView  {
   UIView* component = (UIView*)[self createComponent:astDict];
   if(component != nil) {
-    NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
+//    NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
-    [_rootView addSubview:component];
+    [rootView addSubview:component];
     [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
     [_bridge rasterRenderedComponent:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
   } else {
@@ -224,7 +226,7 @@
     NSDictionary* childComponent = [childComponents objectAtIndex:0];
     
     if(childComponent != nil) {
-      [self build:childComponent];
+      [self build:childComponent rootView:rootView];
     }
     
 		[_nonRenderables setValue:@"" forKey:[astDict valueForKey:@"uuid"]];
@@ -242,7 +244,7 @@
       
       if(child != [NSNull null]) {
       
-      NSLog(@"building %@", [child valueForKey:@"elementName"]);
+//      NSLog(@"building %@", [child valueForKey:@"elementName"]);
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
         
@@ -440,7 +442,6 @@
     text.textColor = [UIColor blackColor];
   }
   [view addSubview:text];
-  _rootView = rootView;
   [rootView addSubview:view];
 }
 

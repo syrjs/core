@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <SyrNative/SyrNative.h>
+#import <SyrNative/SyrBundleManager.h>
 
 @interface ViewController ()
 
@@ -17,6 +18,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  SyrBundleManager* bundleManager = [[SyrBundleManager alloc] initWithManifestServer:@"https://www.sandbox.paypal.com/appstack/nxo-syr-app/stage/"];
+  SyrBundle* myBundle = [bundleManager loadBundle:@"http://localhost:8080"];
+  
   
   // init rootView
   SyrRootView* rootView = [[SyrRootView alloc] initWithBundlePath:@"http://localhost:8080" initialProperties:@{@"foo": @"baz"}];

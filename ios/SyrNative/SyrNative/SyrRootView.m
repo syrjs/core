@@ -51,9 +51,4 @@
   return self;
 }
 
--(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps withResourceBundlePath: (NSString*) resourceBundlePath {
-  _resourcePath = resourceBundlePath;
-  return [self initWithBundlePath:bundlePath initialProperties:initialProps];
-}
-
 @end
