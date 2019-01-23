@@ -84,7 +84,6 @@
   NSObject* componentInstance = [_components objectForKey:uuid];
   NSString* className = [_registeredClasses valueForKey:[component valueForKey:@"elementName"]];
   Class class = NSClassFromString(className);
-  
   BOOL unmount = (BOOL)[component valueForKey:@"unmount"];
   
   if(unmount == YES) {
@@ -95,7 +94,6 @@
       [instance removeFromSuperview];
       [_bridge rasterRemovedComponent:uuid];
     } else {
-    
       NSArray* children = [component objectForKey:@"children"];
       if(children != nil || [children count] != 0) {
         for(id child in children) {
@@ -123,7 +121,6 @@
       [_bridge rasterRemovedComponent:uuid];
       [_nonRenderables removeObjectForKey:uuid];
     }
-    NSLog(@"unmount");
   } else {
   		// attempt to update instance
       if(componentInstance != nil && class != nil) {
@@ -149,7 +146,6 @@
             [inv invoke];
           }
         
-  
       } else if(componentInstance == nil && class != nil) {
         // we don't have an instance, but a class exists
         // lets create this instance
@@ -180,7 +176,6 @@
         }
         [_bridge rasterRenderedComponent:[[component valueForKey:@"instance"] valueForKey:@"uuid"]];
         viewParent = newComponent;
-        NSLog(@"create a new component %@", className);
       } else {
         if([_nonRenderables objectForKey:uuid] == nil) {
           [_bridge rasterRenderedComponent:uuid];
@@ -195,7 +190,6 @@
           NSDictionary* attributes = [component objectForKey:@"attributes"];
           if([attributes objectForKey:@"key"]) {
             key = [attributes objectForKey:@"key"];
-            NSLog(@"we have key");
           }
         }
     
@@ -203,7 +197,6 @@
          if(child != nil && child != [NSNull null]) {
             if(key != nil) {
               [child setValue:key forKey:@"key"];
-              NSLog(@"add key");
             }
           	[self syncState:child withViewParent:viewParent];
         	}
@@ -216,7 +209,6 @@
 -(void) build: (NSDictionary*) astDict rootView:(SyrRootView*) rootView  {
   UIView* component = (UIView*)[self createComponent:astDict];
   if(component != nil) {
-//    NSLog(@"building %@", [astDict valueForKey:@"elementName"]);
     [self buildChildren:astDict withViewParent:component];
     [rootView addSubview:component];
     [_components setObject:component forKey:[[astDict valueForKey:@"instance"] valueForKey:@"uuid"]];
@@ -243,8 +235,7 @@
     for(id child in children) {
       
       if(child != [NSNull null]) {
-      
-//      NSLog(@"building %@", [child valueForKey:@"elementName"]);
+        
       NSObject* nsComponent = [self createComponent:child];
       NSArray* subchildren = [child objectForKey:@"children"];
         
