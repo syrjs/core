@@ -18,6 +18,7 @@
 @property WKWebView* bridgedBrowser;
 @property SyrRootView* rootView;
 @property NSMutableDictionary* instances;
+@property NSMutableDictionary* rootViews;
 @end
 
 @implementation SyrBridge
@@ -36,7 +37,7 @@
     // setup a 0,0,0,0 wkwebview to use the js bridge
     _bridgedBrowser = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) configuration:configuration];
     _bridgedBrowser.navigationDelegate = self;
-
+    _rootViews = [[NSMutableDictionary alloc] init];
     // connect the bridge to other components
     _eventHandler = [SyrEventHandler sharedInstance];
     _eventHandler.bridge = self;
@@ -45,17 +46,6 @@
   }
 
   return self;
-}
-
-- (void)buttonPressed:(UIButton *)button  {
-  NSNumber* tagNumber = [NSNumber numberWithDouble:button.tag];
-  NSDictionary* event = @{@"tag":tagNumber, @"type":@"buttonPressed"};
-  [self sendEvent:event];
-}
-
-- (void) addView {
-  // create a root view
-  [_rootView addSubview:_bridgedBrowser];
 }
 
 /**
@@ -69,7 +59,11 @@
 {
   // load a bundle with the root view we were handed
   // @TODO multiplex bridge : multiple apps, one instance
-   _rootView = rootView;
+  NSString *uuid = [[NSUUID UUID] UUIDString];
+  _rootView = rootView;
+  
+  // store the rootView being loaded
+  [_rootViews setObject:rootView forKey:uuid];
 
   NSURL* syrBridgeUrl;
   if([withBundlePath containsString:@"http"]) {
@@ -116,6 +110,7 @@
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"platform_version" value:[[UIDevice currentDevice] systemVersion]]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"exported_methods" value:uriStringExportedMethods]];
   [queryItems addObject:[NSURLQueryItem queryItemWithName:@"model" value:[self deviceName]]];
+  [queryItems addObject:[NSURLQueryItem queryItemWithName:@"rootViewId" value:uuid]];
 
   components.queryItems = queryItems;
   NSURLRequest * req = [NSURLRequest requestWithURL:components.URL];
@@ -160,6 +155,9 @@
 
   NSDictionary* syrMessage = [message valueForKey:@"body"];
   NSString* messageType = [syrMessage valueForKey:@"type"];
+  NSString* messageSender = [syrMessage valueForKey:@"sender"];
+  SyrRootView* recievingRootView = [_rootViews objectForKey:messageSender];
+  
   if([messageType containsString:@"cmd"]) {
 
     // keep messaging on the async queue
@@ -168,7 +166,7 @@
 
     // updating the UI needs to be done on the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self->_raster parseAST:syrMessage withRootView:self->_rootView];
+      [self->_raster parseAST:syrMessage withRootView:recievingRootView];
     });
 
   } else if([messageType containsString:@"animation"]) {
@@ -176,7 +174,7 @@
     // animations define the thread they are on
     [_raster setupAnimation:syrMessage];
   } else if([messageType containsString:@"error"]) {
-    [_raster showInfoMessage:syrMessage withRootView:_rootView];
+    [_raster showInfoMessage:syrMessage withRootView:recievingRootView];
   }
 }
 
@@ -230,6 +228,7 @@
 /**
  if the page is refreshed, we need to thrash the render
  @TODO - ensure this isn't leaking
+ @TODO - needs to clear per application
  */
 - (void)webView:(WKWebView *)webView
         didStartProvisionalNavigation:(WKNavigation *)navigation
