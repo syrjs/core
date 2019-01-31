@@ -61,16 +61,16 @@
   // javascript is letting us know we have an update
   // to ui, so lets update it
   if([astDict objectForKey:@"update"]) {
-    [self update: astDict];
+    [self update: astDict withViewParent:rootView];
   } else {
     // otherwise lets build it
     [self build: astDict rootView:rootView];
   }
 }
 
--(void) update: (NSDictionary*) astDict {
+-(void) update: (NSDictionary*) astDict withViewParent: (UIView*) viewParent {
  	// todo - reimpliment state update with animations in mind
-  [self syncState:astDict withViewParent:nil];
+  [self syncState:astDict withViewParent:viewParent];
 }
 
 -(void) syncState: (NSDictionary*) component withViewParent: (UIView*) viewParent {

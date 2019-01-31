@@ -108,14 +108,20 @@
       NSString* fileName = [file valueForKey:@"name"];
       NSString* fileHash = [file valueForKey:@"hash"];
       
+      
       if([fileType containsString:@"script"]){
-        [self getStringDataFrom:[baseURI stringByAppendingPathComponent:[version stringByAppendingPathComponent:fileName]] complete:^(NSString* fileData){
+        // create string to call out to get remote file
+        // cache bust akamai
+        NSString* fileRemotePath = [NSString stringWithFormat:@"%@?%@",[baseURI stringByAppendingPathComponent:[version stringByAppendingPathComponent:fileName]], [[NSUUID UUID] UUIDString]];
+        
+        [self getStringDataFrom: fileRemotePath complete:^(NSString* fileData){
           if([fileData length] > 0) {
             NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
             NSString* documentsDirectory = [paths objectAtIndex:0];
             NSString* filenameStr = [documentsDirectory stringByAppendingPathComponent:fileName];
             NSString* md5Sum = [self md5:fileData];
             
+            // check ths sum of the file
             if([md5Sum containsString:fileHash]) {
               // hash is ok, save the file
               [fileData writeToFile:filenameStr atomically:YES encoding:NSUTF8StringEncoding error:nil];
@@ -136,11 +142,15 @@
 }
 
 - (void) getStringDataFrom:(NSString *)url complete:(void(^)(NSString* stringData))someBlock{
-  NSURLSessionDataTask *downloadTask = [[NSURLSession sharedSession]
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+
+  NSURLSessionDataTask *downloadTask = [[NSURLSession sessionWithConfiguration:configuration]
       dataTaskWithURL:[NSURL URLWithString:url] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
       NSString* stringData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
       someBlock(stringData);
   }];
+  
   [downloadTask resume];
 }
 

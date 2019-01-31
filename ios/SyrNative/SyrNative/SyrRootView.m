@@ -29,18 +29,18 @@
   return _resourcePath;
 }
 
-- (NSDictionary*)appProperties {
+- (NSDictionary*) appProperties {
   return _props;
 }
 
-- (void)setAppProperties:(NSDictionary *)passedProps{
+- (void) setAppProperties:(NSDictionary *) passedProps{
   _props = passedProps;
 }
 
 /**
  this view holds the Syr rendering
  */
-- (id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps {
+- (id) initWithBundlePath:(NSString*) bundlePath initialProperties:(NSDictionary*) initialProps {
   self = [super init];
   if (self)
   {
@@ -51,10 +51,9 @@
   return self;
 }
 
--(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps withResourceBundlePath: (NSString*) resourceBundlePath {
+-(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps withResourceBundlePath:(NSString*) resourceBundlePath {
   _resourcePath = resourceBundlePath;
   return [self initWithBundlePath:bundlePath initialProperties:initialProps];
 }
 
 @end
-
