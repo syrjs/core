@@ -126,7 +126,7 @@
 
 -(NSString*) resourceBundlePath
 {
-  return _rootView.resourceBundlePath;
+  return [_rootView resourceBundlePath];
 }
 
 - (void) heartBeat {

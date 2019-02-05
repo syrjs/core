@@ -11,7 +11,7 @@
 
 @interface SyrRootView : UIView
 @property NSDictionary* appProperties;
-@property NSString* resourceBundlePath;
+-(NSString*) resourceBundlePath;
 -(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps;
 -(id) initWithBundlePath:(NSString*)bundlePath initialProperties:(NSDictionary*)initialProps withResourceBundlePath: (NSString*) resourceBundlePath;
 @end

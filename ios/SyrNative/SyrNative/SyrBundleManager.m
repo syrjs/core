@@ -95,7 +95,7 @@
 }
 
 - (void) processManifest: (NSDictionary*) manifest {
-  NSString* manifestStatus = [manifest valueForKey:@"ack"];
+//  NSString* manifestStatus = [manifest valueForKey:@"ack"];
   NSDictionary* manifestApp = [manifest valueForKey:@"app"];
   NSDictionary* meta = [manifestApp objectForKey:@"meta"];
   NSString* baseURI = [meta valueForKey:@"baseURI"];
@@ -158,7 +158,8 @@
 {
   const char *cStr = [input UTF8String];
   unsigned char digest[CC_MD5_DIGEST_LENGTH];
-  CC_MD5(cStr, strlen(cStr), digest);
+
+  CC_MD5(cStr, (CC_LONG)strlen(cStr), digest);
   
   NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
   

@@ -12,7 +12,7 @@
 @interface SyrRootView()
 @property SyrCore* instance;
 @property NSDictionary* props;
-@property NSString* resourcePath;
+@property (nonatomic) NSString* resourcePath;
 @end
 
 @implementation SyrRootView

@@ -56,7 +56,7 @@
                                                        options:NSJSONReadingMutableContainers
                                                          error:&jsonError];
   
-  NSString* messageSender = [astString valueForKey:@"sender"];
+//  NSString* messageSender = [astString valueForKey:@"sender"];
   
   // javascript is letting us know we have an update
   // to ui, so lets update it
