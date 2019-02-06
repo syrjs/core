@@ -43,15 +43,6 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
                 return null;
             }
 
-            // get the default UA from the system
-            String userAgent = System.getProperty("http.agent");
-
-            // create a new UA by adding the APPLICATION_ID from the build config.
-            String syrUserAgent = userAgent + " SyrApp/" + BuildConfig.APPLICATION_ID;
-
-            // set the UA for the request
-            connection.setRequestProperty("User-Agent", syrUserAgent);
-
             connection.setRequestProperty("Content-Length",
                     Integer.toString(requestObject.getString("body").getBytes().length));
 
@@ -71,7 +62,6 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
             // Send request
             DataOutputStream wr = new DataOutputStream(
                     connection.getOutputStream());
-
             wr.writeBytes(requestObject.getString("body"));
             wr.flush();
             wr.close();
