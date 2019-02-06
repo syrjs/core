@@ -52,8 +52,6 @@ public class SyrNetworking extends AsyncTask<JSONObject, Void, String> implement
             // set the UA for the request
             connection.setRequestProperty("User-Agent", syrUserAgent);
 
-            System.setProperty("http.agent", syrUserAgent);
-
             connection.setRequestProperty("Content-Length",
                     Integer.toString(requestObject.getString("body").getBytes().length));
 
