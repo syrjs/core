@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         modules.add(new SyrAlertDialogue());
 
         // get the javascript bundle
-        SyrBundle bundle = new SyrBundleManager().setBundleAssetName("http://10.0.2.2:8080").build();
+        SyrBundle bundle = new SyrBundleManager(this).setBundleAssetName("http://10.0.2.2:8080").build();
 
         // create an instance of Syr
         SyrInstance instance = new SyrInstanceManager().setJSBundleFile(bundle).build();
