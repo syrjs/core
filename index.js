@@ -2,11 +2,9 @@
  * This file glues together a bunch of stuff, to make a superset compatible reactique api
  */
 
-require('./lib/fills');
+import './lib/fills';
 
-// core composition
-import { RasterManager } from './lib/rastermanager';
-import { Component } from './lib/component';
+import { Component, Render } from './lib/component';
 
 // animations and events
 import { Animated } from './lib/animated';
@@ -33,39 +31,19 @@ import { Dimensions } from './lib/dimensions';
 import { PixelRatio } from './lib/pixelratio';
 import { Platform } from './lib/platform';
 
-// rendering platforms
-import { DOMRaster } from './lib/rasters/dom';
-import { WKRaster } from './lib/rasters/wkwebview';
-import { NoDOM } from './lib/rasters/nodom';
-
 // central SyrStore (flux Store)
 import { SyrStore } from './lib/store';
 import { Resolver } from './lib/resolver';
 
-// detecting rendering bridge
-if (
-  typeof window !== 'undefined' &&
-  (window.SyrBridge || (window.webkit && window.webkit.messageHandlers))
-) {
-  RasterManager.setRaster(WKRaster);
-} else {
-  if (typeof window == 'undefined' && !global.document) {
-    RasterManager.setRaster(NoDOM);
-  } else {
-    RasterManager.setRaster(DOMRaster);
-  }
-}
-
-// export render
-const Render = RasterManager.render;
+import { RasterManager } from './lib/rastermanager';
 
 // api objects
 export {
   Component,
   Render,
-  RasterManager,
   View,
   StackView,
+  RasterManager,
   Animated,
   Events,
   Button,

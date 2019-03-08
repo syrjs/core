@@ -6,13 +6,13 @@ const Styles = {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     backgroundColor: '#aaaaaa',
-    padding: 5
+    padding: 5,
   },
   buttonContainer: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     top: PixelRatio.getPixelSizeForLayoutSize(200),
-    margin: 5
+    margin: 5,
   },
   numButton: function(number) {
     const row = Math.floor(number / 4) - (number % 4 ? 0 : 1);
@@ -31,7 +31,7 @@ const Styles = {
       width: width,
       left: left,
       backgroundColor: number % 4 === 0 ? '#f49b42' : '#eeeeee',
-      top: top
+      top: top,
     };
   },
   displayArea: {
@@ -39,10 +39,11 @@ const Styles = {
     height: PixelRatio.getPixelSizeForLayoutSize(125),
     top: PixelRatio.getPixelSizeForLayoutSize(50),
     left: PixelRatio.getPixelSizeForLayoutSize(20),
-    width: Dimensions.get('window').width - PixelRatio.getPixelSizeForLayoutSize(30),
+    width:
+      Dimensions.get('window').width - PixelRatio.getPixelSizeForLayoutSize(30),
     backgroundColor: '#dedede',
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(105)
-  }
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(105),
+  },
 };
 
 export { Styles };

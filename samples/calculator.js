@@ -1,10 +1,4 @@
-import {
-  Component,
-  Render,
-  View,
-  Text,
-  Button
-} from '../index';
+import { Component, Render, View, Text, Button } from '../index';
 
 import { Styles } from './styles/calculator';
 
@@ -23,7 +17,7 @@ const operators = {
       return newValue; // avoid divide by zero
     }
     return oldValue / newValue;
-  }
+  },
 };
 
 class SyrCalculator extends Component {
@@ -32,7 +26,7 @@ class SyrCalculator extends Component {
     this.state = {
       displayAreaValue: '0',
       calculations: [],
-      clear: false
+      clear: false,
     };
   }
 
@@ -139,7 +133,6 @@ class SyrCalculator extends Component {
             *
           </Button>
 
-
           <Button
             onPress={() => {
               this.onPressHandler(0);
@@ -158,7 +151,6 @@ class SyrCalculator extends Component {
             =
           </Button>
 
-
           <Button
             onPress={() => {
               this.clearStack();
@@ -176,7 +168,6 @@ class SyrCalculator extends Component {
           >
             /
           </Button>
-
         </View>
       </View>
     );
@@ -188,10 +179,7 @@ class SyrCalculator extends Component {
       let value = `${operators[firstOprn](first, second)}`;
       this.setState({
         displayAreaValue: value,
-        calculations: [
-          value,
-          secondOprn
-        ]
+        calculations: [value, secondOprn],
       });
     }
   }
@@ -200,46 +188,46 @@ class SyrCalculator extends Component {
     return this.setState({
       displayAreaValue: `0`,
       calculations: [],
-      clear: false
+      clear: false,
     });
   }
 
   processStack() {
     let [firstValue, operator] = this.state.calculations;
-    let value = `${operators[operator](firstValue, this.state.displayAreaValue)}`;
+    let value = `${operators[operator](
+      firstValue,
+      this.state.displayAreaValue
+    )}`;
     return this.setState({
       calculations: [],
       displayAreaValue: value,
-      clear: false
+      clear: false,
     });
   }
 
   onPressHandler(btn) {
-
     if (operators[btn]) {
       this.calculate();
       this.state.calculations.push(this.state.displayAreaValue, btn);
       this.setState({
         displayAreaValue: this.state.displayAreaValue,
-        clear: true
+        clear: true,
       });
       this.calculate();
     } else {
       let value;
       if (this.state.clear) {
-        value = `${(btn) * 1}`;
+        value = `${btn * 1}`;
       } else {
         value = `${(this.state.displayAreaValue + btn) * 1}`;
       }
 
       this.setState({
         displayAreaValue: `${value}`,
-        clear: false
+        clear: false,
       });
     }
-
   }
-
 }
 
 Render(SyrCalculator);
