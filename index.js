@@ -5,6 +5,7 @@
 import './lib/fills';
 
 import { Component, Render } from './lib/component';
+import { RasterManager } from './lib/rastermanager';
 
 // animations and events
 import { Animated } from './lib/animated';
@@ -35,7 +36,6 @@ import { Platform } from './lib/platform';
 import { SyrStore } from './lib/store';
 import { Resolver } from './lib/resolver';
 
-import { RasterManager } from './lib/rastermanager';
 
 // api objects
 export {
