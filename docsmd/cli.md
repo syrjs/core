@@ -5,7 +5,7 @@ Ease development, by using `syr-cli`. This tool scaffolds projects, repairs link
 ## Install
 
 ```bash
-npm install -g syr-cli
+npm install -g @syr/cli
 ```
 
 ## Usage

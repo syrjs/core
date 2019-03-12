@@ -17,7 +17,7 @@
 Applications you build with Syr, ARE Native Apps. We expose the best of the Native Platform, allowing you to build experiences with JavaScript and a Familiar API.
 
 ```
-import { Component, Image, ScrollView, Text } from 'syr';
+import { Component, Image, ScrollView, Text } from '@syr/core';
 
 class myComponent extends Component {
   render() {

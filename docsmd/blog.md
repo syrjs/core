@@ -63,7 +63,7 @@ The `Host` environment attaches these controls to a `RootView`, and once complet
 
 The `Host` environment and the `Guest` environment exchange a series of messages that continue while the application is executing. We'll continue to break those Classes down in future posts, stay tuned!
 
-Want to contribute? Head over to our <a href="https://github.com/dmikey/syr/issues" target="_new">issues</a> page, and grab one to work on today! Any contribution welcome!
+Want to contribute? Head over to our <a href="https://github.com/syrjs/core/issues" target="_new">issues</a> page, and grab one to work on today! Any contribution welcome!
 
 <br/>
 <i>Written By <a href="http://www.twitter.com/dmikeyanderson" target="_new">Derek</a> on January 5, 2018</i>
