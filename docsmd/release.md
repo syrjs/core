@@ -1,3 +1,6 @@
+## 1.7.2-alpha
+[Source](https://github.com/syrjs/core/releases/tag/1.7.2)
+
 ## 1.3.4-alpha
 
 [Source](https://github.com/dmikey/syr/releases/tag/1.3.4-alpha)

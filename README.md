@@ -32,7 +32,7 @@ otherwise open an issue.
 
 ### Read the Docs
 
-https://syr.js.org
+https://syr.js.org/api/
 
 ### Getting Started
 
@@ -89,7 +89,7 @@ To run on Android emulator, using Gradle:
 * `cd android && ./gradlew installDebug`
 * run the app on the Android emulator
 
-To run the calculator sample (partially working), make the following change to `webpack.config.js` before `npm run serve`:
+To run the calculator sample, make the following change to `webpack.config.js` before `npm run serve`:
 
 ```diff
 diff --git a/webpack.config.js b/webpack.config.js

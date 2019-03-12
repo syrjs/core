@@ -1,6 +1,11 @@
+# Dependencies
 node_modules/
-.vscode/
 package-lock.json
+
+# Webstorm IDE and text editors
+.vscode/
+.idea
+
 build/
 .DS_Store
 ios/SyrNativeSample/SyrNativeSample.xcodeproj/xcuserdata/

@@ -9,7 +9,7 @@ This API guide is morphing over time. Please check back often, and feel free to 
 SyrSDK uses the familiar React JavaScript pattern for creating components. The basic component setup looks like this.
 
 ```javascript
-import { Component } from 'syr';
+import { Component } from '@syr/core';
 
 class MyComponent extends Component {
   constructor() {
@@ -24,7 +24,7 @@ class MyComponent extends Component {
 A `View` component is the basic component that renders to a surface (the `RootView`). This component can be rendered to a `SyrRootView`.
 
 ```javascript
-import { View } from 'syr';
+import { View } from '@syr/core';
 
 render(){
   return <View></View>
@@ -34,7 +34,7 @@ render(){
 It can also own components, that will render to the surface as a child. Such as another `View`.
 
 ```javascript
-import { View } from 'syr';
+import { View } from '@syr/core';
 
 render(){
   return <View>
@@ -46,7 +46,7 @@ render(){
 Because a View does not have any dimensions by default, it will render at X,Y:0,0 and Height,Width:0,0. To change this you can attach a style.
 
 ```javascript
-import { View } from 'syr';
+import { View } from '@syr/core';
 
 render(){
   return <View style={{
@@ -62,7 +62,7 @@ render(){
 An animated view lets the bridge know about any special conditions that need to be setup ahead of time for the animation. Currently this stub exists for Syntax compatibility. In SyrSDK any component that is derived from an animatable is, able to have an animation applied. UIView, Button, Image.
 
 ```javascript
-import { Animated } from 'syr';
+import { Animated } from '@syr/core';
 
 render(){
   return <Animated.View></Animated.View>
@@ -74,7 +74,7 @@ render(){
 A text view MUST OWN text. We're following this rule from React Native and sticking with it. Text that is not inside a TextView node, will become a `value` property on nodes that own them. So if you need Text that displays, then you need to ensure it's wrapped inside a `TextView`
 
 ```javascript
-import { TextView } from 'syr';
+import { TextView } from '@syr/core';
 
 render(){
   return <TextView></TextView>
@@ -86,7 +86,7 @@ render(){
 A component for displaying an Image. It is self terminated as it can not hold any children.
 
 ```javascript
-import { Image } from 'syr';
+import { Image } from '@syr/core';
 
 render(){
   return <Image source={{uri:"file_name"}} style={{ height:150, width:300 }}/>
@@ -97,7 +97,7 @@ render(){
 A clickable component. Returns an onPress event.
 
 ```javascript
-import { Button } from 'syr';
+import { Button } from '@syr/core';
 
 render(){
   return <Button onPress={this.onPress} style={{ height:150, width:300 }}>Press Me</Button>
@@ -112,7 +112,7 @@ onPress(){
 A `View` that has a linear gradient applied to the background. Currently supports all 8 ordinal directions.
 
 ```javascript
-import { LinearGradient } from 'syr';
+import { LinearGradient } from '@syr/core';
 
 render() {
   return <LinearGradient colors={['#000000', '#FFFFFF']} direction = {"rightToLeft"} style={{ height:150, width:300 }}/>
@@ -124,7 +124,7 @@ render() {
 An invisible clickable view. Use it to encapsulate components for which you want to receive a click handler.
 
 ```javascript
-import { TouchableOpacity, Image } from 'syr';
+import { TouchableOpacity, Image } from '@syr/core';
 
 render() {
   return <TouchableOpacity onPress={()=>this.handleBackPress()} style={styles.iconContainer}>
@@ -142,7 +142,7 @@ render() {
 A component that introduces scrolling around content inside. We calculate the max Y and max X, and set the content of the scroll view.
 
 ```javascript
-import { ScrollView, View } from 'syr';
+import { ScrollView, View } from '@syr/core';
 
 render() {
   return <ScrollView style={{height: 300, width: 300}}>
@@ -157,7 +157,7 @@ render() {
 StackView allows a developers to align and space out content. In lieu of having React-Native's Yoga (Flexbox), we leverage built in layout controls.
 
 ```javascript
-import { StackView, View } from 'syr';
+import { StackView, View } from '@syr/core';
 
 render() {
   return <StackView
@@ -181,7 +181,7 @@ A prop passed into 'TouchableOpacity' and 'Button' to activate the haptic respon
 - selection
 
 ```JavaScript
-import { TouchableOpacity } from 'syr';
+import { TouchableOpacity } from '@syr/core';
 render() {
   return <TouchableOpacity
           hapticFeedbackType="notificationWarning"
@@ -191,7 +191,7 @@ render() {
 }
 OR
 
-import { Button } from 'syr';
+import { Button } from '@syr/core';
 render() {
   return <Button
           hapticFeedbackType="notificationSuccess"
@@ -210,7 +210,7 @@ This is a controlled component that takes an `onValueChange` callback. It is rec
 Props (type, default) include: value (bool, false), tintColor (string, null), onTintColor (string, null), isDisabled (bool, false), style (syr styling object, null), and onValueChange (func, null). Value is the on/off state of the control, tintColor is the off color, onTintColor is the on color. isDisabled is whether the control is entirely disabled, style only accepts positioning {top, left, right, bottom} at the moment as control size will statically follow iOS/Android convention of 51 x 31 for now, onValueChange is the callback to be fired when the control is toggled.
 
 ```JavaScript
-import { Switch } from 'syr';
+import { Switch } from '@syr/core';
 render() {
   return <Switch
             onValueChange={() => console.log('hey I am changing!')}
@@ -227,7 +227,7 @@ A native alert box that can be used to prompt messages and take feedback from th
 Takes in three params, title: A string containing the 'Title' for the dialogue box, Message: A string containing the 'Message' for the dialogue box and actions: An array of objects containing information about the buttons to be displayed and the actions to be performed.
 
 ```JavaScript
-import { AlertDialogue } from 'syr';
+import { AlertDialogue } from '@syr/core';
 render() {
   return <TouchableOpacity
           onPress={() => {
@@ -255,7 +255,7 @@ render() {
 Currently iOS only. Current capabilities to return all contacts and to request permissions to get contact information. Data for the contacts returned currently is: First Name, Last Name, Birthday, Profile Picture, Phone Number.
 
 ```JavaScript
-{import NativeModules} from 'syr';
+{import NativeModules} from '@syr/core';
 //calls the requestPermissions functions at native layer
   NativeModules.SyrContactManager.requestContactPermissions();
 
@@ -426,7 +426,7 @@ SyrSDK uses the concept of a `raster`. It tries to detect the environment it's i
 We recommend, that you use a top level component for an entry. And use this as top level logic for your application. Once handed to the Raster, it will become an instance, and it's logic and program will run starting with it's `constructor`, and then the `lifeCycle` events.
 
 ```javascript
-import { Component, Render } from 'syr';
+import { Component, Render } from '@syr/core';
 
 class MyApp extends Component {
   render() {
@@ -444,7 +444,7 @@ Syr supports Life Cycle events to help control the flow of the program. To take 
 
 ### Method stubs
 ```
-import { Component } from 'syr';
+import { Component } from '@syr/core';
 
 class MyComponent extends Component {
   constructor() {
@@ -496,7 +496,7 @@ SyrInstance.getInstance(this).sendEvent("FooParty", "party at my desk")
 JavaScript can subscribe to the events that are being passed down from the native layer.
 
 ```javascript
-import { EventEmitter } from 'syr';
+import { EventEmitter } from '@syr/core';
 
 
 const subscription = EventEmitter.addListener(
@@ -513,7 +513,7 @@ Syr has support for animations. With Syr animations you can run animations trans
 
 ### Slide
 ```javascript
-import { Component, Render, Animated } from 'syr';
+import { Component, Render, Animated } from '@syr/core';
 
 class MyComponent extends Component {
   constructor() {
@@ -552,7 +552,7 @@ Render(MyComponent);
 ### Rotation
 
 ```javascript
-import { Component, Render, Animated } from 'syr';
+import { Component, Render, Animated } from '@syr/core';
 
 class MyComponent extends Component {
   constructor() {
@@ -752,7 +752,7 @@ public class MyNativeLog implements SyrBaseModule {
 Accessing the native modules from javascript.
 
 ```javascript
-import { NativeModules } from 'syr';
+import { NativeModules } from '@syr/core';
 
 let MyNativeModule = NativeModules.MyNativeModule;
 

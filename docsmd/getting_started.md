@@ -4,10 +4,10 @@ Our CLI tools will help you get started creating a new project from scratch quic
 
 ## Setting up a Syr JavaScript Project
 
-Grab the `Syr CLI` tool to get started quickly. This tool currently requires `NPM 8` or higher.
+Grab the `Syr CLI` tool to get started quickly. This tool currently requires `Node 8` or higher.
 
 ```bash
-npm install -g syr-cli
+npm install -g @syr/cli
 ```
 
 Use Syr CLI to Instantly Scaffold a Sample project to start with.

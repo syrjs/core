@@ -1,7 +1,7 @@
 ### Chat
 
-Realtime On [Gitter](https://gitter.im/paypal/syr)
+Realtime On [Gitter](https://gitter.im/syrjs/general)
 
 ### Social Media
 
-Mention us @[SyrSDK](https://twitter.com/syrsdk)
+Mention us @[SyrJS](https://twitter.com/syr_js)
