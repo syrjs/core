@@ -7,7 +7,7 @@
   <hr/>
 </div>
 
-[![Build Status](https://travis-ci.org/syrjs/core.svg?branch=master)](https://travis-ci.org/syrjs/syr)
+[![Build Status](https://travis-ci.org/syrjs/core.svg?branch=develop)](https://travis-ci.org/syrjs/core)
 [![NPM Version](https://img.shields.io/npm/v/@syr/core.svg)](https://www.npmjs.com/package/@syr/core)
 [![Coverage Status](https://coveralls.io/repos/github/syrjs/core/badge.svg?branch=master)](https://coveralls.io/github/dmikey/syr?branch=master)
 [![Docs](https://img.shields.io/badge/docs-1.3.0-blue.svg?style=flat)](https://syr.js.org)
