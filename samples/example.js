@@ -2,7 +2,7 @@ import { Component, Render, View, Text, Animated } from '../index';
 
 import { styles } from './styles';
 
-// require('./images/piggy.png');
+require('./images/piggy.png');
 
 class MyComponent extends Component {
   constructor() {
